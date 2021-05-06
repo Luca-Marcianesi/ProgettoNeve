@@ -16,4 +16,3 @@ class skipass:
             unita = "giorni"
         return "tipo: {}\ndescrizione: {}\ninizio validità: {}\ndurata: {} {}\n\n".format(self.tipo,self.descrizione,self.inizio_validita,self.durata,unita)
 
-    #commit
