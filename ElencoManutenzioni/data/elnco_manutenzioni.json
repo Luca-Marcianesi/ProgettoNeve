@@ -1,0 +1,32 @@
+[
+  {
+    "nome": "Controllo serraggio dadi",
+    "cadenza(giorni)": "4",
+    "ultimo_controllo": "",
+    "prossimo_controllo": ""
+  },
+  {
+    "nome": "Controllo bulloni impianto",
+    "cadenza(giorni)": "4",
+    "ultimo_controllo": "",
+    "prossimo_controllo": ""
+  },
+  {
+    "nome": "Controlla unioni saldate",
+    "cadenza(giorni)": "10",
+    "ultimo_controllo": "",
+    "prossimo_controllo": ""
+  },
+  {
+    "nome": "Controllo pedane",
+    "cadenza(giorni)": "8",
+    "ultimo_controllo": "",
+    "prossimo_controllo": ""
+  },
+  {
+    "nome": "Controllo ancoraggi",
+    "cadenza(giorni)": "20",
+    "ultimo_controllo": "",
+    "prossimo_controllo": ""
+  }
+]
