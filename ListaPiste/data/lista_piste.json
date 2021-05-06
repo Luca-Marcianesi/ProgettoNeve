@@ -1,0 +1,77 @@
+[
+  {
+    "nome": "Sassotetto 1",
+    "colore": "Pista nera",
+    "stato": "chiusa"
+  },
+  {
+    "nome": "Sassotetto 2",
+    "colore": "Pista rossa",
+    "stato": "chiusa"
+  },
+  {
+    "nome": "Sassotetto 3",
+    "colore": "Pista rossa",
+    "stato": "chiusa"
+  },
+  {
+    "nome": "Sassotetto Baby",
+    "colore": "Pista blu",
+    "stato": "chiusa"
+  },
+  {
+    "nome": "Valle Lunga",
+    "colore": "Pista rossa",
+    "stato": "chiusa"
+  },
+  {
+    "nome": "Maddalena A",
+    "colore": "Pista rossa",
+    "stato": "chiusa"
+  },
+  {
+    "nome": "Maddalena B",
+    "colore": "Pista rossa",
+    "stato": "chiusa"
+  },
+  {
+    "nome": "Maddalena C",
+    "colore": "Pista rossa",
+    "stato": "chiusa"
+  },
+  {
+    "nome": "Acqua Calda",
+    "colore": "Pista nera",
+    "stato": "chiusa"
+  },
+  {
+    "nome": "Variante Acqua Calda",
+    "colore": "Pista rossa",
+    "stato": "chiusa"
+  },
+  {
+    "nome": "SnowPark",
+    "colore": "Pista rossa",
+    "stato": "chiusa"
+  },
+  {
+    "nome": "Maddalena D",
+    "colore": "Pista rossa",
+    "stato": "chiusa"
+  },
+  {
+    "nome": "Maddalena Baby A",
+    "colore": "Pista blu",
+    "stato": "chiusa"
+  },
+  {
+    "nome": "Maddalena Baby B",
+    "colore": "Pista blu",
+    "stato": "chiusa"
+  },
+  {
+    "nome": "Acqua Calda prima parte",
+    "colore": "Pista rossa",
+    "stato": "chiusa"
+  }
+]
