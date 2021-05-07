@@ -9,7 +9,7 @@ class account:
         self.altezza = altezza
         self.numero_scarpe = numero_scarpe
         self.lista_prenotazioni = []
-
+#account
 
     def set_eta(self, eta):
         self.eta = eta
