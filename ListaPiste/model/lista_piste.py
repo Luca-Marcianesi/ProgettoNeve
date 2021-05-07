@@ -31,3 +31,6 @@ class lista_piste:
 
     def modifica_pista(self,posizione,stato):
         self.cerca_pista_x_numero(posizione).set_stato(stato)
+
+    def visualizza_pista(self,numero):
+        return self.lista_piste[numero].get_pista_str()
