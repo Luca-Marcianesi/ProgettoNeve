@@ -1,3 +1,6 @@
+from datetime import date,time
+
+
 
 class account:
     def __init__(self, nome, cognome, username, password, eta, altezza, numero_scarpe):
@@ -9,7 +12,6 @@ class account:
         self.altezza = altezza
         self.numero_scarpe = numero_scarpe
         self.lista_prenotazioni = []
-#account
 
     def set_eta(self, eta):
         self.eta = eta
@@ -29,6 +31,12 @@ class account:
     def get_lista_prenotazioni(self):
         return self.lista_prenotazioni
 
+    def get_lista_prenotazioni_str(self):
+        lista=""
+        for prenotazione in self.lista_prenotazioni:
+            lista = lista + "" + prenotazione.get_prenotazione_str()
+        return lista
+
     def get_nome(self):
         return self.nome
 
@@ -47,6 +55,10 @@ class account:
     def set_password(self, password):
         self.password = password
 
-    def v_lista(self):
-        for prenotazione in self.lista_prenotazioni :
-            prenotazione.visualizza()
+    def elimina_scadute_prenotazioni(self):
+        if self.lista_prenotazioni == None:
+            pass
+        else :
+            for prenotazione in self.lista_prenotazioni :
+                if prenotazione.get_scadenza() < date.today() :
+                    self.lista_prenotazioni.remove(prenotazione)
