@@ -16,7 +16,7 @@ class vista_account_loggato(QWidget):
 
         self.setFixedWidth(QDesktopWidget().width())
         self.setFixedHeight(QDesktopWidget().height())
-        self.controller = controller_account_loggato()
+        self.controller = controller_sessione()
         self.v1_layout = QVBoxLayout()
         self.v2_layout = QVBoxLayout()
         self.v3_layout = QVBoxLayout()
