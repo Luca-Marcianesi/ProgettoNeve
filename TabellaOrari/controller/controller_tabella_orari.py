@@ -13,3 +13,5 @@ class Controller_tabella_orari:
     def get_lista_tabella_orari(self):
         return self.model.get_lista_tabella_orari()
 
+
+

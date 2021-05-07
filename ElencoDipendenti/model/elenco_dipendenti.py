@@ -1,13 +1,25 @@
-from Dipendenti.model.dipendente import dipendente
 class elenco_dipendenti:
 
     def __init__(self):
         self.elenco = []
 
-    def aggiungi(self, nome, cognome, telefono):
-        self.elenco.append(dipendente( nome, cognome, telefono))
+    def aggiungi_dipendente(self, dipendente):
+        self.elenco.append(dipendente)
 
-    def rimuovi(self, nome, cognome):
+    def rimuovi_dipendente(self, nome, cognome):
         for dipendente in self.elenco:
-            if ((dipendente.nome == nome) and (dipendente.cognome == cognome)):
+            if dipendente.nome == nome and dipendente.cognome == cognome:
                 self.elenco.remove(dipendente)
+            else:
+                return "Dipendente non trovato"
+
+
+    def get_dipendente(self, nome, cognome):
+        for dipendente in self.elenco:
+            if dipendente.nome == nome and dipendente.cognome == cognome:
+                return dipendente
+            else:
+                return "Dipendente non trovato"
+
+    def get_lista_elenco_dipendenti(self):
+        return self.elenco

@@ -1,5 +1,6 @@
 from ListaAccount.model.lista_account import lista_account
-class controller_lista_account:
+
+class controller_lista_account():
     def __init__(self):
         self.model = lista_account()
 

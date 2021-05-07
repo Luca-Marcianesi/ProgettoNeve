@@ -1,5 +1,6 @@
 from GestioneSkipass.model.gestione_skipass import gestione_skipass
-class controller_gestione_skipass():
+
+class controller_gestione_skipass:
     def __init__(self):
         self.model = gestione_skipass()
 

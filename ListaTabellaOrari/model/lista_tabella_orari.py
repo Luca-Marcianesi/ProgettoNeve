@@ -10,3 +10,6 @@ class lista_tabella_orari:
         for tabella in self.lista_tabella_orari:
             if self.lista_tabella_orari[tabella] == numero_tabella:
                 self.lista_tabella_orari.remove(tabella)
+
+    def get_lista_tabella_orari(self):
+        return self.lista_tabella_orari
