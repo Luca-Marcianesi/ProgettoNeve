@@ -11,87 +11,51 @@ class vista_login(QWidget):
 
     def __init__(self,  parent=None):
         super(vista_login, self).__init__(parent)
+
+        # Attributi
         self.controller = controller_lista_account()
         self.credenziali = {}
-        self.v_layout = QVBoxLayout()
-        self.h_layout = QHBoxLayout()
-        self.g_layout = QGridLayout()
+        self.layout_verticale1 = QVBoxLayout()
+        self.layout_verticale2 = QVBoxLayout()
+        self.layout_orizzontale1 = QHBoxLayout()
+        self.layout_orizzontale2 = QHBoxLayout()
 
-        #Allignment and space
-        self.setFixedWidth(800)
-        self.setFixedHeight(600)
-        back_img = QImage("ListaAccount\data\img.png")
-        img = back_img.scaled(800, 600)
-        palette = QPalette()
-        palette.setBrush(10, QBrush(img))
-        self.setPalette(palette)
+        # Sfondo
+        self.show_background("SARNANO NEVE")
 
+        # Spaziatura tra lato sinitro e caselle
+        self.layout_orizzontale1.addSpacerItem(QSpacerItem(200, 0, QSizePolicy.Fixed, QSizePolicy.Fixed))
 
-        h_spacer = QSpacerItem(600, 50, QSizePolicy.Expanding, QSizePolicy.Expanding)
-        v_spacer = QSpacerItem(600, 50, QSizePolicy.Expanding, QSizePolicy.Expanding)
+        # Caselle username e password
+        self.casella_testo("USERNAME")
+        casella_ps = self.casella_testo("PASSWORD")
+        casella_ps.setEchoMode(QLineEdit.Password)
 
-        self.g_layout.addItem(v_spacer, 0, 0)
-        self.g_layout.addItem(h_spacer, 1, 0)
-        self.g_layout.addItem(h_spacer, 1, 3)
-        self.g_layout.addItem(v_spacer, 2, 0)
-
-        titolo = QLabel("SARNANO NEVE")
-        self.cambia_font(40, titolo)
-        titolo.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Maximum)
-        self.v_layout.addWidget(titolo)
-        self.v_layout.addSpacerItem(QSpacerItem(0,150,QSizePolicy.Expanding, QSizePolicy.Expanding))
-
-        #LabelUsername
-        u_label = QLabel("USERNAME")
-        self.cambia_font(25, u_label)
-        u_label.setAlignment(Qt.AlignCenter)
-        u_label.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Fixed)
-        self.v_layout.addWidget(u_label)
-
-        #LineEditUsername
-        casella_us = QLineEdit(self)
-        casella_us.setSizePolicy(QSizePolicy.Minimum, QSizePolicy.Fixed)
-        self.v_layout.addWidget(casella_us)
-        self.credenziali["USERNAME"] = casella_us
-
-        self.v_layout.addSpacerItem(QSpacerItem(0, 25, QSizePolicy.Fixed, QSizePolicy.Fixed))
-
-        #LabelPassword
-        p_label = QLabel("PASSWORD")
-        self.cambia_font(25,p_label)
-        p_label.setAlignment(Qt.AlignCenter)
-        p_label.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Fixed)
-        self.v_layout.addWidget(p_label)
-
-        #LineEditPassword
-        casella_pass = QLineEdit(self)
-        casella_pass.setSizePolicy(QSizePolicy.Minimum, QSizePolicy.Fixed)
-        casella_pass.setEchoMode(QLineEdit.Password)
-        self.v_layout.addWidget(casella_pass)
-        self.credenziali["PASSWORD"] = casella_pass
-
-        self.v_layout.addSpacerItem(QSpacerItem(0, 50, QSizePolicy.Fixed, QSizePolicy.Fixed))
+        # Spaziatura tra caselle e pulsanti
+        self.layout_verticale2.addSpacerItem(QSpacerItem(0, 50, QSizePolicy.Fixed, QSizePolicy.Fixed))
 
         #Accedi
         accedi = QPushButton("ACCEDI")
         accedi.setFixedSize(150,70)
         self.cambia_font(12, accedi)
-        self.h_layout.addWidget(accedi)
+        self.layout_orizzontale2.addWidget(accedi)
         accedi.clicked.connect(self.entra)
 
         #Crea Account
         crea_account = QPushButton("CREA \n ACCOUNT")
         crea_account.setFixedSize(150,70)
         self.cambia_font(12, crea_account)
-        self.h_layout.addWidget(crea_account)
+        self.layout_orizzontale2.addWidget(crea_account)
         crea_account.clicked.connect(self.crea)
+        self.layout_verticale2.addLayout(self.layout_orizzontale2)
 
+        # Allineamento layout orizzontale1
+        self.layout_orizzontale1.addLayout(self.layout_verticale2)
+        self.layout_orizzontale1.addSpacerItem(QSpacerItem(200, 0, QSizePolicy.Fixed, QSizePolicy.Fixed))
+        self.layout_verticale1.addLayout(self.layout_orizzontale1)
 
-        self.v_layout.addLayout(self.h_layout)
-        self.g_layout.addLayout(self.v_layout, 1, 2)
-        self.setLayout(self.g_layout)
+        self.setLayout(self.layout_verticale1)
         self.setWindowTitle("Login")
-
 
     def crea(self):
         self.crea_view = vista_crea_account(self.show, self.controller)
@@ -111,3 +75,38 @@ class vista_login(QWidget):
             self.close()
         else:
             QMessageBox.critical(self, 'Errore', 'Per favore, inserisci tutte le informazioni richieste',QMessageBox.Ok, QMessageBox.Ok)
+
+    def casella_testo(self, tipo):
+        # Label
+        label = QLabel(tipo + ":")
+        label.setFont(QFont('Times New Roman', 25))
+        label.setAlignment(Qt.AlignCenter)
+        self.layout_verticale2.addWidget(label)
+
+        #Casella di testo
+        casella = QLineEdit()
+        font = casella.font()
+        font.setPointSize(10)
+        casella.setFont(font)
+        self.layout_verticale2.addWidget(casella)
+        self.credenziali[tipo] = casella
+        return casella
+
+    def show_background(self, stringa):
+        # Sfondo
+        self.setFixedWidth(800)
+        self.setFixedHeight(600)
+        back_img = QImage("ListaAccount\data\img.png")
+        img = back_img.scaled(800, 600)
+        palette = QPalette()
+        palette.setBrush(10, QBrush(img))
+        self.setPalette(palette)
+
+        # Titolo
+        titolo = QLabel(stringa)
+        titolo.setAlignment(Qt.AlignCenter)
+        titolo.setFont(QFont('Times New Roman', 40))
+        titolo.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Maximum)
+        self.layout_verticale1.addSpacerItem(QSpacerItem(0, 50, QSizePolicy.Fixed, QSizePolicy.Fixed))
+        self.layout_verticale1.addWidget(titolo)
+        self.layout_verticale1.addSpacerItem(QSpacerItem(0, 80, QSizePolicy.Fixed, QSizePolicy.Fixed))

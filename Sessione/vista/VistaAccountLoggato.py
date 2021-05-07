@@ -11,16 +11,84 @@ class vista_account_loggato(QWidget):
 
     def __init__(self, callback):
         super(vista_account_loggato, self).__init__()
+
+        # Attributi
         self.callback = callback
+        self.controller = controller_sessione()
 
+        self.layout_verticale1 = QVBoxLayout()
+        self.layout_verticale2 = QVBoxLayout()
+        self.layout_verticale3 = QVBoxLayout()
+        self.layout_orizzontale = QHBoxLayout()
 
+        # Sfondo
+        self.show_background("INFORMAZIONI ACCOUNT")
+
+        # Spaziatura
+        self.layout_verticale3.addSpacerItem(QSpacerItem(500, 150, QSizePolicy.Fixed, QSizePolicy.Fixed))
+
+        # Label
+        label = QLabel("Nome: {}".format(self.controller.get_nome_str()) + "\n"
+                       "Cognome: {}".format(self.controller.get_cognome_str()) + "\n"
+                       "Età: {}".format(self.controller.get_eta_str()) + "\n"
+                       "Altezza: {}".format(self.controller.get_altezza_str()) + "\n"
+                       "Numero di scarpe: {}".format(self.controller.get_numero_scarpe_str()))
+        label.setFont(QFont('Times New Roman', 30))
+        self.layout_verticale3.addWidget(label)
+
+        # Spaziatura
+        self.layout_verticale3.addSpacerItem(QSpacerItem(500, 150, QSizePolicy.Fixed, QSizePolicy.Fixed))
+        self.layout_orizzontale.addLayout(self.layout_verticale3)
+        self.layout_orizzontale.addSpacerItem(QSpacerItem(700, 0, QSizePolicy.Fixed, QSizePolicy.Fixed))
+
+        # Pulsanti cambia credenziali, prenotazioni e indietro + allineamento
+        self.show_pulsantiera()
+
+        # Spaziatura
+        self.layout_orizzontale.addSpacerItem(QSpacerItem(150, 0, QSizePolicy.Fixed, QSizePolicy.Fixed))
+        self.layout_verticale1.addLayout(self.layout_orizzontale)
+        self.layout_verticale1.addSpacerItem(QSpacerItem(0, 200, QSizePolicy.Expanding, QSizePolicy.Expanding))
+
+        self.setLayout(self.layout_verticale1)
+
+    def show_pulsantiera(self):
+        pulsante_credenziali = QPushButton("CAMBIA\nCREDENZIALI")
+        pulsante_credenziali.setFont(QFont('Times New Roman', 30))
+        pulsante_credenziali.setFixedSize(400, 150)
+        pulsante_credenziali.clicked.connect(self.call_modifica_credenziali)
+        self.layout_verticale2.addWidget(pulsante_credenziali)
+
+        pulsante_prenotazioni = QPushButton("PRENOTAZIONI")
+        pulsante_prenotazioni.setFont(QFont('Times New Roman', 30))
+        pulsante_prenotazioni.setFixedSize(400, 150)
+        pulsante_prenotazioni.clicked.connect(self.vista_prenotazioni)
+        self.layout_verticale2.addWidget(pulsante_prenotazioni)
+
+        pulsante_indietro = QPushButton("INDIETRO")
+        pulsante_indietro.setFont(QFont('Times New Roman', 30))
+        pulsante_indietro.setFixedSize(400, 150)
+        pulsante_indietro.clicked.connect(self.indietro)
+        self.layout_verticale2.addWidget(pulsante_indietro)
+        self.layout_orizzontale.addLayout(self.layout_verticale2)
+
+    def indietro(self):
+        self.callback()
+        self.close()
+
+    def call_modifica_credenziali(self):
+        self.vista_modifica_credenziali = vista_modifica_account(self.show)
+        self.vista_modifica_credenziali.showFullScreen()
+        self.close()
+
+    def vista_prenotazioni(self):
+        self.vista_prenotazione_account = vista_prenotazione_account(self.show)
+        self.vista_prenotazione_account.showFullScreen()
+        self.close()
+
+    def show_background(self, stringa):
+        # Sfondo
         self.setFixedWidth(QDesktopWidget().width())
         self.setFixedHeight(QDesktopWidget().height())
-        self.controller = controller_sessione()
-        self.v1_layout = QVBoxLayout()
-        self.v2_layout = QVBoxLayout()
-        self.v3_layout = QVBoxLayout()
-        self.h_layout = QHBoxLayout()
         back_img = QImage("ListaAccount/data/im.jpg")
         img = back_img.scaled(self.width(), self.height())
         palette = QPalette()
@@ -28,67 +96,10 @@ class vista_account_loggato(QWidget):
         self.setPalette(palette)
 
         # Titolo
-        titolo = QLabel("INFORMAZIONI ACCOUNT")
+        titolo = QLabel(stringa)
         titolo.setAlignment(Qt.AlignCenter)
-        self.cambia_font(60, titolo)
+        titolo.setFont(QFont('Times New Roman', 60))
         titolo.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Maximum)
-        self.v1_layout.addWidget(titolo)
-        self.v1_layout.addSpacerItem(QSpacerItem(0, 80, QSizePolicy.Fixed, QSizePolicy.Fixed))
-
-        #label
-        label = QLabel( "Nome: {}".format(self.controller.get_nome_str()) + "\n"
-                        "Cognome: {}".format(self.controller.get_cognome_str()) + "\n"
-                        "Età: {}".format(self.controller.get_eta_str()) + "\n"
-                        "Altezza: {}".format(self.controller.get_altezza_str()) + "\n"
-                        "Numero di scarpe: {}".format(self.controller.get_numero_scarpe_str())
-                       )
-        #label.setStyleSheet("background-color:white")
-        self.v3_layout.addSpacerItem(QSpacerItem(500, 150, QSizePolicy.Fixed, QSizePolicy.Fixed))
-        self.v3_layout.addWidget(self.cambia_font(30, label))
-        self.v3_layout.addSpacerItem(QSpacerItem(500, 150, QSizePolicy.Fixed, QSizePolicy.Fixed))
-        self.h_layout.addLayout(self.v3_layout)
-
-        self.h_layout.addSpacerItem(QSpacerItem(700, 0, QSizePolicy.Fixed, QSizePolicy.Fixed))
-
-        cambia_credenziali = QPushButton("CAMBIA\nCREDENZIALI")
-        self.cambia_font(30, cambia_credenziali)
-        cambia_credenziali.setFixedSize(400,150)
-        cambia_credenziali.clicked.connect(self.vista_credenziali)
-        self.v2_layout.addWidget(cambia_credenziali)
-
-        prenotazioni = QPushButton("PRENOTAZIONI")
-        self.cambia_font(30, prenotazioni)
-        prenotazioni.setFixedSize(400,150)
-        prenotazioni.clicked.connect(self.vista_prenotazioni)
-        self.v2_layout.addWidget(prenotazioni)
-
-        indietro = QPushButton("INDIETRO")
-        self.cambia_font(30, indietro)
-        indietro.setFixedSize(400, 150)
-        indietro.clicked.connect(self.indietro)
-        self.v2_layout.addWidget(indietro)
-
-        self.h_layout.addLayout(self.v2_layout)
-        self.h_layout.addSpacerItem(QSpacerItem(150, 0, QSizePolicy.Fixed, QSizePolicy.Fixed))
-
-        self.v1_layout.addLayout(self.h_layout)
-        self.v1_layout.addSpacerItem(QSpacerItem(0, 200, QSizePolicy.Expanding, QSizePolicy.Expanding))
-        self.setLayout(self.v1_layout)
-
-    def indietro(self):
-        self.callback()
-        self.close()
-
-    def cambia_font(self, numero, label):
-        label.setFont(QFont('Times New Roman',numero))
-        return label
-
-    def vista_credenziali(self):
-        self.modifica_credenziali = vista_modifica_account(self.show)
-        self.modifica_credenziali.showFullScreen()
-        self.close()
-
-    def vista_prenotazioni(self):
-        self.vista_prenotazione = vista_prenotazione_account(self.show)
-        self.vista_prenotazione.showFullScreen()
-        self.close()
+        self.layout_verticale1.addSpacerItem(QSpacerItem(0, 50, QSizePolicy.Fixed, QSizePolicy.Fixed))
+        self.layout_verticale1.addWidget(titolo)
+        self.layout_verticale1.addSpacerItem(QSpacerItem(0, 50, QSizePolicy.Fixed, QSizePolicy.Fixed))
