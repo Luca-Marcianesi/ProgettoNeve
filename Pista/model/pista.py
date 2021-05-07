@@ -11,3 +11,7 @@ class pista:
         return "Nome: {}".format(self.nome) + "\n" \
                 "Difficoltà: {}".format(self.difficolta) + "\n"\
                 "Stato: {}".format(self.stato) + "\n"
+
+
+    def get_nome_str(self):
+        return self.nome
