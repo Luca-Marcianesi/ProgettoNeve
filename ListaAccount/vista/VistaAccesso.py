@@ -3,6 +3,7 @@ from PyQt5.QtWidgets import QWidget, QPushButton, QVBoxLayout, QLabel, QSizePoli
     QDesktopWidget, QHBoxLayout
 from PyQt5.QtCore import Qt
 
+from ListaPiste.vista.VistaListaPiste import vista_piste
 from Sessione.vista.VistaAccountLoggato import vista_account_loggato
 
 
@@ -26,8 +27,9 @@ class vista_accesso(QWidget):
 
         self.h1_layout = QHBoxLayout()
         info_account = self.crea_bottone("Account", self.h1_layout)
-        info_account.clicked.connect(self.info_account)
+        info_account.clicked.connect(self.show_info_account)
         lista_piste = self.crea_bottone("Lista Piste", self.h1_layout)
+        lista_piste.clicked.connect(self.show_lista_piste)
         prenota = self.crea_bottone("Prenota \n parcheggio", self.h1_layout)
 
         back_img = QImage("ListaAccount/data/im.jpg")
@@ -61,10 +63,12 @@ class vista_accesso(QWidget):
         layout.addWidget(bottone)
         return bottone
 
-    def funzione(self):
-        pass
+    def show_lista_piste(self):
+        self.vista_lista_piste = vista_piste(self.show)
+        self.vista_lista_piste.showFullScreen()
+        self.close()
 
-    def info_account(self):
+    def show_info_account(self):
         self.vista_info_account = vista_account_loggato(self.show)
         self.vista_info_account.showFullScreen()
         self.close()
