@@ -34,3 +34,6 @@ class lista_piste:
 
     def visualizza_pista(self,numero):
         return self.lista_piste[numero].get_pista_str()
+
+    def get_lista(self):
+        return self.lista_piste

@@ -20,3 +20,6 @@ class controller_lista_piste():
 
     def visualizza_pista(self, numero):
         self.model.visualizza_pista(numero)
+
+    def get_lista(self):
+        return self.model.get_lista()
