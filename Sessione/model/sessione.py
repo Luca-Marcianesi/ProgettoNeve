@@ -5,6 +5,7 @@ class sessione:
     @classmethod
     def login(cls,account):
         cls.account_loggato = account
+        cls.elimina_prenotazioni_scadute()
 
     @classmethod
     def cambia_eta(cls,eta):
@@ -53,4 +54,8 @@ class sessione:
     @classmethod
     def get_altezza(cls):
         return cls.account_loggato.get_altezza()
+
+    @classmethod
+    def elimina_prenotazioni_scadute(cls):
+        cls.account_loggato.elimina_scadute_prenotazioni()
 

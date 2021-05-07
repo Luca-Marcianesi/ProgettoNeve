@@ -9,3 +9,6 @@ class prenotazione():
 
     def get_codice_oggetto(self):
         return self.codice_oggetto
+
+    def get_scadenza(self):
+        return self.scadenza
