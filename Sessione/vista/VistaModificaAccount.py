@@ -3,7 +3,7 @@ from PyQt5.QtWidgets import QVBoxLayout, QLabel, QLineEdit, QPushButton, QMessag
     QSpacerItem, QDesktopWidget
 from PyQt5.QtCore import Qt
 
-from Sessione.controller.controller_sessione import controller_account_loggato
+from Sessione.controller.controller_sessione import controller_sessione
 
 
 class vista_modifica_account(QWidget):
@@ -11,11 +11,11 @@ class vista_modifica_account(QWidget):
     def __init__(self, callback):
         super(vista_modifica_account, self).__init__()
         self.callback = callback
-        self.controller = controller_account_loggato()
+        self.controller = controller_sessione()
         self.testo = {}
         self.setFixedWidth(QDesktopWidget().width())
         self.setFixedHeight(QDesktopWidget().height())
-        self.controller = controller_account_loggato()
+        self.controller = controller_sessione()
         self.v1_layout = QVBoxLayout()
         self.v2_layout = QVBoxLayout()
         self.h1_layout = QHBoxLayout()

@@ -2,18 +2,18 @@ from PyQt5.QtGui import QFont, QImage, QPalette, QBrush
 from PyQt5.QtWidgets import QWidget, QDesktopWidget, QVBoxLayout, QHBoxLayout, QLabel, QSizePolicy, QSpacerItem, \
     QPushButton
 from PyQt5.QtCore import Qt
-from Sessione.controller.controller_sessione import controller_account_loggato
+from Sessione.controller.controller_sessione import controller_sessione
 
 
 class vista_prenotazione_account(QWidget):
 
     def __init__(self, callback):
         super(vista_prenotazione_account, self).__init__()
-        self.controller = controller_account_loggato()
+        self.controller = controller_sessione()
         self.callback = callback
         self.setFixedWidth(QDesktopWidget().width())
         self.setFixedHeight(QDesktopWidget().height())
-        self.controller = controller_account_loggato()
+        self.controller = controller_sessione()
         self.v_layout = QVBoxLayout()
         self.h_layout = QHBoxLayout()
         back_img = QImage("ListaAccount/data/im.jpg")

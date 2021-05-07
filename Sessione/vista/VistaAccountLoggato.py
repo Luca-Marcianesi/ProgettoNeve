@@ -2,7 +2,7 @@ from PyQt5.QtGui import QImage, QPalette, QBrush, QFont
 from PyQt5.QtWidgets import QWidget, QVBoxLayout, QLabel, QPushButton, QHBoxLayout, QDesktopWidget, QSpacerItem, \
     QSizePolicy
 from PyQt5.QtCore import Qt
-from Sessione.controller.controller_sessione import controller_account_loggato
+from Sessione.controller.controller_sessione import controller_sessione
 from Sessione.vista.VistaModificaAccount import vista_modifica_account
 from Sessione.vista.VistaPrenotazioneAccount import vista_prenotazione_account
 
