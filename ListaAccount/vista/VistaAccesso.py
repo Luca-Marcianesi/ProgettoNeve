@@ -19,7 +19,7 @@ class vista_accesso(QWidget):
         self.layout_orizzontale2 = QHBoxLayout()
 
         # Sfondo
-        self.show_background("SARNANO NEVE")
+        self.show_background("SarnanoNeve")
 
         # Pulsanti
         self.show_pulsantiera()
