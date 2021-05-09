@@ -15,3 +15,6 @@ class tabella_orari:
 
     def get_giorno_from_lista(self, giorno):
         return self.lista_giorni[giorno]
+
+    def get_numero_tabella(self):
+        return self.numero_tabella
