@@ -15,3 +15,9 @@ class pista:
 
     def get_nome_str(self):
         return self.nome
+
+    def get_stato(self):
+        return self.stato
+
+    def get_difficolta(self):
+        return self.difficolta
