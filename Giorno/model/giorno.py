@@ -7,19 +7,9 @@ class giorno_lavorativo:
         self.lista_dipendenti_impiegati.append(dipendente)
 
     def rimuovi_dipendente(self, dipendente):
-        for dipendente in self.lista_dipendenti_impiegati:
-            if dipendente.nome == self.lista_dipendenti_impiegati[dipendente].nome and dipendente.cognome == self.lista_dipendenti_impiegati[dipendente].cognome:
-                return self.lista_dipendenti_impiegati.remove(dipendente)
-            else:
-                return "Dipendente non trovato"
+        self.lista_dipendenti_impiegati.remove(dipendente)
 
     def get_giorno(self):
         return self.giorno
 
-    def get_dipendente(self, dipendente):
-        for dipendente in self.lista_dipendenti_impiegati:
-            if dipendente.nome == self.lista_dipendenti_impiegati[dipendente].nome and dipendente.cognome == self.lista_dipendenti_impiegati[dipendente].cognome:
-                return self.lista_dipendenti_impiegati[dipendente]
-            else:
-                return "Dipendente non trovato"
 
