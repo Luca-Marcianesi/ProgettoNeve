@@ -1,4 +1,5 @@
-from datetime import datetime,date
+from datetime import timedelta, date
+
 
 class manutenzione:
     def __init__(self, nome,codice, cadenza, ultima_manutenzione,prossima_manutenzione):
@@ -10,7 +11,7 @@ class manutenzione:
 
     def effettua_manutenzione(self):
         self.ultima_manutenzione = date.today()
-        self.prossima_manutenzione = self.ultima_manutenzione + date.timedelta(days = int(self.cadenza))
+        self.prossima_manutenzione = self.ultima_manutenzione + timedelta(days = int(self.cadenza))
 
     def get_codice(self):
         return self.codice

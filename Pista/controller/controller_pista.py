@@ -1,9 +1,7 @@
-from Pista.model.pista import pista
-
 
 class controller_pista():
-    def __init__(self):
-        self.model = pista()
+    def __init__(self, pista):
+        self.model = pista
 
     def modifica_stato_pista(self):
         self.model.set_stato()
