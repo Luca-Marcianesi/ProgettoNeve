@@ -26,7 +26,7 @@ class vista_pista(QWidget):
         self.layout_orizzontale.addSpacerItem(QSpacerItem(150, 0, QSizePolicy.Fixed, QSizePolicy.Fixed))
 
         #Descrizione Pista
-        label = QLabel( "Nome: {}".format(self.controller.get_nome_str()) + "\n"
+        label = QLabel("\b"+"Nome: {}".format(self.controller.get_nome_str()) + "\n"
                         "Difficotà: {}".format(self.controller.get_difficolta()) + "\n"
                         "Stato: {}".format(self.controller.get_stato()) + "\n")
         label.setFont(QFont('Times New Roman', 30))

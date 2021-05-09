@@ -63,7 +63,7 @@ class vista_piste(QWidget):
         # Sfondo
         self.setFixedWidth(QDesktopWidget().width())
         self.setFixedHeight(QDesktopWidget().height())
-        back_img = QImage("ListaAccount/data/im.jpg")
+        back_img = QImage("ListaPiste/data/Immagine_piste.jpg")
         img = back_img.scaled(self.width(), self.height())
         palette = QPalette()
         palette.setBrush(10, QBrush(img))
