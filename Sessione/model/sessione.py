@@ -33,7 +33,7 @@ class sessione:
 
     @classmethod
     def get_lista_prenotazioni(cls):
-        return cls.account_loggato.get_lista_prenotazioni()
+        return cls.account_loggato.get_lista_prenotazioni_str()
 
     @classmethod
     def get_nome(cls):
