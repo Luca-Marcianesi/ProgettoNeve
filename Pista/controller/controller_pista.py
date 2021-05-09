@@ -10,7 +10,7 @@ class controller_pista():
         self.model.get_pista_str()
 
     def get_nome_str(self):
-        self.model.get_nome_str()
+        return self.model.get_nome_str()
 
     def get_stato(self):
         return self.model.get_stato()
