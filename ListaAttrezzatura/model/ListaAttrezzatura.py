@@ -4,7 +4,7 @@ import pickle
 from Attrezzatura.model.attrezzatura import attrezzatura
 
 
-class lista_attrezzatura:
+class listaAttrezzatura:
     def __init__(self):
         self.lista_attrezzatura = []
 

@@ -27,8 +27,7 @@ class lista_account:
         for account in self.lista_account:
             if account.username == username:
                 return True
-            else:
-                return False
+        return False
 
     def salva_dati(self):
         with open('ListaAccount/data/lista_account_salvata.pickle', 'wb') as dati:
