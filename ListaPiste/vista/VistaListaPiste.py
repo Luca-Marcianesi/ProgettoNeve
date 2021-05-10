@@ -66,7 +66,7 @@ class vista_piste(QWidget):
         back_img = QImage("ListaPiste/data/Immagine_piste.jpg")
         img = back_img.scaled(self.width(), self.height())
         palette = QPalette()
-        palette.setBrush(10, QBrush(img))
+        palette.setBrush(10, QBrush(img)) # il 10 è fisso
         self.setPalette(palette)
 
         # Titolo

@@ -1,4 +1,4 @@
-from ListaAttrezzatura.model.lista_attrezzatura import listaAttrezzatura
+from ListaAttrezzatura.model.ListaAttrezzatura import listaAttrezzatura
 
 class controller_lista_attrezzatura:
     def __init__(self):
