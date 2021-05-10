@@ -1,8 +1,9 @@
 class attrezzatura:
-    def __init__(self, nome, tipo):
+    def __init__(self, nome, codice ,dimensioni):
         self.stato = True
         self.nome = nome
-        self.tipo = tipo
+        self.codice = codice
+        self.dimensioni = dimensioni
 
     def get_tipo(self):
         return self.tipo

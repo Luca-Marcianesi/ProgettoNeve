@@ -1,0 +1,27 @@
+[
+  {
+    "nome":"scarponi",
+    "codice": 4,
+    "dimensioni":40
+  },
+  {
+    "nome":"scarponi",
+    "codice": 4,
+    "dimensioni":42
+  },
+  {
+    "nome":"scii",
+    "codice": 2,
+    "dimensioni": 180
+  },
+  {
+    "nome":"snowboard",
+    "codice": 3,
+    "dimensioni":140
+  },
+  {
+    "nome":"ciaspole",
+    "codice": 5,
+    "dimensioni":40
+  }
+]
