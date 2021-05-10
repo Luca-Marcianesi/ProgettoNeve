@@ -12,7 +12,7 @@ class vista_pista(QWidget):
 
         # Attributi
         lista = lista_piste()
-        self.controller = controller_pista(lista.cerca_pista_x_numero(1))
+        self.controller = controller_pista(lista.cerca_pista_x_numero(4))
         self.layout_verticale1 = QVBoxLayout()
         self.layout_orizzontale = QHBoxLayout()
         self.layout_verticale2 = QVBoxLayout()
@@ -26,7 +26,7 @@ class vista_pista(QWidget):
         self.layout_orizzontale.addSpacerItem(QSpacerItem(150, 0, QSizePolicy.Fixed, QSizePolicy.Fixed))
 
         #Descrizione Pista
-        label = QLabel("\b"+"Nome: {}".format(self.controller.get_nome_str()) + "\n"
+        label = QLabel("Nome: {}".format(self.controller.get_nome_str()) + "\n"
                         "Difficotà: {}".format(self.controller.get_difficolta()) + "\n"
                         "Stato: {}".format(self.controller.get_stato()) + "\n")
         label.setFont(QFont('Times New Roman', 30))
@@ -47,7 +47,7 @@ class vista_pista(QWidget):
 
         # Impostazione layout totale
         self.setLayout(self.layout_verticale1)
-        self.setWindowTitle('Lista Piste')
+        self.setWindowTitle('Pista')
 
     def closeEvent(self, event):
         pass
