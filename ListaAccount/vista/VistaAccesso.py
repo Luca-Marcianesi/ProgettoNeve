@@ -94,7 +94,6 @@ class vista_accesso(QWidget):
         pass
 
     def uscita(self):
-        self.controller_lista_account.salva_dati()
         self.close()
 
     def crea_bottone(self, tipo, layout):
