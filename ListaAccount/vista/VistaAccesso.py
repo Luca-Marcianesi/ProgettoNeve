@@ -3,17 +3,18 @@ from PyQt5.QtWidgets import QWidget, QPushButton, QVBoxLayout, QLabel, QSizePoli
     QDesktopWidget, QHBoxLayout
 from PyQt5.QtCore import Qt
 
+from ListaAccount.controller.controller_lista_account import controller_lista_account
 from ListaPiste.vista.VistaListaPiste import vista_piste
 from Sessione.vista.VistaAccountLoggato import vista_account_loggato
 
 
 class vista_accesso(QWidget):
 
-    def __init__(self, controller):
+    def __init__(self):
         super(vista_accesso, self).__init__()
 
         # Attributi
-        self.controller = controller
+        self.controller_lista_account = controller_lista_account()
         self.layout_verticale = QVBoxLayout()
         self.layout_orizzontale1 = QHBoxLayout()
         self.layout_orizzontale2 = QHBoxLayout()
@@ -79,7 +80,7 @@ class vista_accesso(QWidget):
         self.close()
 
     def call_account_loggato(self):
-        self.vista_info_account = vista_account_loggato(self.show)
+        self.vista_info_account = vista_account_loggato(self.showFullScreen)
         self.vista_info_account.showFullScreen()
         self.close()
 
@@ -93,7 +94,7 @@ class vista_accesso(QWidget):
         pass
 
     def uscita(self):
-        self.controller.salva_dati()
+        self.controller_lista_account.salva_dati()
         self.close()
 
     def crea_bottone(self, tipo, layout):

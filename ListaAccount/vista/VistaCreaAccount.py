@@ -1,13 +1,15 @@
 
 from PyQt5.QtWidgets import QVBoxLayout, QLabel, QLineEdit, QPushButton, QMessageBox, QWidget, QHBoxLayout
 
+from ListaAccount.controller.controller_lista_account import controller_lista_account
+
 
 class vista_crea_account(QWidget):
 
-    def __init__(self, callback, controller):
+    def __init__(self, callback):
         super(vista_crea_account, self).__init__()
         self.callback = callback
-        self.controller = controller
+        self.controller_lista_account = controller_lista_account()
         self.testo = {}
         self.setFixedWidth(800)
         self.setFixedHeight(600)
@@ -51,10 +53,10 @@ class vista_crea_account(QWidget):
         password = self.testo["Password"].text()
         eta = self.testo["Età"].text()
         altezza = self.testo["Altezza"].text()
-        n_scarpe = self.testo["Numero di scarpe"].text()
+        numero_scarpe = self.testo["Numero di scarpe"].text()
 
-        if nome != "" and cognome != "" and username != "" and password != "" and eta != "" and altezza != "" and n_scarpe != "":
-            self.controller.cambia_dati(nome, cognome, username, password, eta, altezza, n_scarpe)
+        if nome != "" and cognome != "" and username != "" and password != "" and eta != "" and altezza != "" and numero_scarpe  != "":
+            self.controller.crea_account(nome, cognome, username, password, eta, altezza, numero_scarpe)
             self.controller.salva_dati()
             self.callback()
             self.close()
