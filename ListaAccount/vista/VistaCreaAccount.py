@@ -56,7 +56,7 @@ class vista_crea_account(QWidget):
         n_scarpe = self.testo["Numero di scarpe"].text()
 
         if nome != "" and cognome != "" and username != "" and password != "" and eta != "" and altezza != "" and n_scarpe != "":
-            self.controller.cambia_dati(nome, cognome, username, password, eta, altezza, n_scarpe)
+            self.controller.crea_account(nome, cognome, username, password, eta, altezza, n_scarpe)
             self.controller.salva_dati()
             self.callback()
             self.close()

@@ -8,7 +8,7 @@ class controller_attrezzatura:
         self.model.set_stato(stato)
 
     def get_nome(self):
-        return self.model.set_nome()
+        return self.model.get_nome()
 
     def get_codice(self):
         self.model.get_codice()
