@@ -59,3 +59,9 @@ class sessione:
     def elimina_prenotazioni_scadute(cls):
         cls.account_loggato.elimina_scadute_prenotazioni()
 
+    @classmethod
+    def controlla_prenotazione_effettuata(cls,codice):
+        for prenotazione in cls.get_lista_prenotazioni():
+            if prenotazione.get_codice_oggetto() == codice:
+                return False
+        return True
