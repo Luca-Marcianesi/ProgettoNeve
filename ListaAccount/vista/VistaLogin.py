@@ -1,9 +1,9 @@
 from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QImage, QPalette, QBrush, QFont
 from PyQt5.QtWidgets import QWidget, QVBoxLayout, QLabel, QLineEdit, QPushButton, QHBoxLayout, QSizePolicy, QSpacerItem, \
-    QGridLayout, QMessageBox
+    QMessageBox
 from ListaAccount.controller.controller_lista_account import controller_lista_account
-from ListaAccount.vista.VistraHome import vista_home
+from Home.vista.VistraHome import vista_home
 
 from ListaAccount.vista.VistaCreaAccount import vista_crea_account
 
@@ -14,7 +14,7 @@ class vista_login(QWidget):
         super(vista_login, self).__init__(parent)
 
         # Attributi
-        self.controller = controller_lista_account()
+        self.controller_lista_account = controller_lista_account()
         self.credenziali = {}
         self.layout_verticale1 = QVBoxLayout()
         self.layout_verticale2 = QVBoxLayout()
@@ -59,7 +59,7 @@ class vista_login(QWidget):
         self.setWindowTitle("Login")
 
     def crea(self):
-        self.crea_view = vista_crea_account(self.show, self.controller)
+        self.crea_view = vista_crea_account(self.show, self.controller_lista_account)
         self.crea_view.show()
         self.close()
 
@@ -71,7 +71,7 @@ class vista_login(QWidget):
         username = self.credenziali["USERNAME"].text()
         password = self.credenziali["PASSWORD"].text()
         if self.controller.login(username, password):
-            self.accesso_view = vista_home(self.controller.salva_dati)
+            self.accesso_view = vista_home(self.controller_lista_account.salva_dati)
             self.accesso_view.showFullScreen()
             self.close()
         else:
