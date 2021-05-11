@@ -70,7 +70,7 @@ class vista_login(QWidget):
     def entra(self):
         username = self.credenziali["USERNAME"].text()
         password = self.credenziali["PASSWORD"].text()
-        if self.controller.login(username, password):
+        if self.controller_lista_account.login(username, password):
             self.accesso_view = vista_home(self.controller_lista_account.salva_dati)
             self.accesso_view.showFullScreen()
             self.close()
