@@ -4,47 +4,45 @@ from PyQt5.QtWidgets import QWidget, QVBoxLayout, QHBoxLayout, QSpacerItem, QSiz
     QPushButton
 
 from Attrezzatura.controller.controller_attrezzatura import controller_attrezzatura
+from Attrezzatura.model.attrezzatura import attrezzatura
 
 
 class vista_attrezzatura(QWidget):
-    def __init__(self, attrezzatura):
+    def __init__(self):
         super(vista_attrezzatura, self).__init__()
 
 
         #Attributi
-        self.controller = controller_attrezzatura(attrezzatura)
+        self.controller = controller_attrezzatura(attrezzatura("scii", 1, "180"))
+        self.layout_verticale2 = QVBoxLayout()
         self.layout_verticale1 = QVBoxLayout()
         self.layout_orizzontale = QHBoxLayout()
-        self.layout_verticale2 = QVBoxLayout()
-        self.layout_verticale3 = QVBoxLayout()
 
         # Sfondo
         self.show_background("ATTREZZATURA")
 
-        # Spaziatura
-        self.layout_orizzontale.addSpacerItem(QSpacerItem(150, 0, QSizePolicy.Fixed, QSizePolicy.Fixed))
+
+        self.layout_orizzontale.addSpacerItem(QSpacerItem(50, 0, QSizePolicy.Fixed, QSizePolicy.Fixed))
+
 
         # Descrizione Pista
         label = QLabel("Nome: {}".format(self.controller.get_nome()) + "\n"
                     "Dimensione: {}".format(self.controller.get_dimensioni()) + "\n"
-                    "Stato: {}".format(self.controller.get_stato()) + "\n")
+                    "Stato: {}".format(self.controller.get_stato()))
         label.setFont(QFont('Times New Roman', 30))
-        self.layout_verticale3.addWidget(label)
+        label.setStyleSheet("background-image:url(Attrezzatura/data/legno.jpg)")
+        label.setAlignment(Qt.AlignCenter)
+        self.layout_verticale2.addWidget(label)
 
-        # Spaziatura
-        self.layout_verticale3.addSpacerItem(QSpacerItem(500, 500, QSizePolicy.Fixed, QSizePolicy.Fixed))
-        self.layout_orizzontale.addLayout(self.layout_verticale3)
-        self.layout_orizzontale.addSpacerItem(QSpacerItem(700, 0, QSizePolicy.Fixed, QSizePolicy.Fixed))
 
         # Pulsanti Apri e Indietro allineati
         self.show_pulsantiera()
-
-        # Spaziatura
-        self.layout_orizzontale.addSpacerItem(QSpacerItem(150, 0, QSizePolicy.Fixed, QSizePolicy.Fixed))
-        self.layout_verticale1.addLayout(self.layout_orizzontale)
-        self.layout_verticale1.addSpacerItem(QSpacerItem(0, 150, QSizePolicy.Fixed, QSizePolicy.Fixed))
+        self.layout_orizzontale.addLayout(self.layout_verticale2)
+        self.layout_orizzontale.addSpacerItem(QSpacerItem(50, 0, QSizePolicy.Fixed, QSizePolicy.Fixed))
 
         # Impostazione layout totale
+        self.layout_verticale1.addLayout(self.layout_orizzontale)
+        self.layout_verticale1.addSpacerItem(QSpacerItem(0, 400, QSizePolicy.Fixed, QSizePolicy.Fixed))
         self.setLayout(self.layout_verticale1)
         self.setWindowTitle('Attrezzatura')
 
@@ -74,18 +72,19 @@ class vista_attrezzatura(QWidget):
         titolo.setAlignment(Qt.AlignCenter)
         titolo.setFont(QFont('Times New Roman', 60))
         titolo.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Maximum)
-        self.layout_verticale1.addSpacerItem(QSpacerItem(0, 50, QSizePolicy.Fixed, QSizePolicy.Fixed))
+        self.layout_verticale1.addSpacerItem(QSpacerItem(0, 20, QSizePolicy.Fixed, QSizePolicy.Fixed))
         self.layout_verticale1.addWidget(titolo)
-        self.layout_verticale1.addSpacerItem(QSpacerItem(0, 150, QSizePolicy.Fixed, QSizePolicy.Fixed))
+        self.layout_verticale1.addSpacerItem(QSpacerItem(0, 100, QSizePolicy.Fixed, QSizePolicy.Fixed))
 
     def show_pulsantiera(self):
         # Punsante indietro
-        layout_pulsanti = QVBoxLayout()
-        pulstante_indietro = QPushButton("INDIETRO")
+        layout_pulsanti = QHBoxLayout()
+        pulstante_indietro = QPushButton()
+        pulstante_indietro.setStyleSheet("background-image:url(Attrezzatura/data/arrow.jpg)")
         pulstante_indietro.setFont(QFont('Times New Roman', 18))
-        pulstante_indietro.setFixedSize(250, 100)
+        pulstante_indietro.setFixedSize(100, 100)
         pulstante_indietro.clicked.connect(self.indietro)
+        layout_pulsanti.addSpacerItem(QSpacerItem(50, 0, QSizePolicy.Fixed, QSizePolicy.Fixed))
         layout_pulsanti.addWidget(pulstante_indietro)
-        layout_pulsanti.addStretch()
-        layout_pulsanti.addSpacerItem(QSpacerItem(0, 500, QSizePolicy.Fixed, QSizePolicy.Fixed))
-        self.layout_orizzontale.addLayout(layout_pulsanti)
+        layout_pulsanti.addSpacerItem(QSpacerItem(50, 0, QSizePolicy.Fixed, QSizePolicy.Fixed))
+        self.layout_verticale2.addLayout(layout_pulsanti)
