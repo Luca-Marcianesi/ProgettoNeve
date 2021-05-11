@@ -3,6 +3,7 @@ from PyQt5.QtWidgets import QVBoxLayout, QLabel, QLineEdit, QPushButton, QMessag
     QSpacerItem, QDesktopWidget
 from PyQt5.QtCore import Qt
 from Sessione.controller.controller_sessione import controller_sessione
+from Sessione.model.sessione import sessione
 
 
 class vista_modifica_account(QWidget):
@@ -12,7 +13,7 @@ class vista_modifica_account(QWidget):
 
         # Attributi
         self.callback = callback
-        self.controller = controller_sessione()
+        self.controler_sessione = controller_sessione()
         self.layout_verticale1 = QVBoxLayout()
         self.layout_verticale2 = QVBoxLayout()
         self.layout_orizzontale1 = QHBoxLayout()
@@ -83,10 +84,10 @@ class vista_modifica_account(QWidget):
         altezza = self.testo["ALTEZZA"].text()
         numero_scarpe = self.testo["NUMERO DI SCARPE"].text()
         if password != "" and eta != "" and altezza != "" and numero_scarpe != "":
-            self.controller.cambia_password(password)
-            self.controller.cambia_eta(eta)
-            self.controller.cambia_altezza(altezza)
-            self.controller.cambia_numero_scarpe(numero_scarpe)
+            self.controler_sessione.cambia_password(password)
+            self.controler_sessione.cambia_eta(eta)
+            self.controler_sessione.cambia_altezza(altezza)
+            self.controler_sessione.cambia_numero_scarpe(altezza)
             self.callback()
             self.close()
         else:
