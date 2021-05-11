@@ -2,8 +2,6 @@ from PyQt5.QtGui import QFont, QImage, QPalette, QBrush
 from PyQt5.QtWidgets import QVBoxLayout, QLabel, QLineEdit, QPushButton, QMessageBox, QWidget, QHBoxLayout, QSizePolicy, \
     QSpacerItem, QDesktopWidget
 from PyQt5.QtCore import Qt
-
-from ListaAccount.controller.controller_lista_account import controller_lista_account
 from Sessione.controller.controller_sessione import controller_sessione
 
 
@@ -14,7 +12,6 @@ class vista_modifica_account(QWidget):
 
         # Attributi
         self.callback = callback
-        self.controller_lista_account = controller_lista_account()
         self.controller = controller_sessione()
         self.layout_verticale1 = QVBoxLayout()
         self.layout_verticale2 = QVBoxLayout()
@@ -90,7 +87,6 @@ class vista_modifica_account(QWidget):
             self.controller.cambia_eta(eta)
             self.controller.cambia_altezza(altezza)
             self.controller.cambia_numero_scarpe(numero_scarpe)
-            self.controller_lista_account.salva_dati()
             self.callback()
             self.close()
         else:

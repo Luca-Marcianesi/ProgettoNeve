@@ -1,15 +1,12 @@
-
 from PyQt5.QtWidgets import QVBoxLayout, QLabel, QLineEdit, QPushButton, QMessageBox, QWidget, QHBoxLayout
-
-from ListaAccount.controller.controller_lista_account import controller_lista_account
 
 
 class vista_crea_account(QWidget):
 
-    def __init__(self, callback):
+    def __init__(self, callback, controller):
         super(vista_crea_account, self).__init__()
         self.callback = callback
-        self.controller = controller_lista_account()
+        self.controller = controller
         self.testo = {}
         self.setFixedWidth(800)
         self.setFixedHeight(600)
