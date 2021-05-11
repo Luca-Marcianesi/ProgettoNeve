@@ -1,9 +1,10 @@
 from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QImage, QPalette, QBrush, QFont
 from PyQt5.QtWidgets import QWidget, QVBoxLayout, QLabel, QLineEdit, QPushButton, QHBoxLayout, QSizePolicy, QSpacerItem, \
-    QMessageBox
+        QMessageBox
+
+from Home.vista.VistaHome import vista_home
 from ListaAccount.controller.controller_lista_account import controller_lista_account
-from Home.vista.VistraHome import vista_home
 
 from ListaAccount.vista.VistaCreaAccount import vista_crea_account
 
@@ -64,7 +65,7 @@ class vista_login(QWidget):
         self.close()
 
     def cambia_font(self, numero, label):
-        label.setFont(QFont('Times New Roman',numero))
+        label.setFont(QFont('Times New Roman', numero))
         return label
 
     def entra(self):
