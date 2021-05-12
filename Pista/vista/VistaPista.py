@@ -26,7 +26,7 @@ class vista_pista(QWidget):
                         "DIFFICOLTÀ => {}\n".format(self.controller.get_difficolta()) +
                         "STATO => {}\n".format(self.controller.get_stato()) )
         label.setFont(QFont('Times New Roman', 30))
-        label.setStyleSheet("background-image:url(Pista/data/download.jpg)")
+        label.setStyleSheet("background-image:url(Pista/data/legno.jpg)")
         label.setAlignment(Qt.AlignCenter)
         self.layout_orizzontale.addSpacerItem(QSpacerItem(500, 0, QSizePolicy.Fixed, QSizePolicy.Fixed))
         self.layout_verticale2.addWidget(label)
@@ -66,7 +66,7 @@ class vista_pista(QWidget):
         # Sfondo
         self.setFixedWidth(QDesktopWidget().width())
         self.setFixedHeight(QDesktopWidget().height())
-        back_img = QImage("Pista/data/Sarnano_Sassotetto.jpg")
+        back_img = QImage("Pista/data/sfondo.jpg")
         img = back_img.scaled(self.width(), self.height())
         palette = QPalette()
         palette.setBrush(10, QBrush(img))
