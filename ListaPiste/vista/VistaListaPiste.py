@@ -5,9 +5,9 @@ from PyQt5.QtWidgets import QWidget, QHBoxLayout, QVBoxLayout, QLabel, QSpacerIt
 from ListaPiste.controller.controller_lista_piste import controller_lista_piste
 
 
-class vista_piste(QWidget):
+class vista_lista_piste(QWidget):
     def __init__(self, callback):
-        super(vista_piste, self).__init__()
+        super(vista_lista_piste, self).__init__()
 
         # Attributi
         self.controller = controller_lista_piste()
