@@ -1,5 +1,5 @@
 from PyQt5.QtCore import Qt
-from PyQt5.QtGui import QStandardItemModel, QStandardItem, QFont, QBrush, QPalette, QImage
+from PyQt5.QtGui import  QFont, QBrush, QPalette, QImage
 from PyQt5.QtWidgets import QWidget, QHBoxLayout, QVBoxLayout, QLabel, QSpacerItem, QSizePolicy, QListView, QPushButton, \
     QDesktopWidget
 from ListaPiste.controller.controller_lista_piste import controller_lista_piste
@@ -19,10 +19,7 @@ class vista_piste(QWidget):
         # Sfondo
         self.show_background("LISTA PISTE")
 
-        # Spaziatura
-        self.layout_orizzontale.addSpacerItem(QSpacerItem(150, 0, QSizePolicy.Fixed, QSizePolicy.Fixed))
-
-        # Lista
+        """# Lista
         vista_lista = QListView()
         vista_lista_model = QStandardItemModel(vista_lista)
         for pista in self.controller.get_lista():
@@ -32,10 +29,7 @@ class vista_piste(QWidget):
             item.setFont(QFont('Times New Roman', 16))
             vista_lista_model.appendRow(item)
         vista_lista.setModel(vista_lista_model)
-        self.layout_orizzontale.addWidget(vista_lista)
-
-        # Spaziatura
-        self.layout_orizzontale.addSpacerItem(QSpacerItem(150, 0, QSizePolicy.Fixed, QSizePolicy.Fixed))
+        self.layout_orizzontale.addWidget(vista_lista)"""
 
         # Pulsanti Apri e Indietro allineati
         self.show_pulsantiera()
@@ -66,7 +60,7 @@ class vista_piste(QWidget):
         back_img = QImage("ListaPiste/data/Immagine_piste.jpg")
         img = back_img.scaled(self.width(), self.height())
         palette = QPalette()
-        palette.setBrush(10, QBrush(img)) # il 10 è fisso
+        palette.setBrush(10, QBrush(img))
         self.setPalette(palette)
 
         # Titolo
@@ -80,21 +74,11 @@ class vista_piste(QWidget):
         #self.layout_verticale1.addSpacerItem(QSpacerItem(0, 150, QSizePolicy.Fixed, QSizePolicy.Fixed))
 
     def show_pulsantiera(self):
-        # Punsante apri
-        layout_pulsanti = QVBoxLayout()
-        pulstante_apri = QPushButton("APRI")
-        pulstante_apri.setFont(QFont('Times New Roman', 18))
-        pulstante_apri.setFixedSize(250, 100)
-        pulstante_apri.clicked.connect(self.call_vista_pista)
-        layout_pulsanti.addWidget(pulstante_apri)
-        layout_pulsanti.addStretch()
-
         # Punsante indietro
         pulstante_indietro = QPushButton("INDIETRO")
         pulstante_indietro.setFont(QFont('Times New Roman', 18))
         pulstante_indietro.setFixedSize(250, 100)
         pulstante_indietro.clicked.connect(self.indietro)
-        layout_pulsanti.addWidget(pulstante_indietro)
-        layout_pulsanti.addStretch()
-        layout_pulsanti.addSpacerItem(QSpacerItem(0, 500, QSizePolicy.Fixed, QSizePolicy.Fixed))
-        self.layout_orizzontale.addLayout(layout_pulsanti)
+        self.layout_verticale1.addWidget(pulstante_indietro)
+        self.layout_verticale1.addSpacerItem(QSpacerItem(0, 500, QSizePolicy.Fixed, QSizePolicy.Fixed))
+        self.layout_orizzontale.addLayout(self.layout_verticale1)

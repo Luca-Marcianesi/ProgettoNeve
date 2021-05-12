@@ -40,3 +40,6 @@ class controller_sessione:
 
     def get_eta_str(self):
         return self.model.get_eta()
+
+    def salva_dati(self):
+        self.model.salva_dati()

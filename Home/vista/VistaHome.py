@@ -8,11 +8,10 @@ from Sessione.vista.VistaAccountLoggato import vista_account_loggato
 
 class vista_home(QWidget):
 
-    def __init__(self, salva_dati):
+    def __init__(self):
         super(vista_home, self).__init__()
 
         # Attributi
-        self.salva_dati = salva_dati
         self.layout_verticale = QVBoxLayout()
         self.layout_orizzontale1 = QHBoxLayout()
         self.layout_orizzontale2 = QHBoxLayout()
@@ -92,7 +91,6 @@ class vista_home(QWidget):
         pass
 
     def uscita(self):
-        self.salva_dati()
         self.close()
 
     def crea_bottone(self, tipo, layout):

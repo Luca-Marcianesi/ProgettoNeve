@@ -1,9 +1,11 @@
 class sessione:
 
     account_loggato = None
+    salva_dati = None
 
     @classmethod
-    def login(cls,account):
+    def login(cls,account, salva_dati):
+        cls.salva_dati = salva_dati
         cls.account_loggato = account
         cls.elimina_prenotazioni_scadute()
 
@@ -65,3 +67,7 @@ class sessione:
             if prenotazione.get_codice_oggetto() == codice:
                 return False
         return True
+
+    @classmethod
+    def salva_dati(cls):
+        cls.salva_dati()

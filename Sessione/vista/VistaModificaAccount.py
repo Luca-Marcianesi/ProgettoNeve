@@ -88,6 +88,7 @@ class vista_modifica_account(QWidget):
             self.controler_sessione.cambia_eta(eta)
             self.controler_sessione.cambia_altezza(altezza)
             self.controler_sessione.cambia_numero_scarpe(altezza)
+            self.controler_sessione.salva_dati()
             self.callback()
             self.close()
         else:

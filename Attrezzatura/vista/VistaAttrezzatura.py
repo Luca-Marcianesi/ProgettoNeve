@@ -79,12 +79,12 @@ class vista_attrezzatura(QWidget):
     def show_pulsantiera(self):
         # Punsante indietro
         layout_pulsanti = QHBoxLayout()
-        pulstante_indietro = QPushButton()
-        pulstante_indietro.setStyleSheet("background-image:url(Attrezzatura/data/arrow.jpg)")
-        pulstante_indietro.setFont(QFont('Times New Roman', 18))
-        pulstante_indietro.setFixedSize(100, 100)
-        pulstante_indietro.clicked.connect(self.indietro)
+        pulsante_indietro = QPushButton()
+        pulsante_indietro.setStyleSheet("background-image:url(Attrezzatura/data/arrow.jpg)")
+        pulsante_indietro.setFont(QFont('Times New Roman', 18))
+        pulsante_indietro.setFixedSize(100, 100)
+        pulsante_indietro.clicked.connect(self.indietro)
         layout_pulsanti.addSpacerItem(QSpacerItem(50, 0, QSizePolicy.Fixed, QSizePolicy.Fixed))
-        layout_pulsanti.addWidget(pulstante_indietro)
+        layout_pulsanti.addWidget(pulsante_indietro)
         layout_pulsanti.addSpacerItem(QSpacerItem(50, 0, QSizePolicy.Fixed, QSizePolicy.Fixed))
         self.layout_verticale2.addLayout(layout_pulsanti)

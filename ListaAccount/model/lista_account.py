@@ -19,7 +19,7 @@ class lista_account:
     def login(self, username, password):
         for account in self.lista_account:
             if account.username == username and account.password == password:
-                sessione.login(account)
+                sessione.login(account, self.salva_dati)
                 return True
         return False
 

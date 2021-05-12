@@ -1,10 +1,8 @@
 from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QImage, QPalette, QBrush, QFont
-from PyQt5.QtWidgets import QWidget, QVBoxLayout, QLabel, QLineEdit, QPushButton, QHBoxLayout, QSizePolicy, QSpacerItem, \
-        QMessageBox
-
-from Home.vista.VistaHome import vista_home
+from PyQt5.QtWidgets import QWidget, QVBoxLayout, QLabel, QLineEdit, QPushButton, QHBoxLayout, QSizePolicy, QSpacerItem, QMessageBox
 from ListaAccount.controller.controller_lista_account import controller_lista_account
+from Home.vista.VistaHome import vista_home
 
 from ListaAccount.vista.VistaCreaAccount import vista_crea_account
 
@@ -15,7 +13,7 @@ class vista_login(QWidget):
         super(vista_login, self).__init__(parent)
 
         # Attributi
-        self.controller_lista_account = controller_lista_account()
+        self.controller = controller_lista_account()
         self.credenziali = {}
         self.layout_verticale1 = QVBoxLayout()
         self.layout_verticale2 = QVBoxLayout()
@@ -41,14 +39,14 @@ class vista_login(QWidget):
         accedi.setFixedSize(150,70)
         self.cambia_font(12, accedi)
         self.layout_orizzontale2.addWidget(accedi)
-        accedi.clicked.connect(self.entra)
+        accedi.clicked.connect(self.entra_account)
 
         #Crea Account
         crea_account = QPushButton("CREA \n ACCOUNT")
         crea_account.setFixedSize(150,70)
         self.cambia_font(12, crea_account)
         self.layout_orizzontale2.addWidget(crea_account)
-        crea_account.clicked.connect(self.crea)
+        crea_account.clicked.connect(self.crea_account)
         self.layout_verticale2.addLayout(self.layout_orizzontale2)
 
         # Allineamento layout orizzontale1
@@ -59,20 +57,20 @@ class vista_login(QWidget):
         self.setLayout(self.layout_verticale1)
         self.setWindowTitle("Login")
 
-    def crea(self):
-        self.crea_view = vista_crea_account(self.show, self.controller_lista_account)
+    def crea_account(self):
+        self.crea_view = vista_crea_account(self.show, self.controller)
         self.crea_view.show()
         self.close()
 
     def cambia_font(self, numero, label):
-        label.setFont(QFont('Times New Roman', numero))
+        label.setFont(QFont('Times New Roman',numero))
         return label
 
-    def entra(self):
+    def entra_account(self):
         username = self.credenziali["USERNAME"].text()
         password = self.credenziali["PASSWORD"].text()
-        if self.controller_lista_account.login(username, password):
-            self.accesso_view = vista_home(self.controller_lista_account.salva_dati)
+        if self.controller.login(username, password):
+            self.accesso_view = vista_home()
             self.accesso_view.showFullScreen()
             self.close()
         else:
