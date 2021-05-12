@@ -1,7 +1,7 @@
 class sessione:
 
     account_loggato = None
-    salva_dati = None
+    funzione_salva_dati = None
 
     @classmethod
     def login(cls,account, salva_dati):
@@ -70,4 +70,4 @@ class sessione:
 
     @classmethod
     def salva_dati(cls):
-        cls.salva_dati()
+        cls.funzione_salva_dati()
