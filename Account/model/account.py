@@ -62,3 +62,10 @@ class account:
             for prenotazione in self.lista_prenotazioni :
                 if prenotazione.get_scadenza() < date.today() :
                     self.lista_prenotazioni.remove(prenotazione)
+
+
+    def controlla_prenotazione_effettuata(self, codice):
+        for prenotazione in self.lista_prenotazioni:
+            if prenotazione.get_codice_oggetto() == codice:
+                return False
+        return True

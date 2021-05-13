@@ -4,13 +4,13 @@ class sessione:
     funzione_salva_dati = None
 
     @classmethod
-    def login(cls, account, salva_dati):
+    def login(cls,account, salva_dati):
         cls.salva_dati = salva_dati
         cls.account_loggato = account
         cls.elimina_prenotazioni_scadute()
 
     @classmethod
-    def cambia_eta(cls, eta):
+    def cambia_eta(cls,eta):
         cls.account_loggato.set_eta(eta)
 
     @classmethod
@@ -26,7 +26,7 @@ class sessione:
         cls.account_loggato.set_password(password)
 
     @classmethod
-    def aggiungi_prenotazione(cls, prenotazione):
+    def aggiungi_prenotazione(cls,prenotazione):
         cls.account_loggato.aggiungi_prenotazione(prenotazione)
 
     @classmethod
@@ -39,7 +39,7 @@ class sessione:
 
     @classmethod
     def get_nome(cls):
-        return cls.account_loggato.get_nome()
+         return cls.account_loggato.get_nome()
 
     @classmethod
     def get_cognome(cls):
@@ -62,7 +62,7 @@ class sessione:
         cls.account_loggato.elimina_scadute_prenotazioni()
 
     @classmethod
-    def controlla_prenotazione_effettuata(cls, codice):
+    def controlla_prenotazione_effettuata(cls,codice):
         for prenotazione in cls.get_lista_prenotazioni():
             if prenotazione.get_codice_oggetto() == codice:
                 return False

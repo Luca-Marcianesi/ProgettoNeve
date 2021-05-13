@@ -4,6 +4,7 @@ from PyQt5.QtWidgets import QWidget, QPushButton, QVBoxLayout, QLabel, QSizePoli
 from PyQt5.QtCore import Qt
 from ListaPiste.vista.VistaListaPiste import vista_lista_piste
 from Sessione.vista.VistaAccountLoggato import vista_account_loggato
+from GestioneParcheggi.vista.vista_parcheggio import vista_parcheggio
 
 
 class vista_home(QWidget):
@@ -58,7 +59,7 @@ class vista_home(QWidget):
         pulsante_lista_piste.clicked.connect(self.call_lista_piste)
 
         pulsante_prenota_parcheggio = self.crea_bottone("PRENOTA \n PARCHEGGIO", self.layout_orizzontale1)
-        #pulsante_prenota_parcheggio.clicked.connect(self.call_prenota_parcheggio())
+        pulsante_prenota_parcheggio.clicked.connect(self.call_prenota_parcheggio)
 
         self.layout_verticale.addSpacerItem(QSpacerItem(0, 25, QSizePolicy.Fixed, QSizePolicy.Fixed))
 
@@ -82,7 +83,9 @@ class vista_home(QWidget):
         self.close()
 
     def call_prenota_parcheggio(self):
-        pass
+        self.vista_prenota_parcheggio = vista_parcheggio(self.showFullScreen)
+        self.vista_prenota_parcheggio.showFullScreen()
+        self.close()
 
     def call_noleggia_attrezzatura(self):
         pass

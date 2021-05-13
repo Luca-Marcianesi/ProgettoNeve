@@ -15,11 +15,16 @@ class gestione_parcheggi:
         self.calcola_posti()
 
     def prenota_parcheggio(self,numero_giorni):
-        if self.posti_disponibili > 0:
-            scadenza =  date.today() + timedelta(days = int(numero_giorni))
-            sessione.aggiungi_prenotazione(prenotazione(6,scadenza,"parcheggio:{}".format(self.posti_disponibili)))
-            self.aggiungi_premotazione(prenotazione(6,scadenza,"parcheggio:{}".format(self.posti_disponibili)))
-            self.posti_disponibili -= 1
+        if sessione.controlla_prenotazione_effettuata(6) :
+            if self.posti_disponibili > 0:
+                scadenza = date.today() + timedelta(days = int(numero_giorni))
+                prenotazione_da_aggiungere  = prenotazione(6,scadenza,"parcheggio:{}".format(self.posti_disponibili))
+                sessione.aggiungi_prenotazione(prenotazione_da_aggiungere)
+                self.aggiungi_premotazione(prenotazione_da_aggiungere)
+                self.posti_disponibili -= 1
+                return "Prenotazione effettuata"
+            return "Posti terminati"
+        return "Possiedi già un parcheggio prenotato"
 
     def calcola_posti(self):
         self.posti_disponibili = 30 - self.lista_prenotazioni_parcheggi.__len__()
@@ -34,6 +39,9 @@ class gestione_parcheggi:
             for prenotazione in self.lista_prenotazioni_parcheggi :
                 if prenotazione.get_scadenza() < date.today() :
                     self.lista_prenotazioni_parcheggi.remove(prenotazione)
+
+    def get_posti_disponibili(self):
+        return self.posti_disponibili
 
     def salva_dati(self):
         with open('GestioneParcheggi/data/parcheggi.pickle', 'wb') as dati:
