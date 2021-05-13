@@ -14,6 +14,7 @@ class vista_account_loggato(QWidget):
         super(vista_account_loggato, self).__init__()
 
         # Attributi
+        self.label = QLabel()
         self.callback = callback
         self.controller = controller_sessione()
         self.layout_verticale1 = QVBoxLayout()
@@ -27,14 +28,10 @@ class vista_account_loggato(QWidget):
         # Spaziatura
         self.layout_verticale3.addSpacerItem(QSpacerItem(500, 150, QSizePolicy.Fixed, QSizePolicy.Fixed))
 
-        # Label
-        self.label = QLabel("Nome: {}".format(self.controller.get_nome_str()) + "\n"
-                            "Cognome: {}".format(self.controller.get_cognome_str()) + "\n"
-                            "Età: {}".format(self.controller.get_eta_str()) + "\n"
-                            "Altezza: {}".format(self.controller.get_altezza_str()) + "\n"
-                            "Numero di scarpe: {}".format(self.controller.get_numero_scarpe_str()))
-        self.label.setFont(QFont('Times New Roman', 30))
+        self.aggiorna()
+
         self.layout_verticale3.addWidget(self.label)
+
 
         # Spaziatura
         self.layout_verticale3.addSpacerItem(QSpacerItem(500, 150, QSizePolicy.Fixed, QSizePolicy.Fixed))
@@ -64,10 +61,9 @@ class vista_account_loggato(QWidget):
         pulsante_prenotazioni.clicked.connect(self.vista_prenotazioni)
         self.layout_verticale2.addWidget(pulsante_prenotazioni)
 
-        pulsante_indietro = QPushButton()
+        pulsante_indietro = QPushButton("INDIETRO")
         pulsante_indietro.setFont(QFont('Times New Roman', 30))
-        pulsante_indietro.setStyleSheet("background-image:url(Attrezzatura/data/arrow.jpg)")
-        pulsante_indietro.setFixedSize(100, 100)
+        pulsante_indietro.setFixedSize(400, 150)
         pulsante_indietro.clicked.connect(self.indietro)
         self.layout_verticale2.addWidget(pulsante_indietro)
         self.layout_orizzontale.addLayout(self.layout_verticale2)
@@ -77,12 +73,12 @@ class vista_account_loggato(QWidget):
         self.close()
 
     def call_modifica_credenziali(self):
-        self.vista_modifica_credenziali = vista_modifica_account(self.showFullScreen)
+        self.vista_modifica_credenziali = vista_modifica_account(self.aggiorna, self.showFullScreen)
         self.vista_modifica_credenziali.showFullScreen()
         self.close()
 
     def vista_prenotazioni(self):
-        self.vista_prenotazione_account = vista_prenotazione_account(self.showFullScreen())
+        self.vista_prenotazione_account = vista_prenotazione_account(self.showFullScreen)
         self.vista_prenotazione_account.showFullScreen()
         self.close()
 
@@ -104,4 +100,13 @@ class vista_account_loggato(QWidget):
         self.layout_verticale1.addSpacerItem(QSpacerItem(0, 50, QSizePolicy.Fixed, QSizePolicy.Fixed))
         self.layout_verticale1.addWidget(titolo)
         self.layout_verticale1.addSpacerItem(QSpacerItem(0, 50, QSizePolicy.Fixed, QSizePolicy.Fixed))
+
+    def aggiorna(self):
+        # Label
+        self.label = QLabel("Nome: {}".format(self.controller.get_nome_str()) + "\n"
+                            "Cognome: {}".format(self.controller.get_cognome_str()) + "\n"
+                            "Età: {}".format(self.controller.get_eta_str()) + "\n"
+                            "Altezza: {}".format(self.controller.get_altezza_str()) + "\n"
+                            "Numero di scarpe: {}".format(self.controller.get_numero_scarpe_str()))
+        self.label.setFont(QFont('Times New Roman', 30))
 
