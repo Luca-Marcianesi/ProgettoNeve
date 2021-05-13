@@ -1,6 +1,7 @@
 from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QImage, QPalette, QBrush, QFont
-from PyQt5.QtWidgets import QWidget, QVBoxLayout, QLabel, QLineEdit, QPushButton, QHBoxLayout, QSizePolicy, QSpacerItem, QMessageBox
+from PyQt5.QtWidgets import QWidget, QVBoxLayout, QLabel, QLineEdit, QPushButton, \
+    QHBoxLayout, QSizePolicy, QSpacerItem, QMessageBox
 from ListaAccount.controller.controller_lista_account import controller_lista_account
 from Home.vista.VistaHome import vista_home
 
@@ -13,7 +14,9 @@ class vista_login(QWidget):
         super(vista_login, self).__init__(parent)
 
         # Attributi
+        self.accesso_view = vista_home()
         self.controller = controller_lista_account()
+        self.crea_view = vista_crea_account(self.show, self.controller)
         self.credenziali = {}
         self.layout_verticale1 = QVBoxLayout()
         self.layout_verticale2 = QVBoxLayout()
@@ -34,17 +37,17 @@ class vista_login(QWidget):
         # Spaziatura tra caselle e pulsanti
         self.layout_verticale2.addSpacerItem(QSpacerItem(0, 50, QSizePolicy.Fixed, QSizePolicy.Fixed))
 
-        #Accedi
+        # Accedi
         accedi = QPushButton("ACCEDI")
-        accedi.setFixedSize(150,70)
-        self.cambia_font(12, accedi)
+        accedi.setFixedSize(150, 70)
+        accedi.setFont(QFont('Times New Roman', 12))
         self.layout_orizzontale2.addWidget(accedi)
         accedi.clicked.connect(self.entra_account)
 
-        #Crea Account
+        # Crea Account
         crea_account = QPushButton("CREA \n ACCOUNT")
-        crea_account.setFixedSize(150,70)
-        self.cambia_font(12, crea_account)
+        crea_account.setFixedSize(150, 70)
+        crea_account.setFont(QFont('Times New Roman', 12))
         self.layout_orizzontale2.addWidget(crea_account)
         crea_account.clicked.connect(self.crea_account)
         self.layout_verticale2.addLayout(self.layout_orizzontale2)
@@ -58,23 +61,18 @@ class vista_login(QWidget):
         self.setWindowTitle("Login")
 
     def crea_account(self):
-        self.crea_view = vista_crea_account(self.show, self.controller)
         self.crea_view.show()
         self.close()
-
-    def cambia_font(self, numero, label):
-        label.setFont(QFont('Times New Roman',numero))
-        return label
 
     def entra_account(self):
         username = self.credenziali["USERNAME"].text()
         password = self.credenziali["PASSWORD"].text()
         if self.controller.login(username, password):
-            self.accesso_view = vista_home()
             self.accesso_view.showFullScreen()
             self.close()
         else:
-            QMessageBox.critical(self, 'Errore', 'Per favore, inserisci tutte le informazioni richieste',QMessageBox.Ok, QMessageBox.Ok)
+            QMessageBox.critical(self, 'Errore', 'Per favore, inserisci tutte le informazioni richieste',
+                                 QMessageBox.Ok, QMessageBox.Ok)
 
     def casella_testo(self, tipo):
         # Label
@@ -83,7 +81,7 @@ class vista_login(QWidget):
         label.setAlignment(Qt.AlignCenter)
         self.layout_verticale2.addWidget(label)
 
-        #Casella di testo
+        # Casella di testo
         casella = QLineEdit()
         font = casella.font()
         font.setPointSize(10)

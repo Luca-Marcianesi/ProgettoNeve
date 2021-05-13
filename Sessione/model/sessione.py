@@ -63,7 +63,10 @@ class sessione:
 
     @classmethod
     def controlla_prenotazione_effettuata(cls,codice):
-        return cls.account_loggato.controlla_prenotazione_effettuata(codice)
+        for prenotazione in cls.get_lista_prenotazioni():
+            if prenotazione.get_codice_oggetto() == codice:
+                return False
+        return True
 
     @classmethod
     def salva_dati(cls):

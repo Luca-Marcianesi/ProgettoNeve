@@ -6,12 +6,15 @@ from Sessione.controller.controller_sessione import controller_sessione
 from Sessione.model.sessione import sessione
 
 
+
+
 class vista_modifica_account(QWidget):
 
-    def __init__(self, callback):
+    def __init__(self, aggiorna, callback):
         super(vista_modifica_account, self).__init__()
 
         # Attributi
+        self.aggiorna = aggiorna
         self.callback = callback
         self.controler_sessione = controller_sessione()
         self.layout_verticale1 = QVBoxLayout()
@@ -89,6 +92,7 @@ class vista_modifica_account(QWidget):
             self.controler_sessione.cambia_altezza(altezza)
             self.controler_sessione.cambia_numero_scarpe(altezza)
             self.controler_sessione.salva_dati()
+            self.aggiorna()
             self.callback()
             self.close()
         else:
