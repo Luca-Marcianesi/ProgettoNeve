@@ -3,16 +3,15 @@ from PyQt5.QtGui import QStandardItemModel, QStandardItem, QFont, QBrush, QPalet
 from PyQt5.QtWidgets import QWidget, QHBoxLayout, QVBoxLayout, QLabel, QSpacerItem, QSizePolicy, QListView, QPushButton, \
     QDesktopWidget
 from Pista.controller.controller_pista import controller_pista
-from ListaPiste.model.lista_piste import lista_piste
 
 
 class vista_pista(QWidget):
-    def __init__(self):
+    def __init__(self, pista, callback):
         super(vista_pista, self).__init__()
 
         # Attributi
-        lista = lista_piste()
-        self.controller = controller_pista(lista.cerca_pista_x_numero(4))
+        self.callback = callback
+        self.controller_pista = controller_pista(pista)
         self.layout_verticale = QVBoxLayout()
         self.layout_orizzontale = QHBoxLayout()
 
@@ -21,9 +20,9 @@ class vista_pista(QWidget):
         self.show_background("PISTA")
 
         #Descrizione Pista
-        label = QLabel("Nome => {}\n".format(self.controller.get_nome_str()) + "\n"
-                        "Difficoltà => {}\n".format(self.controller.get_difficolta()) + "\n"
-                        "Stato => {}\n".format(self.controller.get_stato()) + "\n")
+        label = QLabel("Nome => {}\n".format(self.controller_pista.get_nome_str()) + "\n"
+                        "Difficoltà => {}\n".format(self.controller_pista.get_difficolta()) + "\n"
+                        "Stato => {}\n".format(self.controller_pista.get_stato()) + "\n")
         label.setFont(QFont('Times New Roman', 30))
         label.setAlignment(Qt.AlignCenter)
         self.layout_verticale.addWidget(label)
@@ -39,9 +38,6 @@ class vista_pista(QWidget):
         # Impostazione layout totale
         self.setLayout(self.layout_verticale)
         self.setWindowTitle('Pista')
-
-    def closeEvent(self, event):
-        pass
 
     def call_vista_pista(self):
         pass

@@ -2,7 +2,7 @@ from PyQt5.QtGui import QPalette, QBrush, QImage, QFont
 from PyQt5.QtWidgets import QWidget, QPushButton, QVBoxLayout, QLabel, QSizePolicy, QSpacerItem, \
     QDesktopWidget, QHBoxLayout
 from PyQt5.QtCore import Qt
-from ListaPiste.vista.VistaListaPiste import vista_piste
+from ListaPiste.vista.VistaListaPiste import vista_lista_piste
 from Sessione.vista.VistaAccountLoggato import vista_account_loggato
 
 
@@ -72,7 +72,7 @@ class vista_home(QWidget):
         pulsante_esci.clicked.connect(self.uscita)
 
     def call_lista_piste(self):
-        self.vista_lista_piste = vista_piste(self.show)
+        self.vista_lista_piste = vista_lista_piste(self.show)
         self.vista_lista_piste.showFullScreen()
         self.close()
 
