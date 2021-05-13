@@ -1,11 +1,8 @@
 from PyQt5.QtGui import QFont, QImage, QPalette, QBrush
-from PyQt5.QtWidgets import QVBoxLayout, QLabel, QLineEdit, QPushButton, QMessageBox, QWidget, QHBoxLayout, QSizePolicy, \
-    QSpacerItem, QDesktopWidget
+from PyQt5.QtWidgets import QVBoxLayout, QLabel, QLineEdit, QPushButton, QMessageBox, QWidget, \
+    QHBoxLayout, QSizePolicy, QSpacerItem, QDesktopWidget
 from PyQt5.QtCore import Qt
 from Sessione.controller.controller_sessione import controller_sessione
-from Sessione.model.sessione import sessione
-
-
 
 
 class vista_modifica_account(QWidget):
@@ -72,7 +69,7 @@ class vista_modifica_account(QWidget):
         label.setAlignment(Qt.AlignCenter)
         self.layout_verticale2.addWidget(label)
 
-        #Casella di testo
+        # Casella di testo
         casella = QLineEdit()
         font = casella.font()
         font.setPointSize(15)
@@ -102,7 +99,6 @@ class vista_modifica_account(QWidget):
     def indietro(self):
         self.callback()
         self.close()
-
 
     def show_background(self, stringa):
         # Sfondo

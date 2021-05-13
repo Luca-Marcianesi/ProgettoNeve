@@ -32,7 +32,6 @@ class vista_account_loggato(QWidget):
 
         self.layout_verticale3.addWidget(self.label)
 
-
         # Spaziatura
         self.layout_verticale3.addSpacerItem(QSpacerItem(500, 150, QSizePolicy.Fixed, QSizePolicy.Fixed))
         self.layout_orizzontale.addLayout(self.layout_verticale3)
@@ -109,4 +108,3 @@ class vista_account_loggato(QWidget):
                             "Altezza: {}".format(self.controller.get_altezza_str()) + "\n"
                             "Numero di scarpe: {}".format(self.controller.get_numero_scarpe_str()))
         self.label.setFont(QFont('Times New Roman', 30))
-
