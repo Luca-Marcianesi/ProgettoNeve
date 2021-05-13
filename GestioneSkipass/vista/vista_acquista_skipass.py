@@ -8,23 +8,50 @@ class vista_acquista_skipass(QWidget):
     def __init__(self):
         super(vista_acquista_skipass, self).__init__()
 
+
         # Attributi
         self.layout_verticale = QVBoxLayout()
         self.layout_orizzontale = QHBoxLayout()
-        self.layout_verticale1 = QHBoxLayout()
+        self.layout_verticale1 = QVBoxLayout()
         self.layout_verticale2 = QVBoxLayout()
+        self.layout_orizzontale1 = QHBoxLayout()
 
         # Sfondo
         self.show_background("Prenota Skipass")
 
+        self.layout_verticale1.addWidget(self.show_pulsante("Mattiniero", self.call_skipass1))
+        self.layout_verticale1.addSpacerItem(QSpacerItem(0, 50))
+        self.layout_verticale1.addWidget(self.show_pulsante("Pomeridiano", self.call_skipass2))
+        self.layout_verticale1.addSpacerItem(QSpacerItem(0, 50))
+        self.layout_verticale1.addWidget(self.show_pulsante("Giornaliero", self.call_skipass3))
+
+        self.layout_verticale2.addWidget(self.show_pulsante("Settimanale", self.call_skipass4))
+        self.layout_verticale2.addSpacerItem(QSpacerItem(0, 50))
+        self.layout_verticale2.addWidget(self.show_pulsante("Mensile", self.call_skipass5))
+        self.layout_verticale2.addSpacerItem(QSpacerItem(0, 50))
+        self.layout_verticale2.addWidget(self.show_pulsante("Stagionale", self.call_skipass6))
+
+        self.layout_orizzontale.addSpacerItem(QSpacerItem(40, 0))
+        self.layout_orizzontale.addLayout(self.layout_verticale1)
+        self.layout_orizzontale.addSpacerItem(QSpacerItem(300, 0))
+        self.layout_orizzontale.addLayout(self.layout_verticale2)
+        self.layout_orizzontale.addSpacerItem(QSpacerItem(40, 0))
+        self.layout_verticale.addLayout(self.layout_orizzontale)
+        self.layout_verticale.addSpacerItem(QSpacerItem(0, 50))
+        self.layout_orizzontale1.addSpacerItem(QSpacerItem(20, 0))
+        self.layout_orizzontale1.addWidget(self.show_pulsante("Indietro", self.indietro))
+        self.layout_verticale.addSpacerItem(QSpacerItem(0, 50))
+        self.layout_orizzontale1.addSpacerItem(QSpacerItem(20, 0))
+
+
         # Pulsanti
-        self.show_pulsantiera()
+        #self.show_pulsante()
 
         # Spaziature
         self.layout_verticale.addLayout(self.layout_orizzontale)
-        self.layout_verticale.addSpacerItem(QSpacerItem(0, 10, QSizePolicy.Expanding, QSizePolicy.Expanding))
         self.layout_verticale.addLayout(self.layout_verticale1)
-        self.layout_verticale.addSpacerItem(QSpacerItem(0, 5, QSizePolicy.Expanding, QSizePolicy.Expanding))
+        self.layout_verticale.addLayout(self.layout_orizzontale1)
+        self.layout_verticale.addSpacerItem(QSpacerItem(0, 200, QSizePolicy.Expanding, QSizePolicy.Expanding))
 
         # Impostazione layout totale
         self.setLayout(self.layout_verticale)
@@ -48,30 +75,13 @@ class vista_acquista_skipass(QWidget):
         self.layout_verticale.addWidget(titolo)
         self.layout_verticale.addSpacerItem(QSpacerItem(0, 150, QSizePolicy.Fixed, QSizePolicy.Fixed))
 
-    def show_pulsantiera(self):
-        pulsante_skipass1 = self.crea_bottone("Skipass Mattiniero", self.layout_orizzontale)
-        pulsante_skipass1.clicked.connect(self.call_skipass1)
 
-
-        pulsante_skipass2 = self.crea_bottone("Skipass Pomeridiano", self.layout_orizzontale)
-        pulsante_skipass2.clicked.connect(self.call_skipass2)
-
-        pulsante_skipass3 = self.crea_bottone("Skipass Giornaliero", self.layout_orizzontale)
-        pulsante_skipass3.clicked.connect(self.call_skipass3)
-
-        self.layout_verticale.addSpacerItem(QSpacerItem(0, 25, QSizePolicy.Fixed, QSizePolicy.Fixed))
-
-        pulsante_skipass4 = self.crea_bottone("Skipass Settimanale", self.layout_verticale1)
-        pulsante_skipass4.clicked.connect(self.call_skipass4)
-
-        pulsante_skipass5 = self.crea_bottone("Skipass Mensile", self.layout_verticale1)
-        pulsante_skipass5.clicked.connect(self.call_skipass5)
-
-        pulsante_skipass6 = self.crea_bottone("Skipass Stagionale", self.layout_verticale1)
-        pulsante_skipass6.clicked.connect(self.call_skipass6)
-
-        pulsante_esci = self.crea_bottone("Indietro", self.layout_verticale1)
-        pulsante_esci.clicked.connect(self.uscita)
+    def show_pulsante(self, titolo, call):
+        pulsante_skipass = self.crea_bottone(titolo)
+        pulsante_skipass.clicked.connect(call)
+        return pulsante_skipass
+        #pulsante_esci = self.crea_bottone("Indietro")
+        #pulsante_esci.clicked.connect(self.uscita)
 
     def call_skipass1(self):
         self.controller_gestione_skipass.prenota_skipass(self)
@@ -100,11 +110,11 @@ class vista_acquista_skipass(QWidget):
     def uscita(self):
         self.close()
 
-    def crea_bottone(self, tipo, layout):
+    def crea_bottone(self, tipo):
         bottone = QPushButton(tipo)
-        bottone.setFixedSize(500, 200)
+        bottone.setFixedSize(350, 100)
         bottone.setFont(QFont('Times New Roman', 25))
-        layout.addWidget(bottone)
+        #layout.addWidget(bottone)
         return bottone
 
     def indietro(self):
