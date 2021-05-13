@@ -1,8 +1,6 @@
 from functools import partial
-
-from PyQt5.QtCore import Qt
-from PyQt5.QtGui import  QFont, QBrush, QPalette, QImage
-from PyQt5.QtWidgets import QWidget, QHBoxLayout, QVBoxLayout, QLabel, QSpacerItem, QSizePolicy, QListView, QPushButton, \
+from PyQt5.QtGui import QFont, QBrush, QPalette, QImage
+from PyQt5.QtWidgets import QWidget, QHBoxLayout, QVBoxLayout, QSpacerItem, QSizePolicy, QPushButton, \
     QDesktopWidget, QGridLayout
 from ListaPiste.controller.controller_lista_piste import controller_lista_piste
 from Pista.vista.VistaPista import vista_pista
@@ -15,12 +13,13 @@ class vista_lista_piste(QWidget):
         # Attributi
         self.callback = callback
         self.controller = controller_lista_piste()
+        self.vista_pista = None
         self.layout_verticale1 = QVBoxLayout()
         self.layout_orizzontale = QHBoxLayout()
         self.layout_verticale2 = QVBoxLayout()
 
         # Sfondo
-        self.show_background("LISTA PISTE")
+        self.show_background()
 
         # Spaziatura
         self.layout_verticale1.addSpacerItem(QSpacerItem(0, 850, QSizePolicy.Fixed, QSizePolicy.Fixed))
@@ -41,9 +40,6 @@ class vista_lista_piste(QWidget):
         self.setLayout(self.layout_verticale1)
         self.setWindowTitle('Lista Piste')
 
-    def closeEvent(self, event):
-        pass
-
     def call_vista_pista(self, pista):
         self.vista_pista = vista_pista(pista, self.showFullScreen)
         self.vista_pista.showFullScreen()
@@ -53,7 +49,7 @@ class vista_lista_piste(QWidget):
         self.callback()
         self.close()
 
-    def show_background(self, stringa):
+    def show_background(self):
         # Sfondo
         self.setFixedWidth(QDesktopWidget().width())
         self.setFixedHeight(QDesktopWidget().height())
@@ -80,9 +76,9 @@ class vista_lista_piste(QWidget):
         layout_piste = QGridLayout()
         riga = 0
         colonna = 0
-        self.indice_pista = 1
+        indice_pista = 1
         for pista in self.controller.get_lista():
-            bottone = QPushButton("[{}]  ".format(self.indice_pista) + pista.get_nome_str())
+            bottone = QPushButton("[{}]  ".format(indice_pista) + pista.get_nome_str())
             bottone.setFont(QFont('Times New Roman', 18))
             bottone.clicked.connect(partial(self.call_vista_pista, pista))
             if colonna == 5 or colonna == 10:
@@ -90,11 +86,5 @@ class vista_lista_piste(QWidget):
                 riga += 1
             layout_piste.addWidget(bottone, riga, colonna)
             colonna += 1
-            self.indice_pista += 1
+            indice_pista += 1
         self.layout_verticale1.addLayout(layout_piste)
-
-
-
-
-
-

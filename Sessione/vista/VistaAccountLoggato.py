@@ -61,10 +61,9 @@ class vista_account_loggato(QWidget):
         pulsante_prenotazioni.clicked.connect(self.vista_prenotazioni)
         self.layout_verticale2.addWidget(pulsante_prenotazioni)
 
-        pulsante_indietro = QPushButton()
+        pulsante_indietro = QPushButton("INDIETRO")
         pulsante_indietro.setFont(QFont('Times New Roman', 30))
-        pulsante_indietro.setStyleSheet("background-image:url(Attrezzatura/data/arrow.jpg)")
-        pulsante_indietro.setFixedSize(100, 100)
+        pulsante_indietro.setFixedSize(400, 150)
         pulsante_indietro.clicked.connect(self.indietro)
         self.layout_verticale2.addWidget(pulsante_indietro)
         self.layout_orizzontale.addLayout(self.layout_verticale2)
