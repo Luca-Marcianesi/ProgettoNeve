@@ -38,3 +38,10 @@ class lista_attrezzatura:
                 for attrezzatura_da_caricare in lista_attrezzatura:
                     self.aggiungi_attrezzatura(
                         attrezzatura(attrezzatura_da_caricare["nome"], attrezzatura_da_caricare["codice"], attrezzatura_da_caricare["dimensioni"]))
+
+    def get_lista_attrezzatura(self):
+        return self.lista_attrezzatura
+
+
+
+
