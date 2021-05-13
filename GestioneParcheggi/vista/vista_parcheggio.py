@@ -13,6 +13,7 @@ class vista_parcheggio(QWidget):
         self.controller_gestione_parcheggio.prenota_parcheggio(3)
         self.layout_verticale = QVBoxLayout()
         self.layout_orizzontale = QHBoxLayout()
+        self.callback = callback
 
         self.show_background("PARCHEGGIO CAPANNINA")
 
@@ -68,7 +69,7 @@ class vista_parcheggio(QWidget):
         pulsante_indietro = QPushButton("INDIETRO")
         pulsante_indietro.setFont(QFont('Times New Roman', 18))
         pulsante_indietro.setFixedSize(250, 100)
-        #pulsante_indietro.clicked.connect(self.indietro)
+        pulsante_indietro.clicked.connect(self.indietro)
 
         pulsante_prenota = QPushButton("PRENOTA")
         pulsante_prenota.setFont(QFont('Times New Roman', 18))
@@ -83,6 +84,10 @@ class vista_parcheggio(QWidget):
     def call_selezione_giorni(self):
         self.vista = vista_richiesta_giorni()
         self.vista.show()
+
+    def indietro(self):
+        self.callback()
+        self.close()
 
 class vista_richiesta_giorni(QWidget):
 

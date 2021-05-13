@@ -20,7 +20,7 @@ class gestione_parcheggi:
                 scadenza = date.today() + timedelta(days = int(numero_giorni))
                 prenotazione_da_aggiungere  = prenotazione(6,scadenza,"parcheggio:{}".format(self.posti_disponibili))
                 sessione.aggiungi_prenotazione(prenotazione_da_aggiungere)
-                self.aggiungi_premotazione(prenotazione_da_aggiungere)
+                self.aggiungi_prenotazione(prenotazione_da_aggiungere)
                 self.posti_disponibili -= 1
                 return "Prenotazione effettuata"
             return "Posti terminati"
@@ -29,7 +29,7 @@ class gestione_parcheggi:
     def calcola_posti(self):
         self.posti_disponibili = 30 - self.lista_prenotazioni_parcheggi.__len__()
 
-    def aggiungi_premotazione(self,prenotazione):
+    def aggiungi_prenotazione(self,prenotazione):
         self.lista_prenotazioni_parcheggi.append(prenotazione)
 
     def elimina_scadute_prenotazioni(self):
@@ -39,6 +39,7 @@ class gestione_parcheggi:
             for prenotazione in self.lista_prenotazioni_parcheggi :
                 if prenotazione.get_scadenza() < date.today() :
                     self.lista_prenotazioni_parcheggi.remove(prenotazione)
+                    self.posti_disponibili += 1
 
     def get_posti_disponibili(self):
         return self.posti_disponibili
