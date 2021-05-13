@@ -1,5 +1,5 @@
 from PyQt5.QtCore import Qt
-from PyQt5.QtGui import  QFont, QBrush, QPalette, QImage
+from PyQt5.QtGui import QFont, QBrush, QPalette, QImage, QStandardItemModel, QStandardItem
 from PyQt5.QtWidgets import QWidget, QHBoxLayout, QVBoxLayout, QLabel, QSpacerItem, QSizePolicy, QListView, QPushButton, \
     QDesktopWidget
 from ListaPiste.controller.controller_lista_piste import controller_lista_piste
@@ -19,7 +19,7 @@ class vista_lista_piste(QWidget):
         # Sfondo
         self.show_background("LISTA PISTE")
 
-        """# Lista
+        # Lista
         vista_lista = QListView()
         vista_lista_model = QStandardItemModel(vista_lista)
         for pista in self.controller.get_lista():
@@ -29,7 +29,7 @@ class vista_lista_piste(QWidget):
             item.setFont(QFont('Times New Roman', 16))
             vista_lista_model.appendRow(item)
         vista_lista.setModel(vista_lista_model)
-        self.layout_orizzontale.addWidget(vista_lista)"""
+        self.layout_orizzontale.addWidget(vista_lista)
 
         # Pulsanti Apri e Indietro allineati
         self.show_pulsantiera()

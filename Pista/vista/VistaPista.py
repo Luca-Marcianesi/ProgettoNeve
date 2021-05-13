@@ -12,7 +12,7 @@ class vista_pista(QWidget):
 
         # Attributi
         lista = lista_piste()
-        self.controller = controller_pista(lista.cerca_pista_x_numero(15))
+        self.controller = controller_pista(lista.cerca_pista_x_numero(3))
         self.layout_verticale = QVBoxLayout()
         self.layout_orizzontale = QHBoxLayout()
         self.layout_verticale2 = QVBoxLayout()

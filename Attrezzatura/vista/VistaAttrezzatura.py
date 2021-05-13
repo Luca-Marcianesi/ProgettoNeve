@@ -8,34 +8,43 @@ from Attrezzatura.model.attrezzatura import attrezzatura
 
 
 class vista_attrezzatura(QWidget):
-    def __init__(self):
+    def __init__(self, callback):
         super(vista_attrezzatura, self).__init__()
+
 
 
         #Attributi
         self.controller = controller_attrezzatura(attrezzatura("scii", 1, "180"))
+        self.callback = callback
         self.layout_verticale2 = QVBoxLayout()
         self.layout_verticale1 = QVBoxLayout()
         self.layout_orizzontale = QHBoxLayout()
 
         # Sfondo
+
+
         self.show_background("ATTREZZATURA")
+
 
 
         self.layout_orizzontale.addSpacerItem(QSpacerItem(50, 0, QSizePolicy.Fixed, QSizePolicy.Fixed))
 
 
+
         # Descrizione Pista
         label = QLabel("Nome: {}".format(self.controller.get_nome()) + "\n"
-                    "Dimensione: {}".format(self.controller.get_dimensioni()) + "\n"
-                    "Stato: {}".format(self.controller.get_stato()))
+                    "Lunghezza: {}".format(self.controller.get_dimensioni() + " cm") + "\n"
+                    "Stato: {}".format(self.stato_attrezzatura()))
         label.setFont(QFont('Times New Roman', 30))
         label.setStyleSheet("background-image:url(Attrezzatura/data/legno.jpg)")
         label.setAlignment(Qt.AlignCenter)
+        label.setFixedSize(500, 200)
         self.layout_verticale2.addWidget(label)
 
+        self.layout_verticale2.addSpacerItem(QSpacerItem(0, 200, QSizePolicy.Fixed, QSizePolicy.Fixed))
 
-        # Pulsanti Apri e Indietro allineati
+
+        # Pulsante Indietro allineato
         self.show_pulsantiera()
         self.layout_orizzontale.addLayout(self.layout_verticale2)
         self.layout_orizzontale.addSpacerItem(QSpacerItem(50, 0, QSizePolicy.Fixed, QSizePolicy.Fixed))
@@ -72,7 +81,7 @@ class vista_attrezzatura(QWidget):
         titolo.setAlignment(Qt.AlignCenter)
         titolo.setFont(QFont('Times New Roman', 60))
         titolo.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Maximum)
-        self.layout_verticale1.addSpacerItem(QSpacerItem(0, 20, QSizePolicy.Fixed, QSizePolicy.Fixed))
+        self.layout_verticale1.addSpacerItem(QSpacerItem(0, 60, QSizePolicy.Fixed, QSizePolicy.Fixed))
         self.layout_verticale1.addWidget(titolo)
         self.layout_verticale1.addSpacerItem(QSpacerItem(0, 100, QSizePolicy.Fixed, QSizePolicy.Fixed))
 
@@ -88,3 +97,9 @@ class vista_attrezzatura(QWidget):
         layout_pulsanti.addWidget(pulsante_indietro)
         layout_pulsanti.addSpacerItem(QSpacerItem(50, 0, QSizePolicy.Fixed, QSizePolicy.Fixed))
         self.layout_verticale2.addLayout(layout_pulsanti)
+
+
+    def stato_attrezzatura(self):
+        if self.controller.get_stato():
+            return "Disponibile"
+        return "Non disponibile"

@@ -2,6 +2,8 @@ from PyQt5.QtGui import QPalette, QBrush, QImage, QFont
 from PyQt5.QtWidgets import QWidget, QPushButton, QVBoxLayout, QLabel, QSizePolicy, QSpacerItem, \
     QDesktopWidget, QHBoxLayout
 from PyQt5.QtCore import Qt
+
+from ListaAttrezzatura.vista.VistaListaAttrezzatura import vista_lista_attrezzatura
 from ListaPiste.vista.VistaListaPiste import vista_lista_piste
 from Sessione.vista.VistaAccountLoggato import vista_account_loggato
 from GestioneParcheggi.vista.vista_parcheggio import vista_parcheggio
@@ -88,7 +90,9 @@ class vista_home(QWidget):
         self.close()
 
     def call_noleggia_attrezzatura(self):
-        pass
+        self.vista_lista_attrezzatura = vista_lista_attrezzatura(self.showFullScreen)
+        self.vista_lista_attrezzatura.showFullScreen()
+        self.close()
 
     def call_skipass(self):
         pass
