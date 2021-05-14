@@ -104,5 +104,6 @@ class vista_home(QWidget):
         bottone = QPushButton(tipo)
         bottone.setFixedSize(500,200)
         bottone.setFont(QFont('Times New Roman', 25))
+        bottone.setStyleSheet('QPushButton {background-color: transparent; color: orange;}')
         layout.addWidget(bottone)
         return bottone

@@ -1,16 +1,16 @@
 from PyQt5.QtGui import QImage, QPalette, QBrush, QFont
 from PyQt5.QtCore import Qt
-from PyQt5.QtWidgets import QWidget, QHBoxLayout, QVBoxLayout, QLabel, QSpacerItem, QSizePolicy, QListView, QPushButton, \
-    QDesktopWidget, QLineEdit, QSpinBox
+from PyQt5.QtWidgets import QWidget, QHBoxLayout, QVBoxLayout, QLabel, QSpacerItem, QSizePolicy, QPushButton, \
+    QDesktopWidget, QSpinBox
 from GestioneParcheggi.controller.controller_gestione_parcheggi import gestione_parcheggi
 from Sessione.model.sessione import sessione
 
 class vista_parcheggio(QWidget):
+
     def __init__(self,callback):
         super(vista_parcheggio, self).__init__()
 
         self.controller_gestione_parcheggio = gestione_parcheggi()
-        self.controller_gestione_parcheggio.prenota_parcheggio(3)
         self.layout_verticale = QVBoxLayout()
         self.layout_orizzontale = QHBoxLayout()
         self.callback = callback
