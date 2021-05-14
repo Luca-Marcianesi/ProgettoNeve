@@ -45,18 +45,14 @@ class vista_modifica_account(QWidget):
 
     def show_pulsatiera(self):
         # Indietro
-        pulsante_indietro = QPushButton("INDIETRO")
-        pulsante_indietro.setFont(QFont('Times New Roman', 17))
-        pulsante_indietro.setFixedSize(200, 70)
+        pulsante_indietro = self.crea_bottone("INDIETRO", self.layout_orizzontale1)
         pulsante_indietro.clicked.connect(self.indietro)
-        self.layout_orizzontale1.addWidget(pulsante_indietro)
 
         # Invio
-        pulsante_invio = QPushButton("INVIA")
-        pulsante_invio.setFont(QFont('Times New Roman', 17))
-        pulsante_invio.setFixedSize(200, 70)
-        pulsante_invio.clicked.connect(self.cambia_dati)
-        self.layout_orizzontale1.addWidget(pulsante_invio)
+        pulsante_invio = self.crea_bottone("INVIA", self.layout_orizzontale1)
+        pulsante_invio.clicked.connect(self.indietro)
+
+
 
         self.layout_verticale2.addLayout(self.layout_orizzontale1)
         self.layout_verticale1.addLayout(self.layout_orizzontale2)
@@ -118,3 +114,11 @@ class vista_modifica_account(QWidget):
         self.layout_verticale1.addSpacerItem(QSpacerItem(0, 50, QSizePolicy.Fixed, QSizePolicy.Fixed))
         self.layout_verticale1.addWidget(titolo)
         self.layout_verticale1.addSpacerItem(QSpacerItem(0, 150, QSizePolicy.Fixed, QSizePolicy.Fixed))
+
+    def crea_bottone(self, tipo, layout):
+        bottone = QPushButton(tipo)
+        bottone.setFixedSize(300,100)
+        bottone.setFont(QFont('Times New Roman', 20,100,True))
+        bottone.setStyleSheet('QPushButton {background-color: orange; color: black;}')
+        layout.addWidget(bottone)
+        return bottone

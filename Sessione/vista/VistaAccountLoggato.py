@@ -48,23 +48,17 @@ class vista_account_loggato(QWidget):
         self.setLayout(self.layout_verticale1)
 
     def show_pulsantiera(self):
-        pulsante_credenziali = QPushButton("CAMBIA\nCREDENZIALI")
-        pulsante_credenziali.setFont(QFont('Times New Roman', 30))
-        pulsante_credenziali.setFixedSize(400, 150)
+
+        #Cambia Credenziali
+        pulsante_credenziali = self.crea_bottone("CAMBIA\nCREDENZIALI", self.layout_verticale2)
         pulsante_credenziali.clicked.connect(self.call_modifica_credenziali)
-        self.layout_verticale2.addWidget(pulsante_credenziali)
 
-        pulsante_prenotazioni = QPushButton("PRENOTAZIONI")
-        pulsante_prenotazioni.setFont(QFont('Times New Roman', 30))
-        pulsante_prenotazioni.setFixedSize(400, 150)
+        pulsante_prenotazioni = self.crea_bottone("PRENOTAZIONI", self.layout_verticale2)
         pulsante_prenotazioni.clicked.connect(self.vista_prenotazioni)
-        self.layout_verticale2.addWidget(pulsante_prenotazioni)
 
-        pulsante_indietro = QPushButton("INDIETRO")
-        pulsante_indietro.setFont(QFont('Times New Roman', 30))
-        pulsante_indietro.setFixedSize(400, 150)
+        pulsante_indietro = self.crea_bottone("INDIETRO", self.layout_verticale2)
         pulsante_indietro.clicked.connect(self.indietro)
-        self.layout_verticale2.addWidget(pulsante_indietro)
+
         self.layout_orizzontale.addLayout(self.layout_verticale2)
 
     def indietro(self):
@@ -108,3 +102,11 @@ class vista_account_loggato(QWidget):
                             "Altezza: {}".format(self.controller.get_altezza_str()) + "\n"
                             "Numero di scarpe: {}".format(self.controller.get_numero_scarpe_str()))
         self.label.setFont(QFont('Times New Roman', 30))
+
+    def crea_bottone(self, tipo, layout):
+        bottone = QPushButton(tipo)
+        bottone.setFixedSize(300,100)
+        bottone.setFont(QFont('Times New Roman', 20,100,True))
+        bottone.setStyleSheet('QPushButton {background-color: lightBlue; color: black;}')
+        layout.addWidget(bottone)
+        return bottone
