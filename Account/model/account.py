@@ -65,7 +65,8 @@ class account:
 
 
     def controlla_prenotazione_effettuata(self, codice):
-        for prenotazione in self.lista_prenotazioni:
-            if prenotazione.get_codice_oggetto() == codice:
-                return False
+        if self.lista_prenotazioni != None:
+            for prenotazione in self.lista_prenotazioni:
+                if prenotazione.get_codice_oggetto() == codice:
+                    return False
         return True
