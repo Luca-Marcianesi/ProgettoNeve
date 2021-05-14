@@ -1,4 +1,4 @@
-from PyQt5.QtGui import QPalette, QBrush, QImage, QFont
+from PyQt5.QtGui import QPalette, QBrush, QImage, QFont, QPixmap
 from PyQt5.QtWidgets import QWidget, QPushButton, QVBoxLayout, QLabel, QSizePolicy, QSpacerItem, \
     QDesktopWidget, QHBoxLayout
 from PyQt5.QtCore import Qt
@@ -45,13 +45,16 @@ class vista_home(QWidget):
         self.setPalette(palette)
 
         # Titolo
-        titolo = QLabel(stringa)
+
+        titolo = QLabel(self)
         titolo.setAlignment(Qt.AlignCenter)
-        titolo.setFont(QFont('Times New Roman', 60))
-        titolo.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Maximum)
+        pixmap = QPixmap("ListaAccount/data/2.png")
+        titolo.setPixmap(pixmap)
+        titolo.resize(pixmap.width(),pixmap.height())
         self.layout_verticale.addSpacerItem(QSpacerItem(0, 50, QSizePolicy.Fixed, QSizePolicy.Fixed))
         self.layout_verticale.addWidget(titolo)
-        self.layout_verticale.addSpacerItem(QSpacerItem(0, 150, QSizePolicy.Fixed, QSizePolicy.Fixed))
+        self.layout_verticale.addSpacerItem(QSpacerItem(0, 50, QSizePolicy.Fixed, QSizePolicy.Fixed))
+
 
     def show_pulsantiera(self):
         pulsante_account = self.crea_bottone("ACCOUNT", self.layout_orizzontale1)
