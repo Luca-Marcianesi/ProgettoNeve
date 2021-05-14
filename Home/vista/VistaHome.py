@@ -17,24 +17,29 @@ class vista_home(QWidget):
         # Attributi
         self.layout_verticale = QVBoxLayout()
         self.layout_orizzontale1 = QHBoxLayout()
-        self.layout_orizzontale2 = QHBoxLayout()
 
+        self.sfondo = QLabel('')
+        self.sfondo.setStyleSheet('QLabel {background-color: darkCyan}')
+        pixmap = QPixmap("ListaAccount/data/2.png")
+        self.sfondo.setPixmap(pixmap)
+        self.layout_orizzontale1.addWidget(self.sfondo)
+        self.layout_orizzontale1.addSpacerItem(QSpacerItem(375,0,QSizePolicy.Fixed, QSizePolicy.Fixed))
         # Sfondo
-        self.show_background("SarnanoNeve")
+        self.show_background()
 
         # Pulsanti
-        self.show_pulsantiera()
+
 
         # Spaziature
         self.layout_verticale.addLayout(self.layout_orizzontale1)
-        self.layout_verticale.addSpacerItem(QSpacerItem(0, 10, QSizePolicy.Expanding, QSizePolicy.Expanding))
-        self.layout_verticale.addLayout(self.layout_orizzontale2)
-        self.layout_verticale.addSpacerItem(QSpacerItem(0, 5, QSizePolicy.Expanding, QSizePolicy.Expanding))
+
+
+        self.show_pulsantiera()
 
         # Impostazione layout totale
         self.setLayout(self.layout_verticale)
 
-    def show_background(self, stringa):
+    def show_background(self):
         # Sfondo
         self.setFixedWidth(QDesktopWidget().width())
         self.setFixedHeight(QDesktopWidget().height())
@@ -46,36 +51,29 @@ class vista_home(QWidget):
 
         # Titolo
 
-        titolo = QLabel(self)
-        titolo.setAlignment(Qt.AlignCenter)
-        pixmap = QPixmap("ListaAccount/data/2.png")
-        titolo.setPixmap(pixmap)
-        titolo.resize(pixmap.width(),pixmap.height())
-        self.layout_verticale.addSpacerItem(QSpacerItem(0, 50, QSizePolicy.Fixed, QSizePolicy.Fixed))
-        self.layout_verticale.addWidget(titolo)
-        self.layout_verticale.addSpacerItem(QSpacerItem(0, 50, QSizePolicy.Fixed, QSizePolicy.Fixed))
+
+
 
 
     def show_pulsantiera(self):
         pulsante_account = self.crea_bottone("ACCOUNT", self.layout_orizzontale1)
         pulsante_account.clicked.connect(self.call_account_loggato)
 
-        pulsante_lista_piste = self.crea_bottone("LISTA PISTE", self.layout_orizzontale1)
+        pulsante_esci = self.crea_bottone("ESCI", self.layout_orizzontale1)
+        pulsante_esci.clicked.connect(self.uscita)
+
+        pulsante_skipass = self.crea_bottone("ACQUISTA \n SKIPASS", self.layout_verticale)
+        # pulsante_skipass.clicked.connect(self.call_skipass())
+
+        pulsante_lista_piste = self.crea_bottone("LISTA PISTE", self.layout_verticale)
         pulsante_lista_piste.clicked.connect(self.call_lista_piste)
 
-        pulsante_prenota_parcheggio = self.crea_bottone("PRENOTA \n PARCHEGGIO", self.layout_orizzontale1)
+        pulsante_noleggia_attrezzatura = self.crea_bottone("NOLEGGIA \n ATTREZZATURA", self.layout_verticale)
+        # pulsante_noleggia_attrezzatura.clicked.connect(self.call_noleggia_attrezzatura())
+
+        pulsante_prenota_parcheggio = self.crea_bottone("PRENOTA \n PARCHEGGIO", self.layout_verticale)
         pulsante_prenota_parcheggio.clicked.connect(self.call_prenota_parcheggio)
 
-        self.layout_verticale.addSpacerItem(QSpacerItem(0, 25, QSizePolicy.Fixed, QSizePolicy.Fixed))
-
-        pulsante_noleggia_attrezzatura = self.crea_bottone("NOLEGGIA \n ATTREZZATURA", self.layout_orizzontale2)
-        #pulsante_noleggia_attrezzatura.clicked.connect(self.call_noleggia_attrezzatura())
-        
-        pulsante_skipass = self.crea_bottone("ACQUISTA \n SKIPASS", self.layout_orizzontale2)
-        #pulsante_skipass.clicked.connect(self.call_skipass())
-
-        pulsante_esci = self.crea_bottone("ESCI", self.layout_orizzontale2)
-        pulsante_esci.clicked.connect(self.uscita)
 
     def call_lista_piste(self):
         self.vista_lista_piste = vista_lista_piste(self.show)
@@ -105,8 +103,8 @@ class vista_home(QWidget):
 
     def crea_bottone(self, tipo, layout):
         bottone = QPushButton(tipo)
-        bottone.setFixedSize(500,200)
-        bottone.setFont(QFont('Times New Roman', 25))
-        bottone.setStyleSheet('QPushButton {background-color: transparent; color: orange;}')
+        bottone.setFixedSize(300,100)
+        bottone.setFont(QFont('Times New Roman', 20,100,True))
+        bottone.setStyleSheet('QPushButton {background-color: orange; color: black;}')
         layout.addWidget(bottone)
         return bottone
