@@ -5,11 +5,12 @@ from PyQt5.QtCore import Qt
 
 class vista_acquista_skipass(QWidget):
 
-    def __init__(self):
+    def __init__(self, callback):
         super(vista_acquista_skipass, self).__init__()
 
 
         # Attributi
+        self.callback = callback
         self.layout_verticale = QVBoxLayout()
         self.layout_orizzontale = QHBoxLayout()
         self.layout_verticale1 = QVBoxLayout()
@@ -46,6 +47,8 @@ class vista_acquista_skipass(QWidget):
 
         # Pulsanti
         #self.show_pulsante()
+        pulsante_esci = self.crea_bottone("Indietro")
+        pulsante_esci.clicked.connect(self.indietro)
 
         # Spaziature
         self.layout_verticale.addLayout(self.layout_orizzontale)
@@ -80,8 +83,7 @@ class vista_acquista_skipass(QWidget):
         pulsante_skipass = self.crea_bottone(titolo)
         pulsante_skipass.clicked.connect(call)
         return pulsante_skipass
-        #pulsante_esci = self.crea_bottone("Indietro")
-        #pulsante_esci.clicked.connect(self.uscita)
+
 
     def call_skipass1(self):
         self.controller_gestione_skipass.prenota_skipass(self)
@@ -107,14 +109,10 @@ class vista_acquista_skipass(QWidget):
         self.controller_gestione_skipass.prenota_skipass(self)
         self.close()
 
-    def uscita(self):
-        self.close()
-
     def crea_bottone(self, tipo):
         bottone = QPushButton(tipo)
         bottone.setFixedSize(350, 100)
         bottone.setFont(QFont('Times New Roman', 25))
-        #layout.addWidget(bottone)
         return bottone
 
     def indietro(self):

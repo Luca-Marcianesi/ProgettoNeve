@@ -3,6 +3,7 @@ from PyQt5.QtWidgets import QWidget, QPushButton, QVBoxLayout, QLabel, QSizePoli
     QDesktopWidget, QHBoxLayout
 from PyQt5.QtCore import Qt
 
+from GestioneSkipass.vista.vista_acquista_skipass import vista_acquista_skipass
 from ListaAttrezzatura.vista.VistaListaAttrezzatura import vista_lista_attrezzatura
 from ListaPiste.vista.VistaListaPiste import vista_lista_piste
 from Sessione.vista.VistaAccountLoggato import vista_account_loggato
@@ -72,7 +73,7 @@ class vista_home(QWidget):
         #pulsante_noleggia_attrezzatura.clicked.connect(self.call_noleggia_attrezzatura())
         
         pulsante_skipass = self.crea_bottone("ACQUISTA \n SKIPASS", self.layout_orizzontale2)
-        #pulsante_skipass.clicked.connect(self.call_skipass())
+        pulsante_skipass.clicked.connect(self.call_skipass)
 
         pulsante_esci = self.crea_bottone("ESCI", self.layout_orizzontale2)
         pulsante_esci.clicked.connect(self.uscita)
@@ -98,7 +99,9 @@ class vista_home(QWidget):
         self.close()
 
     def call_skipass(self):
-        pass
+        self.vista_acquista_skipass = vista_acquista_skipass(self.showFullScreen)
+        self.vista_acquista_skipass.showFullScreen()
+        self.close()
 
     def uscita(self):
         self.close()
