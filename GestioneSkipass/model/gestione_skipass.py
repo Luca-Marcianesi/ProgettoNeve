@@ -17,7 +17,7 @@ class gestione_skipass:
     def prenota(self,skipass_selezionato):
         if date.today() > date.fromisoformat(self.inizio_stagione) and date.today() < date.fromisoformat(self.fine_stagione) :
             if sessione.controlla_prenotazione_effettuata(1):
-                if skipass_selezionato.tipo != "stagionale"and skipass_selezionato.tipo != "mensile"and skipass_selezionato.tipo != "settimanale":
+                if skipass_selezionato.tipo != "Stagionale"and skipass_selezionato.tipo != "Mensile"and skipass_selezionato.tipo != "Settimanale":
                     scadenza = datetime(date.today().year, date.today().month, date.today().day,
                               time.fromisoformat(skipass_selezionato.inizio_validita).hour, time.fromisoformat(skipass_selezionato.inizio_validita).minute,
                               time.fromisoformat(skipass_selezionato.inizio_validita).second)
@@ -26,7 +26,7 @@ class gestione_skipass:
 
                 else:
 
-                    if skipass_selezionato.tipo != "stagionale" :
+                    if skipass_selezionato.tipo != "Stagionale" :
                         scadenza = date.today() + timedelta(days = int(skipass_selezionato.durata))
                         sessione.aggiungi_prenotazione(prenotazione(1, scadenza, skipass_selezionato.descrizione))
 
