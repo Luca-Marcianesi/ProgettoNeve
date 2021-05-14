@@ -30,7 +30,7 @@
                 },
             {
                 "tipo": "mensile",
-                "descrizione": "Permette l'accesso agli impianti \n per 30 giorni dalla data d'inizio validita'",
+                "descrizione": "Permette l'accesso agli impianti \nper 30 giorni dalla data d'inizio validita'",
                 "durata(day)": 30
                 },
             {
