@@ -7,6 +7,7 @@ from ListaAttrezzatura.vista.VistaListaAttrezzatura import vista_lista_attrezzat
 from ListaPiste.vista.VistaListaPiste import vista_lista_piste
 from Sessione.vista.VistaAccountLoggato import vista_account_loggato
 from GestioneParcheggi.vista.vista_parcheggio import vista_parcheggio
+from GestioneSkipass.vista.vista_acquista_skipass import vista_acquista_skipass
 
 
 class vista_home(QWidget):
@@ -63,7 +64,7 @@ class vista_home(QWidget):
         pulsante_esci.clicked.connect(self.uscita)
 
         pulsante_skipass = self.crea_bottone("ACQUISTA \n SKIPASS", self.layout_verticale)
-        # pulsante_skipass.clicked.connect(self.call_skipass())
+        pulsante_skipass.clicked.connect(self.call_skipass)
 
         pulsante_lista_piste = self.crea_bottone("LISTA PISTE", self.layout_verticale)
         pulsante_lista_piste.clicked.connect(self.call_lista_piste)
@@ -96,7 +97,9 @@ class vista_home(QWidget):
         self.close()
 
     def call_skipass(self):
-        pass
+        self.vista_acquista_skipass= vista_acquista_skipass(self.showFullScreen)
+        self.vista_acquista_skipass.showFullScreen()
+        self.close()
 
     def uscita(self):
         self.close()
