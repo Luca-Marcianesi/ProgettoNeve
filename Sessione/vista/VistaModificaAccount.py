@@ -100,7 +100,7 @@ class vista_modifica_account(QWidget):
         # Sfondo
         self.setFixedWidth(QDesktopWidget().width())
         self.setFixedHeight(QDesktopWidget().height())
-        back_img = QImage("ListaAccount/data/im.jpg")
+        back_img = QImage("Data/Immagini/1.jpg")
         img = back_img.scaled(self.width(), self.height())
         palette = QPalette()
         palette.setBrush(10, QBrush(img))
@@ -119,6 +119,6 @@ class vista_modifica_account(QWidget):
         bottone = QPushButton(tipo)
         bottone.setFixedSize(300,100)
         bottone.setFont(QFont('Times New Roman', 20,100,True))
-        bottone.setStyleSheet('QPushButton {background-color: orange; color: black;}')
+        bottone.setStyleSheet('QPushButton {background-color: lightBlue; color: black;}')
         layout.addWidget(bottone)
         return bottone

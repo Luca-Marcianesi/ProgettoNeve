@@ -56,7 +56,7 @@ class vista_prenotazione_account(QWidget):
         # Sfondo
         self.setFixedWidth(QDesktopWidget().width())
         self.setFixedHeight(QDesktopWidget().height())
-        back_img = QImage("ListaAccount/data/im.jpg")
+        back_img = QImage("Data/Immagini/6.jpg")
         img = back_img.scaled(self.width(), self.height())
         palette = QPalette()
         palette.setBrush(10, QBrush(img))
