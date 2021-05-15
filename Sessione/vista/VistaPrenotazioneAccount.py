@@ -4,12 +4,10 @@ from PyQt5.QtWidgets import QWidget, QDesktopWidget, QVBoxLayout, QHBoxLayout, Q
 from PyQt5.QtCore import Qt
 from Sessione.controller.controller_sessione import controller_sessione
 
-
 class vista_prenotazione_account(QWidget):
 
     def __init__(self, callback):
         super(vista_prenotazione_account, self).__init__()
-
         # Attributi
         self.controller = controller_sessione()
         self.callback = callback

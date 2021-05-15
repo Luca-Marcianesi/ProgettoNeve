@@ -3,10 +3,11 @@ from PyQt5.QtGui import QFont, QBrush, QPalette, QImage
 from PyQt5.QtWidgets import QWidget, QHBoxLayout, QVBoxLayout, QSpacerItem, QSizePolicy, QPushButton, \
     QDesktopWidget, QLabel
 from PyQt5.QtCore import Qt
+from Sessione.model.sessione import sessione
 
 
 class vista_skipass(QWidget):
-    def __init__(self, skipass,callback):
+    def __init__(self, skipass,callback,controller):
         super(vista_skipass, self).__init__()
 
         # Attributi
@@ -14,7 +15,7 @@ class vista_skipass(QWidget):
         self.layout_verticale = QVBoxLayout()
         self.layout_orizzontale = QHBoxLayout()
         self.skipass = skipass
-
+        self.controller_skipass = controller
 
         # Sfondo
         self.show_background("Prenota" + "\n"
@@ -29,7 +30,7 @@ class vista_skipass(QWidget):
 
         # Pulsante
         self.pulsante_prenota = self.crea_bottone("Prenota", self.layout_orizzontale)
-        #self.pulsante_prenota.clicked.connect(self.call_prenota_parcheggio)
+        self.pulsante_prenota.clicked.connect(self.call_prenotazione)
 
         self.layout_orizzontale.addSpacerItem(QSpacerItem(50, 0))
 
@@ -74,3 +75,8 @@ class vista_skipass(QWidget):
         bottone.setStyleSheet('QPushButton {background-color: orange; color: black;}')
         layout.addWidget(bottone)
         return bottone
+
+    def call_prenotazione(self):
+        self.controller_skipass.prenota_skipass(self.skipass)
+        sessione.salva_dati()
+

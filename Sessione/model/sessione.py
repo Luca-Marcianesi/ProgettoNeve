@@ -63,7 +63,7 @@ class sessione:
 
     @classmethod
     def controlla_prenotazione_effettuata(cls,codice):
-        cls.account_loggato.controlla_prenotazione_effettuata(codice)
+        return cls.account_loggato.controlla_prenotazione_effettuata(codice)
 
     @classmethod
     def salva_dati(cls):

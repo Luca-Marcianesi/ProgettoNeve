@@ -69,7 +69,7 @@ class vista_home_proprietario(QWidget):
         pulsante_lista_piste = self.crea_bottone("LISTA PISTE", self.layout_orizzontale2)
         #pulsante_lista_piste.clicked.connect(self.call_lista_piste)
 
-        pulsante_noleggia_attrezzatura = self.crea_bottone("NOLEGGIA \n ATTREZZATURA", self.layout_orizzontale3)
+        pulsante_noleggia_attrezzatura = self.crea_bottone("MODIFICA \n ATTREZZATURA", self.layout_orizzontale3)
         # pulsante_noleggia_attrezzatura.clicked.connect(self.call_noleggia_attrezzatura())
 
         self.layout_orizzontale3.addSpacerItem(QSpacerItem(100, 0))

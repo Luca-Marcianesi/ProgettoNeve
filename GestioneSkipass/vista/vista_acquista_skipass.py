@@ -97,7 +97,7 @@ class vista_acquista_skipass(QWidget):
 
 
     def call_skipass(self,skipass):
-        self.vista_skipass = vista_skipass(skipass, self.showFullScreen)
+        self.vista_skipass = vista_skipass(skipass, self.showFullScreen,self.controller_gestine_skipass)
         self.vista_skipass.showFullScreen()
         self.close()
 
