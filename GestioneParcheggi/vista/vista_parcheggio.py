@@ -1,3 +1,5 @@
+from functools import partial
+
 from PyQt5.QtGui import QImage, QPalette, QBrush, QFont
 from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import QWidget, QHBoxLayout, QVBoxLayout, QLabel, QSpacerItem, QSizePolicy, QPushButton, \
@@ -14,6 +16,7 @@ class vista_parcheggio(QWidget):
         self.layout_verticale = QVBoxLayout()
         self.layout_orizzontale = QHBoxLayout()
         self.callback = callback
+        self.num_giorni = 1
 
         self.show_background("PARCHEGGIO CAPANNINA")
 
@@ -82,7 +85,7 @@ class vista_parcheggio(QWidget):
         self.layout_verticale.addLayout(layout_pulsanti)
 
     def call_selezione_giorni(self):
-        self.vista = vista_richiesta_giorni()
+        self.vista = vista_richiesta_giorni(self.controller_gestione_parcheggio)
         self.vista.show()
 
     def indietro(self):
@@ -91,9 +94,10 @@ class vista_parcheggio(QWidget):
 
 class vista_richiesta_giorni(QWidget):
 
-    def __init__(self):
+    def __init__(self,controller_parcheggi):
         super(vista_richiesta_giorni, self).__init__()
 
+        self.controller_parcheggi = controller_parcheggi
         self.layout_verticale = QVBoxLayout()
         self.num_giorni = 1
         self.setFixedSize(400,300)
@@ -110,6 +114,7 @@ class vista_richiesta_giorni(QWidget):
         #self.giorni.valueChanged.connect(self.num_giorni)
 
         bottone = QPushButton("Prenota")
+        bottone.clicked.connect(partial(self.call_prenota,self.giorni.value()))
 
         self.layout_verticale.addWidget(label)
         self.layout_verticale.addSpacerItem(QSpacerItem(150, 0, QSizePolicy.Fixed, QSizePolicy.Fixed))
@@ -119,6 +124,10 @@ class vista_richiesta_giorni(QWidget):
 
         self.setLayout(self.layout_verticale)
         self.setWindowTitle('Giorni')
+
+    def call_prenota(self,numero_giorni):
+        self.controller_parcheggi.prenota_parcheggio(numero_giorni)
+        sessione.salva_dati()
 
 
 

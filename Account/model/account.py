@@ -34,7 +34,7 @@ class account:
     def get_lista_prenotazioni_str(self):
         lista=""
         for prenotazione in self.lista_prenotazioni:
-            lista = lista + "" + prenotazione.get_prenotazione_str()
+            lista = lista + "" + prenotazione.get_prenotazione_str() + "\n"
         return lista
 
     def get_nome(self):

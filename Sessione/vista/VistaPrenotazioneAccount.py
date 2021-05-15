@@ -18,8 +18,6 @@ class vista_prenotazione_account(QWidget):
         # Sfondo
         self.show_background("PRENOTAZIONI ACCOUNT")
 
-        # Spaziatura
-        self.layout_verticale.addSpacerItem(QSpacerItem(500, 150, QSizePolicy.Fixed, QSizePolicy.Fixed))
 
         # label
         if self.controller.get_lista_prenotazioni() == None:
@@ -31,7 +29,7 @@ class vista_prenotazione_account(QWidget):
         self.layout_verticale.addWidget(self.label)
 
         # Spaziatura
-        self.layout_verticale.addSpacerItem(QSpacerItem(0, 300, QSizePolicy.Fixed, QSizePolicy.Fixed))
+        self.layout_verticale.addSpacerItem(QSpacerItem(0, 100, QSizePolicy.Fixed, QSizePolicy.Fixed))
         self.layout_orizzontale.addSpacerItem(QSpacerItem(700, 0, QSizePolicy.Fixed, QSizePolicy.Fixed))
 
         # Pulsante indietro allineato
