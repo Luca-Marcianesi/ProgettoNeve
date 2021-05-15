@@ -24,7 +24,7 @@ class vista_skipass(QWidget):
         label = QLabel("Tipologia => {}\n".format(self.skipass.get_tipo()) + "\n"
                        "Descrizione => {}\n".format(self.skipass.get_descrizione()) + "\n"
                        "Durata dello skipass => {}\n".format(self.skipass.get_durata()) + "\n")
-        label.setFont(QFont('Times New Roman', 30))
+        label.setFont(QFont('Times New Roman', 30,100,True))
         self.layout_verticale.addWidget(label)
 
         # Pulsante

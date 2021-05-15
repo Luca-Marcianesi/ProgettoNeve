@@ -18,6 +18,7 @@ class vista_home(QWidget):
         # Attributi
         self.layout_verticale = QVBoxLayout()
         self.layout_orizzontale1 = QHBoxLayout()
+        self.layout_orizzontale2 = QHBoxLayout()
 
         self.sfondo = QLabel('')
         self.sfondo.setStyleSheet('QLabel {background-color: darkCyan}')
@@ -34,9 +35,10 @@ class vista_home(QWidget):
         # Spaziature
         self.layout_verticale.addLayout(self.layout_orizzontale1)
 
-
         self.show_pulsantiera()
 
+
+        self.layout_verticale.addLayout(self.layout_orizzontale2)
         # Impostazione layout totale
         self.setLayout(self.layout_verticale)
 
@@ -60,6 +62,7 @@ class vista_home(QWidget):
         pulsante_account = self.crea_bottone("ACCOUNT", self.layout_orizzontale1)
         pulsante_account.clicked.connect(self.call_account_loggato)
 
+
         pulsante_esci = self.crea_bottone("ESCI", self.layout_orizzontale1)
         pulsante_esci.clicked.connect(self.uscita)
 
@@ -72,8 +75,13 @@ class vista_home(QWidget):
         pulsante_noleggia_attrezzatura = self.crea_bottone("NOLEGGIA \n ATTREZZATURA", self.layout_verticale)
         # pulsante_noleggia_attrezzatura.clicked.connect(self.call_noleggia_attrezzatura())
 
-        pulsante_prenota_parcheggio = self.crea_bottone("PRENOTA \n PARCHEGGIO", self.layout_verticale)
+        pulsante_prenota_parcheggio = self.crea_bottone("PRENOTA \n PARCHEGGIO", self.layout_orizzontale2)
         pulsante_prenota_parcheggio.clicked.connect(self.call_prenota_parcheggio)
+
+        self.layout_orizzontale2.addSpacerItem(QSpacerItem(1300,0))
+
+        pulsante_info = self.crea_bottone("INFORMAZIONI", self.layout_orizzontale2)
+        #pulsante_info.clicked.connect(self.call_prenota_parcheggio)
 
 
     def call_lista_piste(self):

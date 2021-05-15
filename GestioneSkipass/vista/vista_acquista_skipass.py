@@ -24,7 +24,7 @@ class vista_acquista_skipass(QWidget):
         self.layout_orizzontale1 = QHBoxLayout()
 
         # Sfondo
-        self.show_background("Prenota Skipass")
+        self.show_background("PRENOTA SKIPASS")
 
         self.layout_verticale1.addWidget(self.show_pulsante("Mattiniero", self.controller_gestine_skipass.get_skipass_n(0)))
         self.layout_verticale1.addSpacerItem(QSpacerItem(0, 50))
@@ -104,7 +104,8 @@ class vista_acquista_skipass(QWidget):
     def crea_bottone(self, tipo):
         bottone = QPushButton(tipo)
         bottone.setFixedSize(350, 100)
-        bottone.setFont(QFont('Times New Roman', 25))
+        bottone.setFont(QFont('Times New Roman', 20, 100, True))
+        bottone.setStyleSheet('QPushButton {background-color: orange; color: black;}')
         return bottone
 
     def indietro(self):
