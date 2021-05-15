@@ -3,6 +3,7 @@ from PyQt5.QtWidgets import QWidget, QDesktopWidget, QVBoxLayout, QHBoxLayout, Q
     QPushButton
 from PyQt5.QtCore import Qt
 from Sessione.controller.controller_sessione import controller_sessione
+from Sessione.model.sessione import sessione
 
 class vista_prenotazione_account(QWidget):
 
@@ -21,7 +22,7 @@ class vista_prenotazione_account(QWidget):
         self.layout_verticale.addSpacerItem(QSpacerItem(500, 150, QSizePolicy.Fixed, QSizePolicy.Fixed))
 
         # label
-        if self.controller.get_lista_prenotazioni() is None:
+        if self.controller.get_lista_prenotazioni() == None:
             self.label = QLabel("Nessuna prenotazione")
         else:
             self.label = QLabel(self.controller.get_lista_prenotazioni())

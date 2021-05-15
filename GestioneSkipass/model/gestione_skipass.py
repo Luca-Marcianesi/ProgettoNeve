@@ -34,7 +34,7 @@ class gestione_skipass:
 
                     else:
                         sessione.aggiungi_prenotazione(prenotazione(1, self.fine_stagione, skipass_selezionato.descrizione))
-
+            print(sessione.get_lista_prenotazioni())
 
 
     def controlla_skipass_acquistato(self):

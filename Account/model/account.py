@@ -1,5 +1,5 @@
 from datetime import date
-
+from datetime import datetime
 
 
 class account:
@@ -60,7 +60,7 @@ class account:
             pass
         else :
             for prenotazione in self.lista_prenotazioni :
-                if prenotazione.get_scadenza() < date.today() :
+                if prenotazione.get_scadenza() < datetime.today() :
                     self.lista_prenotazioni.remove(prenotazione)
 
 

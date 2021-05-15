@@ -52,11 +52,6 @@ class vista_home(QWidget):
         palette.setBrush(10, QBrush(img))
         self.setPalette(palette)
 
-        # Titolo
-
-
-
-
 
     def show_pulsantiera(self):
         pulsante_account = self.crea_bottone("ACCOUNT", self.layout_orizzontale1)
