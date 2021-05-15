@@ -23,7 +23,7 @@ class vista_home_proprietario(QWidget):
         pixmap = QPixmap("ListaAccount/data/2.png")
         self.sfondo.setPixmap(pixmap)
         self.layout_orizzontale1.addWidget(self.sfondo)
-        self.layout_orizzontale1.addSpacerItem(QSpacerItem(375,0,QSizePolicy.Fixed, QSizePolicy.Fixed))
+        self.layout_orizzontale1.addSpacerItem(QSpacerItem(300,0,QSizePolicy.Fixed, QSizePolicy.Fixed))
         # Sfondo
         self.show_background()
 
@@ -54,6 +54,8 @@ class vista_home_proprietario(QWidget):
     def show_pulsantiera(self):
         pulsante_account = self.crea_bottone("ACCOUNT", self.layout_orizzontale1)
         #pulsante_account.clicked.connect(self.call_account_loggato)
+
+        self.layout_orizzontale1.addSpacerItem(QSpacerItem(50,0))
 
 
         pulsante_esci = self.crea_bottone("ESCI", self.layout_orizzontale1)
