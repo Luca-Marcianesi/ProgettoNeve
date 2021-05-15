@@ -1,7 +1,7 @@
 
 from PyQt5.QtGui import QFont, QBrush, QPalette, QImage
 from PyQt5.QtWidgets import QWidget, QHBoxLayout, QVBoxLayout, QSpacerItem, QSizePolicy, QPushButton, \
-    QDesktopWidget, QGridLayout, QLabel
+    QDesktopWidget, QLabel
 from PyQt5.QtCore import Qt
 
 
@@ -62,18 +62,6 @@ class vista_skipass(QWidget):
         self.layout_verticale.addWidget(titolo)
         self.layout_verticale.addSpacerItem(QSpacerItem(0, 50, QSizePolicy.Fixed, QSizePolicy.Fixed))
 
-        """
-    def show_pulsante_indietro(self):
-        # Punsante indietro
-        pulsante_indietro = QPushButton()
-        pulsante_indietro.setFont(QFont('Times New Roman', 18))
-        pulsante_indietro.setFixedSize(100, 100)
-        pulsante_indietro.clicked.connect(self.indietro)
-        self.layout_orizzontale.addSpacerItem(QSpacerItem(5, 0, QSizePolicy.Fixed, QSizePolicy.Fixed))
-        self.layout_orizzontale.addWidget(pulsante_indietro)
-        self.layout_orizzontale.addSpacerItem(QSpacerItem(5000, 0, QSizePolicy.Fixed, QSizePolicy.Fixed))
-        self.layout_verticale1.addLayout(self.layout_orizzontale)
-        """
 
     def indietro(self):
         self.callback()

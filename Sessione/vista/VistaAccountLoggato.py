@@ -79,7 +79,7 @@ class vista_account_loggato(QWidget):
         # Sfondo
         self.setFixedWidth(QDesktopWidget().width())
         self.setFixedHeight(QDesktopWidget().height())
-        back_img = QImage("ListaAccount/data/im.jpg")
+        back_img = QImage("Data/Immagini/1.jpg")
         img = back_img.scaled(self.width(), self.height())
         palette = QPalette()
         palette.setBrush(10, QBrush(img))
@@ -101,7 +101,7 @@ class vista_account_loggato(QWidget):
                             "Età: {}".format(self.controller.get_eta_str()) + "\n"
                             "Altezza: {}".format(self.controller.get_altezza_str()) + "\n"
                             "Numero di scarpe: {}".format(self.controller.get_numero_scarpe_str()))
-        self.label.setFont(QFont('Times New Roman', 30))
+        self.label.setFont(QFont('Times New Roman', 30,100))
 
     def crea_bottone(self, tipo, layout):
         bottone = QPushButton(tipo)
