@@ -19,7 +19,7 @@ class vista_parcheggio(QWidget):
 
         self.layout_verticale.addSpacerItem(QSpacerItem(0, 50, QSizePolicy.Fixed, QSizePolicy.Fixed))
 
-        if sessione.controlla_prenotazione_effettuata(6):
+        if  not sessione.controlla_prenotazione_effettuata(6):
             label =QLabel("POSTI DISPONIBILI:\n{} ".format(self.controller_gestione_parcheggio.get_posti_disponibili()))
         else :
             label = QLabel("POSTI DISPONIBILI:\n{}\n(prenotazione effettuata)".format(self.controller_gestione_parcheggio.get_posti_disponibili()))
