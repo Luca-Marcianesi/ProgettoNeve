@@ -12,3 +12,6 @@ class controller_gestione_skipass:
 
     def controlla_skipass_acquistato(self):
         return self.model.controlla_skipass_acquistato()
+
+    def get_skipass_n(self,numero):
+        return self.model.get_skipass_n(numero)

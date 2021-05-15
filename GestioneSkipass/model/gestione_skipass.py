@@ -44,6 +44,9 @@ class gestione_skipass:
     def aggiungi_skipass(self,skipass):
         self.lista_skipass.append(skipass)
 
+    def get_skipass_n(self,numero):
+        return self.lista_skipass[numero]
+
     def leggi_dati(self):
             with open("GestioneSkipass/data/lista_skipass.json") as file:
                 file_oggetto = json.load(file)

@@ -6,14 +6,15 @@ from PyQt5.QtCore import Qt
 
 
 class vista_skipass(QWidget):
-    def __init__(self, skipass):
+    def __init__(self, skipass,callback):
         super(vista_skipass, self).__init__()
 
         # Attributi
-        #self.callback = callback
+        self.callback = callback
         self.layout_verticale = QVBoxLayout()
         self.layout_orizzontale = QHBoxLayout()
         self.skipass = skipass
+
 
         # Sfondo
         self.show_background("Prenota" + "\n"
@@ -33,7 +34,7 @@ class vista_skipass(QWidget):
         self.layout_orizzontale.addSpacerItem(QSpacerItem(50, 0))
 
         self.pulsante_indietro = self.crea_bottone("Indietro", self.layout_orizzontale)
-        # self.pulsante_prenota.clicked.connect(self.call_prenota_parcheggio)
+        self.pulsante_indietro.clicked.connect(self.indietro)
 
         self.layout_orizzontale.addSpacerItem(QSpacerItem(1300, 0))
 
@@ -61,11 +62,10 @@ class vista_skipass(QWidget):
         self.layout_verticale.addWidget(titolo)
         self.layout_verticale.addSpacerItem(QSpacerItem(0, 50, QSizePolicy.Fixed, QSizePolicy.Fixed))
 
-    """
+        """
     def show_pulsante_indietro(self):
         # Punsante indietro
         pulsante_indietro = QPushButton()
-        #pulsante_indietro.setStyleSheet("background-image:url(Attrezzatura/data/arrow.jpg)")
         pulsante_indietro.setFont(QFont('Times New Roman', 18))
         pulsante_indietro.setFixedSize(100, 100)
         pulsante_indietro.clicked.connect(self.indietro)
@@ -73,7 +73,7 @@ class vista_skipass(QWidget):
         self.layout_orizzontale.addWidget(pulsante_indietro)
         self.layout_orizzontale.addSpacerItem(QSpacerItem(5000, 0, QSizePolicy.Fixed, QSizePolicy.Fixed))
         self.layout_verticale1.addLayout(self.layout_orizzontale)
-    """
+        """
 
     def indietro(self):
         self.callback()
