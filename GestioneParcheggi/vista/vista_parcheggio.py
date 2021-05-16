@@ -22,7 +22,7 @@ class vista_parcheggio(QWidget):
 
         self.layout_verticale.addSpacerItem(QSpacerItem(0, 50, QSizePolicy.Fixed, QSizePolicy.Fixed))
 
-        if  not sessione.controlla_prenotazione_effettuata(6):
+        if sessione.controlla_prenotazione_effettuata(6):
             label =QLabel("POSTI DISPONIBILI:\n{} ".format(self.controller_gestione_parcheggio.get_posti_disponibili()))
         else :
             label = QLabel("POSTI DISPONIBILI:\n{}\n(prenotazione effettuata)".format(self.controller_gestione_parcheggio.get_posti_disponibili()))
@@ -127,6 +127,7 @@ class vista_richiesta_giorni(QWidget):
     def call_prenota(self):
         val = self.giorni.value()
         self.controller_parcheggi.prenota_parcheggio(val)
+        self.controller_parcheggi.salva_dati()
         sessione.salva_dati()
 
 

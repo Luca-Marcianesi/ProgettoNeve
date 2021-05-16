@@ -11,14 +11,16 @@ class gestione_parcheggi:
         self.lista_prenotazioni_parcheggi = []
         self.posti_disponibili = None
         self.leggi_dati()
+        print(self.posti_disponibili )
         self.elimina_scadute_prenotazioni()
         self.calcola_posti()
+        print(self.posti_disponibili)
 
     def prenota_parcheggio(self,numero_giorni):
         if sessione.controlla_prenotazione_effettuata(6) :
             if self.posti_disponibili > 0:
                 scadenza = date.today() + timedelta(days = int(numero_giorni))
-                prenotazione_da_aggiungere  = prenotazione(6,scadenza,"parcheggio:{}".format(self.posti_disponibili))
+                prenotazione_da_aggiungere  = prenotazione(6,scadenza,"parcheggio numero:{}".format(self.posti_disponibili))
                 sessione.aggiungi_prenotazione(prenotazione_da_aggiungere)
                 self.aggiungi_prenotazione(prenotazione_da_aggiungere)
                 self.posti_disponibili -= 1
@@ -50,7 +52,7 @@ class gestione_parcheggi:
 
     def leggi_dati(self):
         if os.path.isfile('GestioneParcheggi/data/parcheggi.pickle'):
-            with open('ListaAccount/data/lista_account_salvata.pickle',"rb") as file:
+            with open('GestioneParcheggi/data/parcheggi.pickle',"rb") as file:
                 self.lista_prenotazioni_parcheggi = pickle.load(file)
         else :
             self.posti_disponibili = 30
