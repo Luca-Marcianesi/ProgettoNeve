@@ -1,4 +1,6 @@
-from PyQt5.QtWidgets import QVBoxLayout, QLabel, QLineEdit, QPushButton, QMessageBox, QWidget, QHBoxLayout
+from PyQt5.QtGui import QImage, QPalette, QBrush
+from PyQt5.QtWidgets import QVBoxLayout, QLabel, QLineEdit, QPushButton, QMessageBox, QWidget, QHBoxLayout, \
+    QDesktopWidget
 
 
 class vista_crea_account(QWidget):
@@ -12,6 +14,8 @@ class vista_crea_account(QWidget):
         self.setFixedHeight(600)
         self.v_layout = QVBoxLayout()
         self.h_layout = QHBoxLayout()
+
+        self.show_background()
 
         self.casella_testo("Nome")
         self.casella_testo("Cognome")
@@ -28,6 +32,7 @@ class vista_crea_account(QWidget):
         invio = QPushButton("Invia")
         invio.clicked.connect(self.crea_account)
         self.h_layout.addWidget(invio)
+
 
         self.v_layout.addLayout(self.h_layout)
         self.setLayout(self.v_layout)
@@ -63,3 +68,11 @@ class vista_crea_account(QWidget):
     def indietro(self):
         self.callback()
         self.close()
+
+    def show_background(self):
+        # Sfondo
+        back_img = QImage("Data/Immagini/azzurro.jpg")
+        img = back_img.scaled(self.width(), self.height())
+        palette = QPalette()
+        palette.setBrush(10, QBrush(img))
+        self.setPalette(palette)

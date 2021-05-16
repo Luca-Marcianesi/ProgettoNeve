@@ -3,38 +3,39 @@
   "data_fine_stagione":"2022-04-01",
   "lista_skipass":[
             {
-                "tipo": "mattiniero",
-                "descrizione": "Permette l'accesso agli impianti dalle ore 8:00 alle ore 12:00 dello stesso giorno",
+                "tipo": "Mattiniero",
+                "descrizione": "Permette l'accesso agli impianti \ndalle ore 8:00 alle ore 12:00 dello stesso giorno",
+
                 "inizio_validita": "08:00:00",
                 "durata(hours)": 4
                 },
             {
-                "tipo": "pomeridiano",
-                "descrizione": "Permette l'accesso agli impianti dalle ore 12:00 alle ore 16:00 dello stesso giorno",
+                "tipo": "Pomeridiano",
+                "descrizione": "Permette l'accesso agli impianti \ndalle ore 12:00 alle ore 16:00 dello stesso giorno",
                 "inizio_validita": "12:00:00",
                 "durata(hours)": 4
                 },
             {
-                "tipo": "giornaliero",
-                "descrizione": "Permette l'accesso agli impianti dalle ore 8:00 alle ore 16:00 dello stesso giorno",
+                "tipo": "Giornaliero",
+                "descrizione": "Permette l'accesso agli impianti \ndalle ore 8:00 alle ore 16:00 dello stesso giorno",
                 "inizio_validita": "08:00:00",
                 "durata(hours)": 8
                 }
     ],
   "lista_abbonamenti":[
             {
-                "tipo": "settimanale",
-                "descrizione": "Permette l'accesso agli impianti per 7 giorni dalla data d'inizio validita'",
+                "tipo": "Settimanale",
+                "descrizione": "Permette l'accesso agli impianti \nper 7 giorni dalla data d'inizio validita'",
                 "durata(day)": 7
                 },
             {
-                "tipo": "mensile",
-                "descrizione": "Permette l'accesso agli impianti per 30 giorni dalla data d'inizio validita'",
+                "tipo": "Mensile",
+                "descrizione": "Permette l'accesso agli impianti \nper 30 giorni dalla data d'inizio validita'",
                 "durata(day)": 30
                 },
             {
-                "tipo": "stagionale",
-                "descrizione": "Permette l'accesso agli impianti per l'intera stagione invernale(1 dicembre-> 30 marzo)",
+                "tipo": "Stagionale",
+                "descrizione": "Permette l'accesso agli impianti \nper l'intera stagione invernale (1 dicembre-> 30 marzo)",
                 "durata(day)": 120
                 }
   ]

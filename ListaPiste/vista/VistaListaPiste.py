@@ -60,10 +60,11 @@ class vista_lista_piste(QWidget):
         self.setPalette(palette)
 
     def show_pulsante_indietro(self):
+
         # Punsante indietro
         pulsante_indietro = QPushButton()
+        pulsante_indietro.setStyleSheet('QPushButton {background-color: lightBlue;}')
         pulsante_indietro.setStyleSheet("background-image:url(Attrezzatura/data/arrow.jpg)")
-        pulsante_indietro.setFont(QFont('Times New Roman', 18))
         pulsante_indietro.setFixedSize(100, 100)
         pulsante_indietro.clicked.connect(self.indietro)
         self.layout_orizzontale.addSpacerItem(QSpacerItem(5, 0, QSizePolicy.Fixed, QSizePolicy.Fixed))
@@ -80,6 +81,7 @@ class vista_lista_piste(QWidget):
         for pista in self.controller.get_lista():
             bottone = QPushButton("[{}]  ".format(indice_pista) + pista.get_nome_str())
             bottone.setFont(QFont('Times New Roman', 18))
+            bottone.setStyleSheet('QPushButton {background-color: lightBlue; color: black;}')
             bottone.clicked.connect(partial(self.call_vista_pista, pista))
             if colonna == 5 or colonna == 10:
                 colonna = 0

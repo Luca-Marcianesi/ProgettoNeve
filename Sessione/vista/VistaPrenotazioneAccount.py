@@ -3,13 +3,12 @@ from PyQt5.QtWidgets import QWidget, QDesktopWidget, QVBoxLayout, QHBoxLayout, Q
     QPushButton
 from PyQt5.QtCore import Qt
 from Sessione.controller.controller_sessione import controller_sessione
-
+from Sessione.model.sessione import sessione
 
 class vista_prenotazione_account(QWidget):
 
     def __init__(self, callback):
         super(vista_prenotazione_account, self).__init__()
-
         # Attributi
         self.controller = controller_sessione()
         self.callback = callback
@@ -19,11 +18,9 @@ class vista_prenotazione_account(QWidget):
         # Sfondo
         self.show_background("PRENOTAZIONI ACCOUNT")
 
-        # Spaziatura
-        self.layout_verticale.addSpacerItem(QSpacerItem(500, 150, QSizePolicy.Fixed, QSizePolicy.Fixed))
 
         # label
-        if self.controller.get_lista_prenotazioni() is None:
+        if self.controller.get_lista_prenotazioni() == None:
             self.label = QLabel("Nessuna prenotazione")
         else:
             self.label = QLabel(self.controller.get_lista_prenotazioni())
@@ -32,7 +29,7 @@ class vista_prenotazione_account(QWidget):
         self.layout_verticale.addWidget(self.label)
 
         # Spaziatura
-        self.layout_verticale.addSpacerItem(QSpacerItem(0, 300, QSizePolicy.Fixed, QSizePolicy.Fixed))
+        self.layout_verticale.addSpacerItem(QSpacerItem(0, 100, QSizePolicy.Fixed, QSizePolicy.Fixed))
         self.layout_orizzontale.addSpacerItem(QSpacerItem(700, 0, QSizePolicy.Fixed, QSizePolicy.Fixed))
 
         # Pulsante indietro allineato
@@ -56,7 +53,7 @@ class vista_prenotazione_account(QWidget):
         # Sfondo
         self.setFixedWidth(QDesktopWidget().width())
         self.setFixedHeight(QDesktopWidget().height())
-        back_img = QImage("ListaAccount/data/im.jpg")
+        back_img = QImage("Data/Immagini/6.jpg")
         img = back_img.scaled(self.width(), self.height())
         palette = QPalette()
         palette.setBrush(10, QBrush(img))

@@ -1,5 +1,5 @@
 from datetime import date
-
+from datetime import datetime
 
 
 class account:
@@ -34,7 +34,7 @@ class account:
     def get_lista_prenotazioni_str(self):
         lista=""
         for prenotazione in self.lista_prenotazioni:
-            lista = lista + "" + prenotazione.get_prenotazione_str()
+            lista = lista + "" + prenotazione.get_prenotazione_str() + "\n"
         return lista
 
     def get_nome(self):
@@ -60,12 +60,13 @@ class account:
             pass
         else :
             for prenotazione in self.lista_prenotazioni :
-                if prenotazione.get_scadenza() < date.today() :
+                if prenotazione.get_scadenza() < datetime.today() :
                     self.lista_prenotazioni.remove(prenotazione)
 
 
     def controlla_prenotazione_effettuata(self, codice):
-        for prenotazione in self.lista_prenotazioni:
-            if prenotazione.get_codice_oggetto() == codice:
-                return False
+        if self.lista_prenotazioni != None:
+            for prenotazione in self.lista_prenotazioni:
+                if prenotazione.get_codice_oggetto() == codice:
+                    return False
         return True

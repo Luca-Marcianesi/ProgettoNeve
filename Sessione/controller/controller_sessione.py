@@ -18,7 +18,7 @@ class controller_sessione:
         self.model.cambia_numero_scarpe(numero_scarpe)
 
     def get_lista_prenotazioni(self):
-        self.model.get_lista_prenotazioni()
+        return self.model.get_lista_prenotazioni()
 
     def cancella_prenotazione(self):
         self.model.cancella_prenotazione()

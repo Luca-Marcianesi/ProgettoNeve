@@ -7,7 +7,7 @@ class sessione:
     def login(cls,account, salva_dati):
         cls.salva_dati = salva_dati
         cls.account_loggato = account
-        cls.elimina_prenotazioni_scadute()
+        #cls.elimina_prenotazioni_scadute()
 
     @classmethod
     def cambia_eta(cls,eta):
@@ -63,10 +63,7 @@ class sessione:
 
     @classmethod
     def controlla_prenotazione_effettuata(cls,codice):
-        for prenotazione in cls.get_lista_prenotazioni():
-            if prenotazione.get_codice_oggetto() == codice:
-                return False
-        return True
+        return cls.account_loggato.controlla_prenotazione_effettuata(codice)
 
     @classmethod
     def salva_dati(cls):
