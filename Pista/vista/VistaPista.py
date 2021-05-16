@@ -15,7 +15,6 @@ class vista_pista(QWidget):
         self.layout_verticale = QVBoxLayout()
         self.layout_orizzontale = QHBoxLayout()
 
-
         # Sfondo
         self.show_background("PISTA")
         #Descrizione Pista
@@ -65,7 +64,6 @@ class vista_pista(QWidget):
         self.layout_verticale.addWidget(titolo)
 
     def show_pulsantiera(self):
-
         # Punsante indietro
         pulsante_indietro = QPushButton("INDIETRO")
         pulsante_indietro.setFont(QFont('Times New Roman', 18,100))
