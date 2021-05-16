@@ -2,6 +2,8 @@ from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QFont, QBrush, QPalette, QImage, QStandardItemModel, QStandardItem
 from PyQt5.QtWidgets import QWidget, QHBoxLayout, QVBoxLayout, QLabel, QSpacerItem, \
     QSizePolicy, QListView, QPushButton, QDesktopWidget
+from PyQt5.QtGui import QColor
+
 from Attrezzatura.vista.VistaAttrezzatura import vista_attrezzatura
 from ListaAttrezzatura.controller.controller_lista_attrezzatura import controller_lista_attrezzatura
 
@@ -21,6 +23,8 @@ class vista_lista_attrezzatura(QWidget):
         # Sfondo
         self.show_background("LISTA ATTREZZATURA")
 
+        self.layout_verticale1.addSpacerItem(QSpacerItem(0,200))
+
         self.layout_orizzontale.addSpacerItem(QSpacerItem(100, 0, QSizePolicy.Fixed, QSizePolicy.Fixed))
 
         # Lista
@@ -31,12 +35,12 @@ class vista_lista_attrezzatura(QWidget):
             nome = attrezzatura.get_nome()
             item.setText(nome)
             item.setEditable(False)
-            item.setFont(QFont('Times New Roman', 30))
+            item.setFont(QFont('Times New Roman', 30,100))
             vista_lista_model.appendRow(item)
         self.vista_lista.setModel(vista_lista_model)
         self.layout_orizzontale.addWidget(self.vista_lista)
 
-        self.layout_orizzontale.addSpacerItem(QSpacerItem(500, 0, QSizePolicy.Fixed, QSizePolicy.Fixed))
+        self.layout_orizzontale.addSpacerItem(QSpacerItem(1000, 0, QSizePolicy.Fixed, QSizePolicy.Fixed))
 
         # Pulsanti Apri e Indietro allineati
         self.show_pulsantiera()

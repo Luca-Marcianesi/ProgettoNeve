@@ -67,7 +67,7 @@ class vista_pista(QWidget):
         # Punsante indietro
         pulsante_indietro = QPushButton("INDIETRO")
         pulsante_indietro.setFont(QFont('Times New Roman', 18,100))
-        pulsante_indietro.setStyleSheet('QPushButton {color:orange ;}')
+        pulsante_indietro.setStyleSheet('QPushButton {color:black ;}')
         pulsante_indietro.setFixedSize(250, 100)
         pulsante_indietro.clicked.connect(self.indietro)
         self.layout_verticale.addSpacerItem(QSpacerItem(0, 80, QSizePolicy.Fixed, QSizePolicy.Fixed))
