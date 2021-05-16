@@ -19,7 +19,7 @@ class vista_prenotazione_account(QWidget):
         self.show_background("PRENOTAZIONI ACCOUNT")
 
         # label
-        if self.controller.get_lista_prenotazioni() == "":
+        if self.controller.get_lista_prenotazioni() == None:
             self.label = QLabel("Nessuna prenotazione")
         else:
             self.label = QLabel(self.controller.get_lista_prenotazioni())
