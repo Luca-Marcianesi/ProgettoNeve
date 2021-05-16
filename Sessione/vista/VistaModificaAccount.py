@@ -52,8 +52,6 @@ class vista_modifica_account(QWidget):
         pulsante_invio = self.crea_bottone("INVIA", self.layout_orizzontale1)
         pulsante_invio.clicked.connect(self.indietro)
 
-
-
         self.layout_verticale2.addLayout(self.layout_orizzontale1)
         self.layout_verticale1.addLayout(self.layout_orizzontale2)
         self.layout_verticale1.addSpacerItem(QSpacerItem(0, 100, QSizePolicy.Expanding, QSizePolicy.Expanding))
@@ -117,8 +115,8 @@ class vista_modifica_account(QWidget):
 
     def crea_bottone(self, tipo, layout):
         bottone = QPushButton(tipo)
-        bottone.setFixedSize(300,100)
-        bottone.setFont(QFont('Times New Roman', 20,100,True))
+        bottone.setFixedSize(300, 100)
+        bottone.setFont(QFont('Times New Roman', 20, 100, True))
         bottone.setStyleSheet('QPushButton {background-color: lightBlue; color: black;}')
         layout.addWidget(bottone)
         return bottone

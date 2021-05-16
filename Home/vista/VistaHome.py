@@ -1,8 +1,5 @@
 from PyQt5.QtGui import QPalette, QBrush, QImage, QFont, QPixmap
-from PyQt5.QtWidgets import QWidget, QPushButton, QVBoxLayout, QLabel, QSizePolicy, QSpacerItem, \
-    QDesktopWidget, QHBoxLayout
-from PyQt5.QtCore import Qt
-
+from PyQt5.QtWidgets import QWidget, QPushButton, QVBoxLayout, QLabel, QSpacerItem, QDesktopWidget, QHBoxLayout
 from ListaAttrezzatura.vista.VistaListaAttrezzatura import vista_lista_attrezzatura
 from ListaPiste.vista.VistaListaPiste import vista_lista_piste
 from Sessione.vista.VistaAccountLoggato import vista_account_loggato
@@ -25,21 +22,18 @@ class vista_home(QWidget):
         pixmap = QPixmap("ListaAccount/data/2.png")
         self.sfondo.setPixmap(pixmap)
         self.layout_orizzontale1.addWidget(self.sfondo)
-        self.layout_orizzontale1.addSpacerItem(QSpacerItem(375,0,QSizePolicy.Fixed, QSizePolicy.Fixed))
+        self.layout_orizzontale1.addSpacerItem(QSpacerItem(375, 0))
         # Sfondo
         self.show_background()
-
-        # Pulsanti
-
 
         # Spaziature
         self.layout_verticale.addLayout(self.layout_orizzontale1)
 
+        # Pulsanti
         self.show_pulsantiera()
 
-
-        self.layout_verticale.addLayout(self.layout_orizzontale2)
         # Impostazione layout totale
+        self.layout_verticale.addLayout(self.layout_orizzontale2)
         self.setLayout(self.layout_verticale)
 
     def show_background(self):
@@ -52,11 +46,9 @@ class vista_home(QWidget):
         palette.setBrush(10, QBrush(img))
         self.setPalette(palette)
 
-
     def show_pulsantiera(self):
         pulsante_account = self.crea_bottone("ACCOUNT", self.layout_orizzontale1)
         pulsante_account.clicked.connect(self.call_account_loggato)
-
 
         pulsante_esci = self.crea_bottone("ESCI", self.layout_orizzontale1)
         pulsante_esci.clicked.connect(self.uscita)
@@ -73,11 +65,10 @@ class vista_home(QWidget):
         pulsante_prenota_parcheggio = self.crea_bottone("PRENOTA \n PARCHEGGIO", self.layout_orizzontale2)
         pulsante_prenota_parcheggio.clicked.connect(self.call_prenota_parcheggio)
 
-        self.layout_orizzontale2.addSpacerItem(QSpacerItem(1300,0))
+        self.layout_orizzontale2.addSpacerItem(QSpacerItem(1300, 0))
 
         pulsante_info = self.crea_bottone("INFORMAZIONI", self.layout_orizzontale2)
-        #pulsante_info.clicked.connect(self.call_prenota_parcheggio)
-
+        # pulsante_info.clicked.connect(self.call_prenota_parcheggio)
 
     def call_lista_piste(self):
         self.vista_lista_piste = vista_lista_piste(self.show)
@@ -100,7 +91,7 @@ class vista_home(QWidget):
         self.close()
 
     def call_skipass(self):
-        self.vista_acquista_skipass= vista_acquista_skipass(self.showFullScreen)
+        self.vista_acquista_skipass = vista_acquista_skipass(self.showFullScreen)
         self.vista_acquista_skipass.showFullScreen()
         self.close()
 
@@ -109,8 +100,8 @@ class vista_home(QWidget):
 
     def crea_bottone(self, tipo, layout):
         bottone = QPushButton(tipo)
-        bottone.setFixedSize(300,100)
-        bottone.setFont(QFont('Times New Roman', 20,100,True))
+        bottone.setFixedSize(300, 100)
+        bottone.setFont(QFont('Times New Roman', 20, 100, True))
         bottone.setStyleSheet('QPushButton {background-color: orange; color: black;}')
         layout.addWidget(bottone)
         return bottone

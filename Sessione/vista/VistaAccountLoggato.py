@@ -49,7 +49,7 @@ class vista_account_loggato(QWidget):
 
     def show_pulsantiera(self):
 
-        #Cambia Credenziali
+        # Cambia Credenziali
         pulsante_credenziali = self.crea_bottone("CAMBIA\nCREDENZIALI", self.layout_verticale2)
         pulsante_credenziali.clicked.connect(self.call_modifica_credenziali)
 
@@ -101,12 +101,12 @@ class vista_account_loggato(QWidget):
                             "Età: {}".format(self.controller.get_eta_str()) + "\n"
                             "Altezza: {}".format(self.controller.get_altezza_str()) + "\n"
                             "Numero di scarpe: {}".format(self.controller.get_numero_scarpe_str()))
-        self.label.setFont(QFont('Times New Roman', 30,100))
+        self.label.setFont(QFont('Times New Roman', 30, 100))
 
     def crea_bottone(self, tipo, layout):
         bottone = QPushButton(tipo)
-        bottone.setFixedSize(300,100)
-        bottone.setFont(QFont('Times New Roman', 20,100,True))
+        bottone.setFixedSize(300, 100)
+        bottone.setFont(QFont('Times New Roman', 20, 100, True))
         bottone.setStyleSheet('QPushButton {background-color: lightBlue; color: black;}')
         layout.addWidget(bottone)
         return bottone

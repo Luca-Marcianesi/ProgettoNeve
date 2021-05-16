@@ -1,11 +1,9 @@
 from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QFont, QBrush, QPalette, QImage, QStandardItemModel, QStandardItem
-from PyQt5.QtWidgets import QWidget, QHBoxLayout, QVBoxLayout, QLabel, QSpacerItem, QSizePolicy, QListView, QPushButton, \
-    QDesktopWidget
-
+from PyQt5.QtWidgets import QWidget, QHBoxLayout, QVBoxLayout, QLabel, QSpacerItem, \
+    QSizePolicy, QListView, QPushButton, QDesktopWidget
 from Attrezzatura.vista.VistaAttrezzatura import vista_attrezzatura
 from ListaAttrezzatura.controller.controller_lista_attrezzatura import controller_lista_attrezzatura
-
 
 
 class vista_lista_attrezzatura(QWidget):
@@ -53,7 +51,7 @@ class vista_lista_attrezzatura(QWidget):
         self.setWindowTitle('Lista Attrezzatura')
 
     def indietro(self):
-        #self.callback()
+        self.callback()
         self.close()
 
     def show_background(self, stringa):
@@ -96,4 +94,3 @@ class vista_lista_attrezzatura(QWidget):
         self.vista_attrezzatura = vista_attrezzatura(self.showFullScreen, attrezzatura)
         self.vista_attrezzatura.showFullScreen()
         self.close()
-
