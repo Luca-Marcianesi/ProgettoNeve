@@ -111,10 +111,9 @@ class vista_richiesta_giorni(QWidget):
         self.giorni.setAlignment(Qt.AlignCenter)
         self.giorni.setFixedSize(100,50)
         self.giorni.setRange(1, 5)
-        #self.giorni.valueChanged.connect(self.num_giorni)
 
         bottone = QPushButton("Prenota")
-        bottone.clicked.connect(partial(self.call_prenota,self.giorni.value()))
+        bottone.clicked.connect(self.call_prenota)
 
         self.layout_verticale.addWidget(label)
         self.layout_verticale.addSpacerItem(QSpacerItem(150, 0, QSizePolicy.Fixed, QSizePolicy.Fixed))
@@ -125,9 +124,13 @@ class vista_richiesta_giorni(QWidget):
         self.setLayout(self.layout_verticale)
         self.setWindowTitle('Giorni')
 
-    def call_prenota(self,numero_giorni):
-        self.controller_parcheggi.prenota_parcheggio(numero_giorni)
+    def call_prenota(self):
+        val = self.giorni.value()
+        self.controller_parcheggi.prenota_parcheggio(val)
         sessione.salva_dati()
+
+
+
 
 
 
