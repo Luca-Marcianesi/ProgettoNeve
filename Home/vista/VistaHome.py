@@ -1,5 +1,7 @@
 from PyQt5.QtGui import QPalette, QBrush, QImage, QFont, QPixmap
 from PyQt5.QtWidgets import QWidget, QPushButton, QVBoxLayout, QLabel, QSpacerItem, QDesktopWidget, QHBoxLayout
+
+from Home.Informazioni.vista_informazioni import vista_informazioni
 from ListaAttrezzatura.vista.VistaListaAttrezzatura import vista_lista_attrezzatura
 from ListaPiste.vista.VistaListaPiste import vista_lista_piste
 from Sessione.vista.VistaAccountLoggato import vista_account_loggato
@@ -68,7 +70,15 @@ class vista_home(QWidget):
         self.layout_orizzontale2.addSpacerItem(QSpacerItem(1300, 0))
 
         pulsante_info = self.crea_bottone("INFORMAZIONI", self.layout_orizzontale2)
-        # pulsante_info.clicked.connect(self.call_prenota_parcheggio)
+        pulsante_info.clicked.connect(self.call_info)
+
+
+
+    def call_info(self):
+        self.vista_informazioni = vista_informazioni(self.show)
+        self.vista_informazioni.showFullScreen()
+        self.close()
+
 
     def call_lista_piste(self):
         self.vista_lista_piste = vista_lista_piste(self.show)
