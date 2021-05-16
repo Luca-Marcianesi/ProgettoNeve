@@ -7,6 +7,7 @@ from Attrezzatura.model.attrezzatura import attrezzatura
 class lista_attrezzatura:
     def __init__(self):
         self.lista_attrezzatura = []
+        self.leggi_dati()
 
     def aggiungi_attrezzatura(self, attrezzatura):
         self.lista_attrezzatura.append(attrezzatura)
@@ -21,8 +22,7 @@ class lista_attrezzatura:
         for attrezzatura in self.lista_attrezzatura:
             if attrezzatura.get_tipo() == tipo:
                 attrezzatura.set_stato(False)
-            else:
-                return "Attrezzatura già prenotata o non disponibile"
+            return "Attrezzatura già prenotata o non disponibile"
 
     def salva_dati(self):
         with open('ListaAttrezzatura/data/lista_attrezzatura.pickle', 'wb') as file:

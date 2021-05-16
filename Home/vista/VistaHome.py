@@ -66,7 +66,7 @@ class vista_home(QWidget):
         self.layout_verticale.addSpacerItem(QSpacerItem(0, 25, QSizePolicy.Fixed, QSizePolicy.Fixed))
 
         pulsante_noleggia_attrezzatura = self.crea_bottone("NOLEGGIA \n ATTREZZATURA", self.layout_orizzontale2)
-        #pulsante_noleggia_attrezzatura.clicked.connect(self.call_noleggia_attrezzatura())
+        pulsante_noleggia_attrezzatura.clicked.connect(self.call_noleggia_attrezzatura)
         
         pulsante_skipass = self.crea_bottone("ACQUISTA \n SKIPASS", self.layout_orizzontale2)
         #pulsante_skipass.clicked.connect(self.call_skipass())

@@ -8,13 +8,11 @@ from Attrezzatura.model.attrezzatura import attrezzatura
 
 
 class vista_attrezzatura(QWidget):
-    def __init__(self, callback):
+    def __init__(self, callback, attrezzatura):
         super(vista_attrezzatura, self).__init__()
 
-
-
         #Attributi
-        self.controller = controller_attrezzatura(attrezzatura("scii", 1, "180"))
+        self.controller = controller_attrezzatura(attrezzatura)
         self.callback = callback
         self.layout_verticale2 = QVBoxLayout()
         self.layout_verticale1 = QVBoxLayout()
@@ -33,7 +31,7 @@ class vista_attrezzatura(QWidget):
 
         # Descrizione Pista
         label = QLabel("Nome: {}".format(self.controller.get_nome()) + "\n"
-                    "Lunghezza: {}".format(self.controller.get_dimensioni() + " cm") + "\n"
+                    "Lunghezza: {}".format(self.controller.get_dimensioni()) + " cm" + "\n"
                     "Stato: {}".format(self.stato_attrezzatura()))
         label.setFont(QFont('Times New Roman', 30))
         label.setStyleSheet("background-image:url(Attrezzatura/data/legno.jpg)")
@@ -55,12 +53,6 @@ class vista_attrezzatura(QWidget):
         self.setLayout(self.layout_verticale1)
         self.setWindowTitle('Attrezzatura')
 
-    def closeEvent(self, event):
-        pass
-
-
-    def call_vista_pista(self):
-        pass
 
     def indietro(self):
         self.callback()
