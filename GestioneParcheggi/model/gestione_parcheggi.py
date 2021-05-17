@@ -51,7 +51,7 @@ class gestione_parcheggi:
             with open('GestioneParcheggi/data/parcheggi.pickle',"rb") as file:
                 self.lista_prenotazioni_parcheggi = pickle.load(file)
         else :
-            with open("ListaPiste/data/lista_piste.json") as file:
+            with open("GestioneParcheggi/data/parcheggio.json") as file:
                 elenco_parcheggi = json.load(file)
             for parcheggio in elenco_parcheggi:
                 self.aggiungi_parcheggio(
