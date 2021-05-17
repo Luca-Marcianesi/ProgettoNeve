@@ -111,6 +111,6 @@ class vista_lista_attrezzatura(QWidget):
         selezionata = self.vista_lista.selectedIndexes()[0].row()
         lista = self.controller.get_lista_filtrata()
         attrezzatura = lista[selezionata]
-        self.vista_attrezzatura = vista_attrezzatura(self.showFullScreen, attrezzatura)
+        self.vista_attrezzatura = vista_attrezzatura(self.showFullScreen, attrezzatura, self.controller.prenota_attrezzatura)
         self.vista_attrezzatura.showFullScreen()
         self.close()

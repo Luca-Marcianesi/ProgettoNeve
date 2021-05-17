@@ -47,13 +47,11 @@ class gestione_skipass:
                                                                     self.fine_stagione,
                                                                     skipass_selezionato))
 
-    """
     def controlla_skipass_acquistato(self):
         for prenotazione in sessione.get_lista_prenotazioni():
-            if prenotazione.get_codice_oggetto() == self.codice_oggetto:
+            if prenotazione.get_codice_oggetto() == self.codice_skipass:
                 return True
         return False
-    """
 
     def aggiungi_skipass(self,skipass):
         self.lista_skipass.append(skipass)

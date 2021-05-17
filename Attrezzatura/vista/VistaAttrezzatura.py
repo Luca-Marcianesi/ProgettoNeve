@@ -6,12 +6,14 @@ from Attrezzatura.controller.controller_attrezzatura import controller_attrezzat
 
 
 class vista_attrezzatura(QWidget):
-    def __init__(self, callback, attrezzatura):
+    def __init__(self, callback, attrezzatura, prenota):
         super(vista_attrezzatura, self).__init__()
 
         # Attributi
-        self.controller = controller_attrezzatura(attrezzatura)
+        self.attrezzatura = attrezzatura
+        self.controller = controller_attrezzatura(self.attrezzatura)
         self.callback = callback
+        self.prenota = prenota
         self.layout_verticale2 = QVBoxLayout()
         self.layout_verticale1 = QVBoxLayout()
         self.layout_orizzontale = QHBoxLayout()
@@ -96,4 +98,4 @@ class vista_attrezzatura(QWidget):
         return "Non disponibile"
 
     def prenotazione(self):
-        pass
+        self.prenota(self.attrezzatura)

@@ -2,7 +2,6 @@ import json
 import os
 import pickle
 from datetime import date, timedelta
-
 from Attrezzatura.model.attrezzatura import attrezzatura
 from Sessione.model.sessione import sessione
 from Prenotazione.model.prenotazione import prenotazione
@@ -32,7 +31,7 @@ class lista_attrezzatura:
                     lista_attrezzatura = json.load(file)
                 for attrezzatura_da_caricare in lista_attrezzatura:
                     self.aggiungi_attrezzatura(
-                        attrezzatura(attrezzatura_da_caricare["nome"], attrezzatura_da_caricare["codice"], attrezzatura_da_caricare["dimensioni"]))
+                        attrezzatura(attrezzatura_da_caricare["codice"], attrezzatura_da_caricare["nome"], attrezzatura_da_caricare["dimensioni"]))
 
     def get_lista_attrezzatura(self):
         return self.lista_attrezzatura
