@@ -10,9 +10,6 @@ class controller_lista_attrezzatura:
     def rimuovi_attrezzatura(self, indice):
         self.model.rimuovi_attrezzatura(indice)
 
-    def set_stato(self, stato):
-        self.model.set_stato(stato)
-
     def prenota_attrezzatura(self, tipo):
         self.model.prenota_attrezzatura(tipo)
 
