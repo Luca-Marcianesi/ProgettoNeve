@@ -57,13 +57,12 @@ class vista_crea_account(QWidget):
         altezza = self.testo["Altezza"].text()
         n_scarpe = self.testo["Numero di scarpe"].text()
 
-        if nome != "" and cognome != "" and username != "" and password != "" and eta != "" and altezza != "" and n_scarpe != "":
-            self.controller.crea_account(nome, cognome, username, password, eta, altezza, n_scarpe)
-            self.controller.salva_dati()
-            self.callback()
-            self.close()
-        else:
-            QMessageBox.critical(self, 'Errore', 'Per favore, inserisci tutte le informazioni richieste', QMessageBox.Ok, QMessageBox.Ok)
+        if self.controlla_informazioni1(nome, cognome, username, password, altezza, eta, n_scarpe) and self.controlla_informazioni2(altezza, eta, n_scarpe):
+                self.controller.crea_account(nome, cognome, username, password, eta, altezza, n_scarpe)
+                self.controller.salva_dati()
+                self.callback()
+                self.close()
+
 
     def indietro(self):
         self.callback()
@@ -76,3 +75,17 @@ class vista_crea_account(QWidget):
         palette = QPalette()
         palette.setBrush(10, QBrush(img))
         self.setPalette(palette)
+
+    def controlla_informazioni1(self, altezza, eta, numero_scarpe, nome, cognome, password, username):
+        if nome != "" and cognome != "" and username != "" and password != "" and eta != "" and altezza != "" and numero_scarpe != "":
+            return True
+        else:
+            QMessageBox.critical(self, 'Errore', 'Per favore, inserisci tutte le informazioni richieste',QMessageBox.Ok, QMessageBox.Ok)
+            return False
+
+    def controlla_informazioni2(self,altezza, eta, numero_scarpe):
+        if int(altezza) <= 0 or int(altezza) > 220 or int(eta) <= 0 or int(eta) > 130 or int(numero_scarpe) <= 0 or int(numero_scarpe) > 50:
+                QMessageBox.critical(self, 'Errore', 'Per favore, inserisci delle informazioni reali!',QMessageBox.Ok, QMessageBox.Ok)
+                return False
+        else:
+            return True
