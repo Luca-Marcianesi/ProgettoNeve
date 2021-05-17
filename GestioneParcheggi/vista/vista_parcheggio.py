@@ -70,13 +70,15 @@ class vista_parcheggio(QWidget):
         layout_pulsanti = QHBoxLayout()
         layout_pulsanti.setAlignment(Qt.AlignCenter)
         pulsante_indietro = QPushButton("INDIETRO")
-        pulsante_indietro.setFont(QFont('Times New Roman', 18))
+        pulsante_indietro.setFont(QFont('Times New Roman', 18, 100, True))
         pulsante_indietro.setFixedSize(250, 100)
+        pulsante_indietro.setStyleSheet("background-color: orange")
         pulsante_indietro.clicked.connect(self.indietro)
 
         pulsante_prenota = QPushButton("PRENOTA")
-        pulsante_prenota.setFont(QFont('Times New Roman', 18))
+        pulsante_prenota.setFont(QFont('Times New Roman', 18, 100, True))
         pulsante_prenota.setFixedSize(250, 100)
+        pulsante_prenota.setStyleSheet("background-color: orange")
         pulsante_prenota.clicked.connect(self.call_selezione_giorni)
 
         layout_pulsanti.addWidget(pulsante_prenota)
