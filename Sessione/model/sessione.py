@@ -34,7 +34,7 @@ class sessione:
         cls.account_loggato.rimuovi_prenotazione()
 
     @classmethod
-    def get_lista_prenotazioni(cls):
+    def get_lista_prenotazioni_str(cls):
         return cls.account_loggato.get_lista_prenotazioni_str()
 
     @classmethod
