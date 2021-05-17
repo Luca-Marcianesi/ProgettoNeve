@@ -18,3 +18,6 @@ class controller_lista_attrezzatura:
 
     def get_lista_attrezzatura(self):
         return self.model.get_lista_attrezzatura()
+
+    def get_lista_filtrata(self):
+        return self.model.get_lista_filtrata()

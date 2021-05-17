@@ -2,7 +2,6 @@ from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QFont, QBrush, QPalette, QImage, QStandardItemModel, QStandardItem
 from PyQt5.QtWidgets import QWidget, QHBoxLayout, QVBoxLayout, QLabel, QSpacerItem, \
     QSizePolicy, QListView, QPushButton, QDesktopWidget
-from PyQt5.QtGui import QColor
 
 from Attrezzatura.vista.VistaAttrezzatura import vista_attrezzatura
 from ListaAttrezzatura.controller.controller_lista_attrezzatura import controller_lista_attrezzatura
@@ -30,15 +29,26 @@ class vista_lista_attrezzatura(QWidget):
         # Lista
         self.vista_lista = QListView()
         vista_lista_model = QStandardItemModel(self.vista_lista)
-        for attrezzatura in self.controller.get_lista_attrezzatura():
-            item = QStandardItem()
-            nome = attrezzatura.get_nome()
-            item.setText(nome)
-            item.setEditable(False)
-            item.setFont(QFont('Times New Roman', 30,100))
-            vista_lista_model.appendRow(item)
-        self.vista_lista.setModel(vista_lista_model)
-        self.layout_orizzontale.addWidget(self.vista_lista)
+        if self.controller.get_lista_filtrata() == []:
+            label = QLabel("Non ci sono oggetti disponibili adatti\nalle tue caratteristiche")
+            label.setAlignment(Qt.AlignCenter)
+            label.setFont(QFont('Times New Roman', 25, 100))
+            label.setStyleSheet('QLabel {background-color: transparent; color: black;}')
+            label.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Maximum)
+            self.layout_orizzontale.addSpacerItem(QSpacerItem(0, 50, QSizePolicy.Fixed, QSizePolicy.Fixed))
+            self.layout_orizzontale.addWidget(label)
+
+
+        else:
+            for attrezzatura in self.controller.get_lista_filtrata():
+                item = QStandardItem()
+                nome = attrezzatura.get_nome()
+                item.setText(nome)
+                item.setEditable(False)
+                item.setFont(QFont('Times New Roman', 30,100))
+                vista_lista_model.appendRow(item)
+            self.vista_lista.setModel(vista_lista_model)
+            self.layout_orizzontale.addWidget(self.vista_lista)
 
         self.layout_orizzontale.addSpacerItem(QSpacerItem(1000, 0, QSizePolicy.Fixed, QSizePolicy.Fixed))
 
