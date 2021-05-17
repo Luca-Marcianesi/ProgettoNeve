@@ -1,8 +1,8 @@
 class attrezzatura:
-    def __init__(self, nome, codice ,dimensioni):
+    def __init__(self, codice, nome ,dimensioni):
+        self.codice = codice
         self.stato = True
         self.nome = nome
-        self.codice = codice
         self.dimensioni = dimensioni
 
     def get_codice(self):
@@ -19,3 +19,6 @@ class attrezzatura:
 
     def set_stato(self, stato):
         self.stato = stato
+
+    def get_descrizione(self):
+        return self.nome + " " + self.dimensioni

@@ -21,3 +21,6 @@ class controller_lista_attrezzatura:
 
     def get_lista_filtrata(self):
         return self.model.get_lista_filtrata()
+
+    def prenota_attrezzatura(self,attrezzatura):
+        self.model.prenota_attrezzatura(attrezzatura)

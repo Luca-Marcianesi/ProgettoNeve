@@ -1,8 +1,11 @@
 import json
 import os
 import pickle
+from datetime import date, timedelta
+
 from Attrezzatura.model.attrezzatura import attrezzatura
 from Sessione.model.sessione import sessione
+from Prenotazione.model.prenotazione import prenotazione
 
 
 class lista_attrezzatura:
@@ -16,14 +19,11 @@ class lista_attrezzatura:
     def rimuovi_attrezzatura(self, indice):
         self.lista_attrezzatura.remove(indice)
 
-    def set_stato(self, stato):
-        self.stato = stato
+    def prenota_attrezzatura(self, attrezzatura,numero_giorni):
+        attrezzatura.set_stato(False)
+        scadenza = date.today() + timedelta(days=int(numero_giorni))
+        sessione.aggiungi_prenotazione(prenotazione(attrezzatura.get_codice(),scadenza,attrezzatura))
 
-    def prenota_attrezzatura(self, tipo):
-        for attrezzatura in self.lista_attrezzatura:
-            if attrezzatura.get_tipo() == tipo:
-                attrezzatura.set_stato(False)
-            return "Attrezzatura già prenotata o non disponibile"
 
     def salva_dati(self):
         with open('ListaAttrezzatura/data/lista_attrezzatura.pickle', 'wb') as file:
@@ -50,6 +50,16 @@ class lista_attrezzatura:
                 if attrezzatura.get_stato() :
                     lista_filtrata.append(attrezzatura)
         return lista_filtrata
+
+    def prenota_attrezzatura(self,attrezzatura):
+        if sessione.controlla_prenotazione_effettuata(attrezzatura.get_codice()):
+            scadenza = date.today() + timedelta(hours=int(1))
+            attrezzatura.set_stato(False)
+            sessione.aggiungi_prenotazione(prenotazione(attrezzatura.get_codice(),
+                                                        scadenza,
+                                                        attrezzatura))
+
+
 
 
 
