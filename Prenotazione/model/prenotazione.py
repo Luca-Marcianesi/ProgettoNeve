@@ -1,11 +1,8 @@
 class prenotazione():
-    def __init__(self,codice_oggetto,scadenza,descrizione):
+    def __init__(self,codice_oggetto,scadenza,oggetto):
         self.codice_oggetto = codice_oggetto
-        self.descrizione = descrizione
+        self.oggetto = oggetto
         self.scadenza = scadenza
-
-    def get_prenotazione_str(self):
-        return "Prenotazione: {}  \nScadenza: {}".format(self.descrizione,self.scadenza)
 
     def get_codice_oggetto(self):
         return self.codice_oggetto
