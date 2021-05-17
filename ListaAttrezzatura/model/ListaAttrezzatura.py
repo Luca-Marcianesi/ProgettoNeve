@@ -46,8 +46,9 @@ class lista_attrezzatura:
     def get_lista_filtrata(self):
         lista_filtrata = []
         for attrezzatura in self.lista_attrezzatura:
-            if int(attrezzatura.get_dimensioni())== int(sessione.get_numero_scarpe()) or int(attrezzatura.get_dimensioni()) == int(sessione.get_altezza()) - 10:
-                lista_filtrata.append(attrezzatura)
+            if int(attrezzatura.get_dimensioni())== int(sessione.get_numero_scarpe()) or int(attrezzatura.get_dimensioni()) == int(sessione.get_altezza()) :
+                if attrezzatura.get_stato() :
+                    lista_filtrata.append(attrezzatura)
         return lista_filtrata
 
 
