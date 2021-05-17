@@ -4,6 +4,7 @@ from PyQt5.QtWidgets import QWidget, QPushButton, QVBoxLayout, QLabel, QSizePoli
 
 from ListaAttrezzatura.vista.VistaListaAttrezzatura import vista_lista_attrezzatura
 from ListaPiste.vista.VistaListaPiste import vista_lista_piste
+from ListaPiste.vista.VistaListaPisteProprietario import vista_lista_piste_proprietario
 from Sessione.vista.VistaAccountLoggato import vista_account_loggato
 
 
@@ -61,24 +62,24 @@ class vista_home_proprietario(QWidget):
         pulsante_esci = self.crea_bottone("ESCI", self.layout_orizzontale1)
         pulsante_esci.clicked.connect(self.uscita)
 
-        pulsante_skipass = self.crea_bottone("ELENCO \nDIPENDENTI", self.layout_orizzontale2)
+        pulsante_dipendenti = self.crea_bottone("ELENCO \nDIPENDENTI", self.layout_orizzontale2)
         #pulsante_skipass.clicked.connect(self.call_skipass)
 
         self.layout_orizzontale2.addSpacerItem(QSpacerItem(100, 0))
 
         pulsante_lista_piste = self.crea_bottone("LISTA PISTE", self.layout_orizzontale2)
-        #pulsante_lista_piste.clicked.connect(self.call_lista_piste)
+        pulsante_lista_piste.clicked.connect(self.call_lista_piste_proprietario)
 
-        pulsante_noleggia_attrezzatura = self.crea_bottone("MODIFICA \n ATTREZZATURA", self.layout_orizzontale3)
-        # pulsante_noleggia_attrezzatura.clicked.connect(self.call_noleggia_attrezzatura())
+        pulsante_modifica_attrezzatura = self.crea_bottone("MODIFICA \n ATTREZZATURA", self.layout_orizzontale3)
+        # pulsante_modifica_attrezzatura.clicked.connect(self.call_noleggia_attrezzatura())
 
         self.layout_orizzontale3.addSpacerItem(QSpacerItem(100, 0))
 
-        pulsante_prenota_parcheggio = self.crea_bottone("MANUTENZIONI", self.layout_orizzontale3)
-        #pulsante_prenota_parcheggio.clicked.connect(self.call_prenota_parcheggio)
+        pulsante_manutenzioni = self.crea_bottone("MANUTENZIONI", self.layout_orizzontale3)
+        #pulsante_manutenzioni.clicked.connect(self.call_prenota_parcheggio)
 
-        pulsante_prenota_parcheggio = self.crea_bottone("TABELLA \nORARI", self.layout_verticale)
-        # pulsante_prenota_parcheggio.clicked.connect(self.call_prenota_parcheggio)
+        pulsante_tabella = self.crea_bottone("TABELLA \nORARI", self.layout_verticale)
+        # pulsante_tabella.clicked.connect(self.call_prenota_parcheggio)
 
         self.layout_orizzontale2.addSpacerItem(QSpacerItem(1300,0))
         self.layout_orizzontale3.addSpacerItem(QSpacerItem(1300, 0))
@@ -86,9 +87,9 @@ class vista_home_proprietario(QWidget):
         self.layout_verticale.addSpacerItem(QSpacerItem(0,150))
 
 
-    def call_lista_piste(self):
-        self.vista_lista_piste = vista_lista_piste(self.show)
-        self.vista_lista_piste.showFullScreen()
+    def call_lista_piste_proprietario(self):
+        self.vista_lista_piste_proprietario = vista_lista_piste_proprietario(self.show)
+        self.vista_lista_piste_proprietario.showFullScreen()
         self.close()
 
     def call_account_loggato(self):
@@ -96,7 +97,7 @@ class vista_home_proprietario(QWidget):
         self.vista_info_account.showFullScreen()
         self.close()
 
-    def call_noleggia_attrezzatura(self):
+    def call_modifica_attrezzatura(self):
         self.vista_lista_attrezzatura = vista_lista_attrezzatura(self.showFullScreen)
         self.vista_lista_attrezzatura.showFullScreen()
         self.close()
