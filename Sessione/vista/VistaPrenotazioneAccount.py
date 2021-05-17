@@ -19,10 +19,10 @@ class vista_prenotazione_account(QWidget):
         self.show_background("PRENOTAZIONI ACCOUNT")
 
         # label
-        if self.controller.get_lista_prenotazioni() == None:
+        if self.controller.get_lista_prenotazioni_str() == "":
             self.label = QLabel("Nessuna prenotazione")
         else:
-            self.label = QLabel(self.controller.get_lista_prenotazioni())
+            self.label = QLabel(self.controller.get_lista_prenotazioni_str())
         self.label.setFont(QFont('Times New Roman', 30))
         self.label.setAlignment(Qt.AlignCenter)
         self.layout_verticale.addWidget(self.label)

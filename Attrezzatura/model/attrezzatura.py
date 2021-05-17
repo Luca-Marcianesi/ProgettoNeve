@@ -21,4 +21,4 @@ class attrezzatura:
         self.stato = stato
 
     def get_descrizione(self):
-        return self.nome + " " + self.dimensioni
+        return self.nome + " " + str(self.dimensioni)

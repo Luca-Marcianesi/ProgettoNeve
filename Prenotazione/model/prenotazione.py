@@ -4,6 +4,9 @@ class prenotazione():
         self.oggetto = oggetto
         self.scadenza = scadenza
 
+    def get_prenotazione_str(self):
+        return "Prenotazione: {}  \nScadenza: {}".format(self.oggetto.get_descrizione(),self.scadenza)
+
     def get_codice_oggetto(self):
         return self.codice_oggetto
 

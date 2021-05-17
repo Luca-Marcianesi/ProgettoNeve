@@ -50,7 +50,7 @@ class vista_modifica_account(QWidget):
 
         # Invio
         pulsante_invio = self.crea_bottone("INVIA", self.layout_orizzontale1)
-        pulsante_invio.clicked.connect(self.indietro)
+        pulsante_invio.clicked.connect(self.cambia_dati)
 
         self.layout_verticale2.addLayout(self.layout_orizzontale1)
         self.layout_verticale1.addLayout(self.layout_orizzontale2)
@@ -81,9 +81,8 @@ class vista_modifica_account(QWidget):
             self.controler_sessione.cambia_password(password)
             self.controler_sessione.cambia_eta(eta)
             self.controler_sessione.cambia_altezza(altezza)
-            self.controler_sessione.cambia_numero_scarpe(altezza)
+            self.controler_sessione.cambia_numero_scarpe(numero_scarpe)
             self.controler_sessione.salva_dati()
-            self.aggiorna()
             self.callback()
             self.close()
         else:

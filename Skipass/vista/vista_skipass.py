@@ -1,7 +1,6 @@
-
 from PyQt5.QtGui import QFont, QBrush, QPalette, QImage
 from PyQt5.QtWidgets import QWidget, QHBoxLayout, QVBoxLayout, QSpacerItem, QSizePolicy, QPushButton, \
-    QDesktopWidget, QLabel
+    QDesktopWidget, QLabel, QMessageBox
 from PyQt5.QtCore import Qt
 from Sessione.model.sessione import sessione
 
@@ -54,6 +53,7 @@ class vista_skipass(QWidget):
         palette = QPalette()
         palette.setBrush(10, QBrush(img))
         self.setPalette(palette)
+
         titolo = QLabel(titolo)
         titolo.setAlignment(Qt.AlignCenter)
         titolo.setFont(QFont('Times New Roman', 60))
@@ -75,5 +75,10 @@ class vista_skipass(QWidget):
         return bottone
 
     def call_prenotazione(self):
+        if self.controller_skipass.controlla_skipass_acquistato():
+            QMessageBox.information(self, 'Prenotazione', 'Hai già prenotato uno skipass', QMessageBox.Ok,
+                                    QMessageBox.Ok)
+        else:
+            QMessageBox.information(self, 'Prenotazione', 'Skipass prenotato!', QMessageBox.Ok, QMessageBox.Ok)
         self.controller_skipass.prenota_skipass(self.skipass)
         sessione.salva_dati()

@@ -1,39 +1,36 @@
+import json
 import os
 import pickle
 from datetime import date, timedelta
 
 from Sessione.model.sessione import sessione
 from Prenotazione.model.prenotazione import prenotazione
+from Parcheggio.model.parcheggio import parcheggio
 
 
 class gestione_parcheggi:
     def __init__(self):
-        self.lista_prenotazioni_parcheggi = []
-        self.posti_disponibili = None
+        self.elenco_parcheggi = []
+        self.codice_parcheggio = 6
         self.leggi_dati()
-        print(self.posti_disponibili )
-        self.elimina_scadute_prenotazioni()
-        self.calcola_posti()
-        print(self.posti_disponibili)
+        #self.elimina_scadute_prenotazioni()
 
     def prenota_parcheggio(self,numero_giorni):
-        if sessione.controlla_prenotazione_effettuata(6) :
-            if self.posti_disponibili > 0:
-                scadenza = date.today() + timedelta(days = int(numero_giorni))
-                prenotazione_da_aggiungere  = prenotazione(6,scadenza,"parcheggio numero:{}".format(self.posti_disponibili))
-                sessione.aggiungi_prenotazione(prenotazione_da_aggiungere)
-                self.aggiungi_prenotazione(prenotazione_da_aggiungere)
-                self.posti_disponibili -= 1
-                return "Prenotazione effettuata"
-            return "Posti terminati"
-        return "Possiedi già un parcheggio prenotato"
+        if sessione.controlla_prenotazione_effettuata(self.codice_parcheggio) :
+            if self.get_posti_disponibili() > 0:
+                for parcheggio in self.elenco_parcheggi:
+                    if parcheggio.get_stato():
+                        scadenza = date.today() + timedelta(days = int(numero_giorni))
+                        sessione.aggiungi_prenotazione(prenotazione(parcheggio.get_codice(),scadenza,parcheggio))
 
-    def calcola_posti(self):
-        self.posti_disponibili = 30 - self.lista_prenotazioni_parcheggi.__len__()
 
-    def aggiungi_prenotazione(self,prenotazione):
-        self.lista_prenotazioni_parcheggi.append(prenotazione)
-
+    def get_posti_disponibili(self):
+        posti = 0
+        for parcheggio in self.elenco_parcheggi:
+            if parcheggio.get_stato():
+                posti +=1
+        return posti
+    """
     def elimina_scadute_prenotazioni(self):
         if self.lista_prenotazioni_parcheggi == None:
             pass
@@ -41,19 +38,23 @@ class gestione_parcheggi:
             for prenotazione in self.lista_prenotazioni_parcheggi :
                 if prenotazione.get_scadenza() < date.today() :
                     self.lista_prenotazioni_parcheggi.remove(prenotazione)
-                    self.posti_disponibili += 1
-
-    def get_posti_disponibili(self):
-        return self.posti_disponibili
+    """
 
     def salva_dati(self):
         with open('GestioneParcheggi/data/parcheggi.pickle', 'wb') as dati:
             pickle.dump(self.lista_prenotazioni_parcheggi, dati, pickle.HIGHEST_PROTOCOL)
+
+    def aggiungi_parcheggio(self,parcheggio):
+        self.elenco_parcheggi.append(parcheggio)
 
     def leggi_dati(self):
         if os.path.isfile('GestioneParcheggi/data/parcheggi.pickle'):
             with open('GestioneParcheggi/data/parcheggi.pickle',"rb") as file:
                 self.lista_prenotazioni_parcheggi = pickle.load(file)
         else :
-            self.posti_disponibili = 30
+            with open("GestioneParcheggi/data/parcheggio.json") as file:
+                elenco_parcheggi = json.load(file)
+            for parcheggio_da_agg in elenco_parcheggi:
+                self.aggiungi_parcheggio(
+                    parcheggio(parcheggio_da_agg["codice"], parcheggio_da_agg["numero"], parcheggio_da_agg["stato"]))
 

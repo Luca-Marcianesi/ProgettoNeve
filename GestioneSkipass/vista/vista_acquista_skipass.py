@@ -12,7 +12,7 @@ class vista_acquista_skipass(QWidget):
     def __init__(self, callback):
         super(vista_acquista_skipass, self).__init__()
 
-        self.controller_gestine_skipass = controller_gestione_skipass()
+        self.controller_gestione_skipass = controller_gestione_skipass()
 
 
         # Attributi
@@ -26,22 +26,22 @@ class vista_acquista_skipass(QWidget):
         # Sfondo
         self.show_background("PRENOTA SKIPASS")
 
-        self.layout_verticale1.addWidget(self.show_pulsante("Mattiniero", self.controller_gestine_skipass.get_skipass_n(0)))
+        self.layout_verticale1.addWidget(self.show_pulsante("Mattiniero", self.controller_gestione_skipass.get_skipass_n(0)))
         self.layout_verticale1.addSpacerItem(QSpacerItem(0, 50))
-        self.layout_verticale1.addWidget(self.show_pulsante("Pomeridiano", self.controller_gestine_skipass.get_skipass_n(1)))
+        self.layout_verticale1.addWidget(self.show_pulsante("Pomeridiano", self.controller_gestione_skipass.get_skipass_n(1)))
         self.layout_verticale1.addSpacerItem(QSpacerItem(0, 50))
 
-        self.layout_verticale1.addWidget(self.show_pulsante("Giornaliero", self.controller_gestine_skipass.get_skipass_n(2)))
+        self.layout_verticale1.addWidget(self.show_pulsante("Giornaliero", self.controller_gestione_skipass.get_skipass_n(2)))
 
 
 
-        self.layout_verticale2.addWidget(self.show_pulsante("Settimanale", self.controller_gestine_skipass.get_skipass_n(3)))
+        self.layout_verticale2.addWidget(self.show_pulsante("Settimanale", self.controller_gestione_skipass.get_skipass_n(3)))
         self.layout_verticale2.addSpacerItem(QSpacerItem(0, 50))
 
-        self.layout_verticale2.addWidget(self.show_pulsante("Mensile", self.controller_gestine_skipass.get_skipass_n(4)))
+        self.layout_verticale2.addWidget(self.show_pulsante("Mensile", self.controller_gestione_skipass.get_skipass_n(4)))
         self.layout_verticale2.addSpacerItem(QSpacerItem(0, 50))
 
-        self.layout_verticale2.addWidget(self.show_pulsante("Stagionale", self.controller_gestine_skipass.get_skipass_n(5)))
+        self.layout_verticale2.addWidget(self.show_pulsante("Stagionale", self.controller_gestione_skipass.get_skipass_n(5)))
 
         self.layout_orizzontale.addSpacerItem(QSpacerItem(40, 0))
         self.layout_orizzontale.addLayout(self.layout_verticale1)
@@ -97,7 +97,7 @@ class vista_acquista_skipass(QWidget):
 
 
     def call_skipass(self,skipass):
-        self.vista_skipass = vista_skipass(skipass, self.showFullScreen,self.controller_gestine_skipass)
+        self.vista_skipass = vista_skipass(skipass, self.showFullScreen, self.controller_gestione_skipass)
         self.vista_skipass.showFullScreen()
         self.close()
 
