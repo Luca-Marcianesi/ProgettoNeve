@@ -1,6 +1,12 @@
 [
   {
     "codice": 6,
+    "numero": 1,
+    "stato": true,
+    "scadenza": null
+  },
+  {
+    "codice": 6,
     "numero": 2,
     "stato": true,
     "scadenza": null
