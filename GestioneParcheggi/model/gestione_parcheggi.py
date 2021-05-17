@@ -13,7 +13,7 @@ class gestione_parcheggi:
         self.elenco_parcheggi = []
         self.codice_parcheggio = 6
         self.leggi_dati()
-        self.elimina_scadute_prenotazioni()
+        #self.elimina_scadute_prenotazioni()
 
     def prenota_parcheggio(self,numero_giorni):
         if sessione.controlla_prenotazione_effettuata(self.codice_parcheggio) :
@@ -30,7 +30,7 @@ class gestione_parcheggi:
             if parcheggio.get_stato():
                 posti +=1
         return posti
-
+    """
     def elimina_scadute_prenotazioni(self):
         if self.lista_prenotazioni_parcheggi == None:
             pass
@@ -38,7 +38,7 @@ class gestione_parcheggi:
             for prenotazione in self.lista_prenotazioni_parcheggi :
                 if prenotazione.get_scadenza() < date.today() :
                     self.lista_prenotazioni_parcheggi.remove(prenotazione)
-
+    """
 
     def salva_dati(self):
         with open('GestioneParcheggi/data/parcheggi.pickle', 'wb') as dati:
