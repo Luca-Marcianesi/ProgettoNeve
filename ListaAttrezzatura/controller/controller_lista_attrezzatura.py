@@ -10,8 +10,6 @@ class controller_lista_attrezzatura:
     def rimuovi_attrezzatura(self, indice):
         self.model.rimuovi_attrezzatura(indice)
 
-    def prenota_attrezzatura(self, tipo):
-        self.model.prenota_attrezzatura(tipo)
 
     def get_lista_attrezzatura(self):
         return self.model.get_lista_attrezzatura()
