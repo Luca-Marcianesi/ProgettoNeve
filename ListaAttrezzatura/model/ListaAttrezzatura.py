@@ -19,12 +19,6 @@ class lista_attrezzatura:
     def rimuovi_attrezzatura(self, indice):
         self.lista_attrezzatura.remove(indice)
 
-    def prenota_attrezzatura(self, attrezzatura,numero_giorni):
-        attrezzatura.set_stato(False)
-        scadenza = date.today() + timedelta(days=int(numero_giorni))
-        sessione.aggiungi_prenotazione(prenotazione(attrezzatura.get_codice(),scadenza,attrezzatura))
-
-
     def salva_dati(self):
         with open('ListaAttrezzatura/data/lista_attrezzatura.pickle', 'wb') as file:
             pickle.dump(self.lista_account, file, pickle.HIGHEST_PROTOCOL)
