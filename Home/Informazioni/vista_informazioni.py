@@ -19,8 +19,6 @@ class vista_informazioni(QWidget):
         self.url1 = ""
         self.callback = callback
 
-
-
         # Impostazione Layout totale
         self.show_background("INFORMAZIONI")
         self.layout_orizzontale.addSpacerItem(QSpacerItem(790, 0))
@@ -73,8 +71,9 @@ class vista_informazioni(QWidget):
 
     # Pulsante indietro
     def pulsante_indietro(self):
-        pulsante_indietro = QPushButton("Indietro")
-        pulsante_indietro.setFont(QFont('Times New Roman', 18))
+        pulsante_indietro = QPushButton("INDIETRO")
+        pulsante_indietro.setFont(QFont('Times New Roman', 20, 100, True))
+        pulsante_indietro.setStyleSheet('background-color: orange')
         pulsante_indietro.setFixedSize(250, 100)
         pulsante_indietro.clicked.connect(self.indietro)
         return pulsante_indietro
