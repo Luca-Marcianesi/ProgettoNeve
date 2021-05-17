@@ -24,7 +24,7 @@ class vista_home(QWidget):
         pixmap = QPixmap("ListaAccount/data/2.png")
         self.sfondo.setPixmap(pixmap)
         self.layout_orizzontale1.addWidget(self.sfondo)
-        self.layout_orizzontale1.addSpacerItem(QSpacerItem(375, 0))
+        self.layout_orizzontale1.addSpacerItem(QSpacerItem(275, 0))
         # Sfondo
         self.show_background()
 
@@ -52,6 +52,8 @@ class vista_home(QWidget):
         pulsante_account = self.crea_bottone("ACCOUNT", self.layout_orizzontale1)
         pulsante_account.clicked.connect(self.call_account_loggato)
 
+        self.layout_orizzontale1.addSpacerItem(QSpacerItem(100, 0))
+
         pulsante_esci = self.crea_bottone("ESCI", self.layout_orizzontale1)
         pulsante_esci.clicked.connect(self.uscita)
 
@@ -72,13 +74,10 @@ class vista_home(QWidget):
         pulsante_info = self.crea_bottone("INFORMAZIONI", self.layout_orizzontale2)
         pulsante_info.clicked.connect(self.call_info)
 
-
-
     def call_info(self):
         self.vista_informazioni = vista_informazioni(self.show)
         self.vista_informazioni.showFullScreen()
         self.close()
-
 
     def call_lista_piste(self):
         self.vista_lista_piste = vista_lista_piste(self.show)

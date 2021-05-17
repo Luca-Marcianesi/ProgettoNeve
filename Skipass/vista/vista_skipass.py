@@ -7,7 +7,7 @@ from Sessione.model.sessione import sessione
 
 
 class vista_skipass(QWidget):
-    def __init__(self, skipass,callback,controller):
+    def __init__(self, skipass, callback, controller):
         super(vista_skipass, self).__init__()
 
         # Attributi
@@ -25,7 +25,7 @@ class vista_skipass(QWidget):
         label = QLabel("Tipologia => {}\n".format(self.skipass.get_tipo()) + "\n"
                        "Descrizione => {}\n".format(self.skipass.get_descrizione()) + "\n"
                        "Durata dello skipass => {}\n".format(self.skipass.get_durata()) + "\n")
-        label.setFont(QFont('Times New Roman', 30,100,True))
+        label.setFont(QFont('Times New Roman', 30, 100, True))
         self.layout_verticale.addWidget(label)
 
         # Pulsante
@@ -46,7 +46,6 @@ class vista_skipass(QWidget):
         self.setLayout(self.layout_verticale)
         self.setWindowTitle('Skipass')
 
-
     def show_background(self, titolo):
         self.setFixedWidth(QDesktopWidget().width())
         self.setFixedHeight(QDesktopWidget().height())
@@ -63,7 +62,6 @@ class vista_skipass(QWidget):
         self.layout_verticale.addWidget(titolo)
         self.layout_verticale.addSpacerItem(QSpacerItem(0, 50, QSizePolicy.Fixed, QSizePolicy.Fixed))
 
-
     def indietro(self):
         self.callback()
         self.close()
@@ -79,4 +77,3 @@ class vista_skipass(QWidget):
     def call_prenotazione(self):
         self.controller_skipass.prenota_skipass(self.skipass)
         sessione.salva_dati()
-

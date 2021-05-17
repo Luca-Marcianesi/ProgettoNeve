@@ -22,22 +22,21 @@ class vista_lista_attrezzatura(QWidget):
         # Sfondo
         self.show_background("LISTA ATTREZZATURA")
 
-        self.layout_verticale1.addSpacerItem(QSpacerItem(0,200))
+        self.layout_verticale1.addSpacerItem(QSpacerItem(0, 200))
 
-        self.layout_orizzontale.addSpacerItem(QSpacerItem(100, 0, QSizePolicy.Fixed, QSizePolicy.Fixed))
+        self.layout_orizzontale.addSpacerItem(QSpacerItem(100, 0))
 
         # Lista
         self.vista_lista = QListView()
         vista_lista_model = QStandardItemModel(self.vista_lista)
         if self.controller.get_lista_filtrata() == []:
-            label = QLabel("Non ci sono oggetti disponibili adatti\nalle tue caratteristiche")
+            label = QLabel(" Non ci sono oggetti disponibili adatti\nalle tue caratteristiche")
             label.setAlignment(Qt.AlignCenter)
             label.setFont(QFont('Times New Roman', 25, 100))
-            label.setStyleSheet('QLabel {background-color: transparent; color: black;}')
+            label.setStyleSheet('QLabel {background-color: white; color: black;}')
             label.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Maximum)
-            self.layout_orizzontale.addSpacerItem(QSpacerItem(0, 50, QSizePolicy.Fixed, QSizePolicy.Fixed))
+            self.layout_orizzontale.addSpacerItem(QSpacerItem(0, 50))
             self.layout_orizzontale.addWidget(label)
-
 
         else:
             for attrezzatura in self.controller.get_lista_filtrata():
@@ -45,20 +44,24 @@ class vista_lista_attrezzatura(QWidget):
                 nome = attrezzatura.get_nome()
                 item.setText(nome)
                 item.setEditable(False)
-                item.setFont(QFont('Times New Roman', 30,100))
+                item.setFont(QFont('Times New Roman', 30, 100))
                 vista_lista_model.appendRow(item)
             self.vista_lista.setModel(vista_lista_model)
             self.layout_orizzontale.addWidget(self.vista_lista)
 
-        self.layout_orizzontale.addSpacerItem(QSpacerItem(1000, 0, QSizePolicy.Fixed, QSizePolicy.Fixed))
+        self.layout_orizzontale.addSpacerItem(QSpacerItem(1000, 0))
 
         # Pulsanti Apri e Indietro allineati
         self.show_pulsantiera()
 
         # Spaziatura
-        self.layout_orizzontale.addSpacerItem(QSpacerItem(150, 0, QSizePolicy.Fixed, QSizePolicy.Fixed))
+        self.layout_orizzontale.addSpacerItem(QSpacerItem(150, 0))
         self.layout_verticale1.addLayout(self.layout_orizzontale)
-        self.layout_verticale1.addSpacerItem(QSpacerItem(0, 150, QSizePolicy.Fixed, QSizePolicy.Fixed))
+
+        if self.controller.get_lista_filtrata() == []:
+            self.layout_verticale1.addSpacerItem(QSpacerItem(0, 350))
+        else:
+            self.layout_verticale1.addSpacerItem(QSpacerItem(0, 150))
 
         # Impostazione layout totale
         self.setLayout(self.layout_verticale1)
@@ -87,18 +90,21 @@ class vista_lista_attrezzatura(QWidget):
         self.layout_verticale1.addSpacerItem(QSpacerItem(0, 100, QSizePolicy.Fixed, QSizePolicy.Fixed))
 
     def show_pulsantiera(self):
-        pulsante_apri = QPushButton("APRI")
-        pulsante_apri.setFont(QFont('Times New Roman', 18))
-        pulsante_apri.setFixedSize(250, 100)
-        pulsante_apri.clicked.connect(self.attrezzatura_selezionata)
-        self.layout_verticale2.addWidget(pulsante_apri)
+        if not self.controller.get_lista_filtrata() == []:
+            pulsante_apri = QPushButton("Apri")
+            pulsante_apri.setFont(QFont('Times New Roman', 20, 100, True))
+            pulsante_apri.setStyleSheet('QPushButton {background-color: orange; color: black;}')
+            pulsante_apri.setFixedSize(250, 100)
+            pulsante_apri.clicked.connect(self.attrezzatura_selezionata)
+            self.layout_verticale2.addWidget(pulsante_apri)
         # Punsante indietro
-        pulsante_indietro = QPushButton("INDIETRO")
-        pulsante_indietro.setFont(QFont('Times New Roman', 18))
+        pulsante_indietro = QPushButton("Indietro")
+        pulsante_indietro.setFont(QFont('Times New Roman', 20, 100, True))
+        pulsante_indietro.setStyleSheet('QPushButton {background-color: orange; color: black;}')
         pulsante_indietro.setFixedSize(250, 100)
         pulsante_indietro.clicked.connect(self.indietro)
         self.layout_verticale2.addWidget(pulsante_indietro)
-        self.layout_verticale2.addSpacerItem(QSpacerItem(0, 50, QSizePolicy.Fixed, QSizePolicy.Fixed))
+        self.layout_verticale2.addSpacerItem(QSpacerItem(0, 50))
         self.layout_orizzontale.addLayout(self.layout_verticale2)
 
     def attrezzatura_selezionata(self):
