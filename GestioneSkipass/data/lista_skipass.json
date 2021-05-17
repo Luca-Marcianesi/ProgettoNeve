@@ -3,6 +3,7 @@
   "data_fine_stagione":"2022-04-01",
   "lista_skipass":[
             {
+                "codice_oggetto" : 1,
                 "tipo": "Mattiniero",
                 "descrizione": "Permette l'accesso agli impianti \ndalle ore 8:00 alle ore 12:00 dello stesso giorno",
 
@@ -10,12 +11,14 @@
                 "durata(hours)": 4
                 },
             {
+                "codice_oggetto" : 1,
                 "tipo": "Pomeridiano",
                 "descrizione": "Permette l'accesso agli impianti \ndalle ore 12:00 alle ore 16:00 dello stesso giorno",
                 "inizio_validita": "12:00:00",
                 "durata(hours)": 4
                 },
             {
+                "codice_oggetto" : 1,
                 "tipo": "Giornaliero",
                 "descrizione": "Permette l'accesso agli impianti \ndalle ore 8:00 alle ore 16:00 dello stesso giorno",
                 "inizio_validita": "08:00:00",
@@ -24,16 +27,19 @@
     ],
   "lista_abbonamenti":[
             {
+                "codice_oggetto" : 1,
                 "tipo": "Settimanale",
                 "descrizione": "Permette l'accesso agli impianti \nper 7 giorni dalla data d'inizio validita'",
                 "durata(day)": 7
                 },
             {
+                "codice_oggetto" : 1,
                 "tipo": "Mensile",
                 "descrizione": "Permette l'accesso agli impianti \nper 30 giorni dalla data d'inizio validita'",
                 "durata(day)": 30
                 },
             {
+                "codice_oggetto" : 1,
                 "tipo": "Stagionale",
                 "descrizione": "Permette l'accesso agli impianti \nper l'intera stagione invernale (1 dicembre-> 30 marzo)",
                 "durata(day)": 120
