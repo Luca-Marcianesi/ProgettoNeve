@@ -5,6 +5,7 @@ from datetime import date, timedelta
 
 from Sessione.model.sessione import sessione
 from Prenotazione.model.prenotazione import prenotazione
+from Parcheggio.model.parcheggio import parcheggio
 
 
 class gestione_parcheggi:
@@ -53,7 +54,7 @@ class gestione_parcheggi:
         else :
             with open("GestioneParcheggi/data/parcheggio.json") as file:
                 elenco_parcheggi = json.load(file)
-            for parcheggio in elenco_parcheggi:
+            for parcheggio_da_agg in elenco_parcheggi:
                 self.aggiungi_parcheggio(
-                    parcheggio(parcheggio["codice"], parcheggio["numero"], parcheggio["stato"]))
+                    parcheggio(parcheggio_da_agg["codice"], parcheggio_da_agg["numero"], parcheggio_da_agg["stato"]))
 
