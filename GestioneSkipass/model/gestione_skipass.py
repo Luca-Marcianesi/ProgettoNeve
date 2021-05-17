@@ -13,35 +13,47 @@ class gestione_skipass:
         self.inizio_stagione = None
         self.fine_stagione = None
         self.leggi_dati()
+        self.codice_skipass = 1
 
     def prenota(self,skipass_selezionato):
         #if date.today() > date.fromisoformat(self.inizio_stagione) and date.today() < date.fromisoformat(self.fine_stagione) :
-            if sessione.controlla_prenotazione_effettuata(1):
+            if sessione.controlla_prenotazione_effettuata(self.codice_skipass):
 
                 if skipass_selezionato.tipo != "Stagionale"and skipass_selezionato.tipo != "Mensile"and skipass_selezionato.tipo != "Settimanale":
 
                     scadenza = datetime(date.today().year, date.today().month, date.today().day,
-                              time.fromisoformat(skipass_selezionato.inizio_validita).hour, time.fromisoformat(skipass_selezionato.inizio_validita).minute,
-                              time.fromisoformat(skipass_selezionato.inizio_validita).second)
-                    scadenza = scadenza + timedelta(hours = int(skipass_selezionato.durata))
-                    sessione.aggiungi_prenotazione(prenotazione(1,scadenza,skipass_selezionato.descrizione))
+                                time.fromisoformat(skipass_selezionato.inizio_validita).hour,
+                                time.fromisoformat(skipass_selezionato.inizio_validita).minute,
+                                time.fromisoformat(skipass_selezionato.get_inizio_validita()).second)
+
+                    scadenza = scadenza + timedelta(hours = int(skipass_selezionato.get_durata()))
+
+                    sessione.aggiungi_prenotazione(prenotazione(skipass_selezionato.get_codice(),
+                                                                scadenza,
+                                                                skipass_selezionato))
 
                 else:
 
                     if skipass_selezionato.tipo != "Stagionale" :
-                        scadenza = date.today() + timedelta(days = int(skipass_selezionato.durata))
-                        sessione.aggiungi_prenotazione(prenotazione(1, scadenza, skipass_selezionato.descrizione))
+
+                        scadenza = date.today() + timedelta(days = int(skipass_selezionato.get_durata()))
+
+                        sessione.aggiungi_prenotazione(prenotazione(skipass_selezionato.get_codice(),
+                                                                    scadenza,
+                                                                    skipass_selezionato))
 
                     else:
-                        sessione.aggiungi_prenotazione(prenotazione(1, self.fine_stagione, skipass_selezionato.descrizione))
-            print(sessione.get_lista_prenotazioni())
+                        sessione.aggiungi_prenotazione(prenotazione(skipass_selezionato.get_codice(),
+                                                                    self.fine_stagione,
+                                                                    skipass_selezionato))
 
-
+    """
     def controlla_skipass_acquistato(self):
         for prenotazione in sessione.get_lista_prenotazioni():
-            if prenotazione.get_codice_oggetto() == 1:
+            if prenotazione.get_codice_oggetto() == self.codice_oggetto:
                 return True
         return False
+    """
 
     def aggiungi_skipass(self,skipass):
         self.lista_skipass.append(skipass)
@@ -56,12 +68,16 @@ class gestione_skipass:
                 self.fine_stagione = file_oggetto["data_fine_stagione"]
                 lista_skipass = file_oggetto["lista_skipass"]
                 for oggetto_skipass in lista_skipass :
-                        self.aggiungi_skipass(skipass(oggetto_skipass["tipo"],
+                        self.aggiungi_skipass(skipass(oggetto_skipass["codice_oggetto"],
+                                                      oggetto_skipass["tipo"],
                                                       oggetto_skipass["descrizione"],oggetto_skipass["inizio_validita"],
                                                       oggetto_skipass["durata(hours)"]))
                 lista_abbonamenti = file_oggetto["lista_abbonamenti"]
                 for abbonamento in lista_abbonamenti:
-                        self.aggiungi_skipass(skipass(abbonamento["tipo"],abbonamento["descrizione"], "", abbonamento["durata(day)"]))
+                        self.aggiungi_skipass(skipass(abbonamento["codice_oggetto"],
+                                                      abbonamento["tipo"],
+                                                      abbonamento["descrizione"],
+                                                      "", abbonamento["durata(day)"]))
 
     def visualizza_lista(self):
         lista ="la stagione inizia: {}".format(self.inizio_stagione) + " e finisce: {} \n".format(self.fine_stagione)
