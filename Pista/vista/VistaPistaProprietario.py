@@ -67,8 +67,9 @@ class vista_pista_proprietario(QWidget):
         pulsante_indietro.setStyleSheet('background-color: orange')
         pulsante_indietro.setFixedSize(250, 100)
         pulsante_indietro.clicked.connect(self.indietro)
-        pulsante_modifica_pista = QPushButton("MODIFICA PISTA")
-        pulsante_modifica_pista.setFont(QFont('Times New Roman', 16,100,True))
+        pulsante_modifica_pista = QPushButton("MODIFICA\n"
+                                              "PISTA")
+        pulsante_modifica_pista.setFont(QFont('Times New Roman', 18,100,True))
         pulsante_modifica_pista.setStyleSheet('background-color: orange')
         pulsante_modifica_pista.setFixedSize(250, 100)
         #pulsante_indietro.clicked.connect()
