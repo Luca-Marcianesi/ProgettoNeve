@@ -13,19 +13,16 @@ class gestione_parcheggi:
         self.elenco_parcheggi = []
         self.codice_parcheggio = 6
         self.leggi_dati()
-        self.prenotazioni =[]
-        #self.elimina_scadute_prenotazioni()
+        self.elimina_scadute_prenotazioni()
 
     def prenota_parcheggio(self,numero_giorni):
         if sessione.controlla_prenotazione_effettuata(self.codice_parcheggio) :
             if self.get_posti_disponibili() > 0:
                 for parcheggio in self.elenco_parcheggi:
                     if parcheggio.get_stato():
-                        parcheggio.set_stato(False)
                         scadenza = date.today() + timedelta(days = int(numero_giorni))
-                        prenotazione_da_aggiungere = prenotazione(parcheggio.get_codice(),scadenza,parcheggio)
-                        self.prenotazioni.append(prenotazione_da_aggiungere)
-                        sessione.aggiungi_prenotazione(prenotazione_da_aggiungere)
+                        parcheggio.prenota(scadenza)
+                        sessione.aggiungi_prenotazione(prenotazione(parcheggio.get_codice(),scadenza,parcheggio))
                         return "Prenotazione effettuata"
             return "Posti esauriti"
         return "Hai già una prenotazione"
@@ -36,15 +33,15 @@ class gestione_parcheggi:
             if parcheggio.get_stato():
                 posti +=1
         return posti
-    """
+
     def elimina_scadute_prenotazioni(self):
-        if self.prenotazioni == None:
-            pass
-        else :
-            for prenotazione in self.prenotazioni :
-                if prenotazione.get_scadenza() < datetime.today() :
-                    self.prenotazioni.remove(prenotazione)
-    """
+            for parcheggio in self.elenco_parcheggi :
+                if parcheggio.get_scadenza() != None:
+                    oggi = date.today()
+                    controllare = parcheggio.get_scadenza()
+                    if controllare > oggi :
+                        parcheggio.elimina_prenotazione()
+
     def salva_dati(self):
         with open('GestioneParcheggi/data/parcheggi.pickle', 'wb') as dati:
             pickle.dump(self.elenco_parcheggi, dati, pickle.HIGHEST_PROTOCOL)

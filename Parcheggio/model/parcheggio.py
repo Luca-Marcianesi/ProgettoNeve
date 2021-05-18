@@ -9,6 +9,9 @@ class parcheggio:
     def get_codice(self):
         return self.codice
 
+    def get_scadenza(self):
+        return self.scadenza
+
     def set_scadenza(self,scadenza):
         self.scadenza = scadenza
 
@@ -17,6 +20,14 @@ class parcheggio:
 
     def get_stato(self):
         return self.stato
+
+    def prenota(self,scadenza):
+        self.scadenza = scadenza
+        self.set_stato(False)
+
+    def elimina_prenotazione(self):
+        self.scadenza = None
+        self.set_stato(True)
 
     def get_numero(self):
         return self.numero

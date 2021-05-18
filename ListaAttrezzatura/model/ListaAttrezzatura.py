@@ -1,7 +1,7 @@
 import json
 import os
 import pickle
-from datetime import date, timedelta
+from datetime import date, timedelta ,datetime
 from Attrezzatura.model.attrezzatura import attrezzatura
 from Sessione.model.sessione import sessione
 from Prenotazione.model.prenotazione import prenotazione
@@ -53,11 +53,18 @@ class lista_attrezzatura:
     def prenota_attrezzatura(self,attrezzatura):
         if sessione.controlla_prenotazione_effettuata(attrezzatura.get_codice()):
             scadenza = date.today() + timedelta(hours=int(1))
-            attrezzatura.set_stato(False)
+            attrezzatura.prenota(scadenza)
             sessione.aggiungi_prenotazione(prenotazione(attrezzatura.get_codice(),
                                                         scadenza,
                                                         attrezzatura))
             return "Prenotazione effettuata"
+
+    def elimina_prenotazione_scadute(self):
+        for attrezzo in self.lista_attrezzatura:
+            oggi = date.today()
+            controllare = attrezzo.get_scadenza
+            if controllare > oggi:
+                attrezzo.elimina_prenotazione()
 
 
 
