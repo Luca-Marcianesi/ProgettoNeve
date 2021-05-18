@@ -3,6 +3,7 @@ from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import QWidget, QVBoxLayout, QHBoxLayout, QSpacerItem, QSizePolicy, QDesktopWidget, QLabel, \
     QPushButton
 from Attrezzatura.controller.controller_attrezzatura import controller_attrezzatura
+from Sessione.model.sessione import sessione
 
 
 class vista_attrezzatura(QWidget):
@@ -98,4 +99,30 @@ class vista_attrezzatura(QWidget):
         return "Non disponibile"
 
     def prenotazione(self):
-        self.prenota(self.attrezzatura)
+        risultato = self.prenota(self.attrezzatura)
+        self.conferma = vista_esito(risultato)
+        self.conferma.show()
+        sessione.salva_dati()
+
+class vista_esito(QWidget):
+    def __init__(self,risultato):
+        super(vista_esito, self).__init__()
+        self.layout_verticale = QVBoxLayout()
+        self.setFixedSize(400, 300)
+
+        label = QLabel(risultato)
+        label.setFont(QFont('Times New Roman', 20))
+        label.setAlignment(Qt.AlignCenter)
+
+        bottone = QPushButton("Chiudi")
+        bottone.clicked.connect(self.call_chiudi)
+
+        self.layout_verticale.addWidget(label)
+        self.layout_verticale.addSpacerItem(QSpacerItem(150, 0, QSizePolicy.Fixed, QSizePolicy.Fixed))
+        self.layout_verticale.addWidget(bottone)
+
+        self.setLayout(self.layout_verticale)
+        self.setWindowTitle('Esito')
+
+    def call_chiudi(self):
+        self.close()

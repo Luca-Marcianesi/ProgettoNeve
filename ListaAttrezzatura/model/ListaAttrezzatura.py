@@ -20,12 +20,12 @@ class lista_attrezzatura:
 
     def salva_dati(self):
         with open('ListaAttrezzatura/data/lista_attrezzatura.pickle', 'wb') as file:
-            pickle.dump(self.lista_account, file, pickle.HIGHEST_PROTOCOL)
+            pickle.dump(self.lista_attrezzatura, file, pickle.HIGHEST_PROTOCOL)
 
     def leggi_dati(self):
         if os.path.isfile('ListaAttrezzatura/data/lista_attrezzatura.pickle'):
             with open('ListaAttrezzatura/data/lista_attrezzatura.pickle',"rb") as file:
-                self.lista_account = pickle.load(file)
+                self.lista_attrezzatura = pickle.load(file)
         else :
                 with open("ListaAttrezzatura/data/lista_attrezzatura.json") as file:
                     lista_attrezzatura = json.load(file)
@@ -39,11 +39,17 @@ class lista_attrezzatura:
     def get_lista_filtrata(self):
         lista_filtrata = []
         for attrezzatura in self.lista_attrezzatura:
-            if int(attrezzatura.get_dimensioni())== int(sessione.get_numero_scarpe()) or int(attrezzatura.get_dimensioni()) == int(sessione.get_altezza()) :
-                if attrezzatura.get_stato() :
-                    lista_filtrata.append(attrezzatura)
+            if attrezzatura.get_stato():
+                    if self.filtra_dimenisoni(attrezzatura.get_dimensioni(),sessione.get_numero_scarpe(),sessione.get_altezza())  :
+                                    for attrezzo_prenotato in sessione.get_lista_prenotazioni():
+                                        if attrezzo_prenotato.get_codice_oggetto() != attrezzatura.get_codice():
+                                            lista_filtrata.append(attrezzatura)
         return lista_filtrata
 
+    def filtra_dimenisoni(self,dim_attrezzo,numero_scarpe_persona,altezza_persona):
+        if int(dim_attrezzo) == int(numero_scarpe_persona) or int(dim_attrezzo) == int(altezza_persona):
+            return True
+        return False
     def prenota_attrezzatura(self,attrezzatura):
         if sessione.controlla_prenotazione_effettuata(attrezzatura.get_codice()):
             scadenza = date.today() + timedelta(hours=int(1))
@@ -51,6 +57,7 @@ class lista_attrezzatura:
             sessione.aggiungi_prenotazione(prenotazione(attrezzatura.get_codice(),
                                                         scadenza,
                                                         attrezzatura))
+            return "Prenotazione effettuata"
 
 
 
