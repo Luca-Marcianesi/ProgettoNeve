@@ -12,3 +12,6 @@ class controller_lista_account():
 
     def salva_dati(self):
         self.model.salva_dati()
+
+    def controlla_username(self,username):
+        return self.model.controlla_username(username)

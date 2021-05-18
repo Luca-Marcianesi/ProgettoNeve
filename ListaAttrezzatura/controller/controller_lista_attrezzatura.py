@@ -17,7 +17,7 @@ class controller_lista_attrezzatura:
         return self.model.get_lista_filtrata()
 
     def prenota_attrezzatura(self,attrezzatura):
-        self.model.prenota_attrezzatura(attrezzatura)
+        return self.model.prenota_attrezzatura(attrezzatura)
 
     def salva_dati(self):
         self.model.salva_dati()

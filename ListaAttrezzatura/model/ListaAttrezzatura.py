@@ -40,16 +40,20 @@ class lista_attrezzatura:
         lista_filtrata = []
         for attrezzatura in self.lista_attrezzatura:
             if attrezzatura.get_stato():
-                    if self.filtra_dimenisoni(attrezzatura.get_dimensioni(),sessione.get_numero_scarpe(),sessione.get_altezza())  :
-                                    for attrezzo_prenotato in sessione.get_lista_prenotazioni():
-                                        if attrezzo_prenotato.get_codice_oggetto() != attrezzatura.get_codice():
-                                            lista_filtrata.append(attrezzatura)
+                    if self.filtra_dimenisoni(attrezzatura.get_dimensioni(),sessione.get_numero_scarpe(),sessione.get_altezza()):
+                                    if sessione.get_lista_prenotazioni() != []:
+                                        for prenotazione in sessione.get_lista_prenotazioni():
+                                                if prenotazione.get_codice_oggetto() != attrezzatura.get_codice():
+                                                    lista_filtrata.append(attrezzatura)
+                                    else:
+                                        lista_filtrata.append(attrezzatura)
         return lista_filtrata
 
     def filtra_dimenisoni(self,dim_attrezzo,numero_scarpe_persona,altezza_persona):
         if int(dim_attrezzo) == int(numero_scarpe_persona) or int(dim_attrezzo) == int(altezza_persona):
             return True
         return False
+
     def prenota_attrezzatura(self,attrezzatura):
         if sessione.controlla_prenotazione_effettuata(attrezzatura.get_codice()):
             scadenza = date.today() + timedelta(hours=int(1))
