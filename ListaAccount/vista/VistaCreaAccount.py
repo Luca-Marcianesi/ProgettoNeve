@@ -77,11 +77,14 @@ class vista_crea_account(QWidget):
         self.setPalette(palette)
 
     def controlla_informazioni1(self, altezza, eta, numero_scarpe, nome, cognome, password, username):
-        if nome != "" and cognome != "" and username != "" and password != "" and eta != "" and altezza != "" and numero_scarpe != "":
-            return True
-        else:
-            QMessageBox.critical(self, 'Errore', 'Per favore, inserisci tutte le informazioni richieste',QMessageBox.Ok, QMessageBox.Ok)
-            return False
+        if self.controller.controlla_username(username) != True:
+            if nome != "" and cognome != "" and username != "" and password != "" and eta != "" and altezza != "" and numero_scarpe != "":
+                return True
+            else:
+                QMessageBox.critical(self, 'Errore', 'Per favore, inserisci tutte le informazioni richieste',QMessageBox.Ok, QMessageBox.Ok)
+                return False
+        QMessageBox.critical(self, 'Errore', 'Username già in uso',QMessageBox.Ok, QMessageBox.Ok)
+        return False
 
     def controlla_informazioni2(self,altezza, eta, numero_scarpe):
         if int(altezza) <= 0 or int(altezza) > 220 or int(eta) <= 0 or int(eta) > 130 or int(numero_scarpe) <= 0 or int(numero_scarpe) > 50:
