@@ -3,6 +3,7 @@ from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import QWidget, QVBoxLayout, QHBoxLayout, QSpacerItem, QSizePolicy, QDesktopWidget, QLabel, \
     QPushButton
 from Attrezzatura.controller.controller_attrezzatura import controller_attrezzatura
+from Sessione.model.sessione import sessione
 
 
 class vista_attrezzatura(QWidget):
@@ -99,3 +100,4 @@ class vista_attrezzatura(QWidget):
 
     def prenotazione(self):
         self.prenota(self.attrezzatura)
+        sessione.salva_dati()

@@ -13,7 +13,7 @@ class vista_lista_attrezzatura(QWidget):
         super(vista_lista_attrezzatura, self).__init__()
 
         # Attributi
-        self.controller = controller_lista_attrezzatura()
+        self.controller_lista_attrezzatura = controller_lista_attrezzatura()
         self.callback = callback
         self.layout_verticale1 = QVBoxLayout()
         self.layout_orizzontale = QHBoxLayout()
@@ -29,7 +29,7 @@ class vista_lista_attrezzatura(QWidget):
         # Lista
         self.vista_lista = QListView()
         vista_lista_model = QStandardItemModel(self.vista_lista)
-        if self.controller.get_lista_filtrata() == []:
+        if self.controller_lista_attrezzatura.get_lista_filtrata() == []:
             label = QLabel(" Non ci sono oggetti disponibili adatti\nalle tue caratteristiche")
             label.setAlignment(Qt.AlignCenter)
             label.setFont(QFont('Times New Roman', 25, 100))
@@ -39,7 +39,7 @@ class vista_lista_attrezzatura(QWidget):
             self.layout_orizzontale.addWidget(label)
 
         else:
-            for attrezzatura in self.controller.get_lista_filtrata():
+            for attrezzatura in self.controller_lista_attrezzatura.get_lista_filtrata():
                 item = QStandardItem()
                 nome = attrezzatura.get_nome()
                 item.setText(nome)
@@ -58,7 +58,7 @@ class vista_lista_attrezzatura(QWidget):
         self.layout_orizzontale.addSpacerItem(QSpacerItem(150, 0))
         self.layout_verticale1.addLayout(self.layout_orizzontale)
 
-        if self.controller.get_lista_filtrata() == []:
+        if self.controller_lista_attrezzatura.get_lista_filtrata() == []:
             self.layout_verticale1.addSpacerItem(QSpacerItem(0, 350))
         else:
             self.layout_verticale1.addSpacerItem(QSpacerItem(0, 150))
@@ -69,6 +69,7 @@ class vista_lista_attrezzatura(QWidget):
 
     def indietro(self):
         self.callback()
+        self.controller_lista_attrezzatura.salva_dati()
         self.close()
 
     def show_background(self, stringa):
@@ -90,7 +91,7 @@ class vista_lista_attrezzatura(QWidget):
         self.layout_verticale1.addSpacerItem(QSpacerItem(0, 100, QSizePolicy.Fixed, QSizePolicy.Fixed))
 
     def show_pulsantiera(self):
-        if not self.controller.get_lista_filtrata() == []:
+        if not self.controller_lista_attrezzatura.get_lista_filtrata() == []:
             pulsante_apri = QPushButton("Apri")
             pulsante_apri.setFont(QFont('Times New Roman', 20, 100, True))
             pulsante_apri.setStyleSheet('QPushButton {background-color: orange; color: black;}')
@@ -109,8 +110,8 @@ class vista_lista_attrezzatura(QWidget):
 
     def attrezzatura_selezionata(self):
         selezionata = self.vista_lista.selectedIndexes()[0].row()
-        lista = self.controller.get_lista_filtrata()
+        lista = self.controller_lista_attrezzatura.get_lista_filtrata()
         attrezzatura = lista[selezionata]
-        self.vista_attrezzatura = vista_attrezzatura(self.showFullScreen, attrezzatura, self.controller.prenota_attrezzatura)
+        self.vista_attrezzatura = vista_attrezzatura(self.showFullScreen, attrezzatura, self.controller_lista_attrezzatura.prenota_attrezzatura)
         self.vista_attrezzatura.showFullScreen()
         self.close()
