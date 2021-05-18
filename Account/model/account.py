@@ -33,8 +33,8 @@ class account:
 
     def get_lista_prenotazioni_str(self):
         lista = ""
-        for prenotazione in self.lista_prenotazioni:
-            lista = lista + "" + prenotazione.get_prenotazione_str() + "\n"
+        for oggetto in self.lista_prenotazioni:
+            lista = lista + "" + oggetto.get_descrizione() + "\n"
         return lista
 
     def get_nome(self):
@@ -54,15 +54,16 @@ class account:
 
     def set_password(self, password):
         self.password = password
-    """
+
     def elimina_scadute_prenotazioni(self):
         if self.lista_prenotazioni == None:
             pass
         else :
             for prenotazione in self.lista_prenotazioni :
-                if prenotazione.get_scadenza() < datetime.today() :
+                controllare = prenotazione.get_scadenza()
+                oggi = datetime.today()
+                if controllare > oggi :
                     self.lista_prenotazioni.remove(prenotazione)
-    """
 
     def controlla_prenotazione_effettuata(self, codice):
         if self.lista_prenotazioni != None:
