@@ -1,7 +1,7 @@
 import json
 import os
 import pickle
-from datetime import date, timedelta
+from datetime import date, timedelta,datetime
 
 from Sessione.model.sessione import sessione
 from Prenotazione.model.prenotazione import prenotazione
@@ -13,6 +13,7 @@ class gestione_parcheggi:
         self.elenco_parcheggi = []
         self.codice_parcheggio = 6
         self.leggi_dati()
+        self.prenotazioni =[]
         #self.elimina_scadute_prenotazioni()
 
     def prenota_parcheggio(self,numero_giorni):
@@ -22,7 +23,9 @@ class gestione_parcheggi:
                     if parcheggio.get_stato():
                         parcheggio.set_stato(False)
                         scadenza = date.today() + timedelta(days = int(numero_giorni))
-                        sessione.aggiungi_prenotazione(prenotazione(parcheggio.get_codice(),scadenza,parcheggio))
+                        prenotazione_da_aggiungere = prenotazione(parcheggio.get_codice(),scadenza,parcheggio)
+                        self.prenotazioni.append(prenotazione_da_aggiungere)
+                        sessione.aggiungi_prenotazione(prenotazione_da_aggiungere)
                         return "Prenotazione effettuata"
             return "Posti esauriti"
         return "Hai già una prenotazione"
@@ -35,14 +38,13 @@ class gestione_parcheggi:
         return posti
     """
     def elimina_scadute_prenotazioni(self):
-        if self.lista_prenotazioni_parcheggi == None:
+        if self.prenotazioni == None:
             pass
         else :
-            for prenotazione in self.lista_prenotazioni_parcheggi :
-                if prenotazione.get_scadenza() < date.today() :
-                    self.lista_prenotazioni_parcheggi.remove(prenotazione)
+            for prenotazione in self.prenotazioni :
+                if prenotazione.get_scadenza() < datetime.today() :
+                    self.prenotazioni.remove(prenotazione)
     """
-
     def salva_dati(self):
         with open('GestioneParcheggi/data/parcheggi.pickle', 'wb') as dati:
             pickle.dump(self.elenco_parcheggi, dati, pickle.HIGHEST_PROTOCOL)

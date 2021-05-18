@@ -54,7 +54,7 @@ class account:
 
     def set_password(self, password):
         self.password = password
-
+    """
     def elimina_scadute_prenotazioni(self):
         if self.lista_prenotazioni == None:
             pass
@@ -62,7 +62,7 @@ class account:
             for prenotazione in self.lista_prenotazioni :
                 if prenotazione.get_scadenza() < datetime.today() :
                     self.lista_prenotazioni.remove(prenotazione)
-
+    """
 
     def controlla_prenotazione_effettuata(self, codice):
         if self.lista_prenotazioni != None:
@@ -70,3 +70,4 @@ class account:
                 if prenotazione.get_codice_oggetto() == codice:
                     return False
         return True
+
