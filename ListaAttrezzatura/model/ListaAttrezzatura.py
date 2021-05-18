@@ -20,12 +20,12 @@ class lista_attrezzatura:
 
     def salva_dati(self):
         with open('ListaAttrezzatura/data/lista_attrezzatura.pickle', 'wb') as file:
-            pickle.dump(self.lista_account, file, pickle.HIGHEST_PROTOCOL)
+            pickle.dump(self.lista_attrezzatura, file, pickle.HIGHEST_PROTOCOL)
 
     def leggi_dati(self):
         if os.path.isfile('ListaAttrezzatura/data/lista_attrezzatura.pickle'):
             with open('ListaAttrezzatura/data/lista_attrezzatura.pickle',"rb") as file:
-                self.lista_account = pickle.load(file)
+                self.lista_attrezzatura = pickle.load(file)
         else :
                 with open("ListaAttrezzatura/data/lista_attrezzatura.json") as file:
                     lista_attrezzatura = json.load(file)
