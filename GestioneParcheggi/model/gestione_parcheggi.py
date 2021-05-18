@@ -20,9 +20,12 @@ class gestione_parcheggi:
             if self.get_posti_disponibili() > 0:
                 for parcheggio in self.elenco_parcheggi:
                     if parcheggio.get_stato():
+                        parcheggio.set_stato(False)
                         scadenza = date.today() + timedelta(days = int(numero_giorni))
                         sessione.aggiungi_prenotazione(prenotazione(parcheggio.get_codice(),scadenza,parcheggio))
-
+                        return "Prenotazione effettuata"
+            return "Posti esauriti"
+        return "Hai già una prenotazione"
 
     def get_posti_disponibili(self):
         posti = 0
@@ -42,7 +45,7 @@ class gestione_parcheggi:
 
     def salva_dati(self):
         with open('GestioneParcheggi/data/parcheggi.pickle', 'wb') as dati:
-            pickle.dump(self.lista_prenotazioni_parcheggi, dati, pickle.HIGHEST_PROTOCOL)
+            pickle.dump(self.elenco_parcheggi, dati, pickle.HIGHEST_PROTOCOL)
 
     def aggiungi_parcheggio(self,parcheggio):
         self.elenco_parcheggi.append(parcheggio)
@@ -50,7 +53,7 @@ class gestione_parcheggi:
     def leggi_dati(self):
         if os.path.isfile('GestioneParcheggi/data/parcheggi.pickle'):
             with open('GestioneParcheggi/data/parcheggi.pickle',"rb") as file:
-                self.lista_prenotazioni_parcheggi = pickle.load(file)
+                self.elenco_parcheggi = pickle.load(file)
         else :
             with open("GestioneParcheggi/data/parcheggio.json") as file:
                 elenco_parcheggi = json.load(file)
