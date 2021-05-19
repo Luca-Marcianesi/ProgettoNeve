@@ -1,4 +1,7 @@
 import json
+import os
+import pickle
+
 from Pista.model.pista import pista
 
 
@@ -23,11 +26,6 @@ class lista_piste:
     def aggiungi_pista(self,pista):
         self.lista_piste.append(pista)
 
-    def leggi_dati(self):
-        with open("ListaPiste/data/lista_piste.json") as file:
-            lista_piste_inizio = json.load(file)
-        for pista_da_caricare in lista_piste_inizio:
-            self.aggiungi_pista(pista(pista_da_caricare["nome"],pista_da_caricare["colore"],pista_da_caricare["stato"]))
 
     def modifica_pista(self,posizione,stato):
         self.cerca_pista_x_numero(posizione).set_stato(stato)
@@ -37,3 +35,19 @@ class lista_piste:
 
     def get_lista(self):
         return self.lista_piste
+
+    def salva_dati(self):
+        with open('ListaPiste/data/lista_piste.pickle', 'wb') as file:
+            pickle.dump(self.lista_piste, file, pickle.HIGHEST_PROTOCOL)
+
+    def leggi_dati(self):
+        if os.path.isfile('ListaPiste/data/lista_piste.pickle'):
+            with open('ListaPiste/data/lista_piste.pickle',"rb") as file:
+                self.lista_piste = pickle.load(file)
+        else :
+            with open("ListaPiste/data/lista_piste.json") as file:
+                lista_piste_inizio = json.load(file)
+            for pista_da_caricare in lista_piste_inizio:
+                self.aggiungi_pista(
+                    pista(pista_da_caricare["nome"], pista_da_caricare["colore"], pista_da_caricare["stato"]))
+
