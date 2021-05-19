@@ -38,15 +38,18 @@ class lista_attrezzatura:
 
     def get_lista_filtrata(self):
         lista_filtrata = []
+        flag = True
         for attrezzatura in self.lista_attrezzatura:
             if attrezzatura.get_stato():
-                    if self.filtra_dimenisoni(attrezzatura.get_dimensioni(),sessione.get_numero_scarpe(),sessione.get_altezza()):
-                                    if sessione.get_lista_prenotazioni() != []:
-                                        for prenotazione in sessione.get_lista_prenotazioni():
-                                                if prenotazione.get_codice_oggetto() != attrezzatura.get_codice():
-                                                    lista_filtrata.append(attrezzatura)
-                                    else:
-                                        lista_filtrata.append(attrezzatura)
+                if self.filtra_dimenisoni(attrezzatura.get_dimensioni(), sessione.get_numero_scarpe(), sessione.get_altezza()):
+                    if sessione.get_lista_prenotazioni() != []:
+                            for prenotazione in sessione.get_lista_prenotazioni():
+                                if prenotazione.get_codice_oggetto() == attrezzatura.get_codice():
+                                    flag = False
+                            if flag:
+                                lista_filtrata.append(attrezzatura)
+                    else:
+                        lista_filtrata.append(attrezzatura)
         return lista_filtrata
 
     def filtra_dimenisoni(self,dim_attrezzo,numero_scarpe_persona,altezza_persona):

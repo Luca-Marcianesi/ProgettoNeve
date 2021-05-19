@@ -1,5 +1,5 @@
 class attrezzatura:
-    def __init__(self, codice, nome ,dimensioni):
+    def __init__(self, codice, nome, dimensioni):
         self.codice = codice
         self.stato = True
         self.nome = nome

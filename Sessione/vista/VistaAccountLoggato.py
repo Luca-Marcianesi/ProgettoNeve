@@ -28,9 +28,9 @@ class vista_account_loggato(QWidget):
         # Spaziatura
         self.layout_verticale3.addSpacerItem(QSpacerItem(500, 150, QSizePolicy.Fixed, QSizePolicy.Fixed))
 
-        self.aggiorna()
+        label = self.aggiorna()
 
-        self.layout_verticale3.addWidget(self.label)
+        self.layout_verticale3.addWidget(label)
 
         # Spaziatura
         self.layout_verticale3.addSpacerItem(QSpacerItem(500, 150, QSizePolicy.Fixed, QSizePolicy.Fixed))
@@ -96,12 +96,13 @@ class vista_account_loggato(QWidget):
 
     def aggiorna(self):
         # Label
-        self.label = QLabel("Nome: {}".format(self.controller.get_nome_str()) + "\n"
+        label = QLabel("Nome: {}".format(self.controller.get_nome_str()) + "\n"
                             "Cognome: {}".format(self.controller.get_cognome_str()) + "\n"
                             "Età: {}".format(self.controller.get_eta_str()) + "\n"
                             "Altezza: {}".format(self.controller.get_altezza_str()) + "\n"
                             "Numero di scarpe: {}".format(self.controller.get_numero_scarpe_str()))
-        self.label.setFont(QFont('Times New Roman', 30, 100))
+        label.setFont(QFont('Times New Roman', 30, 100))
+        return label
 
     def crea_bottone(self, tipo, layout):
         bottone = QPushButton(tipo)

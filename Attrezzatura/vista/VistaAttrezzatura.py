@@ -7,10 +7,11 @@ from Sessione.model.sessione import sessione
 
 
 class vista_attrezzatura(QWidget):
-    def __init__(self, callback, attrezzatura, prenota):
+    def __init__(self, callback, attrezzatura, prenota, aggiorna):
         super(vista_attrezzatura, self).__init__()
 
         # Attributi
+        self.aggiorna = aggiorna
         self.attrezzatura = attrezzatura
         self.controller = controller_attrezzatura(self.attrezzatura)
         self.callback = callback
@@ -99,30 +100,6 @@ class vista_attrezzatura(QWidget):
         return "Non disponibile"
 
     def prenotazione(self):
-        risultato = self.prenota(self.attrezzatura)
-        self.conferma = vista_esito(risultato)
-        self.conferma.show()
+        self.prenota(self.attrezzatura)
+        self.aggiorna()
         sessione.salva_dati()
-
-class vista_esito(QWidget):
-    def __init__(self,risultato):
-        super(vista_esito, self).__init__()
-        self.layout_verticale = QVBoxLayout()
-        self.setFixedSize(400, 300)
-
-        label = QLabel(risultato)
-        label.setFont(QFont('Times New Roman', 20))
-        label.setAlignment(Qt.AlignCenter)
-
-        bottone = QPushButton("Chiudi")
-        bottone.clicked.connect(self.call_chiudi)
-
-        self.layout_verticale.addWidget(label)
-        self.layout_verticale.addSpacerItem(QSpacerItem(150, 0, QSizePolicy.Fixed, QSizePolicy.Fixed))
-        self.layout_verticale.addWidget(bottone)
-
-        self.setLayout(self.layout_verticale)
-        self.setWindowTitle('Esito')
-
-    def call_chiudi(self):
-        self.close()

@@ -13,7 +13,7 @@ class vista_modifica_account(QWidget):
         # Attributi
         self.aggiorna = aggiorna
         self.callback = callback
-        self.controler_sessione = controller_sessione()
+        self.controller_sessione = controller_sessione()
         self.layout_verticale1 = QVBoxLayout()
         self.layout_verticale2 = QVBoxLayout()
         self.layout_orizzontale1 = QHBoxLayout()
@@ -78,12 +78,13 @@ class vista_modifica_account(QWidget):
         altezza = self.testo["ALTEZZA"].text()
         numero_scarpe = self.testo["NUMERO DI SCARPE"].text()
         if self.controlla_informazioni1(altezza, eta, numero_scarpe, password) and self.controlla_informazioni2(altezza, eta, numero_scarpe):
-            self.controler_sessione.cambia_password(password)
-            self.controler_sessione.cambia_eta(eta)
-            self.controler_sessione.cambia_altezza(altezza)
-            self.controler_sessione.cambia_numero_scarpe(numero_scarpe)
-            self.controler_sessione.salva_dati()
+            self.controller_sessione.cambia_password(password)
+            self.controller_sessione.cambia_eta(eta)
+            self.controller_sessione.cambia_altezza(altezza)
+            self.controller_sessione.cambia_numero_scarpe(numero_scarpe)
+            self.controller_sessione.salva_dati()
             self.callback()
+            self.aggiorna()
             self.close()
 
     def indietro(self):
