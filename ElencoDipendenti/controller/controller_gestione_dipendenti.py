@@ -12,7 +12,7 @@ class controller_elenco_dipendenti:
         self.model.rimuovi_dipendente(nome, cognome)
 
     def get_dipendente(self, nome, cognome):
-        self.model.get_dipendente(nome, cognome)
+        return self.model.get_dipendente(nome, cognome)
 
     def get_lista_elenco_dipendenti(self):
         return self.model.elenco

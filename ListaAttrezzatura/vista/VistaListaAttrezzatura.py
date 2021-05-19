@@ -28,26 +28,10 @@ class vista_lista_attrezzatura(QWidget):
 
         # Lista
         self.vista_lista = QListView()
-        vista_lista_model = QStandardItemModel(self.vista_lista)
-        if self.controller_lista_attrezzatura.get_lista_filtrata() == []:
-            label = QLabel(" Non ci sono oggetti disponibili adatti\nalle tue caratteristiche")
-            label.setAlignment(Qt.AlignCenter)
-            label.setFont(QFont('Times New Roman', 25, 100))
-            label.setStyleSheet('QLabel {background-color: white; color: black;}')
-            label.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Maximum)
-            self.layout_orizzontale.addSpacerItem(QSpacerItem(0, 50))
-            self.layout_orizzontale.addWidget(label)
 
-        else:
-            for attrezzatura in self.controller_lista_attrezzatura.get_lista_filtrata():
-                item = QStandardItem()
-                nome = attrezzatura.get_nome()
-                item.setText(nome)
-                item.setEditable(False)
-                item.setFont(QFont('Times New Roman', 30, 100))
-                vista_lista_model.appendRow(item)
-            self.vista_lista.setModel(vista_lista_model)
-            self.layout_orizzontale.addWidget(self.vista_lista)
+        label = self.aggiorna()
+
+        self.layout_orizzontale.addWidget(label)
 
         self.layout_orizzontale.addSpacerItem(QSpacerItem(1000, 0))
 
@@ -112,6 +96,28 @@ class vista_lista_attrezzatura(QWidget):
         selezionata = self.vista_lista.selectedIndexes()[0].row()
         lista = self.controller_lista_attrezzatura.get_lista_filtrata()
         attrezzatura = lista[selezionata]
-        self.vista_attrezzatura = vista_attrezzatura(self.showFullScreen, attrezzatura, self.controller_lista_attrezzatura.prenota_attrezzatura)
+        self.vista_attrezzatura = vista_attrezzatura(self.showFullScreen, attrezzatura, self.controller_lista_attrezzatura.prenota_attrezzatura, self.aggiorna)
         self.vista_attrezzatura.showFullScreen()
-        self.close()
+        #elf.close()
+
+    def aggiorna(self):
+        vista_lista_model = QStandardItemModel(self.vista_lista)
+        if self.controller_lista_attrezzatura.get_lista_filtrata() == []:
+            label = QLabel(" Non ci sono oggetti disponibili adatti\nalle tue caratteristiche")
+            label.setAlignment(Qt.AlignCenter)
+            label.setFont(QFont('Times New Roman', 25, 100))
+            label.setStyleSheet('QLabel {background-color: white; color: black;}')
+            label.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Maximum)
+            self.layout_orizzontale.addSpacerItem(QSpacerItem(0, 50))
+            return label
+
+        else:
+            for attrezzatura in self.controller_lista_attrezzatura.get_lista_filtrata():
+                item = QStandardItem()
+                nome = attrezzatura.get_nome()
+                item.setText(nome)
+                item.setEditable(False)
+                item.setFont(QFont('Times New Roman', 30, 100))
+                vista_lista_model.appendRow(item)
+            self.vista_lista.setModel(vista_lista_model)
+            return self.vista_lista

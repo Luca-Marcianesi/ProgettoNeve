@@ -5,7 +5,7 @@ class dipendente:
         self.telefono = telefono
 
     def get_dipendente_str(self):
-        return "Nome: {} \nCognome:{}".format(self.nome,self.cognome)
+        return self.nome + " " + self.cognome
 
     def get_dipendente_str_x_elenco(self):
         return "Nome: {} \nCognome:{} \nTelefono: {}".format(self.nome,self.cognome,self.telefono)
