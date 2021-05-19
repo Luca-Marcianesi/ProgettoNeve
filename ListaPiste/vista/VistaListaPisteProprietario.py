@@ -41,8 +41,9 @@ class vista_lista_piste_proprietario(QWidget):
         self.setLayout(self.layout_verticale1)
         self.setWindowTitle('Lista Piste')
 
+
     def call_vista_pista_proprietario(self, pista):
-        self.vista_pista_proprietario = vista_pista_proprietario(pista, self.showFullScreen)
+        self.vista_pista_proprietario = vista_pista_proprietario(pista, self.showFullScreen,self.controller.salva_dati)
         self.vista_pista_proprietario.showFullScreen()
         self.close()
 

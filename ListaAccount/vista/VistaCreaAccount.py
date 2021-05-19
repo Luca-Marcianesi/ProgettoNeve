@@ -59,7 +59,7 @@ class vista_crea_account(QWidget):
 
         if self.controlla_informazioni1(nome, cognome, username, password, altezza, eta, n_scarpe) and self.controlla_informazioni2(altezza, eta, n_scarpe):
                 self.controller.crea_account(nome, cognome, username, password, eta, altezza, n_scarpe)
-                self.controller.salva_dati()
+                self.controller.salva_lista_piste()
                 self.callback()
                 self.close()
 
