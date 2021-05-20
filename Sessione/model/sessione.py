@@ -62,6 +62,10 @@ class sessione:
         return cls.account_loggato.get_altezza()
 
     @classmethod
+    def get_permessi(cls):
+        return cls.account_loggato.get_permessi()
+
+    @classmethod
     def elimina_prenotazioni_scadute(cls):
         cls.account_loggato.elimina_scadute_prenotazioni()
 

@@ -24,6 +24,7 @@ class lista_account:
                 return True
         return False
 
+
     def controlla_username(self, username):
         for account in self.lista_account:
             if account.username == username:

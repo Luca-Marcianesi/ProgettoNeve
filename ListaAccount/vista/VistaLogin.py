@@ -8,6 +8,7 @@ from ListaAccount.controller.controller_lista_account import controller_lista_ac
 from Home.vista.VistaHome import vista_home
 
 from ListaAccount.vista.VistaCreaAccount import vista_crea_account
+from Sessione.model.sessione import sessione
 
 
 class vista_login(QWidget):
@@ -17,6 +18,7 @@ class vista_login(QWidget):
 
         # Attributi
         self.accesso_view = vista_home()
+        self.accesso_proprietario = vista_home_proprietario()
         self.controller = controller_lista_account()
         self.crea_view = vista_crea_account(self.show, self.controller)
         self.credenziali = {}
@@ -70,8 +72,12 @@ class vista_login(QWidget):
         username = self.credenziali["USERNAME"].text()
         password = self.credenziali["PASSWORD"].text()
         if self.controller.login(username, password):
-            self.accesso_view.showFullScreen()
-            self.close()
+            if sessione.get_permessi():
+                self.accesso_proprietario.showFullScreen()
+                self.close()
+            else :
+                self.accesso_view.showFullScreen()
+                self.close()
         else:
             QMessageBox.critical(self, 'Errore', 'Per favore, inserisci tutte le informazioni richieste',
                                  QMessageBox.Ok, QMessageBox.Ok)

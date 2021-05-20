@@ -59,6 +59,9 @@ class account:
     def set_password(self, password):
         self.password = password
 
+    def get_permessi(self):
+        return self.permesso
+
     def elimina_scadute_prenotazioni(self):
         if self.lista_prenotazioni == None:
             pass
