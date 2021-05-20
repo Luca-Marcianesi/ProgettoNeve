@@ -8,4 +8,4 @@ class dipendente:
         return self.nome + " " + self.cognome
 
     def get_dipendente_str_x_elenco(self):
-        return "Nome: {} \nCognome:{} \nTelefono: {}".format(self.nome,self.cognome,self.telefono)
+        return "Nome: {} \nCognome: {} \nTelefono: {}".format(self.nome,self.cognome,self.telefono)

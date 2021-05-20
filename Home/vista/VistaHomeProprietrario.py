@@ -2,6 +2,7 @@ from PyQt5.QtGui import QPalette, QBrush, QImage, QFont, QPixmap
 from PyQt5.QtWidgets import QWidget, QPushButton, QVBoxLayout, QLabel, QSizePolicy, QSpacerItem, \
     QDesktopWidget, QHBoxLayout
 
+from ElencoDipendenti.vista.VistaElencoDipendenti import vista_elenco_dipendenti
 from ListaAttrezzatura.vista.VistaListaAttrezzatura import vista_lista_attrezzatura
 from ListaPiste.vista.VistaListaPiste import vista_lista_piste
 from ListaPiste.vista.VistaListaPisteProprietario import vista_lista_piste_proprietario
@@ -64,7 +65,7 @@ class vista_home_proprietario(QWidget):
         pulsante_esci.clicked.connect(self.uscita)
 
         pulsante_dipendenti = self.crea_bottone("ELENCO \nDIPENDENTI", self.layout_orizzontale2)
-        #pulsante_skipass.clicked.connect(self.call_skipass)
+        pulsante_dipendenti.clicked.connect(self.call_elenco_dipendenti)
 
         self.layout_orizzontale2.addSpacerItem(QSpacerItem(100, 0))
 
@@ -104,8 +105,13 @@ class vista_home_proprietario(QWidget):
         self.close()
 
     def call_manutenzioni(self):
-        self.vista_manutenzioni = vista_manutenzioni(self.show)
+        self.vista_manutenzioni = vista_manutenzioni(self.showFullScreen)
         self.vista_manutenzioni.showFullScreen()
+        self.close()
+
+    def call_elenco_dipendenti(self):
+        self.vista_elenco_dipendenti = vista_elenco_dipendenti(self.showFullScreen)
+        self.vista_elenco_dipendenti.showFullScreen()
         self.close()
 
     def uscita(self):
