@@ -1,7 +1,7 @@
 from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QFont, QBrush, QPalette, QImage, QStandardItemModel, QStandardItem
 from PyQt5.QtWidgets import QWidget, QHBoxLayout, QVBoxLayout, QLabel, QSpacerItem, \
-    QSizePolicy, QListView, QPushButton, QDesktopWidget
+    QSizePolicy, QListView, QPushButton, QDesktopWidget, QMessageBox
 
 from Attrezzatura.vista.VistaAttrezzatura import vista_attrezzatura
 from ListaAttrezzatura.controller.controller_lista_attrezzatura import controller_lista_attrezzatura
@@ -93,12 +93,15 @@ class vista_lista_attrezzatura(QWidget):
         self.layout_orizzontale.addLayout(self.layout_verticale2)
 
     def attrezzatura_selezionata(self):
-        selezionata = self.vista_lista.selectedIndexes()[0].row()
-        lista = self.controller_lista_attrezzatura.get_lista_filtrata()
-        attrezzatura = lista[selezionata]
-        self.vista_attrezzatura = vista_attrezzatura(self.showFullScreen, attrezzatura, self.controller_lista_attrezzatura.prenota_attrezzatura, self.aggiorna)
-        self.vista_attrezzatura.showFullScreen()
-        #elf.close()
+        try:
+            self.selezionata = self.vista_lista.selectedIndexes()[0].row()
+            lista = self.controller_lista_attrezzatura.get_lista_filtrata()
+            attrezzatura = lista[self.selezionata]
+            self.vista_attrezzatura = vista_attrezzatura(self.showFullScreen, attrezzatura, self.controller_lista_attrezzatura.prenota_attrezzatura, self.aggiorna)
+            self.vista_attrezzatura.showFullScreen()
+        except IndexError:
+            QMessageBox.information(self, 'Attenzione!', 'Non hai selezionato nessuna attrezzatura',QMessageBox.Ok, QMessageBox.Ok)
+
 
     def aggiorna(self):
         vista_lista_model = QStandardItemModel(self.vista_lista)
