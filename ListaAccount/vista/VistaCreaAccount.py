@@ -55,12 +55,16 @@ class vista_crea_account(QWidget):
         eta = self.testo["Età"].text()
         altezza = self.testo["Altezza"].text()
         n_scarpe = self.testo["Numero di scarpe"].text()
-
-        if self.controlla_informazioni1(nome, cognome, username, password, altezza, eta, n_scarpe) and self.controlla_informazioni2(altezza, eta, n_scarpe):
-                self.controller.crea_account(nome, cognome, username, password, eta, altezza, n_scarpe)
-                self.controller.salva_dati()
-                self.callback()
-                self.close()
+        try:
+            if self.controlla_informazioni1(nome, cognome, username, password, altezza, eta, n_scarpe) and self.controlla_informazioni2(altezza, eta, n_scarpe):
+                    self.controller.crea_account(nome, cognome, username, password, eta, altezza, n_scarpe)
+                    self.controller.salva_dati()
+                    self.callback()
+                    self.close()
+        except ValueError:
+            QMessageBox.critical(self, 'Errore!', 'Hai inserito delle informazioni non valide!', QMessageBox.Ok, QMessageBox.Ok)
+        except:
+            QMessageBox.critical(self, 'Errore!', 'Qualcosa è andato storto, riprova più tardi.', QMessageBox.Ok, QMessageBox.Ok)
 
 
     def indietro(self):
@@ -84,6 +88,7 @@ class vista_crea_account(QWidget):
                 return False
         QMessageBox.critical(self, 'Errore', 'Username già in uso',QMessageBox.Ok, QMessageBox.Ok)
         return False
+
 
     def controlla_informazioni2(self,altezza, eta, numero_scarpe):
         if int(altezza) <= 0 or int(altezza) > 220 or int(eta) <= 0 or int(eta) > 130 or int(numero_scarpe) <= 0 or int(numero_scarpe) > 50:
