@@ -94,9 +94,9 @@ class vista_lista_attrezzatura(QWidget):
 
     def attrezzatura_selezionata(self):
         try:
-            self.selezionata = self.vista_lista.selectedIndexes()[0].row()
+            selezionata = self.vista_lista.selectedIndexes()[0].row()
             lista = self.controller_lista_attrezzatura.get_lista_filtrata()
-            attrezzatura = lista[self.selezionata]
+            attrezzatura = lista[selezionata]
             self.vista_attrezzatura = vista_attrezzatura(self.showFullScreen, attrezzatura, self.controller_lista_attrezzatura.prenota_attrezzatura, self.aggiorna)
             self.vista_attrezzatura.showFullScreen()
         except IndexError:
