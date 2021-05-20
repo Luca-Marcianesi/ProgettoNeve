@@ -2,11 +2,11 @@ from datetime import timedelta, date
 
 
 class manutenzione:
-    def __init__(self, nome, cadenza, ultima_manutenzione,prossima_manutenzione):
+    def __init__(self, nome, cadenza, ultima_manutenzione,prossima_scadenza):
         self.nome = nome
         self.cadenza = cadenza
         self.ultima_manutenzione = ultima_manutenzione
-        self.prossima_manutenzione = prossima_manutenzione
+        self.prossima_scadenza = prossima_scadenza
 
     def effettua_manutenzione(self):
         self.ultima_manutenzione = date.today()
@@ -14,6 +14,9 @@ class manutenzione:
 
     def get_nome(self):
         return  self.nome
+
+    def get_prossima_scadenza(self):
+        return self.prossima_scadenza
 
 
     def get_manutenzione_str(self):

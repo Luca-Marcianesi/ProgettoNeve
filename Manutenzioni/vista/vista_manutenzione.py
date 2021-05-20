@@ -1,18 +1,18 @@
 from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QFont, QBrush, QPalette, QImage, QStandardItemModel, QStandardItem
 from PyQt5.QtWidgets import QWidget, QHBoxLayout, QVBoxLayout, QLabel, QSpacerItem, \
-    QSizePolicy, QListView, QPushButton, QDesktopWidget
+    QSizePolicy, QListView, QPushButton, QDesktopWidget, QAction
 from ElencoManutenzioni.controller.controlle_elenco_manutenzioni import controller_elenco_manutenzioni
 
 
 class vista_manutenzioni(QWidget):
 
-    def __init__(self):
+    def __init__(self,callback):
         super(vista_manutenzioni, self).__init__()
 
         # Attributi
         self.controller_elenco_manutenzioni = controller_elenco_manutenzioni()
-        #self.callback = callback
+        self.callback = callback
         self.layout_verticale1 = QVBoxLayout()
         self.layout_orizzontale = QHBoxLayout()
         self.layout_verticale2 = QVBoxLayout()
@@ -20,7 +20,6 @@ class vista_manutenzioni(QWidget):
         # Sfondo
         self.show_background("ELENCO MANUTENZIONI")
 
-        self.layout_verticale1.addSpacerItem(QSpacerItem(0, 200))
 
         self.layout_orizzontale.addSpacerItem(QSpacerItem(100, 0))
 
@@ -29,29 +28,35 @@ class vista_manutenzioni(QWidget):
         vista_lista_model = QStandardItemModel(self.vista_elenco)
         for manutenzione in self.controller_elenco_manutenzioni.get_elenco_manutenzioni():
             item = QStandardItem()
+            scadenza = manutenzione.get_prossima_scadenza()
             nome = manutenzione.get_nome()
-            item.setText(nome)
+            stringa = str(nome) + "  " + str(scadenza)
+            item.setText(stringa)
             item.setEditable(False)
-            item.setFont(QFont('Times New Roman', 30, 100))
+            item.setFont(QFont('Times New Roman', 25, 100))
+            item.setTextAlignment(Qt.AlignCenter)
             vista_lista_model.appendRow(item)
         self.vista_elenco.setModel(vista_lista_model)
         self.layout_orizzontale.addWidget(self.vista_elenco)
 
-        self.layout_orizzontale.addSpacerItem(QSpacerItem(1000, 0))
+        #self.layout_orizzontale.addSpacerItem(QSpacerItem(400, 0))
 
         # Pulsanti Apri e Indietro allineati
         self.show_pulsantiera()
 
         # Spaziatura
+        self.layout_orizzontale.addLayout(self.layout_verticale2)
         self.layout_orizzontale.addSpacerItem(QSpacerItem(150, 0))
         self.layout_verticale1.addLayout(self.layout_orizzontale)
+
+        self.layout_verticale1.addSpacerItem(QSpacerItem(0,400))
 
         # Impostazione layout totale
         self.setLayout(self.layout_verticale1)
         self.setWindowTitle('Elenco Manutenzioni')
 
     def indietro(self):
-        #self.callback()
+        self.callback()
         self.controller_elenco_manutenzioni.salva_dati()
         self.close()
 
@@ -59,7 +64,7 @@ class vista_manutenzioni(QWidget):
         # Sfondo
         self.setFixedWidth(QDesktopWidget().width())
         self.setFixedHeight(QDesktopWidget().height())
-        back_img = QImage("ListaAttrezzatura/data/attrezzatura.jpg")
+        back_img = QImage("ElencoManutenzioni/data/sfondo.jpg")
         img = back_img.scaled(self.width(), self.height())
         palette = QPalette()
         palette.setBrush(10, QBrush(img))
@@ -79,6 +84,11 @@ class vista_manutenzioni(QWidget):
         pulsante_apri.setFont(QFont('Times New Roman', 20, 100, True))
         pulsante_apri.setStyleSheet('QPushButton {background-color: orange; color: black;}')
         pulsante_apri.setFixedSize(250, 100)
+        azione = QAction("prova", self)
+        azione.triggered.connect(self.onMyToolBarButtonClick)
+        pulsante_apri.setCheckable(True)
+        pulsante_apri.addAction(azione)
+
         #pulsante_apri.clicked.connect(self.attrezzatura_selezionata)
         self.layout_verticale2.addWidget(pulsante_apri)
 
@@ -87,10 +97,12 @@ class vista_manutenzioni(QWidget):
         pulsante_indietro.setFont(QFont('Times New Roman', 20, 100, True))
         pulsante_indietro.setStyleSheet('QPushButton {background-color: orange; color: black;}')
         pulsante_indietro.setFixedSize(250, 100)
-        #pulsante_indietro.clicked.connect(self.indietro)
+        pulsante_indietro.clicked.connect(self.indietro)
         self.layout_verticale2.addWidget(pulsante_indietro)
         self.layout_verticale2.addSpacerItem(QSpacerItem(0, 50))
-        self.layout_orizzontale.addLayout(self.layout_verticale2)
+
+    def onMyToolBarButtonClick(self, s):
+        print("click", s)
     """
     def attrezzatura_selezionata(self):
         selezionata = self.vista_lista.selectedIndexes()[0].row()

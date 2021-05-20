@@ -1,7 +1,7 @@
 import json
 import os
 import pickle
-from datetime import datetime,timedelta
+from datetime import date,timedelta
 
 from Manutenzioni.model.manutenzione import manutenzione
 
@@ -30,18 +30,17 @@ class elenco_manutenzioni:
 
     def leggi_dati(self):
             if os.path.isfile('ElencoManutenzioni/data/elenco_manutenzioni.pickle'):
-                with open('ListaAccount/data/lista_account_salvata.pickle', "rb") as file:
-                    self.lista_account = pickle.load(file)
+                with open('ElencoManutenzioni/data/elenco_manutenzioni.pickle', "rb") as file:
+                    self.elenco_manutenzioni = pickle.load(file)
             else :
                 with open("ElencoManutenzioni/data/elenco_manutenzioni.json") as file:
                     elenco_manutenzioni = json.load(file)
-                    print(1)
                 for manutenzione_da_aggiungere in elenco_manutenzioni:
                         self.aggiungi_manutenzione(manutenzione(manutenzione_da_aggiungere["nome"],
                                                                 manutenzione_da_aggiungere["cadenza(giorni)"],
-                                                                datetime.today(),
-                                                                datetime.today() + timedelta(days=int(manutenzione_da_aggiungere["cadenza(giorni)"]))))
+                                                                date.today(),
+                                                                date.today() + timedelta(days=int(manutenzione_da_aggiungere["cadenza(giorni)"]))))
 
     def salva_dati(self):
         with open('ElencoManutenzioni/data/elenco_manutenzioni.pickle', 'wb') as dati:
-            pickle.dump(self.lista_account, dati, pickle.HIGHEST_PROTOCOL)
+            pickle.dump(self.elenco_manutenzioni, dati, pickle.HIGHEST_PROTOCOL)

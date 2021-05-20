@@ -6,6 +6,7 @@ from ListaAttrezzatura.vista.VistaListaAttrezzatura import vista_lista_attrezzat
 from ListaPiste.vista.VistaListaPiste import vista_lista_piste
 from ListaPiste.vista.VistaListaPisteProprietario import vista_lista_piste_proprietario
 from Sessione.vista.VistaAccountLoggato import vista_account_loggato
+from Manutenzioni.vista.vista_manutenzione import vista_manutenzioni
 
 
 class vista_home_proprietario(QWidget):
@@ -54,7 +55,7 @@ class vista_home_proprietario(QWidget):
 
     def show_pulsantiera(self):
         pulsante_account = self.crea_bottone("ACCOUNT", self.layout_orizzontale1)
-        #pulsante_account.clicked.connect(self.call_account_loggato)
+        pulsante_account.clicked.connect(self.call_account_loggato)
 
         self.layout_orizzontale1.addSpacerItem(QSpacerItem(50,0))
 
@@ -76,7 +77,7 @@ class vista_home_proprietario(QWidget):
         self.layout_orizzontale3.addSpacerItem(QSpacerItem(100, 0))
 
         pulsante_manutenzioni = self.crea_bottone("MANUTENZIONI", self.layout_orizzontale3)
-        #pulsante_manutenzioni.clicked.connect(self.call_prenota_parcheggio)
+        pulsante_manutenzioni.clicked.connect(self.call_manutenzioni)
 
         pulsante_tabella = self.crea_bottone("TABELLA \nORARI", self.layout_verticale)
         # pulsante_tabella.clicked.connect(self.call_prenota_parcheggio)
@@ -100,6 +101,11 @@ class vista_home_proprietario(QWidget):
     def call_modifica_attrezzatura(self):
         self.vista_lista_attrezzatura = vista_lista_attrezzatura(self.showFullScreen)
         self.vista_lista_attrezzatura.showFullScreen()
+        self.close()
+
+    def call_manutenzioni(self):
+        self.vista_manutenzioni = vista_manutenzioni(self.show)
+        self.vista_manutenzioni.showFullScreen()
         self.close()
 
     def uscita(self):

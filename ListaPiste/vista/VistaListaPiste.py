@@ -79,9 +79,13 @@ class vista_lista_piste(QWidget):
         colonna = 0
         indice_pista = 1
         for pista in self.controller.get_lista():
-            bottone = QPushButton("[{}]  ".format(indice_pista) + pista.get_nome_str())
+            simbolo = "●"
+            bottone = QPushButton("[{}]  ".format(indice_pista) + pista.get_nome_str() + simbolo)
             bottone.setFont(QFont('Times New Roman', 18))
-            bottone.setStyleSheet('QPushButton {background-color: lightBlue; color: black;}')
+            if pista.get_stato() == "Aperta":
+                bottone.setStyleSheet('QPushButton {background-color: lightBlue; color: green;}')
+            else :
+                bottone.setStyleSheet('QPushButton {background-color: lightBlue; color: red;}')
             bottone.clicked.connect(partial(self.call_vista_pista, pista))
             if colonna == 5 or colonna == 10:
                 colonna = 0
@@ -90,3 +94,15 @@ class vista_lista_piste(QWidget):
             colonna += 1
             indice_pista += 1
         self.layout_verticale1.addLayout(layout_piste)
+
+class color:
+    PURPLE = '\033[95m'
+    CYAN = '\033[96m'
+    DARKCYAN = '\033[36m'
+    BLUE = '\033[94m'
+    GREEN = '\033[92m'
+    YELLOW = '\033[93m'
+    RED = '\033[91m'
+    BOLD = '\033[1m'
+    UNDERLINE = '\033[4m'
+    END = '\033[0m'
