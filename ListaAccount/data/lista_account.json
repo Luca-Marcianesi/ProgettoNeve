@@ -1,0 +1,11 @@
+[
+  {
+    "nome": "mario",
+    "cognome": "nannerini",
+    "username": "admin",
+    "password": "admin",
+    "eta":54,
+    "altezza": 176,
+    "numero_scarpe": 40
+  }
+]

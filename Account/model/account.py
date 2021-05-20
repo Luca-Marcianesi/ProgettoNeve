@@ -11,6 +11,7 @@ class account:
         self.eta = eta
         self.altezza = altezza
         self.numero_scarpe = numero_scarpe
+        self.permesso = False
         self.lista_prenotazioni = []
 
     def set_eta(self, eta):
@@ -21,6 +22,9 @@ class account:
 
     def set_altezza(self, altezza):
         self.altezza = altezza
+
+    def set_permessi(self,permesso):
+        self.permesso = permesso
 
     def aggiungi_prenotazione(self, prenotazione):
         self.lista_prenotazioni.append(prenotazione)

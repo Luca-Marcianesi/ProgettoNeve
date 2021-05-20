@@ -1,3 +1,4 @@
+import json
 import os.path
 import pickle
 
@@ -37,3 +38,17 @@ class lista_account:
         if os.path.isfile('ListaAccount/data/lista_account_salvata.pickle'):
             with open('ListaAccount/data/lista_account_salvata.pickle',"rb") as file:
                 self.lista_account = pickle.load(file)
+        else  :
+            with open("ListaAccount/data/lista_account.json") as file:
+                lista = json.load(file)
+                for account_da_aggiungere in lista :
+                    acc = account(account_da_aggiungere["nome"],
+                                  account_da_aggiungere["cognome"],
+                                  account_da_aggiungere["username"],
+                                  account_da_aggiungere["password"],
+                                  account_da_aggiungere["eta"],
+                                  account_da_aggiungere["altezza"],
+                                  account_da_aggiungere["numero_scarpe"])
+                    acc.set_permessi(True)
+                    self.lista_account.append(acc)
+
