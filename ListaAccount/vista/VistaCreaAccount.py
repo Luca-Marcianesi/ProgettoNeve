@@ -1,6 +1,5 @@
 from PyQt5.QtGui import QImage, QPalette, QBrush
-from PyQt5.QtWidgets import QVBoxLayout, QLabel, QLineEdit, QPushButton, QMessageBox, QWidget, QHBoxLayout, \
-    QDesktopWidget
+from PyQt5.QtWidgets import QVBoxLayout, QLabel, QLineEdit, QPushButton, QMessageBox, QWidget, QHBoxLayout
 
 
 class vista_crea_account(QWidget):

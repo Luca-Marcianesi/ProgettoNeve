@@ -100,8 +100,9 @@ class vista_lista_attrezzatura(QWidget):
             self.vista_attrezzatura = vista_attrezzatura(self.showFullScreen, attrezzatura, self.controller_lista_attrezzatura.prenota_attrezzatura, self.aggiorna)
             self.vista_attrezzatura.showFullScreen()
         except IndexError:
-            QMessageBox.information(self, 'Attenzione!', 'Non hai selezionato nessuna attrezzatura',QMessageBox.Ok, QMessageBox.Ok)
-
+            QMessageBox.information(self, 'Attenzione!', 'Non hai selezionato nessuna attrezzatura.', QMessageBox.Ok, QMessageBox.Ok)
+        except:
+            QMessageBox.critical(self, 'Errore!', 'Qualcosa è andato storto, riprova più tardi.', QMessageBox.Ok, QMessageBox.Ok)
 
     def aggiorna(self):
         vista_lista_model = QStandardItemModel(self.vista_lista)
