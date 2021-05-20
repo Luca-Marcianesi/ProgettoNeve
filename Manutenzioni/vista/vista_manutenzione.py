@@ -1,5 +1,5 @@
 from PyQt5.QtCore import Qt
-from PyQt5.QtGui import QFont, QBrush, QPalette, QImage, QStandardItemModel, QStandardItem
+from PyQt5.QtGui import QFont, QBrush, QPalette, QImage, QStandardItemModel, QStandardItem, QColor
 from PyQt5.QtWidgets import QWidget, QHBoxLayout, QVBoxLayout, QLabel, QSpacerItem, \
     QSizePolicy, QListView, QPushButton, QDesktopWidget, QAction
 from ElencoManutenzioni.controller.controlle_elenco_manutenzioni import controller_elenco_manutenzioni
@@ -25,6 +25,7 @@ class vista_manutenzioni(QWidget):
 
         # Lista
         self.vista_elenco = QListView()
+        self.vista_elenco.setStyleSheet("background-color: cyan")
         vista_lista_model = QStandardItemModel(self.vista_elenco)
         for manutenzione in self.controller_elenco_manutenzioni.get_elenco_manutenzioni():
             item = QStandardItem()

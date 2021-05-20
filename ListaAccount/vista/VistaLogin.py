@@ -2,6 +2,8 @@ from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QImage, QPalette, QBrush, QFont
 from PyQt5.QtWidgets import QWidget, QVBoxLayout, QLabel, QLineEdit, QPushButton, \
     QHBoxLayout, QSizePolicy, QSpacerItem, QMessageBox
+
+from Home.vista.VistaHomeProprietrario import vista_home_proprietario
 from ListaAccount.controller.controller_lista_account import controller_lista_account
 from Home.vista.VistaHome import vista_home
 
