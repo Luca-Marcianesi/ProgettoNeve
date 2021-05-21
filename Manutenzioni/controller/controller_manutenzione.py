@@ -1,6 +1,6 @@
 class controller_manutenzione():
     def __init__(self,manutenzione):
-        self.model = manutenzione
+        self.model = manutenzione()
 
     def effettua_manutenzione(self):
         self.model.effettua_manutenzione()

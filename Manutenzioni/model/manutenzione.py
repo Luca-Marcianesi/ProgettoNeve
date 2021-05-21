@@ -13,7 +13,7 @@ class manutenzione:
         self.prossima_manutenzione = self.ultima_manutenzione + timedelta(days = int(self.cadenza))
 
     def get_nome(self):
-        return  self.nome
+        return self.nome
 
     def get_prossima_scadenza(self):
         return self.prossima_scadenza
