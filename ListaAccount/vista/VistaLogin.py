@@ -17,8 +17,8 @@ class vista_login(QWidget):
         super(vista_login, self).__init__(parent)
 
         # Attributi
-        self.accesso_view = vista_home()
-        self.accesso_proprietario = vista_home_proprietario()
+        self.accesso_view = vista_home(self.show)
+        self.accesso_proprietario = vista_home_proprietario(self.show)
         self.controller = controller_lista_account()
         self.crea_view = vista_crea_account(self.show, self.controller)
         self.credenziali = {}

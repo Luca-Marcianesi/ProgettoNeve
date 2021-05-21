@@ -11,10 +11,11 @@ from GestioneSkipass.vista.vista_acquista_skipass import vista_acquista_skipass
 
 class vista_home(QWidget):
 
-    def __init__(self):
+    def __init__(self,callback):
         super(vista_home, self).__init__()
 
         # Attributi
+        self.callback = callback
         self.layout_verticale = QVBoxLayout()
         self.layout_orizzontale1 = QHBoxLayout()
         self.layout_orizzontale2 = QHBoxLayout()
@@ -54,7 +55,7 @@ class vista_home(QWidget):
 
         self.layout_orizzontale1.addSpacerItem(QSpacerItem(100, 0))
 
-        pulsante_esci = self.crea_bottone("ESCI", self.layout_orizzontale1)
+        pulsante_esci = self.crea_bottone("LOGOUT", self.layout_orizzontale1)
         pulsante_esci.clicked.connect(self.uscita)
 
         pulsante_skipass = self.crea_bottone("ACQUISTA \n SKIPASS", self.layout_verticale)
@@ -105,6 +106,7 @@ class vista_home(QWidget):
         self.close()
 
     def uscita(self):
+        self.callback()
         self.close()
 
     def crea_bottone(self, tipo, layout):
