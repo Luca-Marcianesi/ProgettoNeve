@@ -23,6 +23,11 @@ class gestione_parcheggi:
                         scadenza = date.today() + timedelta(days = int(numero_giorni))
                         parcheggio.prenota(scadenza)
                         sessione.aggiungi_prenotazione(prenotazione(parcheggio.get_codice(),scadenza,parcheggio))
+                        sessione.salva_dati()
+                        self.salva_dati()
+                        for parcheggio in self.elenco_parcheggi:
+                            print(parcheggio.get_stato())
+
                         return "Prenotazione effettuata"
             return "Posti esauriti"
         return "Hai già una prenotazione"

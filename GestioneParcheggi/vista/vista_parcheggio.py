@@ -129,8 +129,6 @@ class vista_richiesta_giorni(QWidget):
     def call_prenota(self):
         val = self.giorni.value()
         risultato =self.controller_parcheggi.prenota_parcheggio(val)
-        self.controller_parcheggi.salva_lista_piste()
-        sessione.salva_dati()
         self.vista_chiusa = vista_esito(risultato)
         self.vista_chiusa.show()
         self.close()

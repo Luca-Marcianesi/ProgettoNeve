@@ -9,3 +9,6 @@ class controller_gestione_parcheggi:
 
     def get_posti_disponibili(self):
         self.model.get_posti_disponibili()
+
+    def salva_dati(self):
+        self.model.salva_dati()
