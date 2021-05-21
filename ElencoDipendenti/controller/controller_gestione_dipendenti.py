@@ -16,3 +16,6 @@ class controller_elenco_dipendenti:
 
     def get_lista_elenco_dipendenti(self):
         return self.model.elenco
+
+    def salva_dati(self):
+        self.model.salva_dati()
