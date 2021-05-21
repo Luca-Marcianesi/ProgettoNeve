@@ -25,7 +25,6 @@ class gestione_parcheggi:
                         sessione.aggiungi_prenotazione(prenotazione(parcheggio.get_codice(),scadenza,parcheggio))
                         sessione.salva_dati()
                         self.salva_dati()
-
                         return "Prenotazione effettuata"
             return "Posti esauriti"
         return "Hai già una prenotazione"
@@ -33,6 +32,7 @@ class gestione_parcheggi:
     def get_posti_disponibili(self):
         posti = 0
         for parcheggio in self.elenco_parcheggi:
+            print(parcheggio.stato)
             if parcheggio.get_stato():
                 posti +=1
         return posti
@@ -42,7 +42,7 @@ class gestione_parcheggi:
                 if parcheggio.get_scadenza() != None:
                     oggi = date.today()
                     controllare = parcheggio.get_scadenza()
-                    if controllare > oggi :
+                    if controllare < oggi:
                         parcheggio.elimina_prenotazione()
 
     def salva_dati(self):

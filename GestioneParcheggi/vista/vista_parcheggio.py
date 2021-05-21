@@ -6,13 +6,14 @@ from PyQt5.QtWidgets import QWidget, QHBoxLayout, QVBoxLayout, QLabel, QSpacerIt
     QDesktopWidget, QSpinBox, QMessageBox
 from GestioneParcheggi.controller.controller_gestione_parcheggi import gestione_parcheggi
 from Sessione.model.sessione import sessione
+from GestioneParcheggi.controller.controller_gestione_parcheggi import controller_gestione_parcheggi
 
 class vista_parcheggio(QWidget):
 
     def __init__(self,callback):
         super(vista_parcheggio, self).__init__()
 
-        self.controller_gestione_parcheggio = gestione_parcheggi()
+        self.controller_gestione_parcheggio = controller_gestione_parcheggi()
         self.layout_verticale = QVBoxLayout()
         self.layout_orizzontale = QHBoxLayout()
         self.callback = callback

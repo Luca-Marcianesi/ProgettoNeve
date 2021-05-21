@@ -5,10 +5,10 @@ class controller_gestione_parcheggi:
         self.model = gestione_parcheggi()
 
     def prenota_parcheggio(self,numero_giorni):
-        self.model.prenota_parcheggio(numero_giorni)
+        return self.model.prenota_parcheggio(numero_giorni)
 
     def get_posti_disponibili(self):
-        self.model.get_posti_disponibili()
+        return self.model.get_posti_disponibili()
 
     def salva_dati(self):
         self.model.salva_dati()
