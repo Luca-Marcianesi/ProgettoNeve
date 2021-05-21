@@ -1,6 +1,6 @@
-from datetime import datetime
+
 class parcheggio:
-    def __init__(self, codice, numero, stato,):
+    def __init__(self, codice, numero, stato):
         self.codice = codice
         self.numero = numero
         self.stato = stato

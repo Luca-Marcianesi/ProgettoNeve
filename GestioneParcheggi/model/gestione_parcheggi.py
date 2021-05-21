@@ -16,7 +16,7 @@ class gestione_parcheggi:
         self.elimina_scadute_prenotazioni()
 
     def prenota_parcheggio(self,numero_giorni):
-        if sessione.controlla_prenotazione_effettuata(self.codice_parcheggio) :
+        if sessione.controlla_prenotazione_effettuata(self.codice_parcheggio):
             if self.get_posti_disponibili() > 0:
                 for parcheggio in self.elenco_parcheggi:
                     if parcheggio.get_stato():
