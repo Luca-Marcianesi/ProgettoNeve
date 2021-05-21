@@ -81,10 +81,14 @@ class vista_lista_piste_proprietario(QWidget):
         colonna = 0
         indice_pista = 1
         for pista in self.controller.get_lista():
-            bottone = QPushButton("[{}]  ".format(indice_pista) + pista.get_nome_str())
+            simbolo = "●"
+            bottone = QPushButton("[{}]  ".format(indice_pista) + pista.get_nome_str() + simbolo)
             bottone.setFont(QFont('Times New Roman', 18))
-            bottone.setStyleSheet('QPushButton {background-color: lightBlue; color: black;}')
-            bottone.clicked.connect(partial(self.call_vista_pista_proprietario, pista))
+            if pista.get_stato() == "Aperta":
+                bottone.setStyleSheet('QPushButton {background-color: lightBlue; color: green;}')
+            else:
+                bottone.setStyleSheet('QPushButton {background-color: lightBlue; color: red;}')
+            bottone.clicked.connect(partial(self.call_vista_pista, pista))
             if colonna == 5 or colonna == 10:
                 colonna = 0
                 riga += 1

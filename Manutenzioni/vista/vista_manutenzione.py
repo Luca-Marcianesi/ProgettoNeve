@@ -80,23 +80,18 @@ class vista_manutenzioni(QWidget):
         self.layout_verticale1.addSpacerItem(QSpacerItem(0, 100, QSizePolicy.Fixed, QSizePolicy.Fixed))
 
     def show_pulsantiera(self):
-        try:
-            pulsante_apri = QPushButton("Apri")
-            pulsante_apri.setFont(QFont('Times New Roman', 20, 100, True))
-            pulsante_apri.setStyleSheet('QPushButton {background-color: orange; color: black;}')
-            pulsante_apri.setFixedSize(250, 100)
-            azione = QAction("prova", self)
-            azione.triggered.connect(self.onMyToolBarButtonClick)
-            pulsante_apri.setCheckable(True)
-            pulsante_apri.addAction(azione)
-            # pulsante_apri.clicked.connect(self.attrezzatura_selezionata)
-            self.layout_verticale2.addWidget(pulsante_apri)
-        except IndexError:
-            QMessageBox.information(self, 'Attenzione!', 'Non hai selezionato nessuna manutenzione', QMessageBox.Ok,
-                                 QMessageBox.Ok)
-        except:
-            QMessageBox.critical(self, 'Errore!', 'Qualcosa è andato storto, riprova più tardi.', QMessageBox.Ok,
-                                 QMessageBox.Ok)
+
+        pulsante_apri = QPushButton("Apri")
+        pulsante_apri.setFont(QFont('Times New Roman', 20, 100, True))
+        pulsante_apri.setStyleSheet('QPushButton {background-color: orange; color: black;}')
+        pulsante_apri.setFixedSize(250, 100)
+        azione = QAction("prova", self)
+        azione.triggered.connect(self.onMyToolBarButtonClick)
+        pulsante_apri.setCheckable(True)
+        pulsante_apri.addAction(azione)
+        # pulsante_apri.clicked.connect(self.attrezzatura_selezionata)
+        self.layout_verticale2.addWidget(pulsante_apri)
+
 
         # Punsante indietro
         pulsante_indietro = QPushButton("Indietro")
