@@ -42,8 +42,7 @@ class vista_lista_piste(QWidget):
 
     def call_vista_pista(self, pista):
         self.vista_pista = vista_pista(pista, self.showFullScreen)
-        self.vista_pista.showFullScreen()
-        self.close()
+        self.vista_pista.show()
 
     def indietro(self):
         self.callback()
