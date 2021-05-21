@@ -53,8 +53,9 @@ class vista_account_loggato(QWidget):
         pulsante_credenziali = self.crea_bottone("CAMBIA\nCREDENZIALI", self.layout_verticale2)
         pulsante_credenziali.clicked.connect(self.call_modifica_credenziali)
 
-        pulsante_prenotazioni = self.crea_bottone("PRENOTAZIONI", self.layout_verticale2)
-        pulsante_prenotazioni.clicked.connect(self.vista_prenotazioni)
+        if self.controller.get_permessi() != True:
+            pulsante_prenotazioni = self.crea_bottone("PRENOTAZIONI", self.layout_verticale2)
+            pulsante_prenotazioni.clicked.connect(self.vista_prenotazioni)
 
         pulsante_indietro = self.crea_bottone("INDIETRO", self.layout_verticale2)
         pulsante_indietro.clicked.connect(self.indietro)
