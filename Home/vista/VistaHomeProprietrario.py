@@ -4,10 +4,9 @@ from PyQt5.QtWidgets import QWidget, QPushButton, QVBoxLayout, QLabel, QSizePoli
 
 from ElencoDipendenti.vista.VistaElencoDipendenti import vista_elenco_dipendenti
 from ListaAttrezzatura.vista.VistaListaAttrezzatura import vista_lista_attrezzatura
-from ListaPiste.vista.VistaListaPiste import vista_lista_piste
 from ListaPiste.vista.VistaListaPisteProprietario import vista_lista_piste_proprietario
 from Sessione.vista.VistaAccountLoggato import vista_account_loggato
-from Manutenzioni.vista.vista_manutenzione import vista_manutenzioni
+from ElencoManutenzioni.vista.vista_lista_manutenzioni import vista_lista_manutenzioni
 
 
 class vista_home_proprietario(QWidget):
@@ -106,8 +105,8 @@ class vista_home_proprietario(QWidget):
         self.close()
 
     def call_manutenzioni(self):
-        self.vista_manutenzioni = vista_manutenzioni(self.showFullScreen)
-        self.vista_manutenzioni.showFullScreen()
+        self.vista_lista_manutenzioni = vista_lista_manutenzioni(self.showFullScreen)
+        self.vista_lista_manutenzioni.showFullScreen()
         self.close()
 
     def call_elenco_dipendenti(self):

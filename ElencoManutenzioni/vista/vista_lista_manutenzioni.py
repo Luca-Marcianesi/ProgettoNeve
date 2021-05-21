@@ -5,10 +5,10 @@ from PyQt5.QtWidgets import QWidget, QHBoxLayout, QVBoxLayout, QLabel, QSpacerIt
 from ElencoManutenzioni.controller.controlle_elenco_manutenzioni import controller_elenco_manutenzioni
 
 
-class vista_manutenzioni(QWidget):
+class vista_lista_manutenzioni(QWidget):
 
     def __init__(self,callback):
-        super(vista_manutenzioni, self).__init__()
+        super(vista_lista_manutenzioni, self).__init__()
 
         # Attributi
         self.controller_elenco_manutenzioni = controller_elenco_manutenzioni()
