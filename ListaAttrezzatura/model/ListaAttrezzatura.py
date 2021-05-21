@@ -11,6 +11,7 @@ class lista_attrezzatura:
     def __init__(self):
         self.lista_attrezzatura = []
         self.leggi_dati()
+        self.elimina_prenotazione_scadute()
 
     def aggiungi_attrezzatura(self, attrezzatura):
         self.lista_attrezzatura.append(attrezzatura)
@@ -70,7 +71,7 @@ class lista_attrezzatura:
         for attrezzo in self.lista_attrezzatura:
             oggi = date.today()
             controllare = attrezzo.get_scadenza
-            if controllare > oggi:
+            if controllare < oggi:
                 attrezzo.elimina_prenotazione()
 
 
