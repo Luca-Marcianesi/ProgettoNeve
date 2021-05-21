@@ -56,15 +56,15 @@ class vista_crea_account(QWidget):
         altezza = self.testo["Altezza"].text()
         n_scarpe = self.testo["Numero di scarpe"].text()
         try:
-            if self.controlla_informazioni1(nome, cognome, username, password, altezza, eta, n_scarpe) and self.controlla_informazioni2(altezza, eta, n_scarpe):
-                    self.controller.crea_account(nome, cognome, username, password, eta, altezza, n_scarpe)
-                    self.controller.salva_dati()
-                    self.callback()
-                    self.close()
+            if self.controlla_informazioni1(nome, cognome, username, password, altezza, eta,n_scarpe) and self.controlla_informazioni2(altezza, eta, n_scarpe):
+                self.controller.crea_account(nome, cognome, username, password, eta, altezza, n_scarpe)
+                self.controller.salva_dati()
+                self.callback()
+                self.close()
         except ValueError:
-            QMessageBox.critical(self, 'Errore!', 'Hai inserito delle informazioni non valide!', QMessageBox.Ok, QMessageBox.Ok)
+                QMessageBox.critical(self, 'Errore!', 'Hai inserito delle informazioni non valide!', QMessageBox.Ok, QMessageBox.Ok)
         except:
-            QMessageBox.critical(self, 'Errore!', 'Qualcosa è andato storto, riprova più tardi.', QMessageBox.Ok, QMessageBox.Ok)
+                QMessageBox.critical(self, 'Errore!', 'Qualcosa è andato storto, riprova più tardi.', QMessageBox.Ok, QMessageBox.Ok)
 
 
     def indietro(self):
@@ -79,14 +79,14 @@ class vista_crea_account(QWidget):
         palette.setBrush(10, QBrush(img))
         self.setPalette(palette)
 
-    def controlla_informazioni1(self, altezza, eta, numero_scarpe, nome, cognome, password, username):
+    def controlla_informazioni1(self, nome, cognome, username, password, altezza, eta, numero_scarpe):
         if self.controller.controlla_username(username) != True:
-            if nome != "" and cognome != "" and username != "" and password != "" and eta != "" and altezza != "" and numero_scarpe != "":
+            if nome != "" and cognome != "" and username != "" and password != "" and altezza != "" and eta != "" and numero_scarpe != "":
                 return True
             else:
                 QMessageBox.critical(self, 'Errore', 'Per favore, inserisci tutte le informazioni richieste',QMessageBox.Ok, QMessageBox.Ok)
                 return False
-        QMessageBox.critical(self, 'Errore', 'Username già in uso',QMessageBox.Ok, QMessageBox.Ok)
+        QMessageBox.critical(self, 'Errore', 'Mi dispiace, questo username è già in uso!',QMessageBox.Ok, QMessageBox.Ok)
         return False
 
 
