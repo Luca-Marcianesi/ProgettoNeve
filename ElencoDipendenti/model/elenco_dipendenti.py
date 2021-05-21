@@ -14,12 +14,8 @@ class elenco_dipendenti:
     def aggiungi_dipendente(self, dipendente):
         self.elenco.append(dipendente)
 
-    def rimuovi_dipendente(self, nome, cognome):
-        for dipendente in self.elenco:
-            if dipendente.nome == nome and dipendente.cognome == cognome:
-                self.elenco.remove(dipendente)
-            else:
-                return "Dipendente non trovato"
+    def rimuovi_dipendente(self, dipendente):
+        self.elenco.remove(dipendente)
 
 
     def get_dipendente(self, nome, cognome):
@@ -31,6 +27,12 @@ class elenco_dipendenti:
 
     def get_lista_elenco_dipendenti(self):
         return self.elenco
+
+    def get_lista_elenco_dipendenti_str(self):
+        elenco =""
+        for dipendente in self.elenco:
+            elenco = elenco + dipendente.nome +"\n"
+        return elenco
 
 
     def salva_dati(self):

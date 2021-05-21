@@ -1,3 +1,5 @@
+from functools import partial
+
 from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QPalette, QImage, QBrush, QFont, QStandardItem, QStandardItemModel
 from PyQt5.QtWidgets import QVBoxLayout, QHBoxLayout, QDesktopWidget, QLabel, QSpacerItem, QSizePolicy, QWidget, \
@@ -95,18 +97,10 @@ class vista_elenco_dipendenti(QWidget):
         pulsante_aggiungi.setFixedSize(250, 100)
         pulsante_aggiungi.clicked.connect(self.call_aggiungi_dipendente)
 
-        pulsante_elimina = QPushButton("Elimina\nDipendente")
-        pulsante_elimina.setFont(QFont('Times New Roman', 20, 100, True))
-        pulsante_elimina.setStyleSheet('QPushButton {background-color: orange; color: black;}')
-        pulsante_elimina.setFixedSize(250, 100)
-        #pulsante_elimina.clicked.connect(self.indietro)
-
 
         self.layout_verticale2.addWidget(pulsante_apri)
         self.layout_verticale2.addSpacerItem(QSpacerItem(0, 50))
         self.layout_verticale2.addWidget(pulsante_aggiungi)
-        self.layout_verticale2.addSpacerItem(QSpacerItem(0, 50))
-        self.layout_verticale2.addWidget(pulsante_elimina)
         self.layout_verticale2.addSpacerItem(QSpacerItem(0, 50))
         self.layout_verticale2.addWidget(pulsante_indietro)
         self.layout_orizzontale.addLayout(self.layout_verticale2)
@@ -116,7 +110,8 @@ class vista_elenco_dipendenti(QWidget):
             selezionato = self.vista_lista.selectedIndexes()[0].row()
             lista = self.controller_gestione_dipendenti.get_lista_elenco_dipendenti()
             dipendente = lista[selezionato]
-            self.vista_informazioni = vista_informazioni(dipendente)
+            self.vista_informazioni = vista_informazioni(dipendente,self.controller_gestione_dipendenti.rimuovi,
+                                                         self.controller_gestione_dipendenti.salva_dati)
             self.vista_informazioni.show()
         except IndexError:
             QMessageBox.information(self, 'Attenzione!', 'Non hai selezionato nessun dipendente da visualizzare.', QMessageBox.Ok, QMessageBox.Ok)
@@ -124,7 +119,6 @@ class vista_elenco_dipendenti(QWidget):
             QMessageBox.critical(self, 'Errore!', 'Qualcosa è andato storto, riprova più tardi.', QMessageBox.Ok, QMessageBox.Ok)
 
     def call_aggiungi_dipendente(self):
-
         self.vista_aggiungi.show()
         self.close()
 
@@ -133,11 +127,15 @@ class vista_elenco_dipendenti(QWidget):
         self.close()
 
 class vista_informazioni(QWidget):
-    def __init__(self, dipendente):
+    def __init__(self, dipendente,rimuovi,salva_dati):
         super(vista_informazioni, self).__init__()
         self.layout_verticale = QVBoxLayout()
-        self.controller_dipendente = controller_dipendente(dipendente)
+        self.layout_orizzontale = QHBoxLayout()
+        self.dipendente = dipendente
+        self.controller_dipendente = controller_dipendente(self.dipendente)
         self.setFixedSize(400, 300)
+        self.rimuovi = rimuovi
+        self.salva_dati = salva_dati
 
         label = QLabel(self.controller_dipendente.get_dipendente_str_x_elenco())
         label.setFont(QFont('Times New Roman', 20))
@@ -146,9 +144,14 @@ class vista_informazioni(QWidget):
         bottone = QPushButton("Chiudi")
         bottone.clicked.connect(self.call_chiudi)
 
+        bottone_elimina = QPushButton("Elimina")
+        bottone_elimina.clicked.connect(self.call_elimina)
+
         self.layout_verticale.addWidget(label)
         self.layout_verticale.addSpacerItem(QSpacerItem(150, 0, QSizePolicy.Fixed, QSizePolicy.Fixed))
-        self.layout_verticale.addWidget(bottone)
+        self.layout_orizzontale.addWidget(bottone)
+        self.layout_orizzontale.addWidget(bottone_elimina)
+        self.layout_verticale.addLayout(self.layout_orizzontale)
 
         self.setLayout(self.layout_verticale)
         self.setWindowTitle('Informazioni dipendente')
@@ -156,6 +159,12 @@ class vista_informazioni(QWidget):
 
     def call_chiudi(self):
         self.close()
+
+    def call_elimina(self):
+        self.rimuovi(self.dipendente)
+        self.salva_dati()
+        self.close()
+
 
 class vista_aggiungi_dipendente(QWidget):
 
