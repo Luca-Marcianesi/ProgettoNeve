@@ -77,15 +77,36 @@ class vista_elenco_dipendenti(QWidget):
         pulsante_apri.setStyleSheet('QPushButton {background-color: orange; color: black;}')
         pulsante_apri.clicked.connect(self.dipendente_selezionato)
         pulsante_apri.setFixedSize(250, 100)
+
+
+
+
         pulsante_indietro = QPushButton("Indietro")
         pulsante_indietro.setFont(QFont('Times New Roman', 20, 100, True))
         pulsante_indietro.setStyleSheet('QPushButton {background-color: orange; color: black;}')
         pulsante_indietro.setFixedSize(250, 100)
         pulsante_indietro.clicked.connect(self.indietro)
+
+        pulsante_aggiungi = QPushButton("Aggiungi\nDipendente")
+        pulsante_aggiungi.setFont(QFont('Times New Roman', 20, 100, True))
+        pulsante_aggiungi.setStyleSheet('QPushButton {background-color: orange; color: black;}')
+        pulsante_aggiungi.setFixedSize(250, 100)
+        #pulsante_aggiungi.clicked.connect(self.indietro)
+
+        pulsante_elimina = QPushButton("Elimina\nDipendente")
+        pulsante_elimina.setFont(QFont('Times New Roman', 20, 100, True))
+        pulsante_elimina.setStyleSheet('QPushButton {background-color: orange; color: black;}')
+        pulsante_elimina.setFixedSize(250, 100)
+        #pulsante_elimina.clicked.connect(self.indietro)
+
+
         self.layout_verticale2.addWidget(pulsante_apri)
         self.layout_verticale2.addSpacerItem(QSpacerItem(0, 50))
+        self.layout_verticale2.addWidget(pulsante_aggiungi)
+        self.layout_verticale2.addSpacerItem(QSpacerItem(0, 50))
+        self.layout_verticale2.addWidget(pulsante_elimina)
+        self.layout_verticale2.addSpacerItem(QSpacerItem(0, 50))
         self.layout_verticale2.addWidget(pulsante_indietro)
-        self.layout_verticale2.addSpacerItem(QSpacerItem(0, 500))
         self.layout_orizzontale.addLayout(self.layout_verticale2)
 
     def dipendente_selezionato(self):
