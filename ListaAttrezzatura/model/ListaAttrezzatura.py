@@ -69,10 +69,11 @@ class lista_attrezzatura:
 
     def elimina_prenotazione_scadute(self):
         for attrezzo in self.lista_attrezzatura:
-            oggi = date.today()
-            controllare = attrezzo.get_scadenza
-            if controllare < oggi:
-                attrezzo.elimina_prenotazione()
+            if attrezzo.get_scadenza() != None:
+                oggi = date.today()
+                controllare = attrezzo.get_scadenza()
+                if controllare < oggi:
+                    attrezzo.elimina_prenotazione()
 
 
 
