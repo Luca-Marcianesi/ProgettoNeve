@@ -30,7 +30,12 @@ class vista_lista_piste_proprietario(QWidget):
         # Spaziatura
         self.layout_verticale1.addSpacerItem(QSpacerItem(0, 20, QSizePolicy.Fixed, QSizePolicy.Fixed))
         # Pulsanti Apri
-        self.show_pulsantiera_piste()
+
+        self.layout_piste = QGridLayout()
+
+        self.aggiorna()
+
+        self.layout_verticale1.addLayout(self.layout_piste)
 
 
         self.layout_verticale1.addLayout(self.layout_orizzontale1)
@@ -41,14 +46,7 @@ class vista_lista_piste_proprietario(QWidget):
         self.setWindowTitle('Lista Piste')
 
 
-    def call_vista_pista_proprietario(self, pista):
-        self.vista_pista_proprietario = vista_pista_proprietario(pista, self.showFullScreen,self.controller.salva_dati)
-        self.vista_pista_proprietario.showFullScreen()
-        self.close()
 
-    def indietro(self):
-        self.callback()
-        self.close()
 
     def show_background(self):
         # Sfondo
@@ -92,7 +90,7 @@ class vista_lista_piste_proprietario(QWidget):
         self.layout_verticale1.addLayout(self.layout_orizzontale1)
 
 
-    def show_pulsantiera_piste(self):
+    def aggiorna(self):
         # Punsante indietro
         layout_piste = QGridLayout()
         riga = 0
@@ -106,16 +104,22 @@ class vista_lista_piste_proprietario(QWidget):
                 bottone.setStyleSheet('QPushButton {background-color: lightBlue; color: green;}')
             else:
                 bottone.setStyleSheet('QPushButton {background-color: lightBlue; color: red;}')
-            bottone.clicked.connect(partial(self.call_vista_pista, pista))
+            bottone.clicked.connect(partial(self.call_vista_pista_proprietario, pista))
             if colonna == 5 or colonna == 10:
                 colonna = 0
                 riga += 1
-            layout_piste.addWidget(bottone, riga, colonna)
+            self.layout_piste.addWidget(bottone, riga, colonna)
             colonna += 1
             indice_pista += 1
-        self.layout_verticale1.addLayout(layout_piste)
 
-    def call_vista_pista(self, pista):
-        self.vista_pista = vista_pista_proprietario(pista, self.showFullScreen)
-        self.vista_pista.showFullScreen()
+    def call_vista_pista_proprietario(self, pista):
+        self.vista_pista_proprietario = vista_pista_proprietario(pista,
+                                                                 self.showFullScreen,
+                                                                 self.controller.salva_dati,
+                                                                 self.aggiorna)
+        self.vista_pista_proprietario.showFullScreen()
+        self.close()
+
+    def indietro(self):
+        self.callback()
         self.close()

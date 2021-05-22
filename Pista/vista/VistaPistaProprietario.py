@@ -8,11 +8,12 @@ from Pista.controller.controller_pista import controller_pista
 
 
 class vista_pista_proprietario(QWidget):
-    def __init__(self, pista, callback,salva_lista_piste):
+    def __init__(self, pista, callback,salva_lista_piste,aggiorna_lista):
         super(vista_pista_proprietario, self).__init__()
 
         # Attributi
         self.callback = callback
+        self.aggiona_lista = aggiorna_lista
         self.controller_pista = controller_pista(pista)
         self.layout_verticale = QVBoxLayout()
         self.layout_orizzontale = QHBoxLayout()
@@ -80,9 +81,8 @@ class vista_pista_proprietario(QWidget):
         self.layout_verticale.addLayout(self.layout_orizzontale)
 
     def call_modifica(self):
-        self.vista_cambia_stato = vista_cambia_stato(self.controller_pista,self.salva_lista_piste,self.showFullScreen)
+        self.vista_cambia_stato = vista_cambia_stato(self.controller_pista,self.salva_lista_piste,self.showFullScreen,self.aggiona_lista)
         self.vista_cambia_stato.show()
-        self.close()
 
     def indietro(self):
         self.callback()
@@ -90,10 +90,11 @@ class vista_pista_proprietario(QWidget):
 
 class vista_cambia_stato(QWidget):
 
-    def __init__(self,controller_pista,salva_lista_piste,callback):
+    def __init__(self,controller_pista,salva_lista_piste,callback,aggiorna_lista):
         super(vista_cambia_stato, self).__init__()
 
         self.callback = callback
+        self.aggiorna_lista = aggiorna_lista
         self.salva_lista_piste = salva_lista_piste
         self.controller_pista = controller_pista
         self.layout_verticale = QVBoxLayout()
@@ -134,6 +135,7 @@ class vista_cambia_stato(QWidget):
     def call_modifica_stato(self,stato):
         self.controller_pista.modifica_stato_pista(stato)
         self.salva_lista_piste()
+        self.aggiorna_lista()
         self.callback()
         self.close()
 
