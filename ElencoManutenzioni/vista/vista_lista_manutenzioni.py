@@ -85,10 +85,7 @@ class vista_lista_manutenzioni(QWidget):
         pulsante_apri.setFont(QFont('Times New Roman', 20, 100, True))
         pulsante_apri.setStyleSheet('QPushButton {background-color: orange; color: black;}')
         pulsante_apri.setFixedSize(250, 100)
-        azione = QAction("prova", self)
-        azione.triggered.connect(self.onMyToolBarButtonClick)
         pulsante_apri.setCheckable(True)
-        pulsante_apri.addAction(azione)
         # pulsante_apri.clicked.connect(self.attrezzatura_selezionata)
         self.layout_verticale2.addWidget(pulsante_apri)
 
@@ -101,15 +98,3 @@ class vista_lista_manutenzioni(QWidget):
         pulsante_indietro.clicked.connect(self.indietro)
         self.layout_verticale2.addWidget(pulsante_indietro)
         self.layout_verticale2.addSpacerItem(QSpacerItem(0, 50))
-
-    def onMyToolBarButtonClick(self, s):
-        print("click", s)
-    """
-    def attrezzatura_selezionata(self):
-        selezionata = self.vista_lista.selectedIndexes()[0].row()
-        lista = self.controller_lista_attrezzatura.get_lista_filtrata()
-        attrezzatura = lista[selezionata]
-        self.vista_attrezzatura = vista_attrezzatura(self.showFullScreen, attrezzatura, self.controller_lista_attrezzatura.prenota_attrezzatura)
-        self.vista_attrezzatura.showFullScreen()
-        self.close()
-    """
