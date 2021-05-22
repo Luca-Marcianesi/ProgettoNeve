@@ -73,7 +73,9 @@ class vista_lista_piste_proprietario(QWidget):
         apri_tutte_le_piste.setStyleSheet('QPushButton {background-color: orange;}')
         apri_tutte_le_piste.setFont(QFont('Times New Roman', 15, 50, True))
         apri_tutte_le_piste.setFixedSize(100, 100)
-        #apri_tutte_le_piste.clicked.connect(self.indietro)
+        apri_tutte_le_piste.clicked.connect(self.call_apri_tutte)
+
+
         self.layout_orizzontale1.addSpacerItem(QSpacerItem(5, 0, QSizePolicy.Fixed, QSizePolicy.Fixed))
         self.layout_orizzontale1.addWidget(apri_tutte_le_piste)
 
@@ -82,7 +84,10 @@ class vista_lista_piste_proprietario(QWidget):
         chiudi_tutte_le_piste.setStyleSheet('QPushButton {background-color: orange;}')
         chiudi_tutte_le_piste.setFont(QFont('Times New Roman', 15, 50, True))
         chiudi_tutte_le_piste.setFixedSize(100, 100)
-        # apri_tutte_le_piste.clicked.connect(self.indietro)
+        chiudi_tutte_le_piste.clicked.connect(self.call_chiudi_tutte)
+
+
+
         self.layout_orizzontale1.addSpacerItem(QSpacerItem(5, 0, QSizePolicy.Fixed, QSizePolicy.Fixed))
         self.layout_orizzontale1.addWidget(chiudi_tutte_le_piste)
         self.layout_orizzontale1.addSpacerItem(QSpacerItem(5000, 0, QSizePolicy.Fixed, QSizePolicy.Fixed))
@@ -119,6 +124,16 @@ class vista_lista_piste_proprietario(QWidget):
                                                                  self.aggiorna)
         self.vista_pista_proprietario.showFullScreen()
         self.close()
+
+    def call_apri_tutte(self):
+        self.controller.set_stato_tutte("Aperta")
+        self.controller.salva_dati()
+        self.aggiorna()
+
+    def call_chiudi_tutte(self):
+        self.controller.set_stato_tutte("Chiusa")
+        self.controller.salva_dati()
+        self.aggiorna()
 
     def indietro(self):
         self.callback()

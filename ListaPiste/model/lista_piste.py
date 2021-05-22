@@ -36,6 +36,10 @@ class lista_piste:
     def get_lista(self):
         return self.lista_piste
 
+    def set_stato_tutte(self,stato):
+        for pista in self.lista_piste:
+            pista.set_stato(stato)
+
     def salva_dati(self):
         with open('ListaPiste/data/lista_piste.pickle', 'wb') as file:
             pickle.dump(self.lista_piste, file, pickle.HIGHEST_PROTOCOL)
