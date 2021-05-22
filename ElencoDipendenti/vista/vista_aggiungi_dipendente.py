@@ -8,14 +8,20 @@ class vista_aggiungi_dipendente(QWidget):
 
     def __init__(self, callback, controller):
         super(vista_aggiungi_dipendente, self).__init__()
+
         self.callback = callback
         self.controller = controller
-        self.testo = {}
-        self.setFixedWidth(800)
-        self.setFixedHeight(600)
+
+        # Imposta le dimensioni della finestra
+        self.setFixedSize(800,600)
+
+        # Layout
         self.v_layout = QVBoxLayout()
         self.h_layout = QHBoxLayout()
 
+        self.testo = {}
+
+        # Mostra lo sfondo
         self.show_background()
 
         self.casella_testo("Nome")
@@ -55,6 +61,7 @@ class vista_aggiungi_dipendente(QWidget):
             self.callback()
             self.close()
 
+    # Mostra lo sfondo
     def show_background(self):
         # Sfondo
         back_img = QImage("Data/Immagini/azzurro.jpg")
@@ -63,12 +70,15 @@ class vista_aggiungi_dipendente(QWidget):
         palette.setBrush(10, QBrush(img))
         self.setPalette(palette)
 
+    # Controlla che la caselle di testo siano state riempite
     def controlla_informazioni1(self, nome, cognome, numero_di_telefono):
         if nome != "" and cognome != "" and numero_di_telefono != "" :
              return True
         else:
             QMessageBox.critical(self, 'Errore', 'Per favore, inserisci tutte le informazioni richieste',QMessageBox.Ok, QMessageBox.Ok)
             return False
+
+    # Chiamata indietro
     def indietro(self):
         self.callback()
         self.close()
