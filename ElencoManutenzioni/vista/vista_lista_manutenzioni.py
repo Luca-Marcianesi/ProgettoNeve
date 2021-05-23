@@ -3,6 +3,7 @@ from PyQt5.QtGui import QFont, QBrush, QPalette, QImage, QStandardItemModel, QSt
 from PyQt5.QtWidgets import QWidget, QHBoxLayout, QVBoxLayout, QLabel, QSpacerItem, \
     QSizePolicy, QListView, QPushButton, QDesktopWidget, QAction, QMessageBox
 from ElencoManutenzioni.controller.controlle_elenco_manutenzioni import controller_elenco_manutenzioni
+from datetime import  timedelta , datetime,date,time
 
 
 class vista_lista_manutenzioni(QWidget):
@@ -25,20 +26,10 @@ class vista_lista_manutenzioni(QWidget):
 
         # Lista
         self.vista_elenco = QListView()
-        self.vista_elenco.setStyleSheet("background-color: cyan")
-        vista_lista_model = QStandardItemModel(self.vista_elenco)
-        for manutenzione in self.controller_elenco_manutenzioni.get_elenco_manutenzioni():
-            item = QStandardItem()
-            scadenza = manutenzione.get_prossima_scadenza()
-            nome = manutenzione.get_nome()
-            stringa = str(nome) + "  " + str(scadenza)
-            item.setText(stringa)
-            item.setEditable(False)
-            item.setFont(QFont('Times New Roman', 25, 100))
-            item.setTextAlignment(Qt.AlignCenter)
-            vista_lista_model.appendRow(item)
-        self.vista_elenco.setModel(vista_lista_model)
-        self.layout_orizzontale.addWidget(self.vista_elenco)
+
+        vista_lista_model = self.aggiorna()
+
+        self.layout_orizzontale.addWidget(vista_lista_model)
 
         #self.layout_orizzontale.addSpacerItem(QSpacerItem(400, 0))
 
@@ -55,6 +46,27 @@ class vista_lista_manutenzioni(QWidget):
         # Impostazione layout totale
         self.setLayout(self.layout_verticale1)
         self.setWindowTitle('Elenco Manutenzioni')
+
+    def aggiorna(self):
+
+        vista_lista_model = QStandardItemModel(self.vista_elenco)
+        for manutenzione in self.controller_elenco_manutenzioni.get_elenco_manutenzioni():
+            item = QStandardItem()
+            oggi = date.today()
+            scadenza = manutenzione.get_prossima_scadenza()
+            if oggi > scadenza:
+                self.vista_elenco.setStyleSheet("background-color: cyan ; color: red")
+            else :
+                self.vista_elenco.setStyleSheet("background-color: cyan ; color: green")
+            nome = manutenzione.get_nome()
+            stringa = str(nome) + "  " + str(scadenza)
+            item.setText(stringa)
+            item.setEditable(False)
+            item.setFont(QFont('Times New Roman', 25, 100))
+            item.setTextAlignment(Qt.AlignCenter)
+            vista_lista_model.appendRow(item)
+        self.vista_elenco.setModel(vista_lista_model)
+        return self.vista_elenco
 
     def indietro(self):
         self.callback()
@@ -81,20 +93,22 @@ class vista_lista_manutenzioni(QWidget):
 
     def show_pulsantiera(self):
 
-        pulsante_apri = QPushButton("Apri")
-        pulsante_apri.setFont(QFont('Times New Roman', 20, 100, True))
-        pulsante_apri.setStyleSheet('QPushButton {background-color: orange; color: black;}')
-        pulsante_apri.setFixedSize(250, 100)
+        pulsante_apri = self.pulsante("Apri",self.call_apri)
         pulsante_apri.setCheckable(True)
-        # pulsante_apri.clicked.connect(self.attrezzatura_selezionata)
         self.layout_verticale2.addWidget(pulsante_apri)
 
-
         # Punsante indietro
-        pulsante_indietro = QPushButton("Indietro")
-        pulsante_indietro.setFont(QFont('Times New Roman', 20, 100, True))
-        pulsante_indietro.setStyleSheet('QPushButton {background-color: orange; color: black;}')
-        pulsante_indietro.setFixedSize(250, 100)
-        pulsante_indietro.clicked.connect(self.indietro)
+        pulsante_indietro = self.pulsante("Indietro",self.indietro)
         self.layout_verticale2.addWidget(pulsante_indietro)
         self.layout_verticale2.addSpacerItem(QSpacerItem(0, 50))
+
+    def pulsante(self,nome,call):
+        pulsante = QPushButton(nome)
+        pulsante.setFont(QFont('Times New Roman', 20, 100, True))
+        pulsante.setStyleSheet('QPushButton {background-color: orange; color: black;}')
+        pulsante.setFixedSize(250, 100)
+        pulsante.clicked.connect(call)
+        return pulsante
+
+    def call_apri(self):
+        pass
