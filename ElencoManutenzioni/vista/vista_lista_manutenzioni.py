@@ -3,8 +3,8 @@ from PyQt5.QtGui import QFont, QBrush, QPalette, QImage, QStandardItemModel, QSt
 from PyQt5.QtWidgets import QWidget, QHBoxLayout, QVBoxLayout, QLabel, QSpacerItem, \
     QSizePolicy, QListView, QPushButton, QDesktopWidget, QAction, QMessageBox
 from ElencoManutenzioni.controller.controlle_elenco_manutenzioni import controller_elenco_manutenzioni
-from datetime import  timedelta , datetime,date,time
-
+from datetime import date
+from Manutenzioni.controller.controller_manutenzione import controller_manutenzione
 
 class vista_lista_manutenzioni(QWidget):
 
@@ -17,6 +17,8 @@ class vista_lista_manutenzioni(QWidget):
         self.layout_verticale1 = QVBoxLayout()
         self.layout_orizzontale = QHBoxLayout()
         self.layout_verticale2 = QVBoxLayout()
+
+
 
         # Sfondo
         self.show_background("ELENCO MANUTENZIONI")
@@ -93,7 +95,7 @@ class vista_lista_manutenzioni(QWidget):
 
     def show_pulsantiera(self):
 
-        pulsante_apri = self.pulsante("Apri",self.call_apri)
+        pulsante_apri = self.pulsante("Apri",self.manutenzione_selezionata)
         pulsante_apri.setCheckable(True)
         self.layout_verticale2.addWidget(pulsante_apri)
 
@@ -109,6 +111,20 @@ class vista_lista_manutenzioni(QWidget):
         pulsante.setFixedSize(250, 100)
         pulsante.clicked.connect(call)
         return pulsante
+
+    def manutenzione_selezionata(self):
+        try:
+            selezionata = self.vista_elenco.selectedIndexes()[0].row()
+            lista = self.controller_elenco_manutenzioni.get_elenco_manutenzioni()
+            manutenzione = lista[selezionata]
+            self.vista_informazioni_manutenzione = vista_manutenzione(manutenzione)
+            self.vista_informazioni_manutenzione.show()
+        except IndexError:
+            QMessageBox.information(self, 'Attenzione!', 'Non hai selezionato nessuna manutenzione da visualizzare.',
+                                    QMessageBox.Ok, QMessageBox.Ok)
+        except:
+            QMessageBox.critical(self, 'Errore!', 'Qualcosa è andato storto, riprova più tardi.',
+                                 QMessageBox.Ok, QMessageBox.Ok)
 
     def call_apri(self):
         pass
