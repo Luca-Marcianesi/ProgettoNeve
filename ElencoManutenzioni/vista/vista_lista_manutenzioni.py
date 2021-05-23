@@ -97,8 +97,7 @@ class vista_lista_manutenzioni(QWidget):
 
     def show_pulsantiera(self):
 
-        pulsante_apri = self.pulsante("Apri",self.call_apri)
-        pulsante_apri.setCheckable(True)
+        pulsante_apri = self.pulsante("Apri",self.manutenzione_selezionata)
         self.layout_verticale2.addWidget(pulsante_apri)
 
         # Punsante indietro
@@ -119,7 +118,9 @@ class vista_lista_manutenzioni(QWidget):
             selezionata = self.vista_elenco.selectedIndexes()[0].row()
             lista = self.controller_elenco_manutenzioni.get_elenco_manutenzioni()
             manutenzione = lista[selezionata]
-            return manutenzione
+            self.vista_informazioni_manutenzione = vista_manutenzione(manutenzione)
+            self.vista_informazioni_manutenzione.show()
+
         except IndexError:
             QMessageBox.information(self, 'Attenzione!', 'Non hai selezionato nessuna manutenzione da visualizzare.',
                                     QMessageBox.Ok, QMessageBox.Ok)
@@ -127,6 +128,3 @@ class vista_lista_manutenzioni(QWidget):
             QMessageBox.critical(self, 'Errore!', 'Qualcosa è andato storto, riprova più tardi.',
                                  QMessageBox.Ok, QMessageBox.Ok)
 
-    def call_apri(self):
-        self.vista_informazioni_manutenzione = vista_manutenzione(self.manutenzione_selezionata)
-        self.vista_informazioni_manutenzione.show()
