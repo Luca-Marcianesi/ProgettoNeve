@@ -1,8 +1,12 @@
+from functools import partial
+
 from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QFont, QBrush, QPalette, QImage, QStandardItemModel, QStandardItem
 from PyQt5.QtWidgets import QWidget, QHBoxLayout, QVBoxLayout, QLabel, QSpacerItem, \
     QSizePolicy, QListView, QPushButton, QDesktopWidget, QAction, QMessageBox
 from ElencoManutenzioni.controller.controlle_elenco_manutenzioni import controller_elenco_manutenzioni
+
+from Manutenzioni.controller.controller_manutenzione import controller_manutenzione
 
 
 class vista_lista_manutenzioni(QWidget):
@@ -13,6 +17,7 @@ class vista_lista_manutenzioni(QWidget):
         # Attributi
         self.controller_elenco_manutenzioni = controller_elenco_manutenzioni()
         self.callback = callback
+        self.vista_informazioni_manutenzione = vista_manutenzione
         self.layout_verticale1 = QVBoxLayout()
         self.layout_orizzontale = QHBoxLayout()
         self.layout_verticale2 = QVBoxLayout()
@@ -85,8 +90,7 @@ class vista_lista_manutenzioni(QWidget):
         pulsante_apri.setFont(QFont('Times New Roman', 20, 100, True))
         pulsante_apri.setStyleSheet('QPushButton {background-color: orange; color: black;}')
         pulsante_apri.setFixedSize(250, 100)
-        pulsante_apri.setCheckable(True)
-        # pulsante_apri.clicked.connect(self.attrezzatura_selezionata)
+        pulsante_apri.clicked.connect(self.manutenzione_selezionata)
         self.layout_verticale2.addWidget(pulsante_apri)
 
 
@@ -98,3 +102,49 @@ class vista_lista_manutenzioni(QWidget):
         pulsante_indietro.clicked.connect(self.indietro)
         self.layout_verticale2.addWidget(pulsante_indietro)
         self.layout_verticale2.addSpacerItem(QSpacerItem(0, 50))
+
+    def manutenzione_selezionata(self):
+        try:
+            selezionata = self.vista_elenco.selectedIndexes()[0].row()
+            lista = self.controller_elenco_manutenzioni.get_elenco_manutenzioni()
+            manutenzione = lista[selezionata]
+            self.vista_informazioni_manutenzione = vista_manutenzione(manutenzione)
+            self.vista_informazioni_manutenzione.show()
+        except IndexError:
+            QMessageBox.information(self, 'Attenzione!', 'Non hai selezionato nessuna manutenzione da visualizzare.',
+                                    QMessageBox.Ok, QMessageBox.Ok)
+        except:
+            QMessageBox.critical(self, 'Errore!', 'Qualcosa è andato storto, riprova più tardi.',
+                                 QMessageBox.Ok, QMessageBox.Ok)
+
+
+class vista_manutenzione(QWidget):
+    def __init__(self, manutenzione):
+        super(vista_manutenzione, self).__init__()
+
+        # Attributi
+        self.controller_manutenzione = controller_manutenzione(manutenzione)
+        self.layout_orizzontale = QHBoxLayout()
+        self.layout_verticale = QVBoxLayout()
+        self.setFixedSize(550, 280)
+
+        # Visualizzazione manutenzione
+        label = QLabel(self.controller_manutenzione.visualizza_manutenzione())
+        label.setFont(QFont('Times New Roman', 20))
+        label.setAlignment(Qt.AlignCenter)
+
+        # Creazione bottone chiudi
+        bottone = QPushButton("Chiudi")
+        bottone.clicked.connect(self.call_chiudi)
+
+        self.layout_verticale.addWidget(label)
+        self.layout_verticale.addSpacerItem(QSpacerItem(150, 0, QSizePolicy.Fixed, QSizePolicy.Fixed))
+        self.layout_orizzontale.addWidget(bottone)
+        self.layout_verticale.addLayout(self.layout_orizzontale)
+
+        # Layout totale
+        self.setLayout(self.layout_verticale)
+        self.setWindowTitle("Informazioni manutenzione")
+
+    def call_chiudi(self):
+        self.close()

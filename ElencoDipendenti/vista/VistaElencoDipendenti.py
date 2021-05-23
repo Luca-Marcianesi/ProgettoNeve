@@ -126,7 +126,7 @@ class vista_elenco_dipendenti(QWidget):
             item.setEditable(False)
             item.setFont(QFont('Times New Roman', 30, 100))
             vista_lista_model.appendRow(item)
-        return  vista_lista_model
+        return vista_lista_model
 
     # Chiamata aggiungi dipendente
     def call_aggiungi_dipendente(self):
