@@ -1,13 +1,10 @@
-from functools import partial
-
 from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QFont, QBrush, QPalette, QImage, QStandardItemModel, QStandardItem
 from PyQt5.QtWidgets import QWidget, QHBoxLayout, QVBoxLayout, QLabel, QSpacerItem, \
     QSizePolicy, QListView, QPushButton, QDesktopWidget, QAction, QMessageBox
 from ElencoManutenzioni.controller.controlle_elenco_manutenzioni import controller_elenco_manutenzioni
-
+from datetime import date
 from Manutenzioni.controller.controller_manutenzione import controller_manutenzione
-
 
 class vista_lista_manutenzioni(QWidget):
 
@@ -17,10 +14,11 @@ class vista_lista_manutenzioni(QWidget):
         # Attributi
         self.controller_elenco_manutenzioni = controller_elenco_manutenzioni()
         self.callback = callback
-        self.vista_informazioni_manutenzione = vista_manutenzione
         self.layout_verticale1 = QVBoxLayout()
         self.layout_orizzontale = QHBoxLayout()
         self.layout_verticale2 = QVBoxLayout()
+
+
 
         # Sfondo
         self.show_background("ELENCO MANUTENZIONI")
@@ -30,20 +28,10 @@ class vista_lista_manutenzioni(QWidget):
 
         # Lista
         self.vista_elenco = QListView()
-        self.vista_elenco.setStyleSheet("background-color: cyan")
-        vista_lista_model = QStandardItemModel(self.vista_elenco)
-        for manutenzione in self.controller_elenco_manutenzioni.get_elenco_manutenzioni():
-            item = QStandardItem()
-            scadenza = manutenzione.get_prossima_scadenza()
-            nome = manutenzione.get_nome()
-            stringa = str(nome) + "  " + str(scadenza)
-            item.setText(stringa)
-            item.setEditable(False)
-            item.setFont(QFont('Times New Roman', 25, 100))
-            item.setTextAlignment(Qt.AlignCenter)
-            vista_lista_model.appendRow(item)
-        self.vista_elenco.setModel(vista_lista_model)
-        self.layout_orizzontale.addWidget(self.vista_elenco)
+
+        vista_lista_model = self.aggiorna()
+
+        self.layout_orizzontale.addWidget(vista_lista_model)
 
         #self.layout_orizzontale.addSpacerItem(QSpacerItem(400, 0))
 
@@ -60,6 +48,27 @@ class vista_lista_manutenzioni(QWidget):
         # Impostazione layout totale
         self.setLayout(self.layout_verticale1)
         self.setWindowTitle('Elenco Manutenzioni')
+
+    def aggiorna(self):
+
+        vista_lista_model = QStandardItemModel(self.vista_elenco)
+        for manutenzione in self.controller_elenco_manutenzioni.get_elenco_manutenzioni():
+            item = QStandardItem()
+            oggi = date.today()
+            scadenza = manutenzione.get_prossima_scadenza()
+            if oggi > scadenza:
+                self.vista_elenco.setStyleSheet("background-color: cyan ; color: red")
+            else :
+                self.vista_elenco.setStyleSheet("background-color: cyan ; color: green")
+            nome = manutenzione.get_nome()
+            stringa = str(nome) + "  " + str(scadenza)
+            item.setText(stringa)
+            item.setEditable(False)
+            item.setFont(QFont('Times New Roman', 25, 100))
+            item.setTextAlignment(Qt.AlignCenter)
+            vista_lista_model.appendRow(item)
+        self.vista_elenco.setModel(vista_lista_model)
+        return self.vista_elenco
 
     def indietro(self):
         self.callback()
@@ -86,22 +95,22 @@ class vista_lista_manutenzioni(QWidget):
 
     def show_pulsantiera(self):
 
-        pulsante_apri = QPushButton("Apri")
-        pulsante_apri.setFont(QFont('Times New Roman', 20, 100, True))
-        pulsante_apri.setStyleSheet('QPushButton {background-color: orange; color: black;}')
-        pulsante_apri.setFixedSize(250, 100)
-        pulsante_apri.clicked.connect(self.manutenzione_selezionata)
+        pulsante_apri = self.pulsante("Apri",self.manutenzione_selezionata)
+        pulsante_apri.setCheckable(True)
         self.layout_verticale2.addWidget(pulsante_apri)
 
-
         # Punsante indietro
-        pulsante_indietro = QPushButton("Indietro")
-        pulsante_indietro.setFont(QFont('Times New Roman', 20, 100, True))
-        pulsante_indietro.setStyleSheet('QPushButton {background-color: orange; color: black;}')
-        pulsante_indietro.setFixedSize(250, 100)
-        pulsante_indietro.clicked.connect(self.indietro)
+        pulsante_indietro = self.pulsante("Indietro",self.indietro)
         self.layout_verticale2.addWidget(pulsante_indietro)
         self.layout_verticale2.addSpacerItem(QSpacerItem(0, 50))
+
+    def pulsante(self,nome,call):
+        pulsante = QPushButton(nome)
+        pulsante.setFont(QFont('Times New Roman', 20, 100, True))
+        pulsante.setStyleSheet('QPushButton {background-color: orange; color: black;}')
+        pulsante.setFixedSize(250, 100)
+        pulsante.clicked.connect(call)
+        return pulsante
 
     def manutenzione_selezionata(self):
         try:
@@ -117,34 +126,5 @@ class vista_lista_manutenzioni(QWidget):
             QMessageBox.critical(self, 'Errore!', 'Qualcosa è andato storto, riprova più tardi.',
                                  QMessageBox.Ok, QMessageBox.Ok)
 
-
-class vista_manutenzione(QWidget):
-    def __init__(self, manutenzione):
-        super(vista_manutenzione, self).__init__()
-
-        # Attributi
-        self.controller_manutenzione = controller_manutenzione(manutenzione)
-        self.layout_orizzontale = QHBoxLayout()
-        self.layout_verticale = QVBoxLayout()
-        self.setFixedSize(550, 280)
-
-        # Visualizzazione manutenzione
-        label = QLabel(self.controller_manutenzione.visualizza_manutenzione())
-        label.setFont(QFont('Times New Roman', 20))
-        label.setAlignment(Qt.AlignCenter)
-
-        # Creazione bottone chiudi
-        bottone = QPushButton("Chiudi")
-        bottone.clicked.connect(self.call_chiudi)
-
-        self.layout_verticale.addWidget(label)
-        self.layout_verticale.addSpacerItem(QSpacerItem(150, 0, QSizePolicy.Fixed, QSizePolicy.Fixed))
-        self.layout_orizzontale.addWidget(bottone)
-        self.layout_verticale.addLayout(self.layout_orizzontale)
-
-        # Layout totale
-        self.setLayout(self.layout_verticale)
-        self.setWindowTitle("Informazioni manutenzione")
-
-    def call_chiudi(self):
-        self.close()
+    def call_apri(self):
+        pass

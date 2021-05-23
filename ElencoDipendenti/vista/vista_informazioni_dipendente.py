@@ -3,18 +3,22 @@ from PyQt5.QtWidgets import QSpacerItem, QSizePolicy, QPushButton, QLabel, QHBox
 from Dipendenti.controller.controller_dipendente import controller_dipendente
 from PyQt5.QtCore import Qt
 
-
 class vista_informazioni(QWidget):
 
-    def __init__(self, dipendente, rimuovi, salva_dati):
+    def __init__(self, dipendente, rimuovi, salva_dati,aggiorna):
+
         super(vista_informazioni, self).__init__()
+
+        # Layout
         self.layout_verticale = QVBoxLayout()
         self.layout_orizzontale = QHBoxLayout()
+        self.setFixedSize(400, 300)
+
         self.dipendente = dipendente
         self.controller_dipendente = controller_dipendente(self.dipendente)
-        self.setFixedSize(400, 300)
         self.rimuovi = rimuovi
         self.salva_dati = salva_dati
+        self.aggiorna = aggiorna
 
         label = QLabel(self.controller_dipendente.get_dipendente_str_x_elenco())
         label.setFont(QFont('Times New Roman', 20))
@@ -36,9 +40,12 @@ class vista_informazioni(QWidget):
         self.setWindowTitle('Informazioni dipendente')
 
     def call_chiudi(self):
+
         self.close()
 
     def call_elimina(self):
+
         self.rimuovi(self.dipendente)
+        self.aggiorna()
         self.salva_dati()
         self.close()

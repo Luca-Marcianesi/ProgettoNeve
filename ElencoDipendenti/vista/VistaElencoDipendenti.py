@@ -1,5 +1,3 @@
-from functools import partial
-
 from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QPalette, QImage, QBrush, QFont, QStandardItem, QStandardItemModel
 from PyQt5.QtWidgets import QVBoxLayout, QHBoxLayout, QDesktopWidget, QLabel, QSpacerItem, QSizePolicy, QWidget, \
@@ -11,6 +9,7 @@ from ElencoDipendenti.vista.vista_aggiungi_dipendente import vista_aggiungi_dipe
 
 
 class vista_elenco_dipendenti(QWidget):
+
     def __init__(self, callback):
         super(vista_elenco_dipendenti, self).__init__()
 
@@ -27,7 +26,8 @@ class vista_elenco_dipendenti(QWidget):
         self.callback = callback
 
         # Viste Collegate
-        self.vista_aggiungi = vista_aggiungi_dipendente(self.showFullScreen, self.controller_gestione_dipendenti)
+        self.vista_aggiungi = vista_aggiungi_dipendente(self.showFullScreen, self.controller_gestione_dipendenti,
+                                                        self.aggiorna)
 
         # Titolo e Background
         self.show_background("Elenco Dipendenti")
@@ -37,18 +37,19 @@ class vista_elenco_dipendenti(QWidget):
 
         # Lista Dipendenti
         self.lista_dipendenti = QListView()
+
         vista_lista_model = self.aggiorna()
-        self.lista_dipendenti.setModel(vista_lista_model)
-        self.layout_orizzontale.addWidget(self.lista_dipendenti)
+
+        self.layout_orizzontale.addWidget(vista_lista_model)
 
         # Spaziatura
-        self.layout_orizzontale.addSpacerItem(QSpacerItem(300,0))
+        self.layout_orizzontale.addSpacerItem(QSpacerItem(300, 0))
 
-        #Inserimento layout
+        # Inserimento layout
         self.layout_verticale1.addLayout(self.layout_orizzontale)
 
         # Spaziatura
-        self.layout_verticale1.addSpacerItem(QSpacerItem(0,200))
+        self.layout_verticale1.addSpacerItem(QSpacerItem(0, 200))
 
         # Mostra Pulsanti
         self.show_pulsantiera()
@@ -56,10 +57,12 @@ class vista_elenco_dipendenti(QWidget):
         # Spaziatura
         self.layout_orizzontale.addSpacerItem(QSpacerItem(200, 0))
 
+        # Imposta il layout
         self.setLayout(self.layout_verticale1)
 
-
+    # Mostra sfondo e titolo
     def show_background(self, stringa):
+
         # Background
         self.setFixedWidth(QDesktopWidget().width())
         self.setFixedHeight(QDesktopWidget().height())
@@ -81,19 +84,20 @@ class vista_elenco_dipendenti(QWidget):
     def show_pulsantiera(self):
 
         # Pulsante apri
-        self.layout_verticale2.addWidget(self.pulsante("Apri",self.dipendente_selezionato))
-        self.layout_verticale2.addSpacerItem(QSpacerItem(0, 50))
-
-        # Pulsante indietro
-        self.layout_verticale2.addWidget(self.pulsante("Indietro",self.indietro))
+        self.layout_verticale2.addWidget(self.pulsante("Apri", self.dipendente_selezionato))
         self.layout_verticale2.addSpacerItem(QSpacerItem(0, 50))
 
         # Pulsante Aggiungi dipendente
-        self.layout_verticale2.addWidget(self.pulsante("Aggiungi\nDipendente",self.call_aggiungi_dipendente))
+        self.layout_verticale2.addWidget(self.pulsante("Aggiungi\nDipendente", self.call_aggiungi_dipendente))
+        self.layout_verticale2.addSpacerItem(QSpacerItem(0, 50))
+
+        # Pulsante indietro
+        self.layout_verticale2.addWidget(self.pulsante("Indietro", self.indietro))
         self.layout_orizzontale.addLayout(self.layout_verticale2)
 
      # Crea un pulsante da titolo e gli associa una chiamata
     def pulsante(self,titolo,call):
+
         pulsante = QPushButton(titolo)
         pulsante.setFont(QFont('Times New Roman', 20, 100, True))
         pulsante.setStyleSheet('QPushButton {background-color: orange; color: black;}')
@@ -102,12 +106,14 @@ class vista_elenco_dipendenti(QWidget):
         return pulsante
 
     def dipendente_selezionato(self):
+
         try:
             selezionato = self.lista_dipendenti.selectedIndexes()[0].row()
             lista = self.controller_gestione_dipendenti.get_lista_elenco_dipendenti()
             dipendente = lista[selezionato]
             self.vista_informazioni = vista_informazioni(dipendente,self.controller_gestione_dipendenti.rimuovi,
-                                                         self.controller_gestione_dipendenti.salva_dati)
+                                                         self.controller_gestione_dipendenti.salva_dati,
+                                                         self.aggiorna)
             self.vista_informazioni.show()
         except IndexError:
             QMessageBox.information(self, 'Attenzione!', 'Non hai selezionato nessun dipendente da visualizzare.',
@@ -118,6 +124,7 @@ class vista_elenco_dipendenti(QWidget):
 
     # Ritorna la lista dei dipendenti
     def aggiorna(self):
+
         vista_lista_model = QStandardItemModel(self.lista_dipendenti)
         for dipendente in self.controller_gestione_dipendenti.get_lista_elenco_dipendenti():
             item = QStandardItem()
@@ -126,15 +133,18 @@ class vista_elenco_dipendenti(QWidget):
             item.setEditable(False)
             item.setFont(QFont('Times New Roman', 30, 100))
             vista_lista_model.appendRow(item)
-        return vista_lista_model
+        self.lista_dipendenti.setModel(vista_lista_model)
+        return self.lista_dipendenti
 
     # Chiamata aggiungi dipendente
     def call_aggiungi_dipendente(self):
+
         self.vista_aggiungi.show()
         self.close()
 
     # Chiamata indietro
     def indietro(self):
+
         self.callback()
         self.close()
 
