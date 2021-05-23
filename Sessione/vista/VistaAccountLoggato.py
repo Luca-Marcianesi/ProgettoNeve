@@ -14,13 +14,19 @@ class vista_account_loggato(QWidget):
         super(vista_account_loggato, self).__init__()
 
         # Attributi
-        self.label = QLabel()
-        self.callback = callback
         self.controller = controller_sessione()
         self.layout_verticale1 = QVBoxLayout()
         self.layout_verticale2 = QVBoxLayout()
         self.layout_verticale3 = QVBoxLayout()
         self.layout_orizzontale = QHBoxLayout()
+        self.label = QLabel()
+
+        # Viste successive
+        self.vista_modifica_credenziali = vista_modifica_account(self.aggiorna, self.showFullScreen)
+        self.vista_prenotazione_account = vista_prenotazione_account(self.showFullScreen)
+
+        # Vista precedente
+        self.callback = callback
 
         # Sfondo
         self.show_background("INFORMAZIONI ACCOUNT")
@@ -53,7 +59,7 @@ class vista_account_loggato(QWidget):
         pulsante_credenziali = self.crea_bottone("CAMBIA\nCREDENZIALI", self.layout_verticale2)
         pulsante_credenziali.clicked.connect(self.call_modifica_credenziali)
 
-        if self.controller.get_permessi() != True:
+        if self.controller.get_permessi() is False:
             pulsante_prenotazioni = self.crea_bottone("PRENOTAZIONI", self.layout_verticale2)
             pulsante_prenotazioni.clicked.connect(self.vista_prenotazioni)
 
@@ -67,12 +73,10 @@ class vista_account_loggato(QWidget):
         self.close()
 
     def call_modifica_credenziali(self):
-        self.vista_modifica_credenziali = vista_modifica_account(self.aggiorna, self.showFullScreen)
         self.vista_modifica_credenziali.showFullScreen()
         self.close()
 
     def vista_prenotazioni(self):
-        self.vista_prenotazione_account = vista_prenotazione_account(self.showFullScreen)
         self.vista_prenotazione_account.showFullScreen()
         self.close()
 
@@ -98,10 +102,10 @@ class vista_account_loggato(QWidget):
     def aggiorna(self):
         # Label
         self.label.setText("Nome: {}".format(self.controller.get_nome_str()) + "\n"
-                            "Cognome: {}".format(self.controller.get_cognome_str()) + "\n"
-                            "Età: {}".format(self.controller.get_eta_str()) + "\n"
-                            "Altezza: {}".format(self.controller.get_altezza_str()) + "\n"
-                            "Numero di scarpe: {}".format(self.controller.get_numero_scarpe_str()))
+                           "Cognome: {}".format(self.controller.get_cognome_str()) + "\n"
+                           "Età: {}".format(self.controller.get_eta_str()) + "\n"
+                           "Altezza: {}".format(self.controller.get_altezza_str()) + "\n"
+                           "Numero di scarpe: {}".format(self.controller.get_numero_scarpe_str()))
         self.label.setFont(QFont('Times New Roman', 30, 100))
 
     def crea_bottone(self, tipo, layout):

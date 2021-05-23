@@ -121,7 +121,7 @@ class vista_home_proprietario(QWidget):
     def crea_bottone(self, tipo, layout):
         bottone = QPushButton(tipo)
         bottone.setFixedSize(300,100)
-        bottone.setFont(QFont('Times New Roman', 20,100,True))
+        bottone.setFont(QFont('Times New Roman', 20, 100, True))
         bottone.setStyleSheet('QPushButton {background-color: orange; color: black;}')
         layout.addWidget(bottone)
         return bottone
