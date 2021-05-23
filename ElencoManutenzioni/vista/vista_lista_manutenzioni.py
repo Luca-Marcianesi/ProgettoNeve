@@ -4,7 +4,9 @@ from PyQt5.QtWidgets import QWidget, QHBoxLayout, QVBoxLayout, QLabel, QSpacerIt
     QSizePolicy, QListView, QPushButton, QDesktopWidget, QAction, QMessageBox
 from ElencoManutenzioni.controller.controlle_elenco_manutenzioni import controller_elenco_manutenzioni
 from datetime import date
-from Manutenzioni.controller.controller_manutenzione import controller_manutenzione
+
+from Manutenzioni.vista.VistaManutenzione import vista_manutenzione
+
 
 class vista_lista_manutenzioni(QWidget):
 
@@ -95,7 +97,7 @@ class vista_lista_manutenzioni(QWidget):
 
     def show_pulsantiera(self):
 
-        pulsante_apri = self.pulsante("Apri",self.manutenzione_selezionata)
+        pulsante_apri = self.pulsante("Apri",self.call_apri)
         pulsante_apri.setCheckable(True)
         self.layout_verticale2.addWidget(pulsante_apri)
 
@@ -117,8 +119,7 @@ class vista_lista_manutenzioni(QWidget):
             selezionata = self.vista_elenco.selectedIndexes()[0].row()
             lista = self.controller_elenco_manutenzioni.get_elenco_manutenzioni()
             manutenzione = lista[selezionata]
-            self.vista_informazioni_manutenzione = vista_manutenzione(manutenzione)
-            self.vista_informazioni_manutenzione.show()
+            return manutenzione
         except IndexError:
             QMessageBox.information(self, 'Attenzione!', 'Non hai selezionato nessuna manutenzione da visualizzare.',
                                     QMessageBox.Ok, QMessageBox.Ok)
@@ -127,4 +128,5 @@ class vista_lista_manutenzioni(QWidget):
                                  QMessageBox.Ok, QMessageBox.Ok)
 
     def call_apri(self):
-        pass
+        self.vista_informazioni_manutenzione = vista_manutenzione(self.manutenzione_selezionata)
+        self.vista_informazioni_manutenzione.show()
