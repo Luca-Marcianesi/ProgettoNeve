@@ -77,15 +77,23 @@ class vista_modifica_account(QWidget):
         eta = self.testo["ETÀ"].text()
         altezza = self.testo["ALTEZZA"].text()
         numero_scarpe = self.testo["NUMERO DI SCARPE"].text()
-        if self.controlla_informazioni1(altezza, eta, numero_scarpe, password) and self.controlla_informazioni2(altezza, eta, numero_scarpe):
-            self.controller_sessione.cambia_password(password)
-            self.controller_sessione.cambia_eta(eta)
-            self.controller_sessione.cambia_altezza(altezza)
-            self.controller_sessione.cambia_numero_scarpe(numero_scarpe)
-            self.controller_sessione.salva_dati()
-            self.callback()
-            self.aggiorna()
-            self.close()
+        try:
+            if  self.controlla_informazioni1(altezza, eta, numero_scarpe, password) and self.controlla_informazioni2(altezza, eta, numero_scarpe):
+                self.controller_sessione.cambia_password(password)
+                self.controller_sessione.cambia_eta(eta)
+                self.controller_sessione.cambia_altezza(altezza)
+                self.controller_sessione.cambia_numero_scarpe(numero_scarpe)
+                self.controller_sessione.salva_dati()
+                self.callback()
+                self.aggiorna()
+                self.close()
+        except ValueError:
+            QMessageBox.critical(self, 'Errore', 'Hai inserito delle informazioni non valide', QMessageBox.Ok,
+                                 QMessageBox.Ok)
+        except:
+            QMessageBox.critical(self, 'Errore', 'Qualcosa è andato storto, riprova più tardi', QMessageBox.Ok,
+                                 QMessageBox.Ok)
+
 
     def indietro(self):
         self.callback()
@@ -126,13 +134,9 @@ class vista_modifica_account(QWidget):
             return False
 
     def controlla_informazioni2(self,altezza, eta, numero_scarpe):
-        try:
             if int(altezza) <= 0 or int(altezza) > 220 or int(eta) <= 0 or int(eta) > 130 or int(numero_scarpe) <= 0 or int(numero_scarpe) > 50:
                 QMessageBox.critical(self, 'Errore', 'Per favore, inserisci delle informazioni reali!',QMessageBox.Ok, QMessageBox.Ok)
                 return False
             return True
-        except ValueError:
-            QMessageBox.critical(self, 'Errore', 'Hai inserito delle informazioni non valide',QMessageBox.Ok, QMessageBox.Ok)
-        except:
-            QMessageBox.critical(self, 'Errore', 'Qualcosa è andato storto, riprova più tardi', QMessageBox.Ok,QMessageBox.Ok)
+
 
