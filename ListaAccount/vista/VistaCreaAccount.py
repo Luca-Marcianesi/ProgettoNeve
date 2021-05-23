@@ -57,14 +57,15 @@ class vista_crea_account(QWidget):
         n_scarpe = self.testo["Numero di scarpe"].text()
         try:
             if self.controlla_informazioni1(nome, cognome, username, password, altezza, eta,n_scarpe) and self.controlla_informazioni2(altezza, eta, n_scarpe):
-                self.controller.aggiungi_dipendente(nome, cognome, username, password, eta, altezza, n_scarpe)
+                self.controller.crea_account(nome, cognome, username, password, eta, altezza, n_scarpe)
                 self.controller.salva_dati()
                 self.callback()
                 self.close()
         except ValueError:
                 QMessageBox.critical(self, 'Errore!', 'Hai inserito delle informazioni non valide!', QMessageBox.Ok, QMessageBox.Ok)
         except:
-                QMessageBox.critical(self, 'Errore!', 'Qualcosa è andato storto, riprova più tardi.', QMessageBox.Ok, QMessageBox.Ok)
+            QMessageBox.critical(self, 'Errore!', 'Qualcosa è andato storto, riprova più tardi.', QMessageBox.Ok,
+                                 QMessageBox.Ok)
 
 
     def indietro(self):
