@@ -126,8 +126,13 @@ class vista_modifica_account(QWidget):
             return False
 
     def controlla_informazioni2(self,altezza, eta, numero_scarpe):
-        if int(altezza) <= 0 or int(altezza) > 220 or int(eta) <= 0 or int(eta) > 130 or int(numero_scarpe) <= 0 or int(numero_scarpe) > 50:
+        try:
+            if int(altezza) <= 0 or int(altezza) > 220 or int(eta) <= 0 or int(eta) > 130 or int(numero_scarpe) <= 0 or int(numero_scarpe) > 50:
                 QMessageBox.critical(self, 'Errore', 'Per favore, inserisci delle informazioni reali!',QMessageBox.Ok, QMessageBox.Ok)
                 return False
-        else:
             return True
+        except ValueError:
+            QMessageBox.critical(self, 'Errore', 'Hai inserito delle informazioni non valide',QMessageBox.Ok, QMessageBox.Ok)
+        except:
+            QMessageBox.critical(self, 'Errore', 'Qualcosa è andato storto, riprova più tardi', QMessageBox.Ok,QMessageBox.Ok)
+
