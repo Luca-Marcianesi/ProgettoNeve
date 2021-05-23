@@ -78,7 +78,8 @@ class vista_modifica_account(QWidget):
         altezza = self.testo["ALTEZZA"].text()
         numero_scarpe = self.testo["NUMERO DI SCARPE"].text()
         try:
-            if  self.controlla_informazioni1(altezza, eta, numero_scarpe, password) and self.controlla_informazioni2(altezza, eta, numero_scarpe):
+            if self.controlla_informazioni1(altezza, eta, numero_scarpe, password) \
+               and self.controlla_informazioni2(altezza, eta, numero_scarpe):
                 self.controller_sessione.cambia_password(password)
                 self.controller_sessione.cambia_eta(eta)
                 self.controller_sessione.cambia_altezza(altezza)
@@ -93,7 +94,6 @@ class vista_modifica_account(QWidget):
         except:
             QMessageBox.critical(self, 'Errore', 'Qualcosa è andato storto, riprova più tardi', QMessageBox.Ok,
                                  QMessageBox.Ok)
-
 
     def indietro(self):
         self.callback()
@@ -130,13 +130,14 @@ class vista_modifica_account(QWidget):
         if password != "" and eta != "" and altezza != "" and numero_scarpe != "":
             return True
         else:
-            QMessageBox.critical(self, 'Errore', 'Per favore, inserisci tutte le informazioni richieste',QMessageBox.Ok, QMessageBox.Ok)
+            QMessageBox.critical(self, 'Errore', 'Per favore, inserisci tutte le informazioni richieste',
+                                 QMessageBox.Ok, QMessageBox.Ok)
             return False
 
-    def controlla_informazioni2(self,altezza, eta, numero_scarpe):
-            if int(altezza) <= 0 or int(altezza) > 220 or int(eta) <= 0 or int(eta) > 130 or int(numero_scarpe) <= 0 or int(numero_scarpe) > 50:
-                QMessageBox.critical(self, 'Errore', 'Per favore, inserisci delle informazioni reali!',QMessageBox.Ok, QMessageBox.Ok)
-                return False
-            return True
-
-
+    def controlla_informazioni2(self, altezza, eta, numero_scarpe):
+        if int(altezza) <= 0 or int(altezza) > 220 or int(eta) <= 0 or int(eta) > 130 or \
+           int(numero_scarpe) <= 0 or int(numero_scarpe) > 50:
+            QMessageBox.critical(self, 'Errore', 'Per favore, inserisci delle informazioni reali!',
+                                 QMessageBox.Ok, QMessageBox.Ok)
+            return False
+        return True

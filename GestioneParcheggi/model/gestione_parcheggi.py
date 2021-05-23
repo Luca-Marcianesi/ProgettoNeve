@@ -49,14 +49,14 @@ class gestione_parcheggi:
         with open('GestioneParcheggi/data/parcheggi.pickle', 'wb') as dati:
             pickle.dump(self.elenco_parcheggi, dati, pickle.HIGHEST_PROTOCOL)
 
-    def aggiungi_parcheggio(self,parcheggio):
+    def aggiungi_parcheggio(self, parcheggio):
         self.elenco_parcheggi.append(parcheggio)
 
     def leggi_dati(self):
         if os.path.isfile('GestioneParcheggi/data/parcheggi.pickle'):
-            with open('GestioneParcheggi/data/parcheggi.pickle',"rb") as file:
+            with open('GestioneParcheggi/data/parcheggi.pickle', "rb") as file:
                 self.elenco_parcheggi = pickle.load(file)
-        else :
+        else:
             with open("GestioneParcheggi/data/parcheggio.json") as file:
                 elenco_parcheggi = json.load(file)
             for parcheggio_da_agg in elenco_parcheggi:
