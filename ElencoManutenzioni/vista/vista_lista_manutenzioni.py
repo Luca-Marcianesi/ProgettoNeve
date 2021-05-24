@@ -1,7 +1,7 @@
 from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QFont, QBrush, QPalette, QImage, QStandardItemModel, QStandardItem
 from PyQt5.QtWidgets import QWidget, QHBoxLayout, QVBoxLayout, QLabel, QSpacerItem, \
-    QSizePolicy, QListView, QPushButton, QDesktopWidget, QAction, QMessageBox
+    QSizePolicy, QListView, QPushButton, QDesktopWidget, QMessageBox
 from ElencoManutenzioni.controller.controlle_elenco_manutenzioni import controller_elenco_manutenzioni
 from datetime import date
 
@@ -37,8 +37,6 @@ class vista_lista_manutenzioni(QWidget):
         # Aggiunta al layout
         self.layout_orizzontale.addWidget(vista_lista_model)
 
-        #self.layout_orizzontale.addSpacerItem(QSpacerItem(400, 0))
-
         # Pulsanti Apri e Indietro allineati
         self.show_pulsantiera()
 
@@ -55,18 +53,15 @@ class vista_lista_manutenzioni(QWidget):
 
     # Metodo aggiorna facciata
     def aggiorna(self):
-
         vista_lista_model = QStandardItemModel(self.vista_elenco)
         for manutenzione in self.controller_elenco_manutenzioni.get_elenco_manutenzioni():
             item = QStandardItem()
             oggi = date.today()
             scadenza = manutenzione.get_prossima_scadenza()
-            if oggi > scadenza:
-                self.vista_elenco.setStyleSheet("background-color: cyan ; color: red")
-            else :
-                self.vista_elenco.setStyleSheet("background-color: cyan ; color: green")
             nome = manutenzione.get_nome()
-            stringa = str(nome) + "  " + str(scadenza)
+            stringa = str(nome)
+            if oggi > scadenza:
+                stringa += " [URGENTE]"
             item.setText(stringa)
             item.setEditable(False)
             item.setFont(QFont('Times New Roman', 25, 100))

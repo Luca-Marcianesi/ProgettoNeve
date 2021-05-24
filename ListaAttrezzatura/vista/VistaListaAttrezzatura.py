@@ -113,7 +113,7 @@ class vista_lista_attrezzatura(QWidget):
             label = QLabel(" Non ci sono oggetti disponibili adatti\nalle tue caratteristiche")
             label.setAlignment(Qt.AlignCenter)
             label.setFont(QFont('Times New Roman', 25, 100))
-            label.setStyleSheet('QLabel {background-color: white; color: black;}')
+            label.setStyleSheet('QLabel {background-color: lightBlue; color: black;}')
             label.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Maximum)
             self.layout_orizzontale.addSpacerItem(QSpacerItem(0, 50))
             return label
@@ -126,5 +126,6 @@ class vista_lista_attrezzatura(QWidget):
                 item.setEditable(False)
                 item.setFont(QFont('Times New Roman', 30, 100))
                 vista_lista_model.appendRow(item)
+                vista_lista_model.setStyleSheet('QStandardItem{background-color: lightBlue; color: black;}')
             self.vista_lista.setModel(vista_lista_model)
             return self.vista_lista

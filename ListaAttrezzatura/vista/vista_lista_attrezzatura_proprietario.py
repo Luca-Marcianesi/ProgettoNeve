@@ -110,14 +110,13 @@ class vista_lista_attrezzatura_proprietario(QWidget):
     def aggiorna(self):
         vista_lista_model = QStandardItemModel(self.vista_lista)
         if self.controller_lista_attrezzatura.get_lista_attrezzatura() == []:
-            label = QLabel(" Non ci sono oggetti disponibili adatti\nalle tue caratteristiche")
+            label = QLabel(" Non ci sono oggetti disponibili")
             label.setAlignment(Qt.AlignCenter)
             label.setFont(QFont('Times New Roman', 25, 100))
-            label.setStyleSheet('QLabel {background-color: white; color: black;}')
+            label.setStyleSheet('QLabel {background-color: lightBlue; color: black;}')
             label.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Maximum)
             self.layout_orizzontale.addSpacerItem(QSpacerItem(0, 50))
             return label
-
         else:
             for attrezzatura in self.controller_lista_attrezzatura.get_lista_attrezzatura():
                 item = QStandardItem()
