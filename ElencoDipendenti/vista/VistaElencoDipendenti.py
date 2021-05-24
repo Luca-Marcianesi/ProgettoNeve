@@ -7,7 +7,7 @@ from ElencoDipendenti.controller.controller_gestione_dipendenti import controlle
 from ElencoDipendenti.vista.vista_informazioni_dipendente import vista_informazioni
 from ElencoDipendenti.vista.vista_aggiungi_dipendente import vista_aggiungi_dipendente
 
-
+# Vista elenco dipendenti
 class vista_elenco_dipendenti(QWidget):
 
     def __init__(self, callback):
@@ -105,8 +105,8 @@ class vista_elenco_dipendenti(QWidget):
         pulsante.clicked.connect(call)
         return pulsante
 
+    # Gestione eccezzione di non aver selezionato nessun dipendente da visualizzare
     def dipendente_selezionato(self):
-
         try:
             selezionato = self.lista_dipendenti.selectedIndexes()[0].row()
             lista = self.controller_gestione_dipendenti.get_lista_elenco_dipendenti()
@@ -124,7 +124,6 @@ class vista_elenco_dipendenti(QWidget):
 
     # Ritorna la lista dei dipendenti
     def aggiorna(self):
-
         vista_lista_model = QStandardItemModel(self.lista_dipendenti)
         for dipendente in self.controller_gestione_dipendenti.get_lista_elenco_dipendenti():
             item = QStandardItem()
@@ -138,13 +137,11 @@ class vista_elenco_dipendenti(QWidget):
 
     # Chiamata aggiungi dipendente
     def call_aggiungi_dipendente(self):
-
         self.vista_aggiungi.show()
         self.close()
 
     # Chiamata indietro
     def indietro(self):
-
         self.callback()
         self.close()
 

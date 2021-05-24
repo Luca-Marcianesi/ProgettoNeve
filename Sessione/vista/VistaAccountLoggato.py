@@ -93,8 +93,9 @@ class vista_account_loggato(QWidget):
         # Titolo
         titolo = QLabel(stringa)
         titolo.setAlignment(Qt.AlignCenter)
-        titolo.setFont(QFont('Times New Roman', 60))
+        titolo.setFont(QFont('Times New Roman', 60, 100))
         titolo.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Maximum)
+        titolo.setStyleSheet('QLabel {color: orange}')
         self.layout_verticale1.addSpacerItem(QSpacerItem(0, 50, QSizePolicy.Fixed, QSizePolicy.Fixed))
         self.layout_verticale1.addWidget(titolo)
         self.layout_verticale1.addSpacerItem(QSpacerItem(0, 50, QSizePolicy.Fixed, QSizePolicy.Fixed))

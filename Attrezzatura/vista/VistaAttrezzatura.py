@@ -5,7 +5,7 @@ from PyQt5.QtWidgets import QWidget, QVBoxLayout, QHBoxLayout, QSpacerItem, QSiz
 from Attrezzatura.controller.controller_attrezzatura import controller_attrezzatura
 from Sessione.model.sessione import sessione
 
-
+# Vista dell'attrezzatura
 class vista_attrezzatura(QWidget):
     def __init__(self, callback, attrezzatura, prenota, aggiorna):
         super(vista_attrezzatura, self).__init__()
@@ -25,7 +25,7 @@ class vista_attrezzatura(QWidget):
 
         self.layout_orizzontale.addSpacerItem(QSpacerItem(500, 0))
 
-        # Descrizione Pista
+        # Descrizione Pista, aggiunta al layout e spaziatura
         label = QLabel("Nome: {}".format(self.controller.get_nome()) + "\n"
                        "Lunghezza: {}".format(self.controller.get_dimensioni()) + " cm" + "\n"
                        "Stato: {}".format(self.stato_attrezzatura()))
@@ -48,10 +48,12 @@ class vista_attrezzatura(QWidget):
         self.layout_verticale1.addSpacerItem(QSpacerItem(0, 250))
         self.setLayout(self.layout_verticale1)
 
+    # Metodo che permette, cliccando il bottone "indietro", di tornare alla vista precedente
     def indietro(self):
         self.callback()
         self.close()
 
+    # Impostazione dello sfondo
     def show_background(self, stringa):
         # Sfondo
         self.setFixedWidth(QDesktopWidget().width())
@@ -71,6 +73,7 @@ class vista_attrezzatura(QWidget):
         self.layout_verticale1.addWidget(titolo)
         self.layout_verticale1.addSpacerItem(QSpacerItem(0, 150))
 
+    # Metodo per creazione, stile e funzionamento dei bottoni indietro e prenota
     def show_pulsantiera(self):
         # Punsante indietro
         layout_pulsanti1 = QVBoxLayout()
@@ -94,11 +97,13 @@ class vista_attrezzatura(QWidget):
 
         self.layout_verticale2.addLayout(layout_pulsanti2)
 
+    # Metodo che controlla lo stato dell'attrezzatura
     def stato_attrezzatura(self):
         if self.controller.get_stato():
             return "Disponibile"
         return "Non disponibile"
 
+    # Metodo per la prenotazione
     def prenotazione(self):
         risultato = self.prenota(self.attrezzatura)
         self.vista_chiusura = vista_esito(risultato)
@@ -106,16 +111,18 @@ class vista_attrezzatura(QWidget):
         self.aggiorna()
         sessione.salva_dati()
 
-
+# Classe esito -> compare una finestra una volta fatta la prenotazione
 class vista_esito(QWidget):
     def __init__(self, risultato):
         super(vista_esito, self).__init__()
         self.layout_verticale = QVBoxLayout()
         self.setMaximumSize(500, 200)
 
+        # Controllo dello stato per la stampa a finestra
         if risultato != "Prenotazione effettuata":
             risultato = "Hai già prenotato questa attrezzatura!"
 
+        # Creazione, aggiunta e descrizione della finestra
         label = QLabel(risultato)
         label.setFont(QFont('Times New Roman', 20))
         label.setAlignment(Qt.AlignCenter)
@@ -130,5 +137,6 @@ class vista_esito(QWidget):
         self.setLayout(self.layout_verticale)
         self.setWindowTitle('Esito')
 
+    # Metodo per la chiusura della finestra
     def call_chiudi(self):
         self.close()

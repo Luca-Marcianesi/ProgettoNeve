@@ -4,20 +4,24 @@ import pickle
 
 from Dipendenti.model.dipendente import dipendente
 
-
+# Classe elenco dipendenti
 class elenco_dipendenti:
 
     def __init__(self):
+
+        # Definizione attributi
         self.elenco = []
         self.leggi_dati()
 
+    # Metodo per aggiungere un dipendente
     def aggiungi_dipendente(self, dipendente):
         self.elenco.append(dipendente)
 
+    # Metodo per rimuovere un dipendente
     def rimuovi_dipendente(self, dipendente):
         self.elenco.remove(dipendente)
 
-
+    # Metodo che restituisce un dipendente se è presente nella lista
     def get_dipendente(self, nome, cognome):
         for dipendente in self.elenco:
             if dipendente.nome == nome and dipendente.cognome == cognome:
@@ -25,20 +29,23 @@ class elenco_dipendenti:
             else:
                 return "Dipendente non trovato"
 
+    # Metodo che restituisce l'elenco dei dipendenti
     def get_lista_elenco_dipendenti(self):
         return self.elenco
 
+    # Metodo che restituisce l'elenco con il nome dei dipendenti
     def get_lista_elenco_dipendenti_str(self):
         elenco =""
         for dipendente in self.elenco:
             elenco = elenco + dipendente.nome +"\n"
         return elenco
 
-
+    # Metodo per creare il pickle contenente i dipendenti presi dall'elenco
     def salva_dati(self):
         with open('ElencoDipendenti/data/lista_dipendenti_salvata.pickle', 'wb') as dati:
             pickle.dump(self.elenco, dati, pickle.HIGHEST_PROTOCOL)
 
+    # Metodo per leggere il pickle
     def leggi_dati(self):
         if os.path.isfile('ElencoDipendenti/data/lista_dipendenti_salvata.pickle'):
             with open('ElencoDipendenti/data/lista_dipendenti_salvata.pickle', "rb") as file:

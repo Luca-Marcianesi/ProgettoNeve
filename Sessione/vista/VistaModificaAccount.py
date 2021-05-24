@@ -21,7 +21,8 @@ class vista_modifica_account(QWidget):
         self.testo = {}
 
         # Sfondo
-        self.show_background("MODIFICA LE CREDENZIALI")
+        self.show_background("MODIFICA LE \n"
+                              "CREDENZIALI")
 
         # Spaziatura
         self.layout_orizzontale2.addSpacerItem(QSpacerItem(700, 0, QSizePolicy.Fixed, QSizePolicy.Fixed))
@@ -112,8 +113,9 @@ class vista_modifica_account(QWidget):
         # Titolo
         titolo = QLabel(stringa)
         titolo.setAlignment(Qt.AlignCenter)
-        titolo.setFont(QFont('Times New Roman', 60))
+        titolo.setFont(QFont('Times New Roman', 60, 100))
         titolo.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Maximum)
+        titolo.setStyleSheet('QLabel {color: orange}')
         self.layout_verticale1.addSpacerItem(QSpacerItem(0, 50, QSizePolicy.Fixed, QSizePolicy.Fixed))
         self.layout_verticale1.addWidget(titolo)
         self.layout_verticale1.addSpacerItem(QSpacerItem(0, 150, QSizePolicy.Fixed, QSizePolicy.Fixed))

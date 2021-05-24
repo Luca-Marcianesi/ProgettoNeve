@@ -3,6 +3,7 @@ from PyQt5.QtWidgets import QMessageBox, QLineEdit, QLabel, QPushButton, QHBoxLa
 
 from Dipendenti.model.dipendente import dipendente
 
+# Vista aggiungi dipendente
 class vista_aggiungi_dipendente(QWidget):
 
     def __init__(self, callback, controller,aggiorna):
@@ -62,8 +63,7 @@ class vista_aggiungi_dipendente(QWidget):
         self.v_layout.addWidget(casella)
         self.testo[tipo] = casella
 
-
-
+    # Creazione e stile dello sfondo
     def show_background(self):
         # Sfondo
         back_img = QImage("Data/Immagini/azzurro.jpg")
@@ -72,9 +72,9 @@ class vista_aggiungi_dipendente(QWidget):
         palette.setBrush(10, QBrush(img))
         self.setPalette(palette)
 
+    # Metodo che controlla che non venga inserito niente nel momento dell'aggiunta dipendente
     def controlla_informazioni1(self, nome, cognome, numero_di_telefono):
-
-        if nome != "" and cognome != "" and numero_di_telefono != "" :
+        if str(nome) != "" and str(cognome) != "" and int(numero_di_telefono) != "":
              return True
         else:
             QMessageBox.critical(self, 'Errore', 'Per favore, inserisci tutte le informazioni richieste',QMessageBox.Ok, QMessageBox.Ok)
@@ -82,18 +82,22 @@ class vista_aggiungi_dipendente(QWidget):
 
     # Chiamata per aggiungere un dipendente
     def call_aggiungi_dipendente(self):
-
         nome = self.testo["Nome"].text()
         cognome = self.testo["Cognome"].text()
         numero_di_telefono = self.testo["Numero di telefono"].text()
-        if self.controlla_informazioni1(nome, cognome, numero_di_telefono):
-            self.controller_elenco_dipendenti.aggiungi(dipendente(nome, cognome, numero_di_telefono))
-            self.controller_elenco_dipendenti.salva_dati()
-            self.aggiorna()
-            self.callback()
-            self.close()
+        try:
+            if self.controlla_informazioni1(nome, cognome, numero_di_telefono):
+                self.controller_elenco_dipendenti.aggiungi(dipendente(nome, cognome, numero_di_telefono))
+                self.controller_elenco_dipendenti.salva_dati()
+                self.aggiorna()
+                self.callback()
+                self.close()
+        except ValueError:
+            QMessageBox.critical(self, 'Errore', 'Hai inserito delle informazioni non valide.',QMessageBox.Ok, QMessageBox.Ok)
+        except:
+            QMessageBox.critical(self, 'Errore', 'Qualcosa è andato storto, riprova più tardi', QMessageBox.Ok,QMessageBox.Ok)
 
+    # Metodo che permette, cliccando il bottone "indietro", di tornare alla vista precedente
     def indietro(self):
-
         self.callback()
         self.close()

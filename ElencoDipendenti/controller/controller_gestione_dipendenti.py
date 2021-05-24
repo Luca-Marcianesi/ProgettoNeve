@@ -1,10 +1,13 @@
 from ElencoDipendenti.model.elenco_dipendenti import elenco_dipendenti
 
-
+# Controller gestione dipendenti
 class controller_elenco_dipendenti:
     def __init__(self):
+
+        # Prende come model la classe elenco dipendenti
         self.model = elenco_dipendenti()
 
+    # Ridefinisce i metodi della classe elenco dipendenti
     def aggiungi(self, dipendente):
         self.model.aggiungi_dipendente(dipendente)
 
