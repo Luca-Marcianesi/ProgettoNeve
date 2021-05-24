@@ -118,7 +118,9 @@ class vista_lista_manutenzioni(QWidget):
             selezionata = self.vista_elenco.selectedIndexes()[0].row()
             lista = self.controller_elenco_manutenzioni.get_elenco_manutenzioni()
             manutenzione = lista[selezionata]
-            self.vista_informazioni_manutenzione = vista_manutenzione(manutenzione)
+            self.vista_informazioni_manutenzione = vista_manutenzione(manutenzione,
+                                                                      self.controller_elenco_manutenzioni.salva_dati,
+                                                                      self.aggiorna)
             self.vista_informazioni_manutenzione.show()
 
         except IndexError:
@@ -127,4 +129,3 @@ class vista_lista_manutenzioni(QWidget):
         except:
             QMessageBox.critical(self, 'Errore!', 'Qualcosa è andato storto, riprova più tardi.',
                                  QMessageBox.Ok, QMessageBox.Ok)
-
