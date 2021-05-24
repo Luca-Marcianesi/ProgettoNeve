@@ -7,7 +7,7 @@ from datetime import date
 
 from Manutenzioni.vista.VistaManutenzione import vista_manutenzione
 
-
+# Vista lista manutenzioni
 class vista_lista_manutenzioni(QWidget):
 
     def __init__(self,callback):
@@ -25,14 +25,16 @@ class vista_lista_manutenzioni(QWidget):
         # Sfondo
         self.show_background("ELENCO MANUTENZIONI")
 
-
+        # Spaziatura
         self.layout_orizzontale.addSpacerItem(QSpacerItem(100, 0))
 
         # Lista
         self.vista_elenco = QListView()
 
+        # Chiamata funzione aggiorna
         vista_lista_model = self.aggiorna()
 
+        # Aggiunta al layout
         self.layout_orizzontale.addWidget(vista_lista_model)
 
         #self.layout_orizzontale.addSpacerItem(QSpacerItem(400, 0))
@@ -51,6 +53,7 @@ class vista_lista_manutenzioni(QWidget):
         self.setLayout(self.layout_verticale1)
         self.setWindowTitle('Elenco Manutenzioni')
 
+    # Metodo aggiorna facciata
     def aggiorna(self):
 
         vista_lista_model = QStandardItemModel(self.vista_elenco)
@@ -72,11 +75,13 @@ class vista_lista_manutenzioni(QWidget):
         self.vista_elenco.setModel(vista_lista_model)
         return self.vista_elenco
 
+    # Metodo che permette, cliccando il bottone "indietro", di tornare alla vista precedente
     def indietro(self):
         self.callback()
         self.controller_elenco_manutenzioni.salva_dati()
         self.close()
 
+    # Creazione, settaggio e stile dello sfondo
     def show_background(self, stringa):
         # Sfondo
         self.setFixedWidth(QDesktopWidget().width())
@@ -95,6 +100,7 @@ class vista_lista_manutenzioni(QWidget):
         self.layout_verticale1.addWidget(titolo)
         self.layout_verticale1.addSpacerItem(QSpacerItem(0, 100, QSizePolicy.Fixed, QSizePolicy.Fixed))
 
+    # Creazione, settaggio e stile dei pulsanti
     def show_pulsantiera(self):
 
         pulsante_apri = self.pulsante("Apri",self.manutenzione_selezionata)
@@ -105,6 +111,7 @@ class vista_lista_manutenzioni(QWidget):
         self.layout_verticale2.addWidget(pulsante_indietro)
         self.layout_verticale2.addSpacerItem(QSpacerItem(0, 50))
 
+    # Metodo per la creazione di un pulsante
     def pulsante(self,nome,call):
         pulsante = QPushButton(nome)
         pulsante.setFont(QFont('Times New Roman', 20, 100, True))
@@ -113,6 +120,7 @@ class vista_lista_manutenzioni(QWidget):
         pulsante.clicked.connect(call)
         return pulsante
 
+    # Metodo che controlla che venga selezionata una manutenzione al click di "apri"
     def manutenzione_selezionata(self):
         try:
             selezionata = self.vista_elenco.selectedIndexes()[0].row()

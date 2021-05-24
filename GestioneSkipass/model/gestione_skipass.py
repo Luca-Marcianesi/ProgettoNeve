@@ -5,16 +5,19 @@ from datetime import  timedelta , datetime,date,time
 from Prenotazione.model.prenotazione import prenotazione
 from Sessione.model.sessione import sessione
 
-
+# Classe gestione skipass
 class gestione_skipass:
 
     def __init__(self):
+
+        # Definizione attributi
         self.lista_skipass = []
         self.inizio_stagione = None
         self.fine_stagione = None
         self.leggi_dati()
         self.codice_skipass = 1
 
+    # Metodo prenota
     def prenota(self,skipass_selezionato):
         #if date.today() > date.fromisoformat(self.inizio_stagione) and date.today() < date.fromisoformat(self.fine_stagione) :
             if sessione.controlla_prenotazione_effettuata(self.codice_skipass):
@@ -46,19 +49,22 @@ class gestione_skipass:
                         sessione.aggiungi_prenotazione(prenotazione(skipass_selezionato.get_codice(),
                                                                     self.fine_stagione,
                                                                     skipass_selezionato))
-
+    # Metodo che controlla se lo skipass è già stato acquistato
     def controlla_skipass_acquistato(self):
         for prenotazione in sessione.get_lista_prenotazioni():
             if prenotazione.get_codice_oggetto() == self.codice_skipass:
                 return True
         return False
 
+    # Metodo per aggiungere uno skipass
     def aggiungi_skipass(self,skipass):
         self.lista_skipass.append(skipass)
 
+    # Metodo che restituisce lo skipass in base al numero dato
     def get_skipass_n(self,numero):
         return self.lista_skipass[numero]
 
+    # Metodo che legge i dati dal pickle
     def leggi_dati(self):
             with open("GestioneSkipass/data/lista_skipass.json") as file:
                 file_oggetto = json.load(file)
@@ -77,6 +83,7 @@ class gestione_skipass:
                                                       abbonamento["descrizione"],
                                                       "", abbonamento["durata(day)"]))
 
+    # Metodo che restituisce la lista degli skipass
     def visualizza_lista(self):
         lista ="la stagione inizia: {}".format(self.inizio_stagione) + " e finisce: {} \n".format(self.fine_stagione)
         for skipass in self.lista_skipass:

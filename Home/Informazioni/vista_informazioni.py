@@ -6,6 +6,7 @@ from PyQt5.QtWidgets import QVBoxLayout, QLabel, QDesktopWidget, QWidget, QSizeP
     QPushButton
 from PyQt5.QtCore import Qt
 
+# Vista informazioni
 class vista_informazioni(QWidget):
     def __init__(self, callback):
         super(vista_informazioni, self).__init__()

@@ -45,7 +45,7 @@ class elenco_dipendenti:
         with open('ElencoDipendenti/data/lista_dipendenti_salvata.pickle', 'wb') as dati:
             pickle.dump(self.elenco, dati, pickle.HIGHEST_PROTOCOL)
 
-    # Metodo per leggere il pickle
+    # Metodo che legge i dati dal pickle se esiste o dal json
     def leggi_dati(self):
         if os.path.isfile('ElencoDipendenti/data/lista_dipendenti_salvata.pickle'):
             with open('ElencoDipendenti/data/lista_dipendenti_salvata.pickle', "rb") as file:

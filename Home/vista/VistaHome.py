@@ -9,6 +9,7 @@ from GestioneParcheggi.vista.vista_parcheggio import vista_parcheggio
 from GestioneSkipass.vista.vista_acquista_skipass import vista_acquista_skipass
 
 
+# Vista home cliente
 class vista_home(QWidget):
 
     def __init__(self,callback):
@@ -39,6 +40,7 @@ class vista_home(QWidget):
         self.layout_verticale.addLayout(self.layout_orizzontale2)
         self.setLayout(self.layout_verticale)
 
+    # Creazione settaggio e stile sfondo
     def show_background(self):
         # Sfondo
         self.setFixedWidth(QDesktopWidget().width())
@@ -49,10 +51,12 @@ class vista_home(QWidget):
         palette.setBrush(10, QBrush(img))
         self.setPalette(palette)
 
+    # Creazione, settaggio e stile pulsanti
     def show_pulsantiera(self):
         pulsante_account = self.crea_bottone("ACCOUNT", self.layout_orizzontale1)
         pulsante_account.clicked.connect(self.call_account_loggato)
 
+        # Spaziatura
         self.layout_orizzontale1.addSpacerItem(QSpacerItem(100, 0))
 
         pulsante_esci = self.crea_bottone("LOGOUT", self.layout_orizzontale1)
@@ -75,40 +79,48 @@ class vista_home(QWidget):
         pulsante_info = self.crea_bottone("INFORMAZIONI", self.layout_orizzontale2)
         pulsante_info.clicked.connect(self.call_info)
 
+    # Metodo che chiama e mostra la vista informazioni
     def call_info(self):
         self.vista_informazioni = vista_informazioni(self.show)
         self.vista_informazioni.showFullScreen()
         self.close()
 
+    # Metodo che chiama e mostra la vista lista piste
     def call_lista_piste(self):
         self.vista_lista_piste = vista_lista_piste(self.show)
         self.vista_lista_piste.showFullScreen()
         self.close()
 
+    # Metodo che chiama e mostra la vista account loggato
     def call_account_loggato(self):
         self.vista_info_account = vista_account_loggato(self.showFullScreen)
         self.vista_info_account.showFullScreen()
         self.close()
 
+    # Metodo che chiama e mostra la vista prenota parcheggio
     def call_prenota_parcheggio(self):
         self.vista_prenota_parcheggio = vista_parcheggio(self.showFullScreen)
         self.vista_prenota_parcheggio.showFullScreen()
         self.close()
 
+    # Metodo che chiama e mostra la classe noleggia attrezzatura
     def call_noleggia_attrezzatura(self):
         self.vista_lista_attrezzatura = vista_lista_attrezzatura(self.showFullScreen)
         self.vista_lista_attrezzatura.showFullScreen()
         self.close()
 
+    # Metodo che chiama e mostra la vista acquista skipass
     def call_skipass(self):
         self.vista_acquista_skipass = vista_acquista_skipass(self.showFullScreen)
         self.vista_acquista_skipass.showFullScreen()
         self.close()
 
+    # Metodo che, collegato al bottone "LOGOUT", permette di uscire
     def uscita(self):
         self.callback()
         self.close()
 
+    # Metodo crea bottone generale
     def crea_bottone(self, tipo, layout):
         bottone = QPushButton(tipo)
         bottone.setFixedSize(300, 100)

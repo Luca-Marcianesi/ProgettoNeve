@@ -28,7 +28,7 @@ class attrezzatura:
 
     # Metodo per eliminare una prenotazione
     def elimina_prenotazione(self):
-        self.set_stato((True))
+        self.set_stato(True)
         self.scdenza = None
 
     # Metodo che restituisce le dimensioni dell'attrezzatura

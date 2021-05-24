@@ -7,7 +7,7 @@ class controller_elenco_dipendenti:
         # Prende come model la classe elenco dipendenti
         self.model = elenco_dipendenti()
 
-    # Ridefinisce i metodi della classe elenco dipendenti
+    # Richiama i metodi della classe elenco dipendenti
     def aggiungi(self, dipendente):
         self.model.aggiungi_dipendente(dipendente)
 

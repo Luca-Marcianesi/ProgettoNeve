@@ -4,7 +4,7 @@ class controller_dipendente:
         # Prende come model la classe dipendente
         self.model = dipendente
 
-    # Ridefinisce i metodi della classe dipendente
+    # Richiama i metodi della classe dipendente
     def get_dipendente_str(self):
         return self.model.get_dipendente_str()
 

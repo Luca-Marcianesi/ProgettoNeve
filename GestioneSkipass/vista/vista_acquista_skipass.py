@@ -4,14 +4,16 @@ from PyQt5.QtGui import QPalette, QBrush, QImage, QFont
 from PyQt5.QtWidgets import QWidget, QPushButton, QVBoxLayout, QLabel, QSizePolicy, QSpacerItem, \
     QDesktopWidget, QHBoxLayout
 from PyQt5.QtCore import Qt
-from Skipass.vista.vista_skipass import vista_skipass
+from Skipass.vista.VistaSkipass import vista_skipass
 from GestioneSkipass.controller.controller_gestione_skipass import controller_gestione_skipass
 
+# Vista acquista skipass
 class vista_acquista_skipass(QWidget):
 
     def __init__(self, callback):
         super(vista_acquista_skipass, self).__init__()
 
+        # Controller
         self.controller_gestione_skipass = controller_gestione_skipass()
 
 
@@ -26,6 +28,7 @@ class vista_acquista_skipass(QWidget):
         # Sfondo
         self.show_background("PRENOTA SKIPASS")
 
+        # Settaggio layout e creazione dei vari skipass
         self.layout_verticale1.addWidget(self.show_pulsante("Mattiniero", self.controller_gestione_skipass.get_skipass_n(0)))
         self.layout_verticale1.addSpacerItem(QSpacerItem(0, 50))
         self.layout_verticale1.addWidget(self.show_pulsante("Pomeridiano", self.controller_gestione_skipass.get_skipass_n(1)))
@@ -43,6 +46,7 @@ class vista_acquista_skipass(QWidget):
 
         self.layout_verticale2.addWidget(self.show_pulsante("Stagionale", self.controller_gestione_skipass.get_skipass_n(5)))
 
+        # Spaziature e settaggio layout
         self.layout_orizzontale.addSpacerItem(QSpacerItem(40, 0))
         self.layout_orizzontale.addLayout(self.layout_verticale1)
         self.layout_orizzontale.addSpacerItem(QSpacerItem(300, 0))
@@ -89,18 +93,19 @@ class vista_acquista_skipass(QWidget):
         self.layout_verticale.addWidget(titolo)
         self.layout_verticale.addSpacerItem(QSpacerItem(0, 150, QSizePolicy.Fixed, QSizePolicy.Fixed))
 
-
-    def show_pulsante(self, titolo, pista):
+    # Metodo per mostrare il pulsante associato ad ogni skipass
+    def show_pulsante(self, titolo, skipass):
         pulsante_skipass = self.crea_bottone(titolo)
-        pulsante_skipass.clicked.connect(partial(self.call_skipass,pista))
+        pulsante_skipass.clicked.connect(partial(self.call_skipass, skipass))
         return pulsante_skipass
 
-
+    # Metodo per richiamare la vista skipass
     def call_skipass(self,skipass):
         self.vista_skipass = vista_skipass(skipass, self.showFullScreen, self.controller_gestione_skipass)
         self.vista_skipass.showFullScreen()
         self.close()
 
+    # Metodo per creare un bottone
     def crea_bottone(self, tipo):
         bottone = QPushButton(tipo)
         bottone.setFixedSize(350, 100)
@@ -108,6 +113,7 @@ class vista_acquista_skipass(QWidget):
         bottone.setStyleSheet('QPushButton {background-color: orange; color: black;}')
         return bottone
 
+    # Metodo che permette, cliccando il bottone "indietro", di tornare alla vista precedente
     def indietro(self):
         self.callback()
         self.close()

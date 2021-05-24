@@ -8,21 +8,26 @@ from GestioneParcheggi.controller.controller_gestione_parcheggi import gestione_
 from Sessione.model.sessione import sessione
 from GestioneParcheggi.controller.controller_gestione_parcheggi import controller_gestione_parcheggi
 
+# Vista parcheggio
 class vista_parcheggio(QWidget):
 
     def __init__(self,callback):
         super(vista_parcheggio, self).__init__()
 
+        # Controller e layout
         self.controller_gestione_parcheggio = controller_gestione_parcheggi()
         self.layout_verticale = QVBoxLayout()
         self.layout_orizzontale = QHBoxLayout()
         self.callback = callback
         self.num_giorni = 1
 
+        # Mostra sfondo
         self.show_background("PARCHEGGIO CAPANNINA")
 
+        # Spaziatura
         self.layout_verticale.addSpacerItem(QSpacerItem(0, 50, QSizePolicy.Fixed, QSizePolicy.Fixed))
 
+        # Controlla i posti disponibili
         if sessione.controlla_prenotazione_effettuata(6):
             label =QLabel("POSTI DISPONIBILI:\n{} ".format(self.controller_gestione_parcheggio.get_posti_disponibili()))
         else :
@@ -48,6 +53,7 @@ class vista_parcheggio(QWidget):
         self.setLayout(self.layout_verticale)
         self.setWindowTitle('Parcheggio')
 
+    # Creazione, stile e settaggio sfondo e titolo
     def show_background(self,titolo):
 
         self.setFixedWidth(QDesktopWidget().width())
@@ -58,6 +64,7 @@ class vista_parcheggio(QWidget):
         palette.setBrush(10, QBrush(img))
         self.setPalette(palette)
 
+        # Titolo
         titolo =QLabel(titolo)
         titolo.setAlignment(Qt.AlignCenter)
         titolo.setFont(QFont('Times New Roman', 60))
@@ -66,6 +73,7 @@ class vista_parcheggio(QWidget):
         self.layout_verticale.addWidget(titolo)
         self.layout_verticale.addSpacerItem(QSpacerItem(0, 50, QSizePolicy.Fixed, QSizePolicy.Fixed))
 
+    # Creazione, stile e settaggio dei pulsanti
     def show_pulsantiera(self):
 
         layout_pulsanti = QHBoxLayout()
@@ -87,25 +95,29 @@ class vista_parcheggio(QWidget):
         layout_pulsanti.addWidget(pulsante_indietro)
         self.layout_verticale.addLayout(layout_pulsanti)
 
+    # Chiamata e mostra della vista richiesta giorni
     def call_selezione_giorni(self):
         self.vista = vista_richiesta_giorni(self.controller_gestione_parcheggio)
         self.vista.show()
 
+    # Metodo che permette, cliccando il bottone "indietro", di tornare alla vista precedente
     def indietro(self):
         self.callback()
         self.close()
 
+# Vista richiesta giorni
 class vista_richiesta_giorni(QWidget):
 
     def __init__(self,controller_parcheggi):
         super(vista_richiesta_giorni, self).__init__()
 
+        # Controller
         self.controller_parcheggi = controller_parcheggi
         self.layout_verticale = QVBoxLayout()
         self.num_giorni = 1
         self.setFixedSize(400,300)
 
-
+        # Descrizione della finestra per scegliere per quanti giorni prenotare
         label = QLabel("NUMERO GIORNI DA PRENOTARE:")
         label.setFont(QFont('Times New Roman', 10))
         label.setSizePolicy(300, 300)
@@ -115,6 +127,7 @@ class vista_richiesta_giorni(QWidget):
         self.giorni.setFixedSize(100,50)
         self.giorni.setRange(1, 5)
 
+        # Creazione, stile e settaggio bottone prenota e layout totale
         bottone = QPushButton("Prenota")
         bottone.clicked.connect(self.call_prenota)
 
@@ -123,10 +136,10 @@ class vista_richiesta_giorni(QWidget):
         self.layout_verticale.addWidget(self.giorni)
         self.layout_verticale.addWidget(bottone)
 
-
         self.setLayout(self.layout_verticale)
         self.setWindowTitle('Giorni')
 
+    # Metodo prenota
     def call_prenota(self):
         val = self.giorni.value()
         risultato =self.controller_parcheggi.prenota_parcheggio(val)
@@ -134,12 +147,14 @@ class vista_richiesta_giorni(QWidget):
         self.vista_chiusa.show()
         self.close()
 
+# Vista esito
 class vista_esito(QWidget):
     def __init__(self,risultato):
         super(vista_esito, self).__init__()
         self.layout_verticale = QVBoxLayout()
         self.setFixedSize(400, 300)
 
+        # Descrizione, creazione e settaggio esito e layout totale
         label = QLabel(risultato)
         label.setFont(QFont('Times New Roman', 20))
         label.setAlignment(Qt.AlignCenter)
@@ -154,6 +169,7 @@ class vista_esito(QWidget):
         self.setLayout(self.layout_verticale)
         self.setWindowTitle('Esito')
 
+    # Metodo per chiudere la finestra corrente
     def call_chiudi(self):
         self.close()
 

@@ -6,7 +6,7 @@ class controller_attrezzatura:
         # Prende come model la classe attrezzatura
         self.model = attrezzatura
 
-    # Ridefinisce i metodi della classe attrezzatura
+    # Richiama i metodi della classe attrezzatura
     def set_stato(self, stato):
         self.model.set_stato(stato)
 
