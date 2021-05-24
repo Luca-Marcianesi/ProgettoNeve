@@ -7,6 +7,7 @@ from ListaAttrezzatura.vista.VistaListaAttrezzatura import vista_lista_attrezzat
 from ListaPiste.vista.VistaListaPisteProprietario import vista_lista_piste_proprietario
 from Sessione.vista.VistaAccountLoggato import vista_account_loggato
 from ElencoManutenzioni.vista.vista_lista_manutenzioni import vista_lista_manutenzioni
+from ListaAttrezzatura.vista.vista_lista_attrezzatura_proprietario import vista_lista_attrezzatura_proprietario
 
 
 class vista_home_proprietario(QWidget):
@@ -73,7 +74,7 @@ class vista_home_proprietario(QWidget):
         pulsante_lista_piste.clicked.connect(self.call_lista_piste_proprietario)
 
         pulsante_modifica_attrezzatura = self.crea_bottone("MODIFICA \n ATTREZZATURA", self.layout_orizzontale3)
-        # pulsante_modifica_attrezzatura.clicked.connect(self.call_noleggia_attrezzatura())
+        pulsante_modifica_attrezzatura.clicked.connect(self.call_attrezzatura)
 
         self.layout_orizzontale3.addSpacerItem(QSpacerItem(100, 0))
 
@@ -112,6 +113,11 @@ class vista_home_proprietario(QWidget):
     def call_elenco_dipendenti(self):
         self.vista_elenco_dipendenti = vista_elenco_dipendenti(self.showFullScreen)
         self.vista_elenco_dipendenti.showFullScreen()
+        self.close()
+
+    def call_attrezzatura(self):
+        self.vista_attrezzatura = vista_lista_attrezzatura_proprietario(self.showFullScreen)
+        self.vista_attrezzatura.showFullScreen()
         self.close()
 
     def uscita(self):
