@@ -1,6 +1,7 @@
 from PyQt5.QtGui import QImage, QPalette, QBrush
 from PyQt5.QtWidgets import QVBoxLayout, QLabel, QLineEdit, QPushButton, QMessageBox, QWidget, QHBoxLayout
 
+
 # Vista Crea account
 class vista_crea_account(QWidget):
 
@@ -62,16 +63,17 @@ class vista_crea_account(QWidget):
         altezza = self.testo["Altezza"].text()
         n_scarpe = self.testo["Numero di scarpe"].text()
         try:
-            if self.controlla_informazioni1(nome, cognome, username, password, altezza, eta,n_scarpe) and self.controlla_informazioni2(altezza, eta, n_scarpe):
+            if self.controlla_informazioni(nome, cognome, username, password, eta, altezza, n_scarpe):
                 self.controller.crea_account(nome, cognome, username, password, eta, altezza, n_scarpe)
                 self.controller.salva_dati()
                 self.callback()
                 self.close()
         except ValueError:
-                QMessageBox.critical(self, 'Errore!', 'Hai inserito delle informazioni non valide!', QMessageBox.Ok, QMessageBox.Ok)
+            QMessageBox.critical(self, 'Errore!', 'Hai inserito delle informazioni non valide!',
+                                 QMessageBox.Ok, QMessageBox.Ok)
         except:
-            QMessageBox.critical(self, 'Errore!', 'Qualcosa è andato storto, riprova più tardi.', QMessageBox.Ok,
-                                 QMessageBox.Ok)
+            QMessageBox.critical(self, 'Errore!', 'Qualcosa è andato storto, riprova più tardi.',
+                                 QMessageBox.Ok, QMessageBox.Ok)
 
     # Metodo che, collegato al bottone "INDIETRO", permette di tornare alla vista precedente
     def indietro(self):
@@ -88,20 +90,20 @@ class vista_crea_account(QWidget):
         self.setPalette(palette)
 
     # Metodo che controlla la validità delle informazioni inserite dall'utente
-    def controlla_informazioni1(self, nome, cognome, username, password, altezza, eta, numero_scarpe):
-        if self.controller.controlla_username(username) != True:
-            if nome != "" and cognome != "" and username != "" and password != "" and altezza != "" and eta != "" and numero_scarpe != "":
-                return True
-            else:
-                QMessageBox.critical(self, 'Errore', 'Per favore, inserisci tutte le informazioni richieste',QMessageBox.Ok, QMessageBox.Ok)
-                return False
-        QMessageBox.critical(self, 'Errore', 'Mi dispiace, questo username è già in uso!',QMessageBox.Ok, QMessageBox.Ok)
-        return False
-
-    # Metodo che controlla la validità delle informazioni inserite dall'utente
-    def controlla_informazioni2(self,altezza, eta, numero_scarpe):
-        if int(altezza) <= 0 or int(altezza) > 220 or int(eta) <= 0 or int(eta) > 130 or int(numero_scarpe) <= 0 or int(numero_scarpe) > 50:
-                QMessageBox.critical(self, 'Errore', 'Per favore, inserisci delle informazioni reali!',QMessageBox.Ok, QMessageBox.Ok)
-                return False
+    def controlla_informazioni(self, nome, cognome, username, password, eta, altezza, numero_scarpe):
+        if self.controller.controlla_username(username) is True:
+            QMessageBox.critical(self, 'Errore', 'Mi dispiace, questo username è già in uso!', QMessageBox.Ok,
+                                 QMessageBox.Ok)
+            return False
+        elif nome == "" and cognome == "" and username == "" and \
+                password == "" and altezza == "" and eta == "" and numero_scarpe == "":
+            QMessageBox.critical(self, 'Errore', 'Per favore, inserisci tutte le informazioni richieste',
+                                 QMessageBox.Ok, QMessageBox.Ok)
+            return False
+        elif int(altezza) < 50 or int(altezza) > 220 or int(eta) <= 5 or int(eta) > 130 or int(
+                numero_scarpe) <= 20 or int(numero_scarpe) > 50:
+            QMessageBox.critical(self, 'Errore', 'Per favore, inserisci delle informazioni reali!',
+                                 QMessageBox.Ok, QMessageBox.Ok)
+            return False
         else:
             return True
