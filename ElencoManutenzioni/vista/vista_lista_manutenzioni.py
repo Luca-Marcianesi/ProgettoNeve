@@ -58,12 +58,10 @@ class vista_lista_manutenzioni(QWidget):
             item = QStandardItem()
             oggi = date.today()
             scadenza = manutenzione.get_prossima_scadenza()
-            if oggi > scadenza:
-                self.vista_elenco.setStyleSheet("background-color: cyan ; color: red")
-            else :
-                self.vista_elenco.setStyleSheet("background-color: cyan ; color: green")
             nome = manutenzione.get_nome()
-            stringa = str(nome) + "  " + str(scadenza)
+            stringa = str(nome)
+            if oggi > scadenza:
+                stringa += " [URGENTE]"
             item.setText(stringa)
             item.setEditable(False)
             item.setFont(QFont('Times New Roman', 25, 100))

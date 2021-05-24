@@ -121,12 +121,6 @@ class vista_lista_attrezzatura_proprietario(QWidget):
             for attrezzatura in self.controller_lista_attrezzatura.get_lista_attrezzatura():
                 item = QStandardItem()
                 nome = attrezzatura.get_nome()
-                b = QBrush()
-                if attrezzatura.get_stato() == True:
-                    b.setColor(QColor('grenn'))
-                else :
-                    b.setColor(QColor('orange'))
-                item.setBackground(b)
                 item.setText(nome)
                 item.setEditable(False)
                 item.setFont(QFont('Times New Roman', 30, 100))
