@@ -31,13 +31,16 @@ class vista_lista_piste_proprietario(QWidget):
         self.layout_verticale1.addSpacerItem(QSpacerItem(0, 20, QSizePolicy.Fixed, QSizePolicy.Fixed))
         # Pulsanti Apri
 
+        # Creazione layout a griglia
         self.layout_piste = QGridLayout()
 
+        # Chiamata funzione aggiorna
         self.aggiorna()
 
+        # Settaggio layout
         self.layout_verticale1.addLayout(self.layout_piste)
 
-
+        # Layout e spaziatura
         self.layout_verticale1.addLayout(self.layout_orizzontale1)
         self.layout_verticale1.addSpacerItem(QSpacerItem(0, 25, QSizePolicy.Fixed, QSizePolicy.Fixed))
 
@@ -47,7 +50,7 @@ class vista_lista_piste_proprietario(QWidget):
 
 
 
-
+    # Creazione, settaggio e stile sfondo
     def show_background(self):
         # Sfondo
         self.setFixedWidth(QDesktopWidget().width())
@@ -58,6 +61,7 @@ class vista_lista_piste_proprietario(QWidget):
         palette.setBrush(10, QBrush(img))
         self.setPalette(palette)
 
+    # Creazione, settaggio, stile, mostra e aggiunta al layout di vari pulsanti
     def show_pulsante_indietro(self):
 
         # Punsante indietro
@@ -94,7 +98,7 @@ class vista_lista_piste_proprietario(QWidget):
 
         self.layout_verticale1.addLayout(self.layout_orizzontale1)
 
-
+    # Metodo che aggiorna la finestra
     def aggiorna(self):
         # Punsante indietro
         layout_piste = QGridLayout()
@@ -117,6 +121,7 @@ class vista_lista_piste_proprietario(QWidget):
             colonna += 1
             indice_pista += 1
 
+    # Metodo che chiama e mostra la vista pista
     def call_vista_pista_proprietario(self, pista):
         self.vista_pista_proprietario = vista_pista_proprietario(pista,
                                                                  self.showFullScreen,
@@ -125,16 +130,19 @@ class vista_lista_piste_proprietario(QWidget):
         self.vista_pista_proprietario.showFullScreen()
         self.close()
 
+    # Metodo che setta lo stato di tutte le piste ad "APERTA"
     def call_apri_tutte(self):
         self.controller.set_stato_tutte("Aperta")
         self.controller.salva_dati()
         self.aggiorna()
 
+    # Metodo che setta lo stato di tutte le piste ad "CHIUSA"
     def call_chiudi_tutte(self):
         self.controller.set_stato_tutte("Chiusa")
         self.controller.salva_dati()
         self.aggiorna()
 
+    # Metodo che, collegato al pulsante indietro, permette di tornare alla vista precedente
     def indietro(self):
         self.callback()
         self.close()

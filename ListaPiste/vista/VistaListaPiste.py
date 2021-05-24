@@ -5,7 +5,7 @@ from PyQt5.QtWidgets import QWidget, QHBoxLayout, QVBoxLayout, QSpacerItem, QSiz
 from ListaPiste.controller.controller_lista_piste import controller_lista_piste
 from Pista.vista.VistaPista import vista_pista
 
-
+# Vista lista piste
 class vista_lista_piste(QWidget):
     def __init__(self, callback):
         super(vista_lista_piste, self).__init__()
@@ -40,14 +40,17 @@ class vista_lista_piste(QWidget):
         self.setLayout(self.layout_verticale1)
         self.setWindowTitle('Lista Piste')
 
+    # Metodo che chiama e mostra la vista pista
     def call_vista_pista(self, pista):
         self.vista_pista = vista_pista(pista, self.showFullScreen)
         self.vista_pista.show()
 
+    # Metodo che, collegato al pulsante "INDIETRO", permette di tornare alla vista precedente
     def indietro(self):
         self.callback()
         self.close()
 
+    # Creazione settaggio e stile dello sfondo
     def show_background(self):
         # Sfondo
         self.setFixedWidth(QDesktopWidget().width())
@@ -58,6 +61,7 @@ class vista_lista_piste(QWidget):
         palette.setBrush(10, QBrush(img))
         self.setPalette(palette)
 
+    # Creazione, settaggio, aggiunta al layout e stile pulsante indietro
     def show_pulsante_indietro(self):
 
         # Punsante indietro
@@ -71,8 +75,8 @@ class vista_lista_piste(QWidget):
         self.layout_orizzontale.addSpacerItem(QSpacerItem(5000, 0, QSizePolicy.Fixed, QSizePolicy.Fixed))
         self.layout_verticale1.addLayout(self.layout_orizzontale)
 
+    # Creazione, settaggio, aggiunta al layout e stile della descrizione piste
     def show_pulsantiera_piste(self):
-        # Punsante indietro
         layout_piste = QGridLayout()
         riga = 0
         colonna = 0

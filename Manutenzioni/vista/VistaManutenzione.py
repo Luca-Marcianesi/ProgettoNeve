@@ -4,7 +4,7 @@ from PyQt5.QtWidgets import QPushButton, QLabel, QSpacerItem, QSizePolicy, QWidg
 
 from Manutenzioni.controller.controller_manutenzione import controller_manutenzione
 
-
+# Vista manutenzione
 class vista_manutenzione(QWidget):
     def __init__(self, manutenzione, salva_dati, aggiorna):
         super(vista_manutenzione, self).__init__()
@@ -21,14 +21,14 @@ class vista_manutenzione(QWidget):
         self.label = QLabel(self.controller_manutenzione.visualizza_manutenzione())
         label = self.aggiorna()
 
-        # Creazione bottone chiudi
+        # Creazione bottoni
         bottone = QPushButton("Chiudi")
         bottone.clicked.connect(self.call_chiudi)
 
         bottone1 = QPushButton("Effettua manutenzione")
         bottone1.clicked.connect(self.call_effettua)
 
-
+        # Settaggio layout
         self.layout_verticale.addWidget(label)
         self.layout_verticale.addSpacerItem(QSpacerItem(150, 0, QSizePolicy.Fixed, QSizePolicy.Fixed))
         self.layout_orizzontale.addWidget(bottone)
@@ -39,14 +39,17 @@ class vista_manutenzione(QWidget):
         self.setLayout(self.layout_verticale)
         self.setWindowTitle("Informazioni manutenzione")
 
+    # Metodo per chiudere la finestra corrente
     def call_chiudi(self):
         self.close()
 
+    # Metodo che aggiorna la finestra
     def aggiorna(self):
         self.label.setFont(QFont('Times New Roman', 20))
         self.label.setAlignment(Qt.AlignCenter)
         return self.label
 
+    # Metodo che permette di effettuare una manutenzione, aggiorna la lista e salva i dati
     def call_effettua(self):
         self.controller_manutenzione.effettua_manutenzione()
         self.aggiorna()

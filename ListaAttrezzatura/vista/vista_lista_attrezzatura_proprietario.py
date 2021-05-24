@@ -6,7 +6,7 @@ from PyQt5.QtWidgets import QWidget, QHBoxLayout, QVBoxLayout, QLabel, QSpacerIt
 from Attrezzatura.vista.VistaAttrezzatura import vista_attrezzatura
 from ListaAttrezzatura.controller.controller_lista_attrezzatura import controller_lista_attrezzatura
 
-
+# Vista lista attrezzatura proprietario
 class vista_lista_attrezzatura_proprietario(QWidget):
 
     def __init__(self, callback):
@@ -51,11 +51,13 @@ class vista_lista_attrezzatura_proprietario(QWidget):
         self.setLayout(self.layout_verticale1)
         self.setWindowTitle('Lista Attrezzatura')
 
+    # Metodo che, collegato al pulsante "INDIETRO", permette di tornare alla vista precedente
     def indietro(self):
         self.callback()
         self.controller_lista_attrezzatura.salva_dati()
         self.close()
 
+    # Creazione, settaggio e stile dello sfondo
     def show_background(self, stringa):
         # Sfondo
         self.setFixedWidth(QDesktopWidget().width())
@@ -74,6 +76,7 @@ class vista_lista_attrezzatura_proprietario(QWidget):
         self.layout_verticale1.addWidget(titolo)
         self.layout_verticale1.addSpacerItem(QSpacerItem(0, 100, QSizePolicy.Fixed, QSizePolicy.Fixed))
 
+    # Creazione, settaggio e stile dei pulsanti
     def show_pulsantiera(self):
         if not self.controller_lista_attrezzatura.get_lista_filtrata() == []:
             pulsante_apri = QPushButton("Apri")
@@ -82,7 +85,8 @@ class vista_lista_attrezzatura_proprietario(QWidget):
             pulsante_apri.setFixedSize(250, 100)
             pulsante_apri.clicked.connect(self.attrezzatura_selezionata)
             self.layout_verticale2.addWidget(pulsante_apri)
-        # Punsante indietro
+
+        # Pulsante indietro
         pulsante_indietro = QPushButton("Indietro")
         pulsante_indietro.setFont(QFont('Times New Roman', 20, 100, True))
         pulsante_indietro.setStyleSheet('QPushButton {background-color: orange; color: black;}')
@@ -92,6 +96,7 @@ class vista_lista_attrezzatura_proprietario(QWidget):
         self.layout_verticale2.addSpacerItem(QSpacerItem(0, 50))
         self.layout_orizzontale.addLayout(self.layout_verticale2)
 
+    # Metodo che gestisce la situazione in cui al click del pulsante "APRI", non venga selezionato niente
     def attrezzatura_selezionata(self):
         try:
             selezionata = self.vista_lista.selectedIndexes()[0].row()
@@ -107,6 +112,7 @@ class vista_lista_attrezzatura_proprietario(QWidget):
         except:
             QMessageBox.critical(self, 'Errore!', 'Qualcosa è andato storto, riprova più tardi.', QMessageBox.Ok, QMessageBox.Ok)
 
+    # Metodo che aggiorna la finestra
     def aggiorna(self):
         vista_lista_model = QStandardItemModel(self.vista_lista)
         if self.controller_lista_attrezzatura.get_lista_attrezzatura() == []:
