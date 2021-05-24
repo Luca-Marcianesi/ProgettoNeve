@@ -10,7 +10,7 @@ from Home.vista.VistaHome import vista_home
 from ListaAccount.vista.VistaCreaAccount import vista_crea_account
 from Sessione.model.sessione import sessione
 
-
+# Vista login
 class vista_login(QWidget):
 
     def __init__(self,  parent=None):
@@ -61,13 +61,16 @@ class vista_login(QWidget):
         self.layout_orizzontale1.addSpacerItem(QSpacerItem(200, 0, QSizePolicy.Fixed, QSizePolicy.Fixed))
         self.layout_verticale1.addLayout(self.layout_orizzontale1)
 
+        # Settaggio layout toale
         self.setLayout(self.layout_verticale1)
         self.setWindowTitle("Login")
 
+    # Metodo, collegato al bottone, per creare l'account
     def crea_account(self):
         self.crea_view.show()
         self.close()
 
+    # Metodo per effettuare il login
     def entra_account(self):
         username = self.credenziali["USERNAME"].text()
         password = self.credenziali["PASSWORD"].text()
@@ -82,6 +85,7 @@ class vista_login(QWidget):
             QMessageBox.critical(self, 'Errore', 'Per favore, inserisci tutte le informazioni richieste',
                                  QMessageBox.Ok, QMessageBox.Ok)
 
+    # Creazione, settaggio e stile per una casella di testo
     def casella_testo(self, tipo):
         # Label
         label = QLabel(tipo + ":")
@@ -98,6 +102,7 @@ class vista_login(QWidget):
         self.credenziali[tipo] = casella
         return casella
 
+    # Creazione, settaggio e stile dello sfondo
     def show_background(self, stringa):
         # Sfondo
         self.setFixedWidth(800)

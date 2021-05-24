@@ -1,9 +1,13 @@
 from ListaAttrezzatura.model.ListaAttrezzatura import lista_attrezzatura
 
+# Controller lista attrezzatura
 class controller_lista_attrezzatura:
     def __init__(self):
+
+        # Prende come model la classe lista attrezzatura
         self.model = lista_attrezzatura()
 
+    # Richiama i metodi della classe lista attrezzatura
     def aggiungi_attrezzatura(self, attrezzatura):
         self.model.aggiungi_attrezzatura(attrezzatura)
 

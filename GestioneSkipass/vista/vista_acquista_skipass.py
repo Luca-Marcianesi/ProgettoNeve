@@ -4,7 +4,7 @@ from PyQt5.QtGui import QPalette, QBrush, QImage, QFont
 from PyQt5.QtWidgets import QWidget, QPushButton, QVBoxLayout, QLabel, QSizePolicy, QSpacerItem, \
     QDesktopWidget, QHBoxLayout
 from PyQt5.QtCore import Qt
-from Skipass.vista.VistaSkipass import vista_skipass
+from Skipass.vista.vista_skipass import vista_skipass
 from GestioneSkipass.controller.controller_gestione_skipass import controller_gestione_skipass
 
 # Vista acquista skipass

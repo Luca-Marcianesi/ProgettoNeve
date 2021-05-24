@@ -1,11 +1,13 @@
 from PyQt5.QtGui import QImage, QPalette, QBrush
 from PyQt5.QtWidgets import QVBoxLayout, QLabel, QLineEdit, QPushButton, QMessageBox, QWidget, QHBoxLayout
 
-
+# Vista Crea account
 class vista_crea_account(QWidget):
 
     def __init__(self, callback, controller):
         super(vista_crea_account, self).__init__()
+
+        # Definizione degli attributi
         self.callback = callback
         self.controller = controller
         self.testo = {}
@@ -14,8 +16,10 @@ class vista_crea_account(QWidget):
         self.v_layout = QVBoxLayout()
         self.h_layout = QHBoxLayout()
 
+        # Chiamata alla funzione per lo sfondo
         self.show_background()
 
+        # Creazione, settaggio e stile pulsante indietro, invia e parametri account
         self.casella_testo("Nome")
         self.casella_testo("Cognome")
         self.casella_testo("Username")
@@ -32,11 +36,12 @@ class vista_crea_account(QWidget):
         invio.clicked.connect(self.crea_account)
         self.h_layout.addWidget(invio)
 
-
+        # Settaggio layout
         self.v_layout.addLayout(self.h_layout)
         self.setLayout(self.v_layout)
         self.setWindowTitle("Nuovo Account")
 
+    # Creazione casella di testo
     def casella_testo(self, tipo):
         label = QLabel(tipo + ":")
         font = label.font()
@@ -47,6 +52,7 @@ class vista_crea_account(QWidget):
         self.v_layout.addWidget(casella)
         self.testo[tipo] = casella
 
+    # Metodo per creare l'account con gestione eccezioni
     def crea_account(self):
         nome = self.testo["Nome"].text()
         cognome = self.testo["Cognome"].text()
@@ -67,11 +73,12 @@ class vista_crea_account(QWidget):
             QMessageBox.critical(self, 'Errore!', 'Qualcosa è andato storto, riprova più tardi.', QMessageBox.Ok,
                                  QMessageBox.Ok)
 
-
+    # Metodo che, collegato al bottone "INDIETRO", permette di tornare alla vista precedente
     def indietro(self):
         self.callback()
         self.close()
 
+    # Creazione, settaggio e stile dello sfondo
     def show_background(self):
         # Sfondo
         back_img = QImage("Data/Immagini/azzurro.jpg")
@@ -80,6 +87,7 @@ class vista_crea_account(QWidget):
         palette.setBrush(10, QBrush(img))
         self.setPalette(palette)
 
+    # Metodo che controlla la validità delle informazioni inserite dall'utente
     def controlla_informazioni1(self, nome, cognome, username, password, altezza, eta, numero_scarpe):
         if self.controller.controlla_username(username) != True:
             if nome != "" and cognome != "" and username != "" and password != "" and altezza != "" and eta != "" and numero_scarpe != "":
@@ -90,7 +98,7 @@ class vista_crea_account(QWidget):
         QMessageBox.critical(self, 'Errore', 'Mi dispiace, questo username è già in uso!',QMessageBox.Ok, QMessageBox.Ok)
         return False
 
-
+    # Metodo che controlla la validità delle informazioni inserite dall'utente
     def controlla_informazioni2(self,altezza, eta, numero_scarpe):
         if int(altezza) <= 0 or int(altezza) > 220 or int(eta) <= 0 or int(eta) > 130 or int(numero_scarpe) <= 0 or int(numero_scarpe) > 50:
                 QMessageBox.critical(self, 'Errore', 'Per favore, inserisci delle informazioni reali!',QMessageBox.Ok, QMessageBox.Ok)
