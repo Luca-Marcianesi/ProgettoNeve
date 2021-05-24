@@ -29,7 +29,7 @@ class vista_parcheggio(QWidget):
             label = QLabel("POSTI DISPONIBILI:\n{}\n(prenotazione effettuata)".format(self.controller_gestione_parcheggio.get_posti_disponibili()))
 
 
-        label.setFont(QFont('Times New Roman', 30))
+        label.setFont(QFont('Times New Roman', 30,100))
         label.setStyleSheet("background-image:url(Pista/data/legno.jpg)")
         label.setAlignment(Qt.AlignCenter)
         self.layout_orizzontale.addSpacerItem(QSpacerItem(600, 500, QSizePolicy.Fixed, QSizePolicy.Fixed))
@@ -60,7 +60,7 @@ class vista_parcheggio(QWidget):
 
         titolo =QLabel(titolo)
         titolo.setAlignment(Qt.AlignCenter)
-        titolo.setFont(QFont('Times New Roman', 60))
+        titolo.setFont(QFont('Times New Roman', 60,True))
         titolo.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Maximum)
         self.layout_verticale.addSpacerItem(QSpacerItem(0, 50, QSizePolicy.Fixed, QSizePolicy.Fixed))
         self.layout_verticale.addWidget(titolo)
@@ -106,10 +106,11 @@ class vista_richiesta_giorni(QWidget):
         self.setFixedSize(400,300)
 
 
-        label = QLabel("NUMERO GIORNI DA PRENOTARE:")
+        label = QLabel("NUMERO GIORNI DA PRENOTARE:\n(max 5)")
         label.setFont(QFont('Times New Roman', 10))
         label.setSizePolicy(300, 300)
         self.giorni = QSpinBox(self)
+        self.giorni.lineEdit().setReadOnly(True)   # impedisce al utente di inserire da tastiera i giorni
         self.giorni.setFont(QFont('Times New Roman', 20))
         self.giorni.setAlignment(Qt.AlignCenter)
         self.giorni.setFixedSize(100,50)

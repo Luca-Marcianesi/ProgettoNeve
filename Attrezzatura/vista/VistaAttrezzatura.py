@@ -29,7 +29,7 @@ class vista_attrezzatura(QWidget):
         label = QLabel("Nome: {}".format(self.controller.get_nome()) + "\n"
                        "Lunghezza: {}".format(self.controller.get_dimensioni()) + " cm" + "\n"
                        "Stato: {}".format(self.stato_attrezzatura()))
-        label.setFont(QFont('Times New Roman', 30))
+        label.setFont(QFont('Times New Roman', 30,75))
         label.setStyleSheet("background-image:url(Attrezzatura/data/legno.jpg)")
         label.setAlignment(Qt.AlignCenter)
         label.setFixedSize(500, 200)

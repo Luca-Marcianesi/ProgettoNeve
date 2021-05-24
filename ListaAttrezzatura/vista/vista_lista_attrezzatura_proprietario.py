@@ -113,7 +113,7 @@ class vista_lista_attrezzatura_proprietario(QWidget):
             label = QLabel(" Non ci sono oggetti disponibili")
             label.setAlignment(Qt.AlignCenter)
             label.setFont(QFont('Times New Roman', 25, 100))
-            label.setStyleSheet('QLabel {background-color: white; color: black;}')
+            label.setStyleSheet('QLabel {background-color: lightBlue; color: black;}')
             label.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Maximum)
             self.layout_orizzontale.addSpacerItem(QSpacerItem(0, 50))
             return label
