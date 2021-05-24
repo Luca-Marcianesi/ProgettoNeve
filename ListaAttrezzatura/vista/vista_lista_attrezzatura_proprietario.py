@@ -1,5 +1,5 @@
 from PyQt5.QtCore import Qt
-from PyQt5.QtGui import QFont, QBrush, QPalette, QImage, QStandardItemModel, QStandardItem
+from PyQt5.QtGui import QFont, QBrush, QPalette, QImage, QStandardItemModel, QStandardItem, QColor
 from PyQt5.QtWidgets import QWidget, QHBoxLayout, QVBoxLayout, QLabel, QSpacerItem, \
     QSizePolicy, QListView, QPushButton, QDesktopWidget, QMessageBox
 
@@ -110,18 +110,23 @@ class vista_lista_attrezzatura_proprietario(QWidget):
     def aggiorna(self):
         vista_lista_model = QStandardItemModel(self.vista_lista)
         if self.controller_lista_attrezzatura.get_lista_attrezzatura() == []:
-            label = QLabel(" Non ci sono oggetti disponibili adatti\nalle tue caratteristiche")
+            label = QLabel(" Non ci sono oggetti disponibili")
             label.setAlignment(Qt.AlignCenter)
             label.setFont(QFont('Times New Roman', 25, 100))
             label.setStyleSheet('QLabel {background-color: white; color: black;}')
             label.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Maximum)
             self.layout_orizzontale.addSpacerItem(QSpacerItem(0, 50))
             return label
-
         else:
             for attrezzatura in self.controller_lista_attrezzatura.get_lista_attrezzatura():
                 item = QStandardItem()
                 nome = attrezzatura.get_nome()
+                b = QBrush()
+                if attrezzatura.get_stato() == True:
+                    b.setColor(QColor('grenn'))
+                else :
+                    b.setColor(QColor('orange'))
+                item.setBackground(b)
                 item.setText(nome)
                 item.setEditable(False)
                 item.setFont(QFont('Times New Roman', 30, 100))
