@@ -1,16 +1,16 @@
 from PyQt5.QtCore import Qt
-from PyQt5.QtGui import QFont, QBrush, QPalette, QImage, QStandardItemModel, QStandardItem
+from PyQt5.QtGui import QFont, QBrush, QPalette, QImage, QStandardItemModel, QStandardItem, QColor
 from PyQt5.QtWidgets import QWidget, QHBoxLayout, QVBoxLayout, QLabel, QSpacerItem, \
     QSizePolicy, QListView, QPushButton, QDesktopWidget, QMessageBox
 from ElencoManutenzioni.controller.controlle_elenco_manutenzioni import controller_elenco_manutenzioni
 from datetime import date
-
 from Manutenzioni.vista.VistaManutenzione import vista_manutenzione
+
 
 # Vista lista manutenzioni
 class vista_lista_manutenzioni(QWidget):
 
-    def __init__(self,callback):
+    def __init__(self, callback):
         super(vista_lista_manutenzioni, self).__init__()
 
         # Attributi
@@ -19,8 +19,6 @@ class vista_lista_manutenzioni(QWidget):
         self.layout_verticale1 = QVBoxLayout()
         self.layout_orizzontale = QHBoxLayout()
         self.layout_verticale2 = QVBoxLayout()
-
-
 
         # Sfondo
         self.show_background("ELENCO MANUTENZIONI")
@@ -45,7 +43,7 @@ class vista_lista_manutenzioni(QWidget):
         self.layout_orizzontale.addSpacerItem(QSpacerItem(150, 0))
         self.layout_verticale1.addLayout(self.layout_orizzontale)
 
-        self.layout_verticale1.addSpacerItem(QSpacerItem(0,400))
+        self.layout_verticale1.addSpacerItem(QSpacerItem(0, 400))
 
         # Impostazione layout totale
         self.setLayout(self.layout_verticale1)
@@ -60,14 +58,22 @@ class vista_lista_manutenzioni(QWidget):
             scadenza = manutenzione.get_prossima_scadenza()
             nome = manutenzione.get_nome()
             stringa = str(nome)
+
             if oggi > scadenza:
+                item.setForeground(QColor(255, 0, 0))
                 stringa += " [URGENTE]"
+            if scadenza == oggi:
+                item.setForeground(QColor(255, 200, 0))
+            elif scadenza > oggi:
+                item.setForeground(QColor(0, 255, 0))
+
             item.setText(stringa)
             item.setEditable(False)
             item.setFont(QFont('Times New Roman', 25, 100))
             item.setTextAlignment(Qt.AlignCenter)
             vista_lista_model.appendRow(item)
         self.vista_elenco.setModel(vista_lista_model)
+        self.vista_elenco.setStyleSheet("background-color: black")
         return self.vista_elenco
 
     # Metodo che permette, cliccando il bottone "indietro", di tornare alla vista precedente
@@ -89,6 +95,7 @@ class vista_lista_manutenzioni(QWidget):
 
         # Titolo
         titolo = QLabel(stringa)
+        titolo.setStyleSheet("color: white")
         titolo.setAlignment(Qt.AlignCenter)
         titolo.setFont(QFont('Times New Roman', 60))
         self.layout_verticale1.addSpacerItem(QSpacerItem(0, 50, QSizePolicy.Fixed, QSizePolicy.Fixed))
@@ -98,16 +105,16 @@ class vista_lista_manutenzioni(QWidget):
     # Creazione, settaggio e stile dei pulsanti
     def show_pulsantiera(self):
 
-        pulsante_apri = self.pulsante("Apri",self.manutenzione_selezionata)
+        pulsante_apri = self.pulsante("Apri", self.manutenzione_selezionata)
         self.layout_verticale2.addWidget(pulsante_apri)
 
         # Punsante indietro
-        pulsante_indietro = self.pulsante("Indietro",self.indietro)
+        pulsante_indietro = self.pulsante("Indietro", self.indietro)
         self.layout_verticale2.addWidget(pulsante_indietro)
         self.layout_verticale2.addSpacerItem(QSpacerItem(0, 50))
 
     # Metodo per la creazione di un pulsante
-    def pulsante(self,nome,call):
+    def pulsante(self, nome, call):
         pulsante = QPushButton(nome)
         pulsante.setFont(QFont('Times New Roman', 20, 100, True))
         pulsante.setStyleSheet('QPushButton {background-color: orange; color: black;}')

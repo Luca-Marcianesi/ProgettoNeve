@@ -23,6 +23,7 @@ class vista_attrezzatura(QWidget):
         # Sfondo
         self.show_background("ATTREZZATURA")
 
+        # Spaziatura orizzontale
         self.layout_orizzontale.addSpacerItem(QSpacerItem(500, 0))
 
         # Descrizione Pista, aggiunta al layout e spaziatura
@@ -40,7 +41,6 @@ class vista_attrezzatura(QWidget):
         # Pulsante Indietro allineato
         self.show_pulsantiera()
         self.layout_orizzontale.addLayout(self.layout_verticale2)
-
         self.layout_orizzontale.addSpacerItem(QSpacerItem(500, 0))
 
         # Impostazione layout totale
