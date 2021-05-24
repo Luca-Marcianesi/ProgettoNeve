@@ -126,6 +126,5 @@ class vista_lista_attrezzatura(QWidget):
                 item.setEditable(False)
                 item.setFont(QFont('Times New Roman', 30, 100))
                 vista_lista_model.appendRow(item)
-                vista_lista_model.setStyleSheet('QStandardItem{background-color: lightBlue; color: black;}')
             self.vista_lista.setModel(vista_lista_model)
             return self.vista_lista
