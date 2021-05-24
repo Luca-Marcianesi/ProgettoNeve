@@ -25,7 +25,7 @@ class vista_pista(QWidget):
                         "Difficoltà => {}\n".format(self.controller_pista.get_difficolta()) + "\n"
                         "Stato => {}\n".format(self.controller_pista.get_stato()) + "\n")
         label.setFont(QFont('Times New Roman', 30,100))
-        label.setStyleSheet('QLabel{background-color: transparent; color: lightBlue;}')
+        label.setStyleSheet('QLabel{background-color: transparent; color: black;}')
         self.layout_orizzontale.addSpacerItem(QSpacerItem(200, 0, QSizePolicy.Fixed, QSizePolicy.Fixed))
         self.layout_orizzontale.addWidget(label)
         self.layout_orizzontale.addSpacerItem(QSpacerItem(200, 0, QSizePolicy.Fixed, QSizePolicy.Fixed))
@@ -34,9 +34,6 @@ class vista_pista(QWidget):
 
 
         self.layout_verticale.addLayout(self.layout_orizzontale2)
-
-        #Indietro allineati
-        self.show_pulsantiera()
 
         self.layout_verticale.addSpacerItem(QSpacerItem(0, 50, QSizePolicy.Fixed, QSizePolicy.Fixed))
         # Impostazione layout totale
@@ -52,7 +49,7 @@ class vista_pista(QWidget):
 
     def show_background(self, stringa):
         # Sfondo
-        back_img = QImage("Data/Immagini/5.jpg")
+        back_img = QImage("Data/Immagini/6.jpg")
         img = back_img.scaled(self.width(), self.height())
         palette = QPalette()
         palette.setBrush(10, QBrush(img))
@@ -64,14 +61,6 @@ class vista_pista(QWidget):
         titolo.setFont(QFont('Times New Roman', 40,100))
         titolo.setStyleSheet('QLabel {background-color: transparent; color: orange;}')
         titolo.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Maximum)
-        self.layout_verticale.addSpacerItem(QSpacerItem(0, 50, QSizePolicy.Fixed, QSizePolicy.Fixed))
+        self.layout_verticale.addSpacerItem(QSpacerItem(0, 20, QSizePolicy.Fixed, QSizePolicy.Fixed))
         self.layout_verticale.addWidget(titolo)
-
-    def show_pulsantiera(self):
-        # Punsante indietro
-        pulsante_indietro = QPushButton("INDIETRO")
-        pulsante_indietro.setFont(QFont('Times New Roman', 18,100, True))
-        pulsante_indietro.setStyleSheet('background-color: orange')
-        pulsante_indietro.setFixedSize(150, 70)
-        pulsante_indietro.clicked.connect(self.indietro)
-        self.layout_orizzontale2.addWidget(pulsante_indietro)
+        self.layout_verticale.addSpacerItem(QSpacerItem(0, 50, QSizePolicy.Fixed, QSizePolicy.Fixed))
