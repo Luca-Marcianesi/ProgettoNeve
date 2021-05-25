@@ -2,7 +2,7 @@ import json
 import os
 import pickle
 
-from Pista.model.pista import pista
+from Pista.model.pista import Pista
 
 # Classe lista piste
 class lista_piste:
@@ -63,4 +63,4 @@ class lista_piste:
                 lista_piste_inizio = json.load(file)
             for pista_da_caricare in lista_piste_inizio:
                 self.aggiungi_pista(
-                    pista(pista_da_caricare["nome"], pista_da_caricare["colore"], pista_da_caricare["stato"]))
+                    Pista(pista_da_caricare["nome"], pista_da_caricare["colore"], pista_da_caricare["stato"]))

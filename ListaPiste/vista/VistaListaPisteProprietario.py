@@ -3,8 +3,8 @@ from PyQt5.QtGui import QFont, QBrush, QPalette, QImage
 from PyQt5.QtWidgets import QWidget, QHBoxLayout, QVBoxLayout, QSpacerItem, QSizePolicy, QPushButton, \
     QDesktopWidget, QGridLayout
 from ListaPiste.controller.controller_lista_piste import controller_lista_piste
-from Pista.vista.VistaPistaProprietario import vista_pista_proprietario
-from Pista.vista.VistaPistaProprietario import vista_pista_proprietario
+from Pista.vista.VistaPistaProprietario import VistaPistaProprietario
+from Pista.vista.VistaPistaProprietario import VistaPistaProprietario
 
 
 class vista_lista_piste_proprietario(QWidget):
@@ -123,10 +123,10 @@ class vista_lista_piste_proprietario(QWidget):
 
     # Metodo che chiama e mostra la vista pista
     def call_vista_pista_proprietario(self, pista):
-        self.vista_pista_proprietario = vista_pista_proprietario(pista,
-                                                                 self.showFullScreen,
-                                                                 self.controller.salva_dati,
-                                                                 self.aggiorna)
+        self.vista_pista_proprietario = VistaPistaProprietario(pista,
+                                                               self.showFullScreen,
+                                                               self.controller.salva_dati,
+                                                               self.aggiorna)
         self.vista_pista_proprietario.showFullScreen()
         self.close()
 
