@@ -3,8 +3,7 @@ from PyQt5.QtGui import QImage, QPalette, QBrush, QFont, QStandardItem, QStandar
 from PyQt5.QtWidgets import QWidget, QVBoxLayout, QDesktopWidget, QLabel, QSpacerItem, QTableWidget, QTableWidgetItem, \
     QHBoxLayout, QSizePolicy, QPushButton, QListView, QMessageBox, QAbstractItemDelegate, QAbstractItemView
 
-from ElencoDipendenti.controller.controller_gestione_dipendenti import controller_elenco_dipendenti
-from ElencoDipendenti.vista.VistaElencoDipendenti import vista_elenco_dipendenti
+from ElencoDipendenti.controller.controller_gestione_dipendenti import ControllerElencoDipendenti
 
 
 class vista_tabella_orari(QWidget):
@@ -124,7 +123,7 @@ class vista_aggiungi(QWidget):
         self.colonna = colonna
 
         # Controller
-        self.controller_gestione_dipendenti = controller_elenco_dipendenti()
+        self.controller_gestione_dipendenti = ControllerElencoDipendenti()
 
         # Layout
         self.layout_verticale1 = QVBoxLayout()
