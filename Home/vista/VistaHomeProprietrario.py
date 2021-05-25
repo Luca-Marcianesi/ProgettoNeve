@@ -7,7 +7,7 @@ from ListaAttrezzatura.vista.VistaListaAttrezzatura import vista_lista_attrezzat
 from ListaPiste.vista.VistaListaPisteProprietario import vista_lista_piste_proprietario
 from Sessione.vista.VistaAccountLoggato import vista_account_loggato
 from ElencoManutenzioni.vista.vista_lista_manutenzioni import vista_lista_manutenzioni
-from ListaAttrezzatura.vista.vista_lista_attrezzatura_proprietario import vista_lista_attrezzatura_proprietario
+from ListaAttrezzatura.vista.vistalistaattrezzaturaproprietario import VistaListaAttrezzaturaProprietario
 
 # Classe vista home proprietario
 class vista_home_proprietario(QWidget):
@@ -122,7 +122,7 @@ class vista_home_proprietario(QWidget):
 
     # Metodo che chiama e mostra la vista attrezzatura
     def call_attrezzatura(self):
-        self.vista_attrezzatura = vista_lista_attrezzatura_proprietario(self.showFullScreen)
+        self.vista_attrezzatura = VistaListaAttrezzaturaProprietario(self.showFullScreen)
         self.vista_attrezzatura.showFullScreen()
         self.close()
 

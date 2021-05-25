@@ -7,7 +7,7 @@ from Sessione.model.sessione import sessione
 from Prenotazione.model.prenotazione import prenotazione
 
 # Classe lista attrezzatura
-class lista_attrezzatura:
+class ListaAttrezzatura:
     def __init__(self):
         self.lista_attrezzatura = []
         self.leggi_dati()
@@ -29,9 +29,9 @@ class lista_attrezzatura:
     # Metodo per leggere i dati dal pickle se esiste o dal json
     def leggi_dati(self):
         if os.path.isfile('ListaAttrezzatura/data/lista_attrezzatura.pickle'):
-            with open('ListaAttrezzatura/data/lista_attrezzatura.pickle',"rb") as file:
+            with open('ListaAttrezzatura/data/lista_attrezzatura.pickle', "rb") as file:
                 self.lista_attrezzatura = pickle.load(file)
-        else :
+        else:
                 with open("ListaAttrezzatura/data/lista_attrezzatura.json") as file:
                     lista_attrezzatura = json.load(file)
                 for attrezzatura_da_caricare in lista_attrezzatura:
@@ -61,13 +61,13 @@ class lista_attrezzatura:
         return lista_filtrata
 
     # Metodo che confronta le dimensioni de ogni attrezzo con le caratteristiche del cliente
-    def filtra_dimenisoni(self,dim_attrezzo,numero_scarpe_persona,altezza_persona):
+    def filtra_dimenisoni(self, dim_attrezzo, numero_scarpe_persona, altezza_persona):
         if int(dim_attrezzo) == int(numero_scarpe_persona) or int(dim_attrezzo) == int(altezza_persona):
             return True
         return False
 
     # Metodo per prenotare l'attrezzatura
-    def prenota_attrezzatura(self,attrezzatura):
+    def prenota_attrezzatura(self, attrezzatura):
         if sessione.controlla_prenotazione_effettuata(attrezzatura.get_codice()):
             scadenza = date.today() + timedelta(days=int(1))
             attrezzatura.prenota(scadenza)
@@ -79,7 +79,7 @@ class lista_attrezzatura:
     # Metodo per eliminare le prenotazioni scadute
     def elimina_prenotazione_scadute(self):
         for attrezzo in self.lista_attrezzatura:
-            if attrezzo.get_scadenza() != None:
+            if attrezzo.get_scadenza() is not None:
                 oggi = date.today()
                 controllare = attrezzo.get_scadenza()
                 if controllare < oggi:

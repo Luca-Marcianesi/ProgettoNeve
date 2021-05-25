@@ -5,13 +5,14 @@ from PyQt5.QtWidgets import QWidget, QHBoxLayout, QVBoxLayout, QLabel, QSpacerIt
 
 from Attrezzatura.vista.VistaAttrezzaturaProprietario import vista_attrezzatura_proprietario
 from ListaAttrezzatura.controller.controller_lista_attrezzatura import controller_lista_attrezzatura
-from Attrezzatura.vista.VistaAggiungiAttrezzatura import vista_aggiungi_attrezzatura
+from Attrezzatura.vista.VistaAggiungiAttrezzatura import VistaAggiungiAttrezzatura
 
 # Vista lista attrezzatura proprietario
-class vista_lista_attrezzatura_proprietario(QWidget):
 
+
+class VistaListaAttrezzaturaProprietario(QWidget):
     def __init__(self, callback):
-        super(vista_lista_attrezzatura_proprietario, self).__init__()
+        super(VistaListaAttrezzaturaProprietario, self).__init__()
 
         # Attributi
         self.controller_lista_attrezzatura = controller_lista_attrezzatura()
@@ -80,19 +81,17 @@ class vista_lista_attrezzatura_proprietario(QWidget):
     # Creazione, settaggio e stile dei pulsanti
     def show_pulsantiera(self):
         if not self.controller_lista_attrezzatura.get_lista_filtrata() == []:
-            pulsante_apri = self.pulsante("Apri",self.attrezzatura_selezionata)
+            pulsante_apri = self.pulsante("Apri", self.attrezzatura_selezionata)
             pulsante_apri.clicked.connect(self.attrezzatura_selezionata)
             self.layout_verticale2.addWidget(pulsante_apri)
 
-        #Pulsante aggiungi
+        # Pulsante aggiungi
         pulsante_aggiungi = self.pulsante("Aggiungi\nattreazzatura", self.aggiungi)
         self.layout_verticale2.addWidget(pulsante_aggiungi)
 
         # Pulsante indietro
-        pulsante_indietro = self.pulsante("Indietro",self.indietro)
+        pulsante_indietro = self.pulsante("Indietro", self.indietro)
         self.layout_verticale2.addWidget(pulsante_indietro)
-
-
 
         self.layout_orizzontale.addLayout(self.layout_verticale2)
 
@@ -111,9 +110,9 @@ class vista_lista_attrezzatura_proprietario(QWidget):
             for attrezzatura in self.controller_lista_attrezzatura.get_lista_attrezzatura():
                 item = QStandardItem()
                 nome = attrezzatura.get_nome()
-                if attrezzatura.get_stato() :
+                if attrezzatura.get_stato():
                     item.setForeground(QColor(0, 255, 0))
-                else :
+                else:
                     item.setForeground(QColor(255, 0, 0))
                 item.setText(nome)
                 item.setEditable(False)
@@ -122,9 +121,8 @@ class vista_lista_attrezzatura_proprietario(QWidget):
             self.vista_lista.setModel(vista_lista_model)
             return self.vista_lista
 
-
-
     # Metodo che gestisce la situazione in cui al click del pulsante "APRI", non venga selezionato niente
+
     def attrezzatura_selezionata(self):
         try:
             selezionata = self.vista_lista.selectedIndexes()[0].row()
@@ -136,12 +134,14 @@ class vista_lista_attrezzatura_proprietario(QWidget):
                                                          self.aggiorna)
             self.vista_attrezzatura.showFullScreen()
         except IndexError:
-            QMessageBox.information(self, 'Attenzione!', 'Non hai selezionato nessuna attrezzatura.', QMessageBox.Ok, QMessageBox.Ok)
+            QMessageBox.information(self, 'Attenzione!', 'Non hai selezionato nessuna attrezzatura.', QMessageBox.Ok,
+                                    QMessageBox.Ok)
         except:
-            QMessageBox.critical(self, 'Errore!', 'Qualcosa è andato storto, riprova più tardi.', QMessageBox.Ok, QMessageBox.Ok)
-
+            QMessageBox.critical(self, 'Errore!', 'Qualcosa è andato storto, riprova più tardi.', QMessageBox.Ok,
+                                 QMessageBox.Ok)
 
     # Crea un pulsante
+
     def pulsante(self, nome, call):
         pulsante = QPushButton(nome)
         pulsante.setFont(QFont('Times New Roman', 20, 100, True))
@@ -151,7 +151,7 @@ class vista_lista_attrezzatura_proprietario(QWidget):
         return pulsante
 
     def aggiungi(self):
-        self.vista_aggiungi_attrezzatura = vista_aggiungi_attrezzatura(self.showFullScreen,
+        self.vista_aggiungi_attrezzatura = VistaAggiungiAttrezzatura(self.showFullScreen,
                                                                   self.controller_lista_attrezzatura,
                                                                   self.aggiorna)
         self.vista_aggiungi_attrezzatura.show()

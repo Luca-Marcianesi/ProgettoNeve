@@ -8,10 +8,10 @@ from Attrezzatura.model.attrezzatura import attrezzatura
 
 
 # vista Crea account
-class VistaAaggiungiAttrezzatura(QWidget):
+class VistaAggiungiAttrezzatura(QWidget):
 
     def __init__(self, callback, controller_lista_attrezzatura, aggiorna):
-        super(VistaAaggiungiAttrezzatura, self).__init__()
+        super(VistaAggiungiAttrezzatura, self).__init__()
 
         # Definizione degli attributi
         self.callback = callback
