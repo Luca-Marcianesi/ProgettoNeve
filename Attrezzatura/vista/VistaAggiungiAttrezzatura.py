@@ -10,13 +10,13 @@ from Attrezzatura.model.attrezzatura import attrezzatura
 # vista Crea account
 class vista_aggiungi_attrezzatura(QWidget):
 
-    def __init__(self, callback, controller,aggiorna):
+    def __init__(self, callback, controller_lista_attrezzatura,aggiorna):
         super(vista_aggiungi_attrezzatura, self).__init__()
 
         # Definizione degli attributi
         self.callback = callback
         self.aggiorna = aggiorna
-        self.controller_lista_attrezzatura = controller
+        self.controller_lista_attrezzatura = controller_lista_attrezzatura
         self.testo = {}
         self.setFixedSize(1000,1000)
         self.layout_verticale = QVBoxLayout()
