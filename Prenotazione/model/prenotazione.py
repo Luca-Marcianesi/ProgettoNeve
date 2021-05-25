@@ -16,3 +16,6 @@ class prenotazione():
     # Metodo che restituisce la scadenza
     def get_scadenza(self):
         return self.scadenza
+
+    def get_descrizione_oggetto(self):
+        return self.oggetto.get_descrizione()
