@@ -1,8 +1,12 @@
 
+# Controller tabella orari
 class Controller_tabella_orari:
     def __init__(self, tabella_orari):
+
+        # Prende come model l'oggetto tabella orari e viene passato a costruttore
         self.model = tabella_orari
 
+    # Richiama i metodi della classe tabella orari
     def aggiungi_a_giorno(self, giorno, dipendente):
         self.model.aggiungi_a_giorno(giorno, dipendente)
 

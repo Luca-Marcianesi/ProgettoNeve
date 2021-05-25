@@ -4,11 +4,12 @@ from PyQt5.QtWidgets import QWidget, QDesktopWidget, QVBoxLayout, QHBoxLayout, Q
 from PyQt5.QtCore import Qt
 from Sessione.controller.controller_sessione import controller_sessione
 
-
+# Vista prenotazione account
 class vista_prenotazione_account(QWidget):
 
     def __init__(self, callback):
         super(vista_prenotazione_account, self).__init__()
+
         # Attributi
         self.controller = controller_sessione()
         self.callback = callback
@@ -44,10 +45,12 @@ class vista_prenotazione_account(QWidget):
         self.layout_verticale.addSpacerItem(QSpacerItem(0, 100, QSizePolicy.Expanding, QSizePolicy.Expanding))
         self.setLayout(self.layout_verticale)
 
+    # Metodo che, collegato al pulsante "INDIETRO", permette di tornare alla vista precedente
     def indietro(self):
         self.callback()
         self.close()
 
+    # Creazione, settaggio e stile sfondo
     def show_background(self, stringa):
         # Sfondo
         self.setFixedWidth(QDesktopWidget().width())

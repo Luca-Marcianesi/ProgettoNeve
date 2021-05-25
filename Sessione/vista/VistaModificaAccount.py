@@ -82,8 +82,7 @@ class vista_modifica_account(QWidget):
         altezza = self.testo["ALTEZZA"].text()
         numero_scarpe = self.testo["NUMERO DI SCARPE"].text()
         try:
-            if self.controlla_informazioni1(altezza, eta, numero_scarpe, password) \
-               and self.controlla_informazioni2(altezza, eta, numero_scarpe):
+            if self.controlla_informazioni(password, eta, altezza, numero_scarpe):
                 self.controller_sessione.cambia_password(password)
                 self.controller_sessione.cambia_eta(eta)
                 self.controller_sessione.cambia_altezza(altezza)
@@ -139,8 +138,7 @@ class vista_modifica_account(QWidget):
         if password == "" and eta == "" and altezza == "" and numero_scarpe == "":
             QMessageBox.critical(self, 'Errore', 'Per favore, inserisci tutte le informazioni richieste',QMessageBox.Ok, QMessageBox.Ok)
             return False
-        elif int(altezza) < 50 or int(altezza) > 220 or int(eta) <= 5 or int(eta) > 130 or int(
-                    numero_scarpe) <= 20 or int(numero_scarpe) > 50:
+        elif int(altezza) < 50 or int(altezza) > 220 or int(eta) <= 5 or int(eta) > 130 or int(numero_scarpe) <= 20 or int(numero_scarpe) > 50:
             QMessageBox.critical(self, 'Errore', 'Per favore, inserisci delle informazioni reali!',QMessageBox.Ok, QMessageBox.Ok)
             return False
         else:

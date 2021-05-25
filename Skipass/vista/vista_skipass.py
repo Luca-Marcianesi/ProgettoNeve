@@ -4,7 +4,7 @@ from PyQt5.QtWidgets import QWidget, QHBoxLayout, QVBoxLayout, QSpacerItem, QSiz
 from PyQt5.QtCore import Qt
 from Sessione.model.sessione import sessione
 
-
+# Vista skipass
 class vista_skipass(QWidget):
     def __init__(self, skipass, callback, controller):
         super(vista_skipass, self).__init__()
@@ -45,6 +45,7 @@ class vista_skipass(QWidget):
         self.setLayout(self.layout_verticale)
         self.setWindowTitle('Skipass')
 
+    # Creazione, settaggio e stile sfondo
     def show_background(self, titolo):
         self.setFixedWidth(QDesktopWidget().width())
         self.setFixedHeight(QDesktopWidget().height())
@@ -62,10 +63,12 @@ class vista_skipass(QWidget):
         self.layout_verticale.addWidget(titolo)
         self.layout_verticale.addSpacerItem(QSpacerItem(0, 50, QSizePolicy.Fixed, QSizePolicy.Fixed))
 
+    # Metodo che, collegato al pulsante "INDIETRO", permette di tornare alla vista precedente
     def indietro(self):
         self.callback()
         self.close()
 
+    # Metodo che crea un bottone generico
     def crea_bottone(self, tipo, layout):
         bottone = QPushButton(tipo)
         bottone.setFixedSize(300, 100)
@@ -74,6 +77,7 @@ class vista_skipass(QWidget):
         layout.addWidget(bottone)
         return bottone
 
+    # Metodo che richiama la vista prenotazione con controllo
     def call_prenotazione(self):
         if self.controller_skipass.controlla_skipass_acquistato():
             QMessageBox.information(self, 'Prenotazione', 'Hai già prenotato uno skipass', QMessageBox.Ok,
