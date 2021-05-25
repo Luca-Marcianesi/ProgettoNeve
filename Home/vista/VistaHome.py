@@ -2,7 +2,7 @@ from PyQt5.QtGui import QPalette, QBrush, QImage, QFont, QPixmap
 from PyQt5.QtWidgets import QWidget, QPushButton, QVBoxLayout, QLabel, QSpacerItem, QDesktopWidget, QHBoxLayout
 
 from Home.Informazioni.vista_informazioni import vista_informazioni
-from ListaAttrezzatura.vista.VistaListaAttrezzatura import vista_lista_attrezzatura
+from ListaAttrezzatura.vista.VistaListaAttrezzatura import VistaListaAttrezzatura
 from ListaPiste.vista.VistaListaPiste import VistaListaPiste
 from Sessione.vista.VistaAccountLoggato import VistaAccountLoggato
 from GestioneParcheggi.vista.vista_parcheggio import vista_parcheggio
@@ -105,7 +105,7 @@ class vista_home(QWidget):
 
     # Metodo che chiama e mostra la classe noleggia attrezzatura
     def call_noleggia_attrezzatura(self):
-        self.vista_lista_attrezzatura = vista_lista_attrezzatura(self.showFullScreen)
+        self.vista_lista_attrezzatura = VistaListaAttrezzatura(self.showFullScreen)
         self.vista_lista_attrezzatura.showFullScreen()
         self.close()
 

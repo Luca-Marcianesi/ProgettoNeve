@@ -3,7 +3,7 @@ from PyQt5.QtWidgets import QWidget, QPushButton, QVBoxLayout, QLabel, QSizePoli
     QDesktopWidget, QHBoxLayout
 
 from ElencoDipendenti.vista.VistaElencoDipendenti import vista_elenco_dipendenti
-from ListaAttrezzatura.vista.VistaListaAttrezzatura import vista_lista_attrezzatura
+from ListaAttrezzatura.vista.VistaListaAttrezzatura import VistaListaAttrezzatura
 from ListaPiste.vista.VistaListaPisteProprietario import VistaListaPisteProprietario
 from Sessione.vista.VistaAccountLoggato import VistaAccountLoggato
 from ElencoManutenzioni.vista.vista_lista_manutenzioni import vista_lista_manutenzioni
@@ -104,7 +104,7 @@ class vista_home_proprietario(QWidget):
 
     # Metodo che chiama e mostra la vista modifica attrezzatura
     def call_modifica_attrezzatura(self):
-        self.vista_lista_attrezzatura = vista_lista_attrezzatura(self.showFullScreen)
+        self.vista_lista_attrezzatura = VistaListaAttrezzatura(self.showFullScreen)
         self.vista_lista_attrezzatura.showFullScreen()
         self.close()
 

@@ -4,7 +4,7 @@ from PyQt5.QtWidgets import QWidget, QHBoxLayout, QVBoxLayout, QLabel, QSpacerIt
     QSizePolicy, QListView, QPushButton, QDesktopWidget, QMessageBox
 
 from Attrezzatura.vista.VistaAttrezzaturaProprietario import vista_attrezzatura_proprietario
-from ListaAttrezzatura.controller.controller_lista_attrezzatura import controller_lista_attrezzatura
+from ListaAttrezzatura.controller.controllerlistaattrezzatura import ControllerListaAttrezzatura
 from Attrezzatura.vista.VistaAggiungiAttrezzatura import VistaAggiungiAttrezzatura
 
 # Vista lista attrezzatura proprietario
@@ -15,7 +15,7 @@ class VistaListaAttrezzaturaProprietario(QWidget):
         super(VistaListaAttrezzaturaProprietario, self).__init__()
 
         # Attributi
-        self.controller_lista_attrezzatura = controller_lista_attrezzatura()
+        self.controller_lista_attrezzatura = ControllerListaAttrezzatura()
         self.callback = callback
         self.layout_verticale1 = QVBoxLayout()
         self.layout_orizzontale = QHBoxLayout()
@@ -128,10 +128,9 @@ class VistaListaAttrezzaturaProprietario(QWidget):
             selezionata = self.vista_lista.selectedIndexes()[0].row()
             lista = self.controller_lista_attrezzatura.get_lista_attrezzatura()
             attrezzatura = lista[selezionata]
-            self.vista_attrezzatura = vista_attrezzatura_proprietario(self.showFullScreen,
-                                                         attrezzatura,
-                                                         self.controller_lista_attrezzatura.rimuovi_attrezzatura,
-                                                         self.aggiorna)
+            self.vista_attrezzatura = vista_attrezzatura_proprietario(
+                self.showFullScreen, attrezzatura, self.controller_lista_attrezzatura.rimuovi_attrezzatura,
+                self.aggiorna)
             self.vista_attrezzatura.showFullScreen()
         except IndexError:
             QMessageBox.information(self, 'Attenzione!', 'Non hai selezionato nessuna attrezzatura.', QMessageBox.Ok,
@@ -151,7 +150,6 @@ class VistaListaAttrezzaturaProprietario(QWidget):
         return pulsante
 
     def aggiungi(self):
-        self.vista_aggiungi_attrezzatura = VistaAggiungiAttrezzatura(self.showFullScreen,
-                                                                  self.controller_lista_attrezzatura,
-                                                                  self.aggiorna)
+        self.vista_aggiungi_attrezzatura = VistaAggiungiAttrezzatura(
+            self.showFullScreen, self.controller_lista_attrezzatura, self.aggiorna)
         self.vista_aggiungi_attrezzatura.show()

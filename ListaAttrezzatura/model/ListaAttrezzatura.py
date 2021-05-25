@@ -2,11 +2,13 @@ import json
 import os
 import pickle
 from datetime import date, timedelta
-from Attrezzatura.model.attrezzatura import attrezzatura
+from Attrezzatura.model.attrezzatura import Attrezzatura
 from Sessione.model.sessione import Sessione
 from Prenotazione.model.prenotazione import Prenotazione
 
 # Classe lista attrezzatura
+
+
 class ListaAttrezzatura:
     def __init__(self):
         self.lista_attrezzatura = []
@@ -32,11 +34,12 @@ class ListaAttrezzatura:
             with open('ListaAttrezzatura/data/lista_attrezzatura.pickle', "rb") as file:
                 self.lista_attrezzatura = pickle.load(file)
         else:
-                with open("ListaAttrezzatura/data/lista_attrezzatura.json") as file:
-                    lista_attrezzatura = json.load(file)
+            with open("ListaAttrezzatura/data/lista_attrezzatura.json") as file:
+                lista_attrezzatura = json.load(file)
                 for attrezzatura_da_caricare in lista_attrezzatura:
                     self.aggiungi_attrezzatura(
-                        attrezzatura(attrezzatura_da_caricare["codice"], attrezzatura_da_caricare["nome"], attrezzatura_da_caricare["dimensioni"]))
+                        Attrezzatura(attrezzatura_da_caricare["codice"], attrezzatura_da_caricare["nome"],
+                                     attrezzatura_da_caricare["dimensioni"]))
 
     # Metodo che restituisce la lista dell'attrezzatura
     def get_lista_attrezzatura(self):
@@ -49,11 +52,12 @@ class ListaAttrezzatura:
         flag = True
         for attrezzatura in self.lista_attrezzatura:
             if attrezzatura.get_stato():
-                if self.filtra_dimenisoni(attrezzatura.get_dimensioni(), Sessione.get_numero_scarpe(), Sessione.get_altezza()):
+                if self.filtra_dimenisoni(attrezzatura.get_dimensioni(), Sessione.get_numero_scarpe(),
+                                          Sessione.get_altezza()):
                     if Sessione.get_lista_prenotazioni() != []:
-                            for prenotazione in Sessione.get_lista_prenotazioni():
-                                if prenotazione.get_codice_oggetto() == attrezzatura.get_codice():
-                                    flag = False
+                        for prenotazione in Sessione.get_lista_prenotazioni():
+                            if prenotazione.get_codice_oggetto() == attrezzatura.get_codice():
+                                flag = False
                             if flag:
                                 lista_filtrata.append(attrezzatura)
                     else:
