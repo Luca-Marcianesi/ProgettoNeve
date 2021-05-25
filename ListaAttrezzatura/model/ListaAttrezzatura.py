@@ -4,7 +4,7 @@ import pickle
 from datetime import date, timedelta
 from Attrezzatura.model.attrezzatura import attrezzatura
 from Sessione.model.sessione import Sessione
-from Prenotazione.model.prenotazione import prenotazione
+from Prenotazione.model.prenotazione import Prenotazione
 
 # Classe lista attrezzatura
 class ListaAttrezzatura:
@@ -71,7 +71,7 @@ class ListaAttrezzatura:
         if Sessione.controlla_prenotazione_effettuata(attrezzatura.get_codice()):
             scadenza = date.today() + timedelta(days=int(1))
             attrezzatura.prenota(scadenza)
-            Sessione.aggiungi_prenotazione(prenotazione(attrezzatura.get_codice(),
+            Sessione.aggiungi_prenotazione(Prenotazione(attrezzatura.get_codice(),
                                                         scadenza,
                                                         attrezzatura))
             return "Prenotazione effettuata"

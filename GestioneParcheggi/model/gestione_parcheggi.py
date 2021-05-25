@@ -4,7 +4,7 @@ import pickle
 from datetime import date, timedelta
 
 from Sessione.model.sessione import Sessione
-from Prenotazione.model.prenotazione import prenotazione
+from Prenotazione.model.prenotazione import Prenotazione
 from Parcheggio.model.parcheggio import parcheggio
 
 # Classe gestione parcheggi
@@ -25,7 +25,7 @@ class gestione_parcheggi:
                     if parcheggio.get_stato():
                         scadenza = date.today() + timedelta(days = int(numero_giorni))
                         parcheggio.prenota(scadenza)
-                        Sessione.aggiungi_prenotazione(prenotazione(parcheggio.get_codice(), scadenza, parcheggio))
+                        Sessione.aggiungi_prenotazione(Prenotazione(parcheggio.get_codice(), scadenza, parcheggio))
                         Sessione.salva_dati()
                         self.salva_dati()
                         return "Prenotazione effettuata"
