@@ -7,7 +7,7 @@ from ElencoDipendenti.controller.controller_gestione_dipendenti import controlle
 from ElencoDipendenti.vista.vista_informazioni_dipendente import vista_informazioni
 from ElencoDipendenti.vista.vista_aggiungi_dipendente import vista_aggiungi_dipendente
 
-# Vista elenco dipendenti
+# vista elenco dipendenti
 class vista_elenco_dipendenti(QWidget):
 
     def __init__(self, callback):

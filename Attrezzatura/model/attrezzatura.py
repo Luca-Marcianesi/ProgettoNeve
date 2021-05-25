@@ -15,12 +15,12 @@ class attrezzatura:
 
     # Metodo per prenotare l'attrezzatura
     def prenota(self,scadenza):
-        self.scdenza = scadenza
+        self.scadenza = scadenza
         self.stato = False
 
     # Metodo che restituisce la scadenza della prenotazione
     def get_scadenza(self):
-        return self.scdenza
+        return self.scadenza
 
     # Metodo che restituisce il nome dell'attrezzatura
     def get_nome(self):

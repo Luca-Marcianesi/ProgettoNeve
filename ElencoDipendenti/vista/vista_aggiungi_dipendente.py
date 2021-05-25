@@ -3,7 +3,7 @@ from PyQt5.QtWidgets import QMessageBox, QLineEdit, QLabel, QPushButton, QHBoxLa
 
 from Dipendenti.model.dipendente import dipendente
 
-# Vista aggiungi dipendente
+# vista aggiungi dipendente
 class vista_aggiungi_dipendente(QWidget):
 
     def __init__(self, callback, controller,aggiorna):

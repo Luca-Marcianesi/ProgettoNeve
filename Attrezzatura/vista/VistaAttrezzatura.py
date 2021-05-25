@@ -5,7 +5,8 @@ from PyQt5.QtWidgets import QWidget, QVBoxLayout, QHBoxLayout, QSpacerItem, QSiz
 from Attrezzatura.controller.controller_attrezzatura import controller_attrezzatura
 from Sessione.model.sessione import sessione
 
-# Vista dell'attrezzatura
+
+# vista dell'attrezzatura
 class vista_attrezzatura(QWidget):
     def __init__(self, callback, attrezzatura, prenota, aggiorna):
         super(vista_attrezzatura, self).__init__()
@@ -30,7 +31,7 @@ class vista_attrezzatura(QWidget):
         label = QLabel("Nome: {}".format(self.controller.get_nome()) + "\n"
                        "Lunghezza: {}".format(self.controller.get_dimensioni()) + " cm" + "\n"
                        "Stato: {}".format(self.stato_attrezzatura()))
-        label.setFont(QFont('Times New Roman', 30,75))
+        label.setFont(QFont('Times New Roman', 30, 75))
         label.setStyleSheet("background-image:url(Attrezzatura/data/legno.jpg)")
         label.setAlignment(Qt.AlignCenter)
         label.setFixedSize(500, 200)
@@ -56,19 +57,18 @@ class vista_attrezzatura(QWidget):
     # Impostazione dello sfondo
     def show_background(self, stringa):
         # Sfondo
-        self.setFixedWidth(QDesktopWidget().width())
-        self.setFixedHeight(QDesktopWidget().height())
-        back_img = QImage("ListaAttrezzatura/data/1.jpg")
-        img = back_img.scaled(self.width(), self.height())
+        self.setFixedSize(QDesktopWidget().width(), QDesktopWidget().height())
+        self.setStyleSheet("background-image: ListaAttrezzatura/data/1.jpg")
+        immagine = QImage("ListaAttrezzatura/data/1.jpg")
+        immagine = immagine.scaled(self.width(), self.height())
         palette = QPalette()
-        palette.setBrush(10, QBrush(img))
+        palette.setBrush(10, QBrush(immagine))
         self.setPalette(palette)
 
         # Titolo
         titolo = QLabel(stringa)
         titolo.setAlignment(Qt.AlignCenter)
         titolo.setFont(QFont('Times New Roman', 60))
-        titolo.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Maximum)
         self.layout_verticale1.addSpacerItem(QSpacerItem(0, 60))
         self.layout_verticale1.addWidget(titolo)
         self.layout_verticale1.addSpacerItem(QSpacerItem(0, 150))
@@ -84,13 +84,22 @@ class vista_attrezzatura(QWidget):
         pulsante_indietro.setFixedSize(300, 100)
         pulsante_indietro.clicked.connect(self.indietro)
 
-        pulsante_prenota = QPushButton("Prenota")
-        pulsante_prenota.setStyleSheet('QPushButton {background-color: orange; color: black;}')
-        pulsante_prenota.setFont(QFont('Times New Roman', 30, 100, True))
-        pulsante_prenota.setFixedSize(300, 100)
-        pulsante_prenota.clicked.connect(self.prenotazione)
+        if sessione.get_permessi() is False:
+            pulsante_prenota = QPushButton("Prenota")
+            pulsante_prenota.setStyleSheet('QPushButton {background-color: orange; color: black;}')
+            pulsante_prenota.setFont(QFont('Times New Roman', 30, 100, True))
+            pulsante_prenota.setFixedSize(300, 100)
+            pulsante_prenota.clicked.connect(self.prenotazione)
+            layout_pulsanti1.addWidget(pulsante_prenota)
 
-        layout_pulsanti1.addWidget(pulsante_prenota)
+        else:
+            pulsante_modifica = QPushButton("Modifica")
+            pulsante_modifica.setStyleSheet('QPushButton {background-color: orange; color: black;}')
+            pulsante_modifica.setFont(QFont('Times New Roman', 30, 100, True))
+            pulsante_modifica.setFixedSize(300, 100)
+            pulsante_modifica.clicked.connect(self.prenotazione)
+            layout_pulsanti1.addWidget(pulsante_modifica)
+
         layout_pulsanti1.addSpacerItem(QSpacerItem(0, 100))
         layout_pulsanti1.addWidget(pulsante_indietro)
         layout_pulsanti2.addLayout(layout_pulsanti1)
@@ -110,6 +119,7 @@ class vista_attrezzatura(QWidget):
         self.vista_chiusura.show()
         self.aggiorna()
         sessione.salva_dati()
+
 
 # Classe esito -> compare una finestra una volta fatta la prenotazione
 class vista_esito(QWidget):

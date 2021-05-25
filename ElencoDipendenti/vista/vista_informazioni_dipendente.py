@@ -3,7 +3,7 @@ from PyQt5.QtWidgets import QSpacerItem, QSizePolicy, QPushButton, QLabel, QHBox
 from Dipendenti.controller.controller_dipendente import controller_dipendente
 from PyQt5.QtCore import Qt
 
-# Vista informazioni dipendente
+# vista informazioni dipendente
 class vista_informazioni(QWidget):
 
     def __init__(self, dipendente, rimuovi, salva_dati,aggiorna):
