@@ -5,9 +5,12 @@ from PyQt5.QtCore import Qt
 from Sessione.model.sessione import sessione
 
 # Vista skipass
-class vista_skipass(QWidget):
+
+
+class VistaSkipass(QWidget):
+
     def __init__(self, skipass, callback, controller):
-        super(vista_skipass, self).__init__()
+        super(VistaSkipass, self).__init__()
 
         # Attributi
         self.callback = callback
