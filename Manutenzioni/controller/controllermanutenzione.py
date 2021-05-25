@@ -1,7 +1,9 @@
 
 # Controller manutenzione
-class controller_manutenzione:
-    def __init__(self,manutenzione):
+
+
+class ControllerManutenzione:
+    def __init__(self, manutenzione):
 
         # Prende come model la classe manutenzione e il controller prende in ingresso la manutenzione
         self.model = manutenzione
