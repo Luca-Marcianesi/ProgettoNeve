@@ -7,7 +7,7 @@ class attrezzatura:
         self.stato = True
         self.nome = nome
         self.dimensioni = dimensioni
-        self.scdenza = None
+        self.scadenza = None
 
     # Metodo che restituisce il codice dell'attrezzatura
     def get_codice(self):
@@ -29,7 +29,7 @@ class attrezzatura:
     # Metodo per eliminare una prenotazione
     def elimina_prenotazione(self):
         self.set_stato((True))
-        self.scdenza = None
+        self.scadenza = None
 
     # Metodo che restituisce le dimensioni dell'attrezzatura
     def get_dimensioni(self):
