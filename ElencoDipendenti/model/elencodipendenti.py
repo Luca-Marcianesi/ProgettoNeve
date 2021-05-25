@@ -2,10 +2,12 @@ import json
 import os
 import pickle
 
-from Dipendenti.model.dipendente import dipendente
+from Dipendenti.model.dipendente import Dipendente
 
 # Classe elenco dipendenti
-class elenco_dipendenti:
+
+
+class ElencoDipendenti:
 
     def __init__(self):
 
@@ -35,9 +37,9 @@ class elenco_dipendenti:
 
     # Metodo che restituisce l'elenco con il nome dei dipendenti
     def get_lista_elenco_dipendenti_str(self):
-        elenco =""
+        elenco = ""
         for dipendente in self.elenco:
-            elenco = elenco + dipendente.nome +"\n"
+            elenco = elenco + dipendente.nome + "\n"
         return elenco
 
     # Metodo per creare il pickle contenente i dipendenti presi dall'elenco
@@ -54,5 +56,6 @@ class elenco_dipendenti:
             with open("ElencoDipendenti/data/lista_dipendenti.json") as file:
                 lista_dipendenti = json.load(file)
             for dipendenti_da_caricare in lista_dipendenti:
-                self.aggiungi_dipendente(dipendente(dipendenti_da_caricare["nome"], dipendenti_da_caricare["cognome"],
-                                 dipendenti_da_caricare["numero di telefono"]))
+                self.aggiungi_dipendente(Dipendente(dipendenti_da_caricare["nome"],
+                                                    dipendenti_da_caricare["cognome"],
+                                                    dipendenti_da_caricare["numero di telefono"]))
