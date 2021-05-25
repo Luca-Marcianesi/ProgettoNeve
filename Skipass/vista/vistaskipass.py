@@ -2,7 +2,7 @@ from PyQt5.QtGui import QFont, QBrush, QPalette, QImage
 from PyQt5.QtWidgets import QWidget, QHBoxLayout, QVBoxLayout, QSpacerItem, QSizePolicy, QPushButton, \
     QDesktopWidget, QLabel, QMessageBox
 from PyQt5.QtCore import Qt
-from Sessione.model.sessione import sessione
+from Sessione.model.sessione import Sessione
 
 # Vista skipass
 
@@ -88,4 +88,4 @@ class VistaSkipass(QWidget):
         else:
             QMessageBox.information(self, 'Prenotazione', 'Skipass prenotato!', QMessageBox.Ok, QMessageBox.Ok)
         self.controller_skipass.prenota_skipass(self.skipass)
-        sessione.salva_dati()
+        Sessione.salva_dati()

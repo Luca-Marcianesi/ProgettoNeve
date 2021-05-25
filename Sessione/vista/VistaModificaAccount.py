@@ -2,18 +2,20 @@ from PyQt5.QtGui import QFont, QImage, QPalette, QBrush
 from PyQt5.QtWidgets import QVBoxLayout, QLabel, QLineEdit, QPushButton, QMessageBox, QWidget, \
     QHBoxLayout, QSizePolicy, QSpacerItem, QDesktopWidget
 from PyQt5.QtCore import Qt
-from Sessione.controller.controller_sessione import controller_sessione
+from Sessione.controller.controllersessione import ControllerSessione
 
 # Vista modifica account
-class vista_modifica_account(QWidget):
+
+
+class VistaModificaAccount(QWidget):
 
     def __init__(self, aggiorna, callback):
-        super(vista_modifica_account, self).__init__()
+        super(VistaModificaAccount, self).__init__()
 
         # Attributi
         self.aggiorna = aggiorna
         self.callback = callback
-        self.controller_sessione = controller_sessione()
+        self.controller_sessione = ControllerSessione()
         self.layout_verticale1 = QVBoxLayout()
         self.layout_verticale2 = QVBoxLayout()
         self.layout_orizzontale1 = QHBoxLayout()
@@ -21,8 +23,7 @@ class vista_modifica_account(QWidget):
         self.testo = {}
 
         # Sfondo
-        self.show_background("MODIFICA LE \n"
-                              "CREDENZIALI")
+        self.show_background("MODIFICA LE \nCREDENZIALI")
 
         # Spaziatura
         self.layout_orizzontale2.addSpacerItem(QSpacerItem(700, 0, QSizePolicy.Fixed, QSizePolicy.Fixed))
@@ -136,10 +137,13 @@ class vista_modifica_account(QWidget):
         # Metodo che controlla la validità delle informazioni inserite dall'utente
     def controlla_informazioni(self, password, eta, altezza, numero_scarpe):
         if password == "" and eta == "" and altezza == "" and numero_scarpe == "":
-            QMessageBox.critical(self, 'Errore', 'Per favore, inserisci tutte le informazioni richieste',QMessageBox.Ok, QMessageBox.Ok)
+            QMessageBox.critical(self, 'Errore', 'Per favore, inserisci tutte le informazioni richieste',
+                                 QMessageBox.Ok, QMessageBox.Ok)
             return False
-        elif int(altezza) < 50 or int(altezza) > 220 or int(eta) <= 5 or int(eta) > 130 or int(numero_scarpe) <= 20 or int(numero_scarpe) > 50:
-            QMessageBox.critical(self, 'Errore', 'Per favore, inserisci delle informazioni reali!',QMessageBox.Ok, QMessageBox.Ok)
+        elif int(altezza) < 50 or int(altezza) > 220 or int(eta) <= 5 or int(eta) > 130 or int(numero_scarpe) <= 20 or\
+                int(numero_scarpe) > 50:
+            QMessageBox.critical(self, 'Errore', 'Per favore, inserisci delle informazioni reali!', QMessageBox.Ok,
+                                 QMessageBox.Ok)
             return False
         else:
             return True

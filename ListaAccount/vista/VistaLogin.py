@@ -8,7 +8,7 @@ from ListaAccount.controller.controller_lista_account import controller_lista_ac
 from Home.vista.VistaHome import vista_home
 
 from ListaAccount.vista.VistaCreaAccount import vista_crea_account
-from Sessione.model.sessione import sessione
+from Sessione.model.sessione import Sessione
 
 # Vista login
 class vista_login(QWidget):
@@ -75,7 +75,7 @@ class vista_login(QWidget):
         username = self.credenziali["USERNAME"].text()
         password = self.credenziali["PASSWORD"].text()
         if self.controller.login(username, password):
-            if sessione.get_permessi():
+            if Sessione.get_permessi():
                 self.accesso_proprietario.showFullScreen()
                 self.close()
             else :

@@ -3,7 +3,7 @@ import os
 import pickle
 from datetime import date, timedelta
 
-from Sessione.model.sessione import sessione
+from Sessione.model.sessione import Sessione
 from Prenotazione.model.prenotazione import prenotazione
 from Parcheggio.model.parcheggio import parcheggio
 
@@ -19,14 +19,14 @@ class gestione_parcheggi:
 
     # Metodo prenota parcheggio
     def prenota_parcheggio(self,numero_giorni):
-        if sessione.controlla_prenotazione_effettuata(self.codice_parcheggio):
+        if Sessione.controlla_prenotazione_effettuata(self.codice_parcheggio):
             if self.get_posti_disponibili() > 0:
                 for parcheggio in self.elenco_parcheggi:
                     if parcheggio.get_stato():
                         scadenza = date.today() + timedelta(days = int(numero_giorni))
                         parcheggio.prenota(scadenza)
-                        sessione.aggiungi_prenotazione(prenotazione(parcheggio.get_codice(),scadenza,parcheggio))
-                        sessione.salva_dati()
+                        Sessione.aggiungi_prenotazione(prenotazione(parcheggio.get_codice(), scadenza, parcheggio))
+                        Sessione.salva_dati()
                         self.salva_dati()
                         return "Prenotazione effettuata"
             return "Posti esauriti"

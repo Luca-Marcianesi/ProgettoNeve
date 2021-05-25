@@ -3,7 +3,7 @@ from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import QWidget, QVBoxLayout, QHBoxLayout, QSpacerItem, QSizePolicy, \
                             QDesktopWidget, QLabel, QPushButton
 from Attrezzatura.controller.controller_attrezzatura import ControllerAttrezzatura
-from Sessione.model.sessione import sessione
+from Sessione.model.sessione import Sessione
 
 # vista dell'attrezzatura
 class vista_attrezzatura(QWidget):
@@ -108,7 +108,7 @@ class vista_attrezzatura(QWidget):
         self.vista_chiusura = vista_esito(risultato)
         self.vista_chiusura.show()
         self.aggiorna()
-        sessione.salva_dati()
+        Sessione.salva_dati()
 
 
 # Classe esito -> compare una finestra una volta fatta la prenotazione

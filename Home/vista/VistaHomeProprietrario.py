@@ -5,7 +5,7 @@ from PyQt5.QtWidgets import QWidget, QPushButton, QVBoxLayout, QLabel, QSizePoli
 from ElencoDipendenti.vista.VistaElencoDipendenti import vista_elenco_dipendenti
 from ListaAttrezzatura.vista.VistaListaAttrezzatura import vista_lista_attrezzatura
 from ListaPiste.vista.VistaListaPisteProprietario import vista_lista_piste_proprietario
-from Sessione.vista.VistaAccountLoggato import vista_account_loggato
+from Sessione.vista.VistaAccountLoggato import VistaAccountLoggato
 from ElencoManutenzioni.vista.vista_lista_manutenzioni import vista_lista_manutenzioni
 from ListaAttrezzatura.vista.vistalistaattrezzaturaproprietario import VistaListaAttrezzaturaProprietario
 
@@ -98,7 +98,7 @@ class vista_home_proprietario(QWidget):
 
     # Metodo che mostra e chiama la vista account loggato
     def call_account_loggato(self):
-        self.vista_info_account = vista_account_loggato(self.showFullScreen)
+        self.vista_info_account = VistaAccountLoggato(self.showFullScreen)
         self.vista_info_account.showFullScreen()
         self.close()
 
