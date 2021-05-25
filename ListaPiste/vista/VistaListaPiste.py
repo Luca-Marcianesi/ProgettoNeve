@@ -2,17 +2,19 @@ from functools import partial
 from PyQt5.QtGui import QFont, QBrush, QPalette, QImage
 from PyQt5.QtWidgets import QWidget, QHBoxLayout, QVBoxLayout, QSpacerItem, QSizePolicy, QPushButton, \
     QDesktopWidget, QGridLayout
-from ListaPiste.controller.controller_lista_piste import controller_lista_piste
+from ListaPiste.controller.controllerlistapiste import ControllerListaPiste
 from Pista.vista.VistaPista import vista_pista
 
 # Vista lista piste
-class vista_lista_piste(QWidget):
+
+
+class VistaListaPiste(QWidget):
     def __init__(self, callback):
-        super(vista_lista_piste, self).__init__()
+        super(VistaListaPiste, self).__init__()
 
         # Attributi
         self.callback = callback
-        self.controller = controller_lista_piste()
+        self.controller = ControllerListaPiste()
         self.vista_pista = None
         self.layout_verticale1 = QVBoxLayout()
         self.layout_orizzontale = QHBoxLayout()
@@ -87,7 +89,7 @@ class vista_lista_piste(QWidget):
             bottone.setFont(QFont('Times New Roman', 18))
             if pista.get_stato() == "Aperta":
                 bottone.setStyleSheet('QPushButton {background-color: lightBlue; color: green;}')
-            else :
+            else:
                 bottone.setStyleSheet('QPushButton {background-color: lightBlue; color: red;}')
             bottone.clicked.connect(partial(self.call_vista_pista, pista))
             if colonna == 5 or colonna == 10:

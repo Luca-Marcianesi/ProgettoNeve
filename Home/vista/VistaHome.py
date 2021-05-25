@@ -3,7 +3,7 @@ from PyQt5.QtWidgets import QWidget, QPushButton, QVBoxLayout, QLabel, QSpacerIt
 
 from Home.Informazioni.vista_informazioni import vista_informazioni
 from ListaAttrezzatura.vista.VistaListaAttrezzatura import vista_lista_attrezzatura
-from ListaPiste.vista.VistaListaPiste import vista_lista_piste
+from ListaPiste.vista.VistaListaPiste import VistaListaPiste
 from Sessione.vista.VistaAccountLoggato import VistaAccountLoggato
 from GestioneParcheggi.vista.vista_parcheggio import vista_parcheggio
 from GestioneSkipass.vista.vista_acquista_skipass import vista_acquista_skipass
@@ -87,7 +87,7 @@ class vista_home(QWidget):
 
     # Metodo che chiama e mostra la vista lista piste
     def call_lista_piste(self):
-        self.vista_lista_piste = vista_lista_piste(self.show)
+        self.vista_lista_piste = VistaListaPiste(self.show)
         self.vista_lista_piste.showFullScreen()
         self.close()
 
