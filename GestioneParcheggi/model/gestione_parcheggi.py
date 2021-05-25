@@ -1,7 +1,7 @@
 import json
 import os
 import pickle
-from datetime import date, timedelta,datetime
+from datetime import date, timedelta
 
 from Sessione.model.sessione import sessione
 from Prenotazione.model.prenotazione import prenotazione
@@ -13,7 +13,7 @@ class gestione_parcheggi:
 
         # Definizione degli attributi
         self.elenco_parcheggi = []
-        self.codice_parcheggio = 6
+        self.codice_parcheggio = 2
         self.leggi_dati()
         self.elimina_scadute_prenotazioni()
 

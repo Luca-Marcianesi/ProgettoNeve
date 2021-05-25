@@ -69,7 +69,7 @@ class lista_attrezzatura:
     # Metodo per prenotare l'attrezzatura
     def prenota_attrezzatura(self,attrezzatura):
         if sessione.controlla_prenotazione_effettuata(attrezzatura.get_codice()):
-            scadenza = date.today() + timedelta(hours=int(1))
+            scadenza = date.today() + timedelta(days=int(1))
             attrezzatura.prenota(scadenza)
             sessione.aggiungi_prenotazione(prenotazione(attrezzatura.get_codice(),
                                                         scadenza,

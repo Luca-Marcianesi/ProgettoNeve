@@ -84,13 +84,16 @@ class vista_lista_attrezzatura_proprietario(QWidget):
             pulsante_apri.clicked.connect(self.attrezzatura_selezionata)
             self.layout_verticale2.addWidget(pulsante_apri)
 
+        #Pulsante aggiungi
+        pulsante_aggiungi = self.pulsante("Aggiungi\nattreazzatura", self.aggiungi)
+        self.layout_verticale2.addWidget(pulsante_aggiungi)
+
         # Pulsante indietro
         pulsante_indietro = self.pulsante("Indietro",self.indietro)
-
         self.layout_verticale2.addWidget(pulsante_indietro)
-        self.layout_verticale2.addSpacerItem(QSpacerItem(0, 50))
 
-        pulsante_aggiungi = self.pulsante("Aggiungi\nattreazzatura",self.aggiungi)
+
+
         self.layout_orizzontale.addLayout(self.layout_verticale2)
 
     # Metodo che aggiorna la finestra
@@ -151,4 +154,4 @@ class vista_lista_attrezzatura_proprietario(QWidget):
         self.vista_aggiungi_attrezzatura = vista_aggiungi_attrezzatura(self.showFullScreen,
                                                                   self.controller_lista_attrezzatura,
                                                                   self.aggiorna)
-        self.vista_aggiungi_attrezzatura.showFullScreen()
+        self.vista_aggiungi_attrezzatura.show()
