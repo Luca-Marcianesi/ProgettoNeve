@@ -2,19 +2,19 @@ from PyQt5.QtGui import QImage, QPalette, QBrush, QFont
 from PyQt5.QtWidgets import QWidget, QVBoxLayout, QLabel, QPushButton, QHBoxLayout, QDesktopWidget, QSpacerItem, \
     QSizePolicy
 from PyQt5.QtCore import Qt
-from Sessione.controller.controller_sessione import controller_sessione
-from Sessione.vista.VistaModificaAccount import vista_modifica_account
+from Sessione.controller.controllersessione import ControllerSessione
+from Sessione.vista.VistaModificaAccount import VistaModificaAccount
 
-from Sessione.vista.VistaPrenotazioneAccount import vista_prenotazione_account
+from Sessione.vista.VistaPrenotazioneAccount import VistaPrenotazioneAccount
 
 # Vista account loggato
-class vista_account_loggato(QWidget):
+class VistaAccountLoggato(QWidget):
 
     def __init__(self, callback):
-        super(vista_account_loggato, self).__init__()
+        super(VistaAccountLoggato, self).__init__()
 
         # Attributi
-        self.controller = controller_sessione()
+        self.controller = ControllerSessione()
         self.layout_verticale1 = QVBoxLayout()
         self.layout_verticale2 = QVBoxLayout()
         self.layout_verticale3 = QVBoxLayout()
@@ -22,8 +22,8 @@ class vista_account_loggato(QWidget):
         self.label = QLabel()
 
         # Viste successive
-        self.vista_modifica_credenziali = vista_modifica_account(self.aggiorna, self.showFullScreen)
-        self.vista_prenotazione_account = vista_prenotazione_account(self.showFullScreen)
+        self.vista_modifica_credenziali = VistaModificaAccount(self.aggiorna, self.showFullScreen)
+        self.vista_prenotazione_account = VistaPrenotazioneAccount(self.showFullScreen)
 
         # Vista precedente
         self.callback = callback

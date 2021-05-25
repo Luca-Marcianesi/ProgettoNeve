@@ -4,7 +4,7 @@ from PyQt5.QtGui import QPalette, QBrush, QImage, QFont
 from PyQt5.QtWidgets import QWidget, QPushButton, QVBoxLayout, QLabel, QSizePolicy, QSpacerItem, \
     QDesktopWidget, QHBoxLayout
 from PyQt5.QtCore import Qt
-from Skipass.vista.vista_skipass import vista_skipass
+from Skipass.vista.vistaskipass import VistaSkipass
 from GestioneSkipass.controller.controller_gestione_skipass import controller_gestione_skipass
 
 # Vista acquista skipass
@@ -101,7 +101,7 @@ class vista_acquista_skipass(QWidget):
 
     # Metodo per richiamare la vista skipass
     def call_skipass(self,skipass):
-        self.vista_skipass = vista_skipass(skipass, self.showFullScreen, self.controller_gestione_skipass)
+        self.vista_skipass = VistaSkipass(skipass, self.showFullScreen, self.controller_gestione_skipass)
         self.vista_skipass.showFullScreen()
         self.close()
 

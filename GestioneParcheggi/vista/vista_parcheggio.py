@@ -5,7 +5,7 @@ from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import QWidget, QHBoxLayout, QVBoxLayout, QLabel, QSpacerItem, QSizePolicy, QPushButton, \
     QDesktopWidget, QSpinBox, QMessageBox
 from GestioneParcheggi.controller.controller_gestione_parcheggi import gestione_parcheggi
-from Sessione.model.sessione import sessione
+from Sessione.model.sessione import Sessione
 from GestioneParcheggi.controller.controller_gestione_parcheggi import controller_gestione_parcheggi
 
 # Vista parcheggio
@@ -28,7 +28,7 @@ class vista_parcheggio(QWidget):
         self.layout_verticale.addSpacerItem(QSpacerItem(0, 50, QSizePolicy.Fixed, QSizePolicy.Fixed))
 
         # Controlla i posti disponibili
-        if sessione.controlla_prenotazione_effettuata(6):
+        if Sessione.controlla_prenotazione_effettuata(6):
             label =QLabel("POSTI DISPONIBILI:\n{} ".format(self.controller_gestione_parcheggio.get_posti_disponibili()))
         else :
             label = QLabel("POSTI DISPONIBILI:\n{}\n(prenotazione effettuata)".format(self.controller_gestione_parcheggio.get_posti_disponibili()))

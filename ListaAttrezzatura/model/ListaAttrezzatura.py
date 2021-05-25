@@ -3,7 +3,7 @@ import os
 import pickle
 from datetime import date, timedelta
 from Attrezzatura.model.attrezzatura import attrezzatura
-from Sessione.model.sessione import sessione
+from Sessione.model.sessione import Sessione
 from Prenotazione.model.prenotazione import prenotazione
 
 # Classe lista attrezzatura
@@ -49,9 +49,9 @@ class ListaAttrezzatura:
         flag = True
         for attrezzatura in self.lista_attrezzatura:
             if attrezzatura.get_stato():
-                if self.filtra_dimenisoni(attrezzatura.get_dimensioni(), sessione.get_numero_scarpe(), sessione.get_altezza()):
-                    if sessione.get_lista_prenotazioni() != []:
-                            for prenotazione in sessione.get_lista_prenotazioni():
+                if self.filtra_dimenisoni(attrezzatura.get_dimensioni(), Sessione.get_numero_scarpe(), Sessione.get_altezza()):
+                    if Sessione.get_lista_prenotazioni() != []:
+                            for prenotazione in Sessione.get_lista_prenotazioni():
                                 if prenotazione.get_codice_oggetto() == attrezzatura.get_codice():
                                     flag = False
                             if flag:
@@ -68,10 +68,10 @@ class ListaAttrezzatura:
 
     # Metodo per prenotare l'attrezzatura
     def prenota_attrezzatura(self, attrezzatura):
-        if sessione.controlla_prenotazione_effettuata(attrezzatura.get_codice()):
+        if Sessione.controlla_prenotazione_effettuata(attrezzatura.get_codice()):
             scadenza = date.today() + timedelta(days=int(1))
             attrezzatura.prenota(scadenza)
-            sessione.aggiungi_prenotazione(prenotazione(attrezzatura.get_codice(),
+            Sessione.aggiungi_prenotazione(prenotazione(attrezzatura.get_codice(),
                                                         scadenza,
                                                         attrezzatura))
             return "Prenotazione effettuata"
