@@ -5,17 +5,18 @@ from PyQt5.QtWidgets import QWidget, QPushButton, QVBoxLayout, QLabel, QSizePoli
     QDesktopWidget, QHBoxLayout
 from PyQt5.QtCore import Qt
 from Skipass.vista.vistaskipass import VistaSkipass
-from GestioneSkipass.controller.controller_gestione_skipass import controller_gestione_skipass
+from GestioneSkipass.controller.controllergestioneskipass import ControllerGestioneSkipass
 
 # Vista acquista skipass
-class vista_acquista_skipass(QWidget):
+
+
+class VistaAcquistaSkipass(QWidget):
 
     def __init__(self, callback):
-        super(vista_acquista_skipass, self).__init__()
+        super(VistaAcquistaSkipass, self).__init__()
 
         # Controller
-        self.controller_gestione_skipass = controller_gestione_skipass()
-
+        self.controller_gestione_skipass = ControllerGestioneSkipass()
 
         # Attributi
         self.callback = callback
@@ -29,22 +30,26 @@ class vista_acquista_skipass(QWidget):
         self.show_background("PRENOTA SKIPASS")
 
         # Settaggio layout e creazione dei vari skipass
-        self.layout_verticale1.addWidget(self.show_pulsante("Mattiniero", self.controller_gestione_skipass.get_skipass_n(0)))
+        self.layout_verticale1.addWidget(self.show_pulsante
+                                         ("Mattiniero", self.controller_gestione_skipass.get_skipass_n(0)))
         self.layout_verticale1.addSpacerItem(QSpacerItem(0, 50))
-        self.layout_verticale1.addWidget(self.show_pulsante("Pomeridiano", self.controller_gestione_skipass.get_skipass_n(1)))
+        self.layout_verticale1.addWidget(self.show_pulsante
+                                         ("Pomeridiano", self.controller_gestione_skipass.get_skipass_n(1)))
         self.layout_verticale1.addSpacerItem(QSpacerItem(0, 50))
 
-        self.layout_verticale1.addWidget(self.show_pulsante("Giornaliero", self.controller_gestione_skipass.get_skipass_n(2)))
+        self.layout_verticale1.addWidget(self.show_pulsante
+                                         ("Giornaliero", self.controller_gestione_skipass.get_skipass_n(2)))
 
-
-
-        self.layout_verticale2.addWidget(self.show_pulsante("Settimanale", self.controller_gestione_skipass.get_skipass_n(3)))
+        self.layout_verticale2.addWidget(self.show_pulsante
+                                         ("Settimanale", self.controller_gestione_skipass.get_skipass_n(3)))
         self.layout_verticale2.addSpacerItem(QSpacerItem(0, 50))
 
-        self.layout_verticale2.addWidget(self.show_pulsante("Mensile", self.controller_gestione_skipass.get_skipass_n(4)))
+        self.layout_verticale2.addWidget(self.show_pulsante
+                                         ("Mensile", self.controller_gestione_skipass.get_skipass_n(4)))
         self.layout_verticale2.addSpacerItem(QSpacerItem(0, 50))
 
-        self.layout_verticale2.addWidget(self.show_pulsante("Stagionale", self.controller_gestione_skipass.get_skipass_n(5)))
+        self.layout_verticale2.addWidget(self.show_pulsante
+                                         ("Stagionale", self.controller_gestione_skipass.get_skipass_n(5)))
 
         # Spaziature e settaggio layout
         self.layout_orizzontale.addSpacerItem(QSpacerItem(40, 0))
@@ -68,8 +73,7 @@ class vista_acquista_skipass(QWidget):
         # Impostazione layout totale
         self.setLayout(self.layout_verticale)
 
-
-    def show_pulsante_indietro(self,titolo,call):
+    def show_pulsante_indietro(self, titolo, call):
         pulsante_esci = self.crea_bottone(titolo)
         pulsante_esci.clicked.connect(call)
         return pulsante_esci
@@ -100,7 +104,7 @@ class vista_acquista_skipass(QWidget):
         return pulsante_skipass
 
     # Metodo per richiamare la vista skipass
-    def call_skipass(self,skipass):
+    def call_skipass(self, skipass):
         self.vista_skipass = VistaSkipass(skipass, self.showFullScreen, self.controller_gestione_skipass)
         self.vista_skipass.showFullScreen()
         self.close()
