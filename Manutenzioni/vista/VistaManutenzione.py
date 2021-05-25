@@ -2,17 +2,19 @@ from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QFont
 from PyQt5.QtWidgets import QPushButton, QLabel, QSpacerItem, QSizePolicy, QWidget, QHBoxLayout, QVBoxLayout
 
-from Manutenzioni.controller.controller_manutenzione import controller_manutenzione
+from Manutenzioni.controller.controllermanutenzione import ControllerManutenzione
 
 # Vista manutenzione
-class vista_manutenzione(QWidget):
+
+
+class VistaManutenzione(QWidget):
     def __init__(self, manutenzione, salva_dati, aggiorna):
-        super(vista_manutenzione, self).__init__()
+        super(VistaManutenzione, self).__init__()
 
         # Attributi
         self.salva_dati = salva_dati
         self.aggiorna_lista = aggiorna
-        self.controller_manutenzione = controller_manutenzione(manutenzione)
+        self.controller_manutenzione = ControllerManutenzione(manutenzione)
         self.layout_orizzontale = QHBoxLayout()
         self.layout_verticale = QVBoxLayout()
         self.setFixedSize(550, 280)
@@ -56,5 +58,3 @@ class vista_manutenzione(QWidget):
         self.aggiorna_lista()
         self.salva_dati()
         self.close()
-
-

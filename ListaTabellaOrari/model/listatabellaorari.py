@@ -1,5 +1,5 @@
 
-class lista_tabella_orari:
+class ListaTabellaOrari:
 
     def __init__(self):
         self.lista_tabella_orari = []

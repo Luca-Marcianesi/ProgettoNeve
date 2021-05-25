@@ -1,7 +1,9 @@
 from datetime import timedelta, date
 
 # Classe manutenzione
-class manutenzione:
+
+
+class Manutenzione:
     def __init__(self, nome, cadenza, ultima_manutenzione, prossima_scadenza):
         self.nome = nome
         self.cadenza = cadenza
@@ -25,4 +27,5 @@ class manutenzione:
     def get_manutenzione_str(self):
         return "Nome: {}\nCadenza: {} giorni\n" \
                "Ultima manutenzione: {}\nProssima Manutenzione: {}\n".format(self.nome, self.cadenza,
-                                                                             self.ultima_manutenzione, self.prossima_scadenza)
+                                                                             self.ultima_manutenzione,
+                                                                             self.prossima_scadenza)

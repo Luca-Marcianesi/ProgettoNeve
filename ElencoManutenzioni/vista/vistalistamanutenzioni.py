@@ -4,7 +4,7 @@ from PyQt5.QtWidgets import QWidget, QHBoxLayout, QVBoxLayout, QLabel, QSpacerIt
     QSizePolicy, QListView, QPushButton, QDesktopWidget, QMessageBox
 from ElencoManutenzioni.controller.controllerelencomanutenzioni import ControllerElencoManutenzioni
 from datetime import date
-from Manutenzioni.vista.VistaManutenzione import vista_manutenzione
+from Manutenzioni.vista.VistaManutenzione import VistaManutenzione
 
 
 # Vista lista manutenzioni
@@ -128,9 +128,9 @@ class VistaListaManutenzioni(QWidget):
             selezionata = self.vista_elenco.selectedIndexes()[0].row()
             lista = self.controller_elenco_manutenzioni.get_elenco_manutenzioni()
             manutenzione = lista[selezionata]
-            self.vista_informazioni_manutenzione = vista_manutenzione(manutenzione,
-                                                                      self.controller_elenco_manutenzioni.salva_dati,
-                                                                      self.aggiorna)
+            self.vista_informazioni_manutenzione = VistaManutenzione(manutenzione,
+                                                                     self.controller_elenco_manutenzioni.salva_dati,
+                                                                     self.aggiorna)
             self.vista_informazioni_manutenzione.show()
 
         except IndexError:
