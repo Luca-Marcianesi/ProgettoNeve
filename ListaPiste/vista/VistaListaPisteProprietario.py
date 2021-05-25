@@ -2,18 +2,17 @@ from functools import partial
 from PyQt5.QtGui import QFont, QBrush, QPalette, QImage
 from PyQt5.QtWidgets import QWidget, QHBoxLayout, QVBoxLayout, QSpacerItem, QSizePolicy, QPushButton, \
     QDesktopWidget, QGridLayout
-from ListaPiste.controller.controller_lista_piste import controller_lista_piste
-from Pista.vista.VistaPistaProprietario import vista_pista_proprietario
-from Pista.vista.VistaPistaProprietario import vista_pista_proprietario
+from ListaPiste.controller.controllerlistapiste import ControllerListaPiste
+from Pista.vista.VistaPistaProprietario import VistaPistaProprietario
 
 
-class vista_lista_piste_proprietario(QWidget):
+class VistaListaPisteProprietario(QWidget):
     def __init__(self, callback):
-        super(vista_lista_piste_proprietario, self).__init__()
+        super(VistaListaPisteProprietario, self).__init__()
 
         # Attributi
         self.callback = callback
-        self.controller = controller_lista_piste()
+        self.controller = ControllerListaPiste()
         self.vista_pista = None
         self.layout_verticale1 = QVBoxLayout()
         self.layout_orizzontale1 = QHBoxLayout()
@@ -48,8 +47,6 @@ class vista_lista_piste_proprietario(QWidget):
         self.setLayout(self.layout_verticale1)
         self.setWindowTitle('Lista Piste')
 
-
-
     # Creazione, settaggio e stile sfondo
     def show_background(self):
         # Sfondo
@@ -79,18 +76,14 @@ class vista_lista_piste_proprietario(QWidget):
         apri_tutte_le_piste.setFixedSize(100, 100)
         apri_tutte_le_piste.clicked.connect(self.call_apri_tutte)
 
-
         self.layout_orizzontale1.addSpacerItem(QSpacerItem(5, 0, QSizePolicy.Fixed, QSizePolicy.Fixed))
         self.layout_orizzontale1.addWidget(apri_tutte_le_piste)
 
-
         chiudi_tutte_le_piste = QPushButton("CHIUDI\nTUTTE")
-        chiudi_tutte_le_piste.setStyleSheet('QPushButton {background-color: orange;}')
+        chiudi_tutte_le_piste.setStyleSheet(' QPushButton {background-color: orange;}')
         chiudi_tutte_le_piste.setFont(QFont('Times New Roman', 15, 50, True))
         chiudi_tutte_le_piste.setFixedSize(100, 100)
         chiudi_tutte_le_piste.clicked.connect(self.call_chiudi_tutte)
-
-
 
         self.layout_orizzontale1.addSpacerItem(QSpacerItem(5, 0, QSizePolicy.Fixed, QSizePolicy.Fixed))
         self.layout_orizzontale1.addWidget(chiudi_tutte_le_piste)
@@ -101,7 +94,6 @@ class vista_lista_piste_proprietario(QWidget):
     # Metodo che aggiorna la finestra
     def aggiorna(self):
         # Punsante indietro
-        layout_piste = QGridLayout()
         riga = 0
         colonna = 0
         indice_pista = 1
@@ -123,10 +115,10 @@ class vista_lista_piste_proprietario(QWidget):
 
     # Metodo che chiama e mostra la vista pista
     def call_vista_pista_proprietario(self, pista):
-        self.vista_pista_proprietario = vista_pista_proprietario(pista,
-                                                                 self.showFullScreen,
-                                                                 self.controller.salva_dati,
-                                                                 self.aggiorna)
+        self.vista_pista_proprietario = VistaPistaProprietario(pista,
+                                                               self.showFullScreen,
+                                                               self.controller.salva_dati,
+                                                               self.aggiorna)
         self.vista_pista_proprietario.showFullScreen()
         self.close()
 

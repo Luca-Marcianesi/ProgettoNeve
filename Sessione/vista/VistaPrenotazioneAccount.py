@@ -2,16 +2,18 @@ from PyQt5.QtGui import QFont, QImage, QPalette, QBrush, QStandardItemModel, QSt
 from PyQt5.QtWidgets import QWidget, QDesktopWidget, QVBoxLayout, QHBoxLayout, QLabel, QSizePolicy, QSpacerItem, \
     QPushButton, QListView
 from PyQt5.QtCore import Qt
-from Sessione.controller.controller_sessione import controller_sessione
+from Sessione.controller.controllersessione import ControllerSessione
 
 # Vista prenotazione account
-class vista_prenotazione_account(QWidget):
+
+
+class VistaPrenotazioneAccount(QWidget):
 
     def __init__(self, callback):
-        super(vista_prenotazione_account, self).__init__()
+        super(VistaPrenotazioneAccount, self).__init__()
 
         # Attributi
-        self.controller = controller_sessione()
+        self.controller = ControllerSessione()
         self.callback = callback
         self.layout_verticale = QVBoxLayout()
         self.layout_orizzontale1 = QHBoxLayout()
@@ -70,6 +72,7 @@ class vista_prenotazione_account(QWidget):
         titolo = QLabel(stringa)
         titolo.setAlignment(Qt.AlignCenter)
         titolo.setFont(QFont('Times New Roman', 60))
+        titolo.setStyleSheet('color: orange')
         titolo.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Maximum)
         self.layout_verticale.addSpacerItem(QSpacerItem(0, 50, QSizePolicy.Fixed, QSizePolicy.Fixed))
         self.layout_verticale.addWidget(titolo)

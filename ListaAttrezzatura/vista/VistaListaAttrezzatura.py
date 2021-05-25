@@ -4,16 +4,18 @@ from PyQt5.QtWidgets import QWidget, QHBoxLayout, QVBoxLayout, QLabel, QSpacerIt
     QSizePolicy, QListView, QPushButton, QDesktopWidget, QMessageBox
 
 from Attrezzatura.vista.VistaAttrezzatura import vista_attrezzatura
-from ListaAttrezzatura.controller.controller_lista_attrezzatura import controller_lista_attrezzatura
+from ListaAttrezzatura.controller.controllerlistaattrezzatura import ControllerListaAttrezzatura
 
 # Vista lista attrezzatura
-class vista_lista_attrezzatura(QWidget):
+
+
+class VistaListaAttrezzatura(QWidget):
 
     def __init__(self, callback):
-        super(vista_lista_attrezzatura, self).__init__()
+        super(VistaListaAttrezzatura, self).__init__()
 
         # Attributi
-        self.controller_lista_attrezzatura = controller_lista_attrezzatura()
+        self.controller_lista_attrezzatura = ControllerListaAttrezzatura()
         self.callback = callback
         self.layout_verticale1 = QVBoxLayout()
         self.layout_orizzontale = QHBoxLayout()
@@ -109,9 +111,11 @@ class vista_lista_attrezzatura(QWidget):
                                                          self.aggiorna)
             self.vista_attrezzatura.showFullScreen()
         except IndexError:
-            QMessageBox.information(self, 'Attenzione!', 'Non hai selezionato nessuna attrezzatura.', QMessageBox.Ok, QMessageBox.Ok)
+            QMessageBox.information(self, 'Attenzione!', 'Non hai selezionato nessuna attrezzatura.', QMessageBox.Ok,
+                                    QMessageBox.Ok)
         except:
-            QMessageBox.critical(self, 'Errore!', 'Qualcosa è andato storto, riprova più tardi.', QMessageBox.Ok, QMessageBox.Ok)
+            QMessageBox.critical(self, 'Errore!', 'Qualcosa è andato storto, riprova più tardi.', QMessageBox.Ok,
+                                 QMessageBox.Ok)
 
     # Metodo che aggiorna la finestra
     def aggiorna(self):

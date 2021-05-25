@@ -1,8 +1,8 @@
 
 # Classe skipass
-class skipass:
+class Skipass:
 
-    def __init__(self,codice, tipo,descrizione,inizio_validita,durata):
+    def __init__(self, codice, tipo, descrizione, inizio_validita, durata):
 
         # Definizione attributi
         self.codice = codice
@@ -30,7 +30,3 @@ class skipass:
     # Metodo che restituisce la durata dello skipass
     def get_durata(self):
         return self.durata
-
-
-
-

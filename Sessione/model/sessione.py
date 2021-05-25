@@ -1,6 +1,8 @@
 
 # Classe globale sessione
-class sessione:
+
+
+class Sessione:
 
     # Attributi
     account_loggato = None
@@ -8,14 +10,14 @@ class sessione:
 
     # Metodo per fare il login
     @classmethod
-    def login(cls,account, salva_dati):
+    def login(cls, account, salva_dati):
         cls.salva_dati = salva_dati
         cls.account_loggato = account
-        #cls.elimina_prenotazioni_scadute()
+        cls.elimina_prenotazioni_scadute()
 
     # Metodo per settare l'età
     @classmethod
-    def cambia_eta(cls,eta):
+    def cambia_eta(cls, eta):
         cls.account_loggato.set_eta(eta)
 
     # Metodo per settare il numero di scarpe
@@ -35,7 +37,7 @@ class sessione:
 
     # Metodo per aggiungere una prenotazione
     @classmethod
-    def aggiungi_prenotazione(cls,prenotazione):
+    def aggiungi_prenotazione(cls, prenotazione):
         cls.account_loggato.aggiungi_prenotazione(prenotazione)
 
     # Metodo per cancellare una prenotazione
@@ -56,7 +58,7 @@ class sessione:
     # Metodo che restituisce il nome dell'account loggato
     @classmethod
     def get_nome(cls):
-         return cls.account_loggato.get_nome()
+        return cls.account_loggato.get_nome()
 
     # Metodo che restituisce il cognome dell'account loggato
     @classmethod
@@ -90,7 +92,7 @@ class sessione:
 
     # Metodo che controlla se sia stata effettuata una prenotazione
     @classmethod
-    def controlla_prenotazione_effettuata(cls,codice):
+    def controlla_prenotazione_effettuata(cls, codice):
         return cls.account_loggato.controlla_prenotazione_effettuata(codice)
 
     # Metodo salva dati che verrà richiamato nella classe che lo necessita

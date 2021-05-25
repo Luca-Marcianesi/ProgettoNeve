@@ -3,18 +3,20 @@ from PyQt5.QtGui import QPalette, QImage, QBrush, QFont, QStandardItem, QStandar
 from PyQt5.QtWidgets import QVBoxLayout, QHBoxLayout, QDesktopWidget, QLabel, QSpacerItem, QSizePolicy, QWidget, \
     QListView, QPushButton, QMessageBox
 
-from ElencoDipendenti.controller.controller_gestione_dipendenti import controller_elenco_dipendenti
-from ElencoDipendenti.vista.vista_informazioni_dipendente import vista_informazioni
-from ElencoDipendenti.vista.vista_aggiungi_dipendente import vista_aggiungi_dipendente
+from ElencoDipendenti.controller.controller_gestione_dipendenti import ControllerElencoDipendenti
+from ElencoDipendenti.vista.vista_informazioni_dipendente import VistaInformazioniDipendente
+from ElencoDipendenti.vista.vistaaggiungidipendente import VistaAggiungiDipendente
 
 # vista elenco dipendenti
-class vista_elenco_dipendenti(QWidget):
+
+
+class VistaElencoDipendenti(QWidget):
 
     def __init__(self, callback):
-        super(vista_elenco_dipendenti, self).__init__()
+        super(VistaElencoDipendenti, self).__init__()
 
         # Controller
-        self.controller_gestione_dipendenti = controller_elenco_dipendenti()
+        self.controller_gestione_dipendenti = ControllerElencoDipendenti()
 
         # Layout
         self.layout_verticale1 = QVBoxLayout()
@@ -26,8 +28,8 @@ class vista_elenco_dipendenti(QWidget):
         self.callback = callback
 
         # Viste Collegate
-        self.vista_aggiungi = vista_aggiungi_dipendente(self.showFullScreen, self.controller_gestione_dipendenti,
-                                                        self.aggiorna)
+        self.vista_aggiungi = VistaAggiungiDipendente(self.showFullScreen, self.controller_gestione_dipendenti,
+                                                      self.aggiorna)
 
         # Titolo e Background
         self.show_background("Elenco Dipendenti")
@@ -95,8 +97,8 @@ class vista_elenco_dipendenti(QWidget):
         self.layout_verticale2.addWidget(self.pulsante("Indietro", self.indietro))
         self.layout_orizzontale.addLayout(self.layout_verticale2)
 
-     # Crea un pulsante da titolo e gli associa una chiamata
-    def pulsante(self,titolo,call):
+    # Crea un pulsante da titolo e gli associa una chiamata
+    def pulsante(self, titolo, call):
 
         pulsante = QPushButton(titolo)
         pulsante.setFont(QFont('Times New Roman', 20, 100, True))
@@ -111,9 +113,10 @@ class vista_elenco_dipendenti(QWidget):
             selezionato = self.lista_dipendenti.selectedIndexes()[0].row()
             lista = self.controller_gestione_dipendenti.get_lista_elenco_dipendenti()
             dipendente = lista[selezionato]
-            self.vista_informazioni = vista_informazioni(dipendente,self.controller_gestione_dipendenti.rimuovi,
-                                                         self.controller_gestione_dipendenti.salva_dati,
-                                                         self.aggiorna)
+            self.vista_informazioni = VistaInformazioniDipendente(dipendente,
+                                                                  self.controller_gestione_dipendenti.rimuovi,
+                                                                  self.controller_gestione_dipendenti.salva_dati,
+                                                                  self.aggiorna)
             self.vista_informazioni.show()
         except IndexError:
             QMessageBox.information(self, 'Attenzione!', 'Non hai selezionato nessun dipendente da visualizzare.',
@@ -144,10 +147,3 @@ class vista_elenco_dipendenti(QWidget):
     def indietro(self):
         self.callback()
         self.close()
-
-
-
-
-
-
-

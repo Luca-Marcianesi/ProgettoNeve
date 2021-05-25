@@ -3,7 +3,7 @@ import os.path
 import pickle
 
 from Account.model.account import account
-from Sessione.model.sessione import sessione
+from Sessione.model.sessione import Sessione
 
 # Classe lista account
 class lista_account:
@@ -25,7 +25,7 @@ class lista_account:
     def login(self, username, password):
         for account in self.lista_account:
             if account.username == username and account.password == password:
-                sessione.login(account, self.salva_dati)
+                Sessione.login(account, self.salva_dati)
                 return True
         return False
 

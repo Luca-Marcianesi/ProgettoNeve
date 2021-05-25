@@ -2,19 +2,19 @@ from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QFont, QBrush, QPalette, QImage, QStandardItemModel, QStandardItem, QColor
 from PyQt5.QtWidgets import QWidget, QHBoxLayout, QVBoxLayout, QLabel, QSpacerItem, \
     QSizePolicy, QListView, QPushButton, QDesktopWidget, QMessageBox
-from ElencoManutenzioni.controller.controlle_elenco_manutenzioni import controller_elenco_manutenzioni
+from ElencoManutenzioni.controller.controllerelencomanutenzioni import ControllerElencoManutenzioni
 from datetime import date
-from Manutenzioni.vista.VistaManutenzione import vista_manutenzione
+from Manutenzioni.vista.VistaManutenzione import VistaManutenzione
 
 
 # Vista lista manutenzioni
-class vista_lista_manutenzioni(QWidget):
+class VistaListaManutenzioni(QWidget):
 
     def __init__(self, callback):
-        super(vista_lista_manutenzioni, self).__init__()
+        super(VistaListaManutenzioni, self).__init__()
 
         # Attributi
-        self.controller_elenco_manutenzioni = controller_elenco_manutenzioni()
+        self.controller_elenco_manutenzioni = ControllerElencoManutenzioni()
         self.callback = callback
         self.layout_verticale1 = QVBoxLayout()
         self.layout_orizzontale = QHBoxLayout()
@@ -128,9 +128,9 @@ class vista_lista_manutenzioni(QWidget):
             selezionata = self.vista_elenco.selectedIndexes()[0].row()
             lista = self.controller_elenco_manutenzioni.get_elenco_manutenzioni()
             manutenzione = lista[selezionata]
-            self.vista_informazioni_manutenzione = vista_manutenzione(manutenzione,
-                                                                      self.controller_elenco_manutenzioni.salva_dati,
-                                                                      self.aggiorna)
+            self.vista_informazioni_manutenzione = VistaManutenzione(manutenzione,
+                                                                     self.controller_elenco_manutenzioni.salva_dati,
+                                                                     self.aggiorna)
             self.vista_informazioni_manutenzione.show()
 
         except IndexError:

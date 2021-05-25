@@ -3,11 +3,11 @@ from PyQt5.QtWidgets import QWidget, QPushButton, QVBoxLayout, QLabel, QSizePoli
     QDesktopWidget, QHBoxLayout
 
 from ElencoDipendenti.vista.VistaElencoDipendenti import vista_elenco_dipendenti
-from ListaAttrezzatura.vista.VistaListaAttrezzatura import vista_lista_attrezzatura
-from ListaPiste.vista.VistaListaPisteProprietario import vista_lista_piste_proprietario
-from Sessione.vista.VistaAccountLoggato import vista_account_loggato
+from ListaAttrezzatura.vista.VistaListaAttrezzatura import VistaListaAttrezzatura
+from ListaPiste.vista.VistaListaPisteProprietario import VistaListaPisteProprietario
+from Sessione.vista.VistaAccountLoggato import VistaAccountLoggato
 from ElencoManutenzioni.vista.vista_lista_manutenzioni import vista_lista_manutenzioni
-from ListaAttrezzatura.vista.vista_lista_attrezzatura_proprietario import vista_lista_attrezzatura_proprietario
+from ListaAttrezzatura.vista.vistalistaattrezzaturaproprietario import VistaListaAttrezzaturaProprietario
 
 # Classe vista home proprietario
 class vista_home_proprietario(QWidget):
@@ -92,19 +92,19 @@ class vista_home_proprietario(QWidget):
 
     # Metodo che chiama e mostra la vista liste proprietario
     def call_lista_piste_proprietario(self):
-        self.vista_lista_piste_proprietario = vista_lista_piste_proprietario(self.show)
+        self.vista_lista_piste_proprietario = VistaListaPisteProprietario(self.show)
         self.vista_lista_piste_proprietario.showFullScreen()
         self.close()
 
     # Metodo che mostra e chiama la vista account loggato
     def call_account_loggato(self):
-        self.vista_info_account = vista_account_loggato(self.showFullScreen)
+        self.vista_info_account = VistaAccountLoggato(self.showFullScreen)
         self.vista_info_account.showFullScreen()
         self.close()
 
     # Metodo che chiama e mostra la vista modifica attrezzatura
     def call_modifica_attrezzatura(self):
-        self.vista_lista_attrezzatura = vista_lista_attrezzatura(self.showFullScreen)
+        self.vista_lista_attrezzatura = VistaListaAttrezzatura(self.showFullScreen)
         self.vista_lista_attrezzatura.showFullScreen()
         self.close()
 
@@ -122,7 +122,7 @@ class vista_home_proprietario(QWidget):
 
     # Metodo che chiama e mostra la vista attrezzatura
     def call_attrezzatura(self):
-        self.vista_attrezzatura = vista_lista_attrezzatura_proprietario(self.showFullScreen)
+        self.vista_attrezzatura = VistaListaAttrezzaturaProprietario(self.showFullScreen)
         self.vista_attrezzatura.showFullScreen()
         self.close()
 

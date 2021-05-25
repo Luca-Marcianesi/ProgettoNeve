@@ -1,6 +1,6 @@
 
 # Classe parcheggio
-class parcheggio:
+class Parcheggio:
     def __init__(self, codice, numero, stato):
 
         # Definizione degli attributi
@@ -18,7 +18,7 @@ class parcheggio:
         return self.scadenza
 
     # Metodo che setta la scadenza del parcheggio
-    def set_scadenza(self,scadenza):
+    def set_scadenza(self, scadenza):
         self.scadenza = scadenza
 
     # Metodo che restituisce lo stato di un parcheggio
@@ -26,7 +26,7 @@ class parcheggio:
         return self.stato
 
     # Metodo che permette di prenotare un parcheggio
-    def prenota(self,scadenza):
+    def prenota(self, scadenza):
         self.scadenza = scadenza
         self.stato = False
 
@@ -42,4 +42,3 @@ class parcheggio:
     # Metodo che restituisce la descrizione del parcheggio
     def get_descrizione(self):
         return "Parcheggio numero {}".format(self.numero)
-

@@ -1,14 +1,16 @@
-from GestioneParcheggi.model.gestione_parcheggi import gestione_parcheggi
+from GestioneParcheggi.model.gestioneparcheggi import GestioneParcheggi
 
 # Controller gestione parcheggi
-class controller_gestione_parcheggi:
+
+
+class ControllerGestioneParcheggi:
     def __init__(self):
 
         # Prende come model la classe gestione parcheggi
-        self.model = gestione_parcheggi()
+        self.model = GestioneParcheggi()
 
     # Richiama i metodi della classe gestione parcheggi
-    def prenota_parcheggio(self,numero_giorni):
+    def prenota_parcheggio(self, numero_giorni):
         return self.model.prenota_parcheggio(numero_giorni)
 
     def get_posti_disponibili(self):

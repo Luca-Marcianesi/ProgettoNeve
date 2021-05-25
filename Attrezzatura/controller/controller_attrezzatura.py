@@ -1,5 +1,5 @@
-# Controller dell'attrezzatura
-class controller_attrezzatura:
+# Controller dell'attrezzatura e definizione del costruttore
+class ControllerAttrezzatura:
 
     def __init__(self, attrezzatura):
 
@@ -33,4 +33,3 @@ class controller_attrezzatura:
 
     def get_descrizione(self):
         return self.model.get_descrizione()
-

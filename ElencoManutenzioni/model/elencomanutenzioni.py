@@ -2,11 +2,11 @@ import json
 import os
 import pickle
 from datetime import date, timedelta
-from Manutenzioni.model.manutenzione import manutenzione
+from Manutenzioni.model.manutenzione import Manutenzione
 
 
 # Classe manutenzioni
-class elenco_manutenzioni:
+class ElencoManutenzioni:
 
     def __init__(self):
         self.elenco_manutenzioni = []
@@ -41,11 +41,12 @@ class elenco_manutenzioni:
             with open("ElencoManutenzioni/data/elenco_manutenzioni.json") as file:
                 elenco_manutenzioni = json.load(file)
             for manutenzione_da_aggiungere in elenco_manutenzioni:
-                self.aggiungi_manutenzione(manutenzione(manutenzione_da_aggiungere["nome"],
+                self.aggiungi_manutenzione(Manutenzione(manutenzione_da_aggiungere["nome"],
                                                         manutenzione_da_aggiungere["cadenza(giorni)"],
                                                         date.today(),
                                                         date.today() +
-                                                        timedelta(days=int(manutenzione_da_aggiungere["cadenza(giorni)"]))))
+                                                        timedelta(days=int(manutenzione_da_aggiungere
+                                                                           ["cadenza(giorni)"]))))
 
     # Metodo per salvare i dati
     def salva_dati(self):

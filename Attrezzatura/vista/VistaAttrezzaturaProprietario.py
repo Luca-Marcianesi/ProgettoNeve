@@ -2,20 +2,20 @@ from PyQt5.QtGui import QImage, QPalette, QBrush, QFont
 from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import QWidget, QVBoxLayout, QHBoxLayout, QSpacerItem, QSizePolicy, \
                             QDesktopWidget, QLabel, QPushButton
-from Attrezzatura.controller.controller_attrezzatura import ControllerAttrezzatura
-from Sessione.model.sessione import Sessione
+from Attrezzatura.controller.controller_attrezzatura import controller_attrezzatura
+
 
 # vista dell'attrezzatura
-class vista_attrezzatura(QWidget):
-    def __init__(self, callback, attrezzatura, prenota, aggiorna):
-        super(vista_attrezzatura, self).__init__()
+class vista_attrezzatura_proprietario(QWidget):
+    def __init__(self, callback, attrezzatura, rimuovi, aggiorna):
+        super(vista_attrezzatura_proprietario, self).__init__()
 
         # Attributi
         self.aggiorna = aggiorna
         self.attrezzatura = attrezzatura
-        self.controller = ControllerAttrezzatura(self.attrezzatura)
         self.callback = callback
-        self.prenota = prenota
+        self.rimuovi = rimuovi
+        self.controller = controller_attrezzatura(self.attrezzatura)
         self.layout_verticale2 = QVBoxLayout()
         self.layout_verticale1 = QVBoxLayout()
         self.layout_orizzontale = QHBoxLayout()
@@ -48,10 +48,7 @@ class vista_attrezzatura(QWidget):
         self.layout_verticale1.addSpacerItem(QSpacerItem(0, 250))
         self.setLayout(self.layout_verticale1)
 
-    # Metodo che permette, cliccando il bottone "indietro", di tornare alla vista precedente
-    def indietro(self):
-        self.callback()
-        self.close()
+
 
     # Impostazione dello sfondo
     def show_background(self, stringa):
@@ -83,12 +80,12 @@ class vista_attrezzatura(QWidget):
         pulsante_indietro.setFixedSize(300, 100)
         pulsante_indietro.clicked.connect(self.indietro)
 
-        pulsante_prenota = QPushButton("Prenota")
-        pulsante_prenota.setStyleSheet('QPushButton {background-color: orange; color: black;}')
-        pulsante_prenota.setFont(QFont('Times New Roman', 30, 100, True))
-        pulsante_prenota.setFixedSize(300, 100)
-        pulsante_prenota.clicked.connect(self.prenotazione)
-        layout_pulsanti1.addWidget(pulsante_prenota)
+        pulsante_modifica = QPushButton("Elimina")
+        pulsante_modifica.setStyleSheet('QPushButton {background-color: orange; color: black;}')
+        pulsante_modifica.setFont(QFont('Times New Roman', 30, 100, True))
+        pulsante_modifica.setFixedSize(300, 100)
+        pulsante_modifica.clicked.connect(self.elimina)
+        layout_pulsanti1.addWidget(pulsante_modifica)
 
         layout_pulsanti1.addSpacerItem(QSpacerItem(0, 100))
         layout_pulsanti1.addWidget(pulsante_indietro)
@@ -100,44 +97,15 @@ class vista_attrezzatura(QWidget):
     def stato_attrezzatura(self):
         if self.controller.get_stato():
             return "Disponibile"
-        return "Non disponibile"
+        return "Prenotato"
 
-    # Metodo per la prenotazione
-    def prenotazione(self):
-        risultato = self.prenota(self.attrezzatura)
-        self.vista_chiusura = vista_esito(risultato)
-        self.vista_chiusura.show()
-        self.aggiorna()
-        Sessione.salva_dati()
-
-
-# Classe esito -> compare una finestra una volta fatta la prenotazione
-class vista_esito(QWidget):
-    def __init__(self, risultato):
-        super(vista_esito, self).__init__()
-        self.layout_verticale = QVBoxLayout()
-        self.setMaximumSize(500, 200)
-
-        # Controllo dello stato per la stampa a finestra
-        if risultato != "Prenotazione effettuata":
-            risultato = "Hai già prenotato questa attrezzatura!"
-
-        # Creazione, aggiunta e descrizione della finestra
-        label = QLabel(risultato)
-        label.setFont(QFont('Times New Roman', 20))
-        label.setAlignment(Qt.AlignCenter)
-
-        bottone = QPushButton("Chiudi")
-        bottone.clicked.connect(self.call_chiudi)
-
-        self.layout_verticale.addWidget(label)
-        self.layout_verticale.addSpacerItem(QSpacerItem(150, 0, QSizePolicy.Fixed, QSizePolicy.Fixed))
-        self.layout_verticale.addWidget(bottone)
-
-        self.setLayout(self.layout_verticale)
-        self.setWindowTitle('Esito')
-
-    # Metodo per la chiusura della finestra
-    def call_chiudi(self):
+# Metodo che permette, cliccando il bottone "indietro", di tornare alla vista precedente
+    def indietro(self):
+        self.callback()
         self.close()
 
+    def elimina(self):
+        self.rimuovi(self.attrezzatura)
+        self.aggiorna()
+        self.callback()
+        self.close()

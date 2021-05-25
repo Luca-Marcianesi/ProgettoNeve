@@ -1,14 +1,16 @@
 from PyQt5.QtGui import QFont
 from PyQt5.QtWidgets import QSpacerItem, QSizePolicy, QPushButton, QLabel, QHBoxLayout, QVBoxLayout, QWidget
-from Dipendenti.controller.controller_dipendente import controller_dipendente
+from Dipendenti.controller.controller_dipendente import ControllerDipendente
 from PyQt5.QtCore import Qt
 
 # vista informazioni dipendente
-class vista_informazioni(QWidget):
 
-    def __init__(self, dipendente, rimuovi, salva_dati,aggiorna):
 
-        super(vista_informazioni, self).__init__()
+class VistaInformazioniDipendente(QWidget):
+
+    def __init__(self, dipendente, rimuovi, salva_dati, aggiorna):
+
+        super(VistaInformazioniDipendente, self).__init__()
 
         # Layout
         self.layout_verticale = QVBoxLayout()
@@ -17,7 +19,7 @@ class vista_informazioni(QWidget):
 
         # Definizione degli attributi
         self.dipendente = dipendente
-        self.controller_dipendente = controller_dipendente(self.dipendente)
+        self.controller_dipendente = ControllerDipendente(self.dipendente)
         self.rimuovi = rimuovi
         self.salva_dati = salva_dati
         self.aggiorna = aggiorna

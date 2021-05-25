@@ -1,5 +1,5 @@
 # Classe Dipendente
-class dipendente:
+class Dipendente:
     def __init__(self, nome, cognome, telefono):
 
         # Definizione degli attributi
@@ -13,4 +13,4 @@ class dipendente:
 
     # Metodo che restituisce nome, cognome, telefono del dipendente con descrizione
     def get_dipendente_str_x_elenco(self):
-        return "Nome: {} \nCognome: {} \nTelefono: {}".format(self.nome,self.cognome,self.telefono)
+        return "Nome: {} \nCognome: {} \nTelefono: {}".format(self.nome, self.cognome, self.telefono)

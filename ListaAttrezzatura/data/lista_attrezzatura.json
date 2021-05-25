@@ -1,28 +1,28 @@
 [
   {
     "nome":"Scii",
-    "codice": 2,
+    "codice": 3,
     "dimensioni": 180
   },
 
   {
     "nome":"Snowboard",
-    "codice": 3,
+    "codice": 4,
     "dimensioni":140
   },
   {
     "nome":"Scarponi",
-    "codice": 4,
+    "codice": 5,
     "dimensioni":40
   },
   {
     "nome":"Scarponi",
-    "codice": 4,
+    "codice": 5,
     "dimensioni":42
   },
   {
     "nome":"Ciaspole",
-    "codice": 5,
+    "codice": 6,
     "dimensioni":40
   }
 ]

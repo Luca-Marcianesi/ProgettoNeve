@@ -1,19 +1,21 @@
 from PyQt5.QtCore import Qt
-from PyQt5.QtGui import QFont, QBrush, QPalette, QImage, QStandardItemModel, QStandardItem
+from PyQt5.QtGui import QFont, QBrush, QPalette, QImage, QStandardItemModel, QStandardItem, QColor
 from PyQt5.QtWidgets import QWidget, QHBoxLayout, QVBoxLayout, QLabel, QSpacerItem, \
     QSizePolicy, QListView, QPushButton, QDesktopWidget, QMessageBox
 
-from Attrezzatura.vista.VistaAttrezzatura import vista_attrezzatura
-from ListaAttrezzatura.controller.controller_lista_attrezzatura import controller_lista_attrezzatura
+from Attrezzatura.vista.VistaAttrezzaturaProprietario import vista_attrezzatura_proprietario
+from ListaAttrezzatura.controller.controllerlistaattrezzatura import ControllerListaAttrezzatura
+from Attrezzatura.vista.VistaAggiungiAttrezzatura import VistaAggiungiAttrezzatura
 
 # Vista lista attrezzatura proprietario
-class vista_lista_attrezzatura_proprietario(QWidget):
 
+
+class VistaListaAttrezzaturaProprietario(QWidget):
     def __init__(self, callback):
-        super(vista_lista_attrezzatura_proprietario, self).__init__()
+        super(VistaListaAttrezzaturaProprietario, self).__init__()
 
         # Attributi
-        self.controller_lista_attrezzatura = controller_lista_attrezzatura()
+        self.controller_lista_attrezzatura = ControllerListaAttrezzatura()
         self.callback = callback
         self.layout_verticale1 = QVBoxLayout()
         self.layout_orizzontale = QHBoxLayout()
@@ -79,38 +81,19 @@ class vista_lista_attrezzatura_proprietario(QWidget):
     # Creazione, settaggio e stile dei pulsanti
     def show_pulsantiera(self):
         if not self.controller_lista_attrezzatura.get_lista_filtrata() == []:
-            pulsante_apri = QPushButton("Apri")
-            pulsante_apri.setFont(QFont('Times New Roman', 20, 100, True))
-            pulsante_apri.setStyleSheet('QPushButton {background-color: orange; color: black;}')
-            pulsante_apri.setFixedSize(250, 100)
+            pulsante_apri = self.pulsante("Apri", self.attrezzatura_selezionata)
             pulsante_apri.clicked.connect(self.attrezzatura_selezionata)
             self.layout_verticale2.addWidget(pulsante_apri)
 
-        # Pulsante indietro
-        pulsante_indietro = QPushButton("Indietro")
-        pulsante_indietro.setFont(QFont('Times New Roman', 20, 100, True))
-        pulsante_indietro.setStyleSheet('QPushButton {background-color: orange; color: black;}')
-        pulsante_indietro.setFixedSize(250, 100)
-        pulsante_indietro.clicked.connect(self.indietro)
-        self.layout_verticale2.addWidget(pulsante_indietro)
-        self.layout_verticale2.addSpacerItem(QSpacerItem(0, 50))
-        self.layout_orizzontale.addLayout(self.layout_verticale2)
+        # Pulsante aggiungi
+        pulsante_aggiungi = self.pulsante("Aggiungi\nattreazzatura", self.aggiungi)
+        self.layout_verticale2.addWidget(pulsante_aggiungi)
 
-    # Metodo che gestisce la situazione in cui al click del pulsante "APRI", non venga selezionato niente
-    def attrezzatura_selezionata(self):
-        try:
-            selezionata = self.vista_lista.selectedIndexes()[0].row()
-            lista = self.controller_lista_attrezzatura.get_lista_attrezzatura()
-            attrezzatura = lista[selezionata]
-            self.vista_attrezzatura = vista_attrezzatura(self.showFullScreen,
-                                                         attrezzatura,
-                                                         self.controller_lista_attrezzatura.prenota_attrezzatura,
-                                                         self.aggiorna)
-            self.vista_attrezzatura.showFullScreen()
-        except IndexError:
-            QMessageBox.information(self, 'Attenzione!', 'Non hai selezionato nessuna attrezzatura.', QMessageBox.Ok, QMessageBox.Ok)
-        except:
-            QMessageBox.critical(self, 'Errore!', 'Qualcosa è andato storto, riprova più tardi.', QMessageBox.Ok, QMessageBox.Ok)
+        # Pulsante indietro
+        pulsante_indietro = self.pulsante("Indietro", self.indietro)
+        self.layout_verticale2.addWidget(pulsante_indietro)
+
+        self.layout_orizzontale.addLayout(self.layout_verticale2)
 
     # Metodo che aggiorna la finestra
     def aggiorna(self):
@@ -127,9 +110,46 @@ class vista_lista_attrezzatura_proprietario(QWidget):
             for attrezzatura in self.controller_lista_attrezzatura.get_lista_attrezzatura():
                 item = QStandardItem()
                 nome = attrezzatura.get_nome()
+                if attrezzatura.get_stato():
+                    item.setForeground(QColor(0, 255, 0))
+                else:
+                    item.setForeground(QColor(255, 0, 0))
                 item.setText(nome)
                 item.setEditable(False)
                 item.setFont(QFont('Times New Roman', 30, 100))
                 vista_lista_model.appendRow(item)
             self.vista_lista.setModel(vista_lista_model)
             return self.vista_lista
+
+    # Metodo che gestisce la situazione in cui al click del pulsante "APRI", non venga selezionato niente
+
+    def attrezzatura_selezionata(self):
+        try:
+            selezionata = self.vista_lista.selectedIndexes()[0].row()
+            lista = self.controller_lista_attrezzatura.get_lista_attrezzatura()
+            attrezzatura = lista[selezionata]
+            self.vista_attrezzatura = vista_attrezzatura_proprietario(
+                self.showFullScreen, attrezzatura, self.controller_lista_attrezzatura.rimuovi_attrezzatura,
+                self.aggiorna)
+            self.vista_attrezzatura.showFullScreen()
+        except IndexError:
+            QMessageBox.information(self, 'Attenzione!', 'Non hai selezionato nessuna attrezzatura.', QMessageBox.Ok,
+                                    QMessageBox.Ok)
+        except:
+            QMessageBox.critical(self, 'Errore!', 'Qualcosa è andato storto, riprova più tardi.', QMessageBox.Ok,
+                                 QMessageBox.Ok)
+
+    # Crea un pulsante
+
+    def pulsante(self, nome, call):
+        pulsante = QPushButton(nome)
+        pulsante.setFont(QFont('Times New Roman', 20, 100, True))
+        pulsante.setStyleSheet('QPushButton {background-color: orange; color: black;}')
+        pulsante.setFixedSize(250, 100)
+        pulsante.clicked.connect(call)
+        return pulsante
+
+    def aggiungi(self):
+        self.vista_aggiungi_attrezzatura = VistaAggiungiAttrezzatura(
+            self.showFullScreen, self.controller_lista_attrezzatura, self.aggiorna)
+        self.vista_aggiungi_attrezzatura.show()
