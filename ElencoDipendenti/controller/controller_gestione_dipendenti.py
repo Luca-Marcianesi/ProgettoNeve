@@ -1,17 +1,19 @@
-from ElencoDipendenti.model.elenco_dipendenti import elenco_dipendenti
+from ElencoDipendenti.model.elencodipendenti import ElencoDipendenti
 
 # Controller gestione dipendenti
-class controller_elenco_dipendenti:
+
+
+class ControllerElencoDipendenti:
     def __init__(self):
 
         # Prende come model la classe elenco dipendenti
-        self.model = elenco_dipendenti()
+        self.model = ElencoDipendenti()
 
     # Richiama i metodi della classe elenco dipendenti
     def aggiungi(self, dipendente):
         self.model.aggiungi_dipendente(dipendente)
 
-    def rimuovi(self,dipendente):
+    def rimuovi(self, dipendente):
         self.model.rimuovi_dipendente(dipendente)
 
     def get_dipendente(self, nome, cognome):
