@@ -1,6 +1,8 @@
 from Sessione.model.sessione import Sessione
 
 # Controller sessione
+
+
 class ControllerSessione:
 
     def __init__(self):
