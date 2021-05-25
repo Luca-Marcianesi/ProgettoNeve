@@ -1,8 +1,8 @@
-from datetime import date
 from datetime import datetime
-
 # Classe account e definizione del costruttore
-class account:
+
+
+class Account:
     def __init__(self, nome, cognome, username, password, eta, altezza, numero_scarpe):
 
         # Definizione degli attributi
@@ -29,7 +29,7 @@ class account:
         self.altezza = altezza
 
     # Metodo per settare i permessi del proprietario
-    def set_permessi(self,permesso):
+    def set_permessi(self, permesso):
         self.permesso = permesso
 
     # Metodo per aggiungere una prenotazione
@@ -81,20 +81,19 @@ class account:
 
     # Metodo che elimina le prenotazioni scadute
     def elimina_scadute_prenotazioni(self):
-        if self.lista_prenotazioni == None:
+        if self.lista_prenotazioni is None:
             pass
-        else :
-            for prenotazione in self.lista_prenotazioni :
+        else:
+            for prenotazione in self.lista_prenotazioni:
                 controllare = prenotazione.get_scadenza()
                 oggi = datetime.today()
-                if controllare > oggi :
+                if controllare > oggi:
                     self.lista_prenotazioni.remove(prenotazione)
 
     # Metodo che controlla se una prenotazione è stata effettuata in base al codice dell'oggetto
     def controlla_prenotazione_effettuata(self, codice):
-        if self.lista_prenotazioni != None:
+        if self.lista_prenotazioni is not None:
             for prenotazione in self.lista_prenotazioni:
                 if prenotazione.get_codice_oggetto() == codice:
                     return False
         return True
-

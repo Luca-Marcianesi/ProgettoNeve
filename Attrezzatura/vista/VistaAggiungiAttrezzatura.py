@@ -4,7 +4,7 @@ from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QImage, QPalette, QBrush, QFont
 from PyQt5.QtWidgets import QVBoxLayout, QLabel, QLineEdit, QPushButton, QMessageBox, QWidget, QHBoxLayout, QSpinBox, \
     QSizePolicy, QSpacerItem
-from Attrezzatura.model.attrezzatura import attrezzatura
+from Attrezzatura.model.attrezzatura import Attrezzatura
 
 
 # vista Crea account
@@ -110,7 +110,7 @@ class VistaAggiungiAttrezzatura(QWidget):
         dimensioni = int(self.dimensioni.value())
         codice = self.codice.value()
         if self.nome != "":
-            self.controller_lista_attrezzatura.aggiungi_attrezzatura(attrezzatura(codice, self.nome, dimensioni))
+            self.controller_lista_attrezzatura.aggiungi_attrezzatura(Attrezzatura(codice, self.nome, dimensioni))
             self.aggiorna()
             QMessageBox.information(self, '', 'Oggetto aggiunto.', QMessageBox.Ok, QMessageBox.Ok)
         else:

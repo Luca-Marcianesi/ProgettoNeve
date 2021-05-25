@@ -2,9 +2,8 @@ from PyQt5.QtGui import QImage, QPalette, QBrush, QFont
 from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import QWidget, QVBoxLayout, QHBoxLayout, QSpacerItem, QSizePolicy, \
                             QDesktopWidget, QLabel, QPushButton
-from Attrezzatura.controller.controller_attrezzatura import controller_attrezzatura
+from Attrezzatura.controller.controller_attrezzatura import ControllerAttrezzatura
 from Sessione.model.sessione import sessione
-
 
 # vista dell'attrezzatura
 class vista_attrezzatura(QWidget):
@@ -14,7 +13,7 @@ class vista_attrezzatura(QWidget):
         # Attributi
         self.aggiorna = aggiorna
         self.attrezzatura = attrezzatura
-        self.controller = controller_attrezzatura(self.attrezzatura)
+        self.controller = ControllerAttrezzatura(self.attrezzatura)
         self.callback = callback
         self.prenota = prenota
         self.layout_verticale2 = QVBoxLayout()
