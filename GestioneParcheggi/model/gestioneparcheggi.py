@@ -8,7 +8,9 @@ from Prenotazione.model.prenotazione import Prenotazione
 from Parcheggio.model.parcheggio import parcheggio
 
 # Classe gestione parcheggi
-class gestione_parcheggi:
+
+
+class GestioneParcheggi:
     def __init__(self):
 
         # Definizione degli attributi
@@ -18,12 +20,12 @@ class gestione_parcheggi:
         self.elimina_scadute_prenotazioni()
 
     # Metodo prenota parcheggio
-    def prenota_parcheggio(self,numero_giorni):
+    def prenota_parcheggio(self, numero_giorni):
         if Sessione.controlla_prenotazione_effettuata(self.codice_parcheggio):
             if self.get_posti_disponibili() > 0:
                 for parcheggio in self.elenco_parcheggi:
                     if parcheggio.get_stato():
-                        scadenza = date.today() + timedelta(days = int(numero_giorni))
+                        scadenza = date.today() + timedelta(days=int(numero_giorni))
                         parcheggio.prenota(scadenza)
                         Sessione.aggiungi_prenotazione(Prenotazione(parcheggio.get_codice(), scadenza, parcheggio))
                         Sessione.salva_dati()
@@ -38,17 +40,17 @@ class gestione_parcheggi:
         for parcheggio in self.elenco_parcheggi:
             print(parcheggio.stato)
             if parcheggio.get_stato():
-                posti +=1
+                posti += 1
         return posti
 
     # Metodo che elimina le prenotazioni scadute
     def elimina_scadute_prenotazioni(self):
-            for parcheggio in self.elenco_parcheggi :
-                if parcheggio.get_scadenza() != None:
-                    oggi = date.today()
-                    controllare = parcheggio.get_scadenza()
-                    if controllare < oggi:
-                        parcheggio.elimina_prenotazione()
+        for parcheggio in self.elenco_parcheggi:
+            if parcheggio.get_scadenza() is not None:
+                oggi = date.today()
+                controllare = parcheggio.get_scadenza()
+                if controllare < oggi:
+                    parcheggio.elimina_prenotazione()
 
     # Metodo salva dati con creazione del pickle
     def salva_dati(self):
@@ -70,4 +72,3 @@ class gestione_parcheggi:
             for parcheggio_da_agg in elenco_parcheggi:
                 self.aggiungi_parcheggio(
                     parcheggio(parcheggio_da_agg["codice"], parcheggio_da_agg["numero"], parcheggio_da_agg["stato"]))
-
