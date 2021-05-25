@@ -2,7 +2,7 @@ from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QFont, QBrush, QPalette, QImage, QStandardItemModel, QStandardItem, QColor
 from PyQt5.QtWidgets import QWidget, QHBoxLayout, QVBoxLayout, QLabel, QSpacerItem, \
     QSizePolicy, QListView, QPushButton, QDesktopWidget, QMessageBox
-from ElencoManutenzioni.controller.controlle_elenco_manutenzioni import controller_elenco_manutenzioni
+from ElencoManutenzioni.controller.controller_elenco_manutenzioni import controller_elenco_manutenzioni
 from datetime import date
 from Manutenzioni.vista.VistaManutenzione import vista_manutenzione
 
