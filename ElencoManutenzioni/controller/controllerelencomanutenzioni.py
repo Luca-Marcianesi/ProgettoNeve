@@ -1,12 +1,14 @@
-from ElencoManutenzioni.model.elenco_manutenzioni import elenco_manutenzioni
+from ElencoManutenzioni.model.elencomanutenzioni import ElencoManutenzioni
 
 # Controller elenco manutenzioni
-class controller_elenco_manutenzioni():
+
+
+class ControllerElencoManutenzioni:
 
     def __init__(self):
 
         # Prende come model la classe elenco manutenzioni
-        self.model = elenco_manutenzioni()
+        self.model = ElencoManutenzioni()
 
     # Ridefinisce i metodi della classe elenco manutenzioni
     def salva_dati(self):

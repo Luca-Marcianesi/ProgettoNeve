@@ -6,7 +6,7 @@ from Manutenzioni.model.manutenzione import manutenzione
 
 
 # Classe manutenzioni
-class elenco_manutenzioni:
+class ElencoManutenzioni:
 
     def __init__(self):
         self.elenco_manutenzioni = []
@@ -45,7 +45,8 @@ class elenco_manutenzioni:
                                                         manutenzione_da_aggiungere["cadenza(giorni)"],
                                                         date.today(),
                                                         date.today() +
-                                                        timedelta(days=int(manutenzione_da_aggiungere["cadenza(giorni)"]))))
+                                                        timedelta(days=int(manutenzione_da_aggiungere
+                                                                           ["cadenza(giorni)"]))))
 
     # Metodo per salvare i dati
     def salva_dati(self):
