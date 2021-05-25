@@ -4,7 +4,7 @@ from PyQt5.QtWidgets import QWidget, QPushButton, QVBoxLayout, QLabel, QSizePoli
 
 from ElencoDipendenti.vista.VistaElencoDipendenti import vista_elenco_dipendenti
 from ListaAttrezzatura.vista.VistaListaAttrezzatura import vista_lista_attrezzatura
-from ListaPiste.vista.VistaListaPisteProprietario import vista_lista_piste_proprietario
+from ListaPiste.vista.VistaListaPisteProprietario import VistaListaPisteProprietario
 from Sessione.vista.VistaAccountLoggato import VistaAccountLoggato
 from ElencoManutenzioni.vista.vista_lista_manutenzioni import vista_lista_manutenzioni
 from ListaAttrezzatura.vista.vistalistaattrezzaturaproprietario import VistaListaAttrezzaturaProprietario
@@ -92,7 +92,7 @@ class vista_home_proprietario(QWidget):
 
     # Metodo che chiama e mostra la vista liste proprietario
     def call_lista_piste_proprietario(self):
-        self.vista_lista_piste_proprietario = vista_lista_piste_proprietario(self.show)
+        self.vista_lista_piste_proprietario = VistaListaPisteProprietario(self.show)
         self.vista_lista_piste_proprietario.showFullScreen()
         self.close()
 

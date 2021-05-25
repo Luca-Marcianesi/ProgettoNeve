@@ -1,7 +1,9 @@
-from ListaPiste.model.lista_piste import lista_piste
-class controller_lista_piste():
+from ListaPiste.model.listapiste import ListaPiste
+
+
+class ControllerListaPiste:
     def __init__(self):
-        self.model = lista_piste()
+        self.model = ListaPiste()
 
     def cerca_piste(self, nome):
         self.model.lista_piste(nome)
@@ -24,7 +26,7 @@ class controller_lista_piste():
     def get_lista(self):
         return self.model.get_lista()
 
-    def set_stato_tutte(self,stato):
+    def set_stato_tutte(self, stato):
         self.model.set_stato_tutte(stato)
 
     def salva_dati(self):
