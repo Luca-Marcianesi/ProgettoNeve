@@ -8,17 +8,17 @@ from Attrezzatura.model.attrezzatura import attrezzatura
 
 
 # vista Crea account
-class vista_aggiungi_attrezzatura(QWidget):
+class VistaAaggiungiAttrezzatura(QWidget):
 
-    def __init__(self, callback, controller_lista_attrezzatura,aggiorna):
-        super(vista_aggiungi_attrezzatura, self).__init__()
+    def __init__(self, callback, controller_lista_attrezzatura, aggiorna):
+        super(VistaAaggiungiAttrezzatura, self).__init__()
 
         # Definizione degli attributi
         self.callback = callback
         self.aggiorna = aggiorna
         self.controller_lista_attrezzatura = controller_lista_attrezzatura
         self.testo = {}
-        self.setFixedSize(1000,1000)
+        self.setFixedSize(1000, 1000)
         self.layout_verticale = QVBoxLayout()
         self.layout_orizzontale = QHBoxLayout()
 
@@ -36,7 +36,6 @@ class vista_aggiungi_attrezzatura(QWidget):
         codici = QLabel()
         codici.setText(self.leggi_codici_json())
         codici.setFont(QFont('Times New Roman', 15))
-
 
         label1 = QLabel("Codice Oggetto:")
         label1.setFont(QFont('Times New Roman', 20))
@@ -57,7 +56,6 @@ class vista_aggiungi_attrezzatura(QWidget):
         self.dimensioni.setFont(QFont('Times New Roman', 20))
         self.dimensioni.setAlignment(Qt.AlignCenter)
         self.dimensioni.setFixedSize(300, 150)
-        #self.dimensioni.lineEdit().setReadOnly(True)
         self.dimensioni.setRange(1, 200)
 
         self.layout_verticale.addWidget(label)
@@ -69,13 +67,13 @@ class vista_aggiungi_attrezzatura(QWidget):
 
         indietro = QPushButton("Indietro")
         indietro.clicked.connect(self.indietro)
-        indietro.setFixedSize(200,100)
+        indietro.setFixedSize(200, 100)
         indietro.setStyleSheet('background-color: orange')
         self.layout_orizzontale.addWidget(indietro)
 
         invio = QPushButton("Aggiungi")
         invio.clicked.connect(self.aggiungi)
-        invio.setFixedSize(200,100)
+        invio.setFixedSize(200, 100)
         invio.setStyleSheet('background-color: orange')
         self.layout_orizzontale.addWidget(invio)
 
@@ -93,6 +91,7 @@ class vista_aggiungi_attrezzatura(QWidget):
         palette.setBrush(10, QBrush(img))
         self.setPalette(palette)
 
+        # Titolo
         titolo = QLabel("AGGIUNGI ATTREZZATURA")
         titolo.setAlignment(Qt.AlignCenter)
         titolo.setFont(QFont('Times New Roman', 40))
@@ -111,10 +110,10 @@ class vista_aggiungi_attrezzatura(QWidget):
         dimensioni = int(self.dimensioni.value())
         codice = self.codice.value()
         if self.nome != "":
-            self.controller_lista_attrezzatura.aggiungi_attrezzatura(attrezzatura(codice,self.nome,dimensioni))
+            self.controller_lista_attrezzatura.aggiungi_attrezzatura(attrezzatura(codice, self.nome, dimensioni))
             self.aggiorna()
-            QMessageBox.information(self, '', 'Oggetto aggiunto.', QMessageBox.Ok,QMessageBox.Ok)
-        else :
+            QMessageBox.information(self, '', 'Oggetto aggiunto.', QMessageBox.Ok, QMessageBox.Ok)
+        else:
             QMessageBox.critical(self, 'Errore', 'Controlla le informazioni.', QMessageBox.Ok, QMessageBox.Ok)
 
     def leggi_codici_json(self):
@@ -124,4 +123,3 @@ class vista_aggiungi_attrezzatura(QWidget):
         for oggetto in file:
             stringa += oggetto["descrizione"]
         return stringa
-
