@@ -70,6 +70,7 @@ class vista_prenotazione_account(QWidget):
         titolo = QLabel(stringa)
         titolo.setAlignment(Qt.AlignCenter)
         titolo.setFont(QFont('Times New Roman', 60))
+        titolo.setStyleSheet('color: orange')
         titolo.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Maximum)
         self.layout_verticale.addSpacerItem(QSpacerItem(0, 50, QSizePolicy.Fixed, QSizePolicy.Fixed))
         self.layout_verticale.addWidget(titolo)

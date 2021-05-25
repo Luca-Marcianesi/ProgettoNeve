@@ -108,7 +108,7 @@ class vista_modifica_account(QWidget):
         # Sfondo
         self.setFixedWidth(QDesktopWidget().width())
         self.setFixedHeight(QDesktopWidget().height())
-        back_img = QImage("Data/Immagini/1.jpg")
+        back_img = QImage("Data/Immagini/7.jpg")
         img = back_img.scaled(self.width(), self.height())
         palette = QPalette()
         palette.setBrush(10, QBrush(img))
