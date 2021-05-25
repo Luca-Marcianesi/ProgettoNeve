@@ -1,13 +1,13 @@
 
 # Controller pista
-class controller_pista():
+class ControllerPista:
     def __init__(self, pista):
 
         # Prende come model l'oggetto pista e viene passato come parametro al costruttore
         self.model = pista
 
     # Richiama i metodi della classe pista
-    def modifica_stato_pista(self,stato):
+    def modifica_stato_pista(self, stato):
         self.model.set_stato(stato)
 
     def get_pista_str(self):
@@ -21,4 +21,3 @@ class controller_pista():
 
     def get_difficolta(self):
         return self.model.get_difficolta()
-

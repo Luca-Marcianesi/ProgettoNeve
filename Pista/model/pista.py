@@ -1,6 +1,6 @@
 
 # Classe pista
-class pista:
+class Pista:
     def __init__(self, nome, difficolta, stato):
 
         # Definizione degli attributi
