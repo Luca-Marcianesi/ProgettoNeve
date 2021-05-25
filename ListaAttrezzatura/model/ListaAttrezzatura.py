@@ -1,7 +1,7 @@
 import json
 import os
 import pickle
-from datetime import date, timedelta ,datetime
+from datetime import date, timedelta
 from Attrezzatura.model.attrezzatura import attrezzatura
 from Sessione.model.sessione import sessione
 from Prenotazione.model.prenotazione import prenotazione
@@ -18,8 +18,8 @@ class lista_attrezzatura:
         self.lista_attrezzatura.append(attrezzatura)
 
     # Metodo per rimuovere un attrezzatura dalla lista
-    def rimuovi_attrezzatura(self, indice):
-        self.lista_attrezzatura.remove(indice)
+    def rimuovi_attrezzatura(self, attrezzatura):
+        self.lista_attrezzatura.remove(attrezzatura)
 
     # Metodo per salvare i dati sul pickle
     def salva_dati(self):

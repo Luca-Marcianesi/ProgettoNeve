@@ -125,6 +125,8 @@ class vista_richiesta_giorni(QWidget):
         self.giorni.setFont(QFont('Times New Roman', 20))
         self.giorni.setAlignment(Qt.AlignCenter)
         self.giorni.setFixedSize(100,50)
+        self.giorni.lineEdit().setReadOnly(True)
+
         self.giorni.setRange(1, 5)
 
         # Creazione, stile e settaggio bottone prenota e layout totale
