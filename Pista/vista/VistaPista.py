@@ -4,7 +4,7 @@ from PyQt5.QtWidgets import QWidget, QHBoxLayout, QVBoxLayout, QLabel, QSpacerIt
     QDesktopWidget
 from Pista.controller.controller_pista import controller_pista
 
-
+# Vista pista
 class vista_pista(QWidget):
     def __init__(self, pista, callback):
         super(vista_pista, self).__init__()
@@ -40,9 +40,11 @@ class vista_pista(QWidget):
         self.setLayout(self.layout_verticale)
         self.setWindowTitle('Pista')
 
+    # ???
     def call_vista_pista(self):
         pass
 
+    # Metodo che, collegato al pulsante "INDIETRO"
     def indietro(self):
         self.callback()
         self.close()

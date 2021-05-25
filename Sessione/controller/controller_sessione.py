@@ -1,10 +1,14 @@
 from Sessione.model.sessione import sessione
 
+# Controller sessione
 class controller_sessione:
 
     def __init__(self):
+
+        # Prende come model la classe sessione
         self.model = sessione()
 
+    # Richiama i metodi della classe sessione
     def cambia_password(self, password):
         self.model.cambia_password(password)
 

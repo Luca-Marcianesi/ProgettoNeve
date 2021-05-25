@@ -7,7 +7,7 @@ from Sessione.vista.VistaModificaAccount import vista_modifica_account
 
 from Sessione.vista.VistaPrenotazioneAccount import vista_prenotazione_account
 
-
+# Vista account loggato
 class vista_account_loggato(QWidget):
 
     def __init__(self, callback):
@@ -34,8 +34,10 @@ class vista_account_loggato(QWidget):
         # Spaziatura
         self.layout_verticale3.addSpacerItem(QSpacerItem(500, 150, QSizePolicy.Fixed, QSizePolicy.Fixed))
 
+        # Chiamata alla funzione aggiorna
         self.aggiorna()
 
+        # Aggiunta della label al layout
         self.layout_verticale3.addWidget(self.label)
 
         # Spaziatura
@@ -51,8 +53,10 @@ class vista_account_loggato(QWidget):
         self.layout_verticale1.addLayout(self.layout_orizzontale)
         self.layout_verticale1.addSpacerItem(QSpacerItem(0, 200, QSizePolicy.Expanding, QSizePolicy.Expanding))
 
+        # Settaggio layout
         self.setLayout(self.layout_verticale1)
 
+    # Creazione, settaggio e stile pulsanti
     def show_pulsantiera(self):
 
         # Cambia Credenziali
@@ -68,18 +72,22 @@ class vista_account_loggato(QWidget):
 
         self.layout_orizzontale.addLayout(self.layout_verticale2)
 
+    # Metodo che, collegato al bottone "INDIETRO", permette di tornare alla vista precedente
     def indietro(self):
         self.callback()
         self.close()
 
+    # Metodo che richiama e mostra la vista modifica credenziali
     def call_modifica_credenziali(self):
         self.vista_modifica_credenziali.showFullScreen()
         self.close()
 
+    # Metodo che richiama e mostra la vista prenotazioni
     def vista_prenotazioni(self):
         self.vista_prenotazione_account.showFullScreen()
         self.close()
 
+    # Creazione, settaggio e stile sfondo
     def show_background(self, stringa):
         # Sfondo
         self.setFixedWidth(QDesktopWidget().width())
@@ -100,6 +108,7 @@ class vista_account_loggato(QWidget):
         self.layout_verticale1.addWidget(titolo)
         self.layout_verticale1.addSpacerItem(QSpacerItem(0, 50, QSizePolicy.Fixed, QSizePolicy.Fixed))
 
+    # Metodo che aggiorna la finestra corrente
     def aggiorna(self):
         # Label
         self.label.setText("Nome: {}".format(self.controller.get_nome_str()) + "\n"
@@ -109,6 +118,7 @@ class vista_account_loggato(QWidget):
                            "Numero di scarpe: {}".format(self.controller.get_numero_scarpe_str()))
         self.label.setFont(QFont('Times New Roman', 30, 100))
 
+    # Metodo che crea un generico bottone
     def crea_bottone(self, tipo, layout):
         bottone = QPushButton(tipo)
         bottone.setFixedSize(300, 100)
