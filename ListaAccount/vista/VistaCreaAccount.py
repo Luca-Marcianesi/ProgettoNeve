@@ -91,7 +91,7 @@ class VistaCreaAccount(QWidget):
 
     # Metodo che controlla la validità delle informazioni inserite dall'utente
     def controlla_informazioni(self, nome, cognome, username, password, eta, altezza, numero_scarpe):
-        if self.controller.controlla_username(username) is True:
+        if self.controller.controlla_username(username):
             QMessageBox.critical(self, 'Errore', 'Mi dispiace, questo username è già in uso!', QMessageBox.Ok,
                                  QMessageBox.Ok)
             return False
