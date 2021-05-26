@@ -52,16 +52,16 @@ class ListaPiste:
 
     # Metodo che permette di salvare i dati in pickle
     def salva_dati(self):
-        with open('ListaPiste/data/lista_piste.pickle', 'wb') as file:
+        with open('Data/ListaPiste/lista_piste.pickle', 'wb') as file:
             pickle.dump(self.lista_piste, file, pickle.HIGHEST_PROTOCOL)
 
     # Metodo che permette di leggere i dati da pickle, se esiste, o da json
     def leggi_dati(self):
-        if os.path.isfile('ListaPiste/data/lista_piste.pickle'):
-            with open('ListaPiste/data/lista_piste.pickle', "rb") as file:
+        if os.path.isfile('Data/ListaPiste/lista_piste.pickle'):
+            with open('Data/ListaPiste/lista_piste.pickle', "rb") as file:
                 self.lista_piste = pickle.load(file)
         else:
-            with open("ListaPiste/data/lista_piste.json") as file:
+            with open("Data/ListaPiste/lista_piste.json") as file:
                 lista_piste_inizio = json.load(file)
             for pista_da_caricare in lista_piste_inizio:
                 self.aggiungi_pista(

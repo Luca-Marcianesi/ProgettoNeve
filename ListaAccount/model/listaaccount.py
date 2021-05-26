@@ -46,16 +46,16 @@ class ListaAccount:
 
     # Metodo che salva i dati sul pickle
     def salva_dati(self):
-        with open('ListaAccount/data/lista_account_salvata.pickle', 'wb') as dati:
+        with open('Data/ListaAccount/lista_account_salvata.pickle', 'wb') as dati:
             pickle.dump(self.lista_account, dati, pickle.HIGHEST_PROTOCOL)
 
     # Metodo che legge i dati dal pickle se esiste o dal json (contiene solo l'account del proprietario)
     def leggi_dati(self):
-        if os.path.isfile('ListaAccount/data/lista_account_salvata.pickle'):
-            with open('ListaAccount/data/lista_account_salvata.pickle', "rb") as file:
+        if os.path.isfile('Data/ListaAccount/lista_account_salvata.pickle'):
+            with open('Data/ListaAccount/lista_account_salvata.pickle', "rb") as file:
                 self.lista_account = pickle.load(file)
         else:
-            with open("ListaAccount/data/lista_account.json") as file:
+            with open("Data/ListaAccount/lista_account.json") as file:
                 lista = json.load(file)
                 for account_da_aggiungere in lista:
                     acc = Account(account_da_aggiungere["nome"],

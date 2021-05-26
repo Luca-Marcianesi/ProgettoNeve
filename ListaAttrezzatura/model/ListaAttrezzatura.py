@@ -25,16 +25,16 @@ class ListaAttrezzatura:
 
     # Metodo per salvare i dati sul pickle
     def salva_dati(self):
-        with open('ListaAttrezzatura/data/lista_attrezzatura.pickle', 'wb') as file:
+        with open('Data/ListaAttrezzatura/lista_attrezzatura.pickle', 'wb') as file:
             pickle.dump(self.lista_attrezzatura, file, pickle.HIGHEST_PROTOCOL)
 
     # Metodo per leggere i dati dal pickle se esiste o dal json
     def leggi_dati(self):
-        if os.path.isfile('ListaAttrezzatura/data/lista_attrezzatura.pickle'):
-            with open('ListaAttrezzatura/data/lista_attrezzatura.pickle', "rb") as file:
+        if os.path.isfile('Data/ListaAttrezzatura/lista_attrezzatura.pickle'):
+            with open('Data/ListaAttrezzatura/lista_attrezzatura.pickle', "rb") as file:
                 self.lista_attrezzatura = pickle.load(file)
         else:
-            with open("ListaAttrezzatura/data/lista_attrezzatura.json") as file:
+            with open("Data/ListaAttrezzatura/lista_attrezzatura.json") as file:
                 lista_attrezzatura = json.load(file)
                 for attrezzatura_da_caricare in lista_attrezzatura:
                     self.aggiungi_attrezzatura(
