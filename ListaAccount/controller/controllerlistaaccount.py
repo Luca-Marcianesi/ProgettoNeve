@@ -1,11 +1,13 @@
-from ListaAccount.model.lista_account import lista_account
+from ListaAccount.model.listaaccount import ListaAccount
 
 # Controller lista account
-class controller_lista_account():
+
+
+class ControllerListaAccount:
     def __init__(self):
 
         # Prende come model la classe lista account
-        self.model = lista_account()
+        self.model = ListaAccount()
 
     # Richiama i metodi della classe lista account
     def crea_account(self, nome, cognome, username, password, eta, altezza, numero_scarpe):
@@ -17,5 +19,5 @@ class controller_lista_account():
     def salva_dati(self):
         self.model.salva_dati()
 
-    def controlla_username(self,username):
+    def controlla_username(self, username):
         return self.model.controlla_username(username)

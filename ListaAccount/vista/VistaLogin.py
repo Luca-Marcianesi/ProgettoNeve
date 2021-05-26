@@ -4,23 +4,25 @@ from PyQt5.QtWidgets import QWidget, QVBoxLayout, QLabel, QLineEdit, QPushButton
     QHBoxLayout, QSizePolicy, QSpacerItem, QMessageBox
 
 from Home.vista.VistaHomeProprietrario import vista_home_proprietario
-from ListaAccount.controller.controller_lista_account import controller_lista_account
+from ListaAccount.controller.controllerlistaaccount import ControllerListaAccount
 from Home.vista.VistaHome import vista_home
 
-from ListaAccount.vista.VistaCreaAccount import vista_crea_account
+from ListaAccount.vista.VistaCreaAccount import VistaCreaAccount
 from Sessione.model.sessione import Sessione
 
 # Vista login
-class vista_login(QWidget):
+
+
+class VistaLogin(QWidget):
 
     def __init__(self,  parent=None):
-        super(vista_login, self).__init__(parent)
+        super(VistaLogin, self).__init__(parent)
 
         # Attributi
         self.accesso_view = vista_home(self.show)
         self.accesso_proprietario = vista_home_proprietario(self.show)
-        self.controller = controller_lista_account()
-        self.crea_view = vista_crea_account(self.show, self.controller)
+        self.controller = ControllerListaAccount()
+        self.crea_view = VistaCreaAccount(self.show, self.controller)
         self.credenziali = {}
         self.layout_verticale1 = QVBoxLayout()
         self.layout_verticale2 = QVBoxLayout()
@@ -78,7 +80,7 @@ class vista_login(QWidget):
             if Sessione.get_permessi():
                 self.accesso_proprietario.showFullScreen()
                 self.close()
-            else :
+            else:
                 self.accesso_view.showFullScreen()
                 self.close()
         else:
@@ -107,7 +109,7 @@ class vista_login(QWidget):
         # Sfondo
         self.setFixedWidth(800)
         self.setFixedHeight(600)
-        back_img = QImage("ListaAccount\data\img.png")
+        back_img = QImage("ListaAccount/data/img.png")
         img = back_img.scaled(800, 600)
         palette = QPalette()
         palette.setBrush(10, QBrush(img))

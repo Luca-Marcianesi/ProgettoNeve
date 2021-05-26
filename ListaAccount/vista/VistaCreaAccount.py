@@ -3,10 +3,10 @@ from PyQt5.QtWidgets import QVBoxLayout, QLabel, QLineEdit, QPushButton, QMessag
 
 
 # vista Crea account
-class vista_crea_account(QWidget):
+class VistaCreaAccount(QWidget):
 
     def __init__(self, callback, controller):
-        super(vista_crea_account, self).__init__()
+        super(VistaCreaAccount, self).__init__()
 
         # Definizione degli attributi
         self.callback = callback
