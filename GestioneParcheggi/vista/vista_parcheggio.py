@@ -28,19 +28,15 @@ class VistaParcheggio(QWidget):
         # Spaziatura
         self.layout_verticale.addSpacerItem(QSpacerItem(0, 50, QSizePolicy.Fixed, QSizePolicy.Fixed))
 
-        # Controlla i posti disponibili
-        if Sessione.controlla_prenotazione_effettuata(6):
-            label = QLabel("POSTI DISPONIBILI:\n{} ".format
-                           (self.controller_gestione_parcheggio.get_posti_disponibili()))
-        else:
-            label = QLabel("POSTI DISPONIBILI:\n{}\n(prenotazione effettuata)".format
-                           (self.controller_gestione_parcheggio.get_posti_disponibili()))
+        self.label = QLabel()
+        self.label.setFont(QFont('Times New Roman', 30))
+        self.label.setStyleSheet("background-image:url(Pista/data/legno.jpg)")
+        self.label.setAlignment(Qt.AlignCenter)
 
-        label.setFont(QFont('Times New Roman', 30))
-        label.setStyleSheet("background-image:url(Pista/data/legno.jpg)")
-        label.setAlignment(Qt.AlignCenter)
+        self.aggiorna()
+
         self.layout_orizzontale.addSpacerItem(QSpacerItem(600, 500, QSizePolicy.Fixed, QSizePolicy.Fixed))
-        self.layout_orizzontale.addWidget(label)
+        self.layout_orizzontale.addWidget(self.label)
         self.layout_orizzontale.addSpacerItem(QSpacerItem(600, 300, QSizePolicy.Fixed, QSizePolicy.Fixed))
 
         self.layout_verticale.addLayout(self.layout_orizzontale)
@@ -53,6 +49,14 @@ class VistaParcheggio(QWidget):
 
         self.setLayout(self.layout_verticale)
         self.setWindowTitle('Parcheggio')
+
+    def aggiorna(self):
+        if Sessione.controlla_prenotazione_effettuata(2):  # 2 è il codice assegnato al parcheggio
+            self.label.setText("POSTI DISPONIBILI:\n{} ".format
+                           (self.controller_gestione_parcheggio.get_posti_disponibili()))
+        else:
+            self.label.setText("POSTI DISPONIBILI:\n{}\n(prenotazione effettuata)".format
+                           (self.controller_gestione_parcheggio.get_posti_disponibili()))
 
     # Creazione, stile e settaggio sfondo e titolo
     def show_background(self, titolo):
@@ -98,7 +102,7 @@ class VistaParcheggio(QWidget):
 
     # Chiamata e mostra della vista richiesta giorni
     def call_selezione_giorni(self):
-        self.vista = VistaRichiestaGiorni(self.controller_gestione_parcheggio)
+        self.vista = VistaRichiestaGiorni(self.controller_gestione_parcheggio,self.aggiorna)
         self.vista.show()
 
     # Metodo che permette, cliccando il bottone "indietro", di tornare alla vista precedente
@@ -111,7 +115,7 @@ class VistaParcheggio(QWidget):
 
 class VistaRichiestaGiorni(QWidget):
 
-    def __init__(self, controller_parcheggi):
+    def __init__(self, controller_parcheggi,aggiorna):
         super(VistaRichiestaGiorni, self).__init__()
 
         # Controller
@@ -119,6 +123,7 @@ class VistaRichiestaGiorni(QWidget):
         self.layout_verticale = QVBoxLayout()
         self.num_giorni = 1
         self.setFixedSize(400, 300)
+        self.aggiorna = aggiorna
 
         # Descrizione della finestra per scegliere per quanti giorni prenotare
         label = QLabel("NUMERO GIORNI DA PRENOTARE:")
@@ -148,6 +153,7 @@ class VistaRichiestaGiorni(QWidget):
     def call_prenota(self):
         val = self.giorni.value()
         risultato = self.controller_parcheggi.prenota_parcheggio(val)
+        self.aggiorna()
         self.vista_chiusa = VistaEsito(risultato)
         self.vista_chiusa.show()
         self.close()

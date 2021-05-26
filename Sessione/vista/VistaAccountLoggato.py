@@ -25,7 +25,7 @@ class VistaAccountLoggato(QWidget):
         self.vista_modifica_credenziali = VistaModificaAccount(self.aggiorna, self.showFullScreen)
         self.vista_prenotazione_account = VistaPrenotazioneAccount(self.showFullScreen)
 
-        # Vista precedente
+        # vista precedente
         self.callback = callback
 
         # Sfondo

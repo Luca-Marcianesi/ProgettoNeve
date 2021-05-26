@@ -2,11 +2,10 @@
 # Classe tabella orari
 class tabella_orari:
 
-    def __init__(self, numero_tabella):
+    def __init__(self):
 
         # Definizione attributi
         self.lista_giorni = []
-        self.numero_tabella = numero_tabella
 
     # Metodo che aggiunge un dipendente ad un certo giorno della lista giorni
     def aggiungi_a_giorno(self, giorno, dipendente):
@@ -23,7 +22,3 @@ class tabella_orari:
     # Metodo che restituisce il giorno scelto dalla lista
     def get_giorno_from_lista(self, giorno):
         return self.lista_giorni[giorno]
-
-    # Metodo che restituisce il numero della tabella
-    def get_numero_tabella(self):
-        return self.numero_tabella

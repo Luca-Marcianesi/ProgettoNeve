@@ -10,6 +10,10 @@ from ElencoManutenzioni.vista.vista_lista_manutenzioni import VistaListaManutenz
 from ListaAttrezzatura.vista.vistalistaattrezzaturaproprietario import VistaListaAttrezzaturaProprietario
 
 # Classe vista home proprietario
+from TabellaOrari.model.tabella_orari import tabella_orari
+from TabellaOrari.vista.VistaTabellaOrari import vista_tabella_orari
+
+
 class vista_home_proprietario(QWidget):
 
     def __init__(self,callback):
@@ -83,7 +87,7 @@ class vista_home_proprietario(QWidget):
         pulsante_manutenzioni.clicked.connect(self.call_manutenzioni)
 
         pulsante_tabella = self.crea_bottone("TABELLA \nORARI", self.layout_verticale)
-        # pulsante_tabella.clicked.connect(self.call_prenota_parcheggio)
+        pulsante_tabella.clicked.connect(self.call_tabella)
 
         self.layout_orizzontale2.addSpacerItem(QSpacerItem(1300,0))
         self.layout_orizzontale3.addSpacerItem(QSpacerItem(1300, 0))
@@ -139,3 +143,8 @@ class vista_home_proprietario(QWidget):
         bottone.setStyleSheet('QPushButton {background-color: orange; color: black;}')
         layout.addWidget(bottone)
         return bottone
+
+    def call_tabella(self):
+        self.tabella = vista_tabella_orari(self.showFullScreen)
+        self.tabella.showFullScreen()
+        self.close()

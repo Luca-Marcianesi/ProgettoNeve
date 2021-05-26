@@ -38,7 +38,8 @@ class ListaAttrezzatura:
                 lista_attrezzatura = json.load(file)
                 for attrezzatura_da_caricare in lista_attrezzatura:
                     self.aggiungi_attrezzatura(
-                        Attrezzatura(attrezzatura_da_caricare["codice"], attrezzatura_da_caricare["nome"],
+                        Attrezzatura(attrezzatura_da_caricare["codice"],
+                                     attrezzatura_da_caricare["nome"],
                                      attrezzatura_da_caricare["dimensioni"]))
 
     # Metodo che restituisce la lista dell'attrezzatura

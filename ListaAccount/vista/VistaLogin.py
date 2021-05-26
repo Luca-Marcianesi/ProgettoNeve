@@ -10,7 +10,7 @@ from Home.vista.VistaHome import VistaHome
 from ListaAccount.vista.VistaCreaAccount import VistaCreaAccount
 from Sessione.model.sessione import Sessione
 
-# Vista login
+# vista login
 
 
 class VistaLogin(QWidget):
