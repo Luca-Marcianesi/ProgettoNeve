@@ -82,7 +82,6 @@ class VistaListaAttrezzaturaProprietario(QWidget):
     def show_pulsantiera(self):
         if not self.controller_lista_attrezzatura.get_lista_filtrata() == []:
             pulsante_apri = self.pulsante("Apri", self.attrezzatura_selezionata)
-            pulsante_apri.clicked.connect(self.attrezzatura_selezionata)
             self.layout_verticale2.addWidget(pulsante_apri)
 
         # Pulsante aggiungi
@@ -133,6 +132,7 @@ class VistaListaAttrezzaturaProprietario(QWidget):
                 self.aggiorna)
             self.vista_attrezzatura.showFullScreen()
         except IndexError:
+            print(1)
             QMessageBox.information(self, 'Attenzione!', 'Non hai selezionato nessuna attrezzatura.', QMessageBox.Ok,
                                     QMessageBox.Ok)
         except:
