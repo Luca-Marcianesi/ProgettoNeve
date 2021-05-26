@@ -38,6 +38,12 @@ class ListaAccount:
                 return True
         return False
 
+    def controlla_caratteristiche_persona(self, altezza, eta, numero_scarpe):
+        if int(altezza) < 50 or int(altezza) > 220 or int(eta) <= 5 or int(eta) > 130 or int(
+                numero_scarpe) <= 20 or int(numero_scarpe) > 50:
+            return False
+        return True
+
     # Metodo che salva i dati sul pickle
     def salva_dati(self):
         with open('ListaAccount/data/lista_account_salvata.pickle', 'wb') as dati:

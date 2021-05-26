@@ -100,8 +100,7 @@ class VistaCreaAccount(QWidget):
             QMessageBox.critical(self, 'Errore', 'Per favore, inserisci tutte le informazioni richieste',
                                  QMessageBox.Ok, QMessageBox.Ok)
             return False
-        elif int(altezza) < 50 or int(altezza) > 220 or int(eta) <= 5 or int(eta) > 130 or int(
-                numero_scarpe) <= 20 or int(numero_scarpe) > 50:
+        elif self.controller.controlla_caratteristiche_persona(altezza, eta, numero_scarpe) is False:
             QMessageBox.critical(self, 'Errore', 'Per favore, inserisci delle informazioni reali!',
                                  QMessageBox.Ok, QMessageBox.Ok)
             return False
