@@ -87,7 +87,7 @@ class VistaListaManutenzioni(QWidget):
         # Sfondo
         self.setFixedWidth(QDesktopWidget().width())
         self.setFixedHeight(QDesktopWidget().height())
-        back_img = QImage("ElencoManutenzioni/data/sfondo.jpg")
+        back_img = QImage("ElencoManutenzioni/data/sfondols.jpg")
         img = back_img.scaled(self.width(), self.height())
         palette = QPalette()
         palette.setBrush(10, QBrush(img))

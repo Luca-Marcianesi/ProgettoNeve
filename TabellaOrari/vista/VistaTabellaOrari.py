@@ -46,8 +46,8 @@ class vista_tabella_orari(QWidget):
     def show_background(self, stringa):
         # Sfondo
         self.setFixedSize(QDesktopWidget().width(), QDesktopWidget().height())
-        self.setStyleSheet("background-image: ListaAttrezzatura/data/1.jpg")
-        immagine = QImage("ListaAttrezzatura/data/1.jpg")
+        self.setStyleSheet("background-image: ListaAttrezzatura/data/1gs.jpg")
+        immagine = QImage("ListaAttrezzatura/data/1gs.jpg")
         immagine_scalata = immagine.scaled(self.width(), self.height())
         palette = QPalette()
         palette.setBrush(10, QBrush(immagine_scalata))

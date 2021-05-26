@@ -69,7 +69,7 @@ class VistaListaPiste(QWidget):
         # Punsante indietro
         pulsante_indietro = QPushButton()
         pulsante_indietro.setStyleSheet('QPushButton {background-color: lightBlue;}')
-        pulsante_indietro.setStyleSheet("background-image:url(Attrezzatura/data/arrow.jpg)")
+        pulsante_indietro.setStyleSheet("background-image:url(Attrezzatura/data/arrowla.jpg)")
         pulsante_indietro.setFixedSize(100, 100)
         pulsante_indietro.clicked.connect(self.indietro)
         self.layout_orizzontale.addSpacerItem(QSpacerItem(5, 0, QSizePolicy.Fixed, QSizePolicy.Fixed))

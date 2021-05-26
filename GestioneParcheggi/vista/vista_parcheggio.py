@@ -30,7 +30,7 @@ class VistaParcheggio(QWidget):
 
         self.label = QLabel()
         self.label.setFont(QFont('Times New Roman', 30))
-        self.label.setStyleSheet("background-image:url(Pista/data/legno.jpg)")
+        self.label.setStyleSheet("background-image:url(Pista/data/legnopista.jpg)")
         self.label.setAlignment(Qt.AlignCenter)
 
         self.aggiorna()
