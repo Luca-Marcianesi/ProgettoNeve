@@ -1,14 +1,16 @@
 from PyQt5.QtGui import QImage, QPalette, QBrush, QFont
 from PyQt5.QtCore import Qt
-from PyQt5.QtWidgets import QWidget, QVBoxLayout, QHBoxLayout, QSpacerItem, QSizePolicy, \
+from PyQt5.QtWidgets import QWidget, QVBoxLayout, QHBoxLayout, QSpacerItem, \
                             QDesktopWidget, QLabel, QPushButton
 from Attrezzatura.controller.controller_attrezzatura import ControllerAttrezzatura
 
 
 # vista dell'attrezzatura
-class vista_attrezzatura_proprietario(QWidget):
+
+
+class VistaAttrezzaturaProprietario(QWidget):
     def __init__(self, callback, attrezzatura, rimuovi, aggiorna):
-        super(vista_attrezzatura_proprietario, self).__init__()
+        super(VistaAttrezzaturaProprietario, self).__init__()
 
         # Attributi
         self.aggiorna = aggiorna
@@ -47,8 +49,6 @@ class vista_attrezzatura_proprietario(QWidget):
         self.layout_verticale1.addLayout(self.layout_orizzontale)
         self.layout_verticale1.addSpacerItem(QSpacerItem(0, 250))
         self.setLayout(self.layout_verticale1)
-
-
 
     # Impostazione dello sfondo
     def show_background(self, stringa):

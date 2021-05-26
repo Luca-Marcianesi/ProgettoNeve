@@ -21,3 +21,7 @@ class ControllerListaAccount:
 
     def controlla_username(self, username):
         return self.model.controlla_username(username)
+
+    def controlla_caratteristiche_persona(self,altezza, eta, numero_scarpe):
+        return self.model.controlla_caratteristiche_persona(altezza, eta, numero_scarpe)
+
