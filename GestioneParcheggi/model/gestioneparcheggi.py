@@ -54,7 +54,7 @@ class GestioneParcheggi:
 
     # Metodo salva dati con creazione del pickle
     def salva_dati(self):
-        with open('GestioneParcheggi/data/parcheggi.pickle', 'wb') as dati:
+        with open('Data/GestioneParcheggio/parcheggi.pickle', 'wb') as dati:
             pickle.dump(self.elenco_parcheggi, dati, pickle.HIGHEST_PROTOCOL)
 
     # Metodo per aggiungere un parcheggio
@@ -63,11 +63,11 @@ class GestioneParcheggi:
 
     # Metodo che legge i dati dal pickle se esiste o dal json
     def leggi_dati(self):
-        if os.path.isfile('GestioneParcheggi/data/parcheggi.pickle'):
-            with open('GestioneParcheggi/data/parcheggi.pickle', "rb") as file:
+        if os.path.isfile('Data/GestioneParcheggio/parcheggi.pickle'):
+            with open('Data/GestioneParcheggio/parcheggi.pickle', "rb") as file:
                 self.elenco_parcheggi = pickle.load(file)
         else:
-            with open("GestioneParcheggi/data/parcheggio.json") as file:
+            with open("Data/GestioneParcheggio/parcheggio.json") as file:
                 elenco_parcheggi = json.load(file)
             for parcheggio_da_agg in elenco_parcheggi:
                 self.aggiungi_parcheggio(

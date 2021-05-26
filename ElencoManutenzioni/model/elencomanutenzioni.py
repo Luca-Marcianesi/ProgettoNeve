@@ -34,11 +34,11 @@ class ElencoManutenzioni:
 
     # Metodo che legge i dati dal pickle se esiste o dal json
     def leggi_dati(self):
-        if os.path.isfile('ElencoManutenzioni/data/elenco_manutenzioni.pickle'):
-            with open('ElencoManutenzioni/data/elenco_manutenzioni.pickle', "rb") as file:
+        if os.path.isfile('Data/ElencoManutenzioni/elenco_manutenzioni.pickle'):
+            with open('Data/ElencoManutenzioni/elenco_manutenzioni.pickle', "rb") as file:
                 self.elenco_manutenzioni = pickle.load(file)
         else:
-            with open("ElencoManutenzioni/data/elenco_manutenzioni.json") as file:
+            with open("Data/ElencoManutenzioni/elenco_manutenzioni.json") as file:
                 elenco_manutenzioni = json.load(file)
             for manutenzione_da_aggiungere in elenco_manutenzioni:
                 self.aggiungi_manutenzione(Manutenzione(manutenzione_da_aggiungere["nome"],

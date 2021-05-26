@@ -71,7 +71,7 @@ class GestioneSkipass:
 
     # Metodo che legge i dati dal pickle
     def leggi_dati(self):
-        with open("GestioneSkipass/data/lista_skipass.json") as file:
+        with open("Data/ListaSkipass/lista_skipass.json") as file:
             file_oggetto = json.load(file)
             self.inizio_stagione = file_oggetto["data_inizio_stagione"]
             self.fine_stagione = file_oggetto["data_fine_stagione"]

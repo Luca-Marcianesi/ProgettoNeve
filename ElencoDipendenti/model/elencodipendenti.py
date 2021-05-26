@@ -44,16 +44,16 @@ class ElencoDipendenti:
 
     # Metodo per creare il pickle contenente i dipendenti presi dall'elenco
     def salva_dati(self):
-        with open('ElencoDipendenti/data/lista_dipendenti_salvata.pickle', 'wb') as dati:
+        with open('Data/ElencoDipendenti/lista_dipendenti_salvata.pickle', 'wb') as dati:
             pickle.dump(self.elenco, dati, pickle.HIGHEST_PROTOCOL)
 
     # Metodo che legge i dati dal pickle se esiste o dal json
     def leggi_dati(self):
-        if os.path.isfile('ElencoDipendenti/data/lista_dipendenti_salvata.pickle'):
-            with open('ElencoDipendenti/data/lista_dipendenti_salvata.pickle', "rb") as file:
+        if os.path.isfile('Data/ElencoDipendenti/lista_dipendenti_salvata.pickle'):
+            with open('Data/ElencoDipendenti/lista_dipendenti_salvata.pickle', "rb") as file:
                 self.elenco = pickle.load(file)
         else:
-            with open("ElencoDipendenti/data/lista_dipendenti.json") as file:
+            with open("Data/ElencoDipendenti/lista_dipendenti.json") as file:
                 lista_dipendenti = json.load(file)
             for dipendenti_da_caricare in lista_dipendenti:
                 self.aggiungi_dipendente(Dipendente(dipendenti_da_caricare["nome"],
