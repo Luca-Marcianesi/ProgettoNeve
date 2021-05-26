@@ -52,7 +52,7 @@ class VistaSkipass(QWidget):
     def show_background(self, titolo):
         self.setFixedWidth(QDesktopWidget().width())
         self.setFixedHeight(QDesktopWidget().height())
-        back_img = QImage("GestioneSkipass/data/vista_skipass.webp")
+        back_img = QImage("Data/Immagini/vista_skipass.webp")
         img = back_img.scaled(self.width(), self.height())
         palette = QPalette()
         palette.setBrush(10, QBrush(img))

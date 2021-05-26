@@ -1,7 +1,7 @@
 from PyQt5.QtGui import QPalette, QBrush, QImage, QFont, QPixmap
 from PyQt5.QtWidgets import QWidget, QPushButton, QVBoxLayout, QLabel, QSpacerItem, QDesktopWidget, QHBoxLayout
 
-from Home.Informazioni.vistainformazioni import VistaInformazioni
+from Home.vista.vistainformazioni import VistaInformazioni
 from ListaAttrezzatura.vista.VistaListaAttrezzatura import VistaListaAttrezzatura
 from ListaPiste.vista.VistaListaPiste import VistaListaPiste
 from Sessione.vista.VistaAccountLoggato import VistaAccountLoggato

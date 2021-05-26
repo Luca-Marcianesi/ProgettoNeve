@@ -43,7 +43,7 @@ class VistaInformazioni(QWidget):
     def show_background(self, titolo):
         self.setFixedWidth(QDesktopWidget().width())
         self.setFixedHeight(QDesktopWidget().height())
-        back_img = QImage("Home/data/VistaInfo.jpg")
+        back_img = QImage("Data/Immagini/VistaInfo.jpg")
         img = back_img.scaled(self.width(), self.height())
         palette = QPalette()
         palette.setBrush(10, QBrush(img))

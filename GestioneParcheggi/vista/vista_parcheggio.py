@@ -30,7 +30,7 @@ class VistaParcheggio(QWidget):
 
         self.label = QLabel()
         self.label.setFont(QFont('Times New Roman', 30))
-        self.label.setStyleSheet("background-image:url(Pista/data/legnopista.jpg)")
+        self.label.setStyleSheet("background-image:url(Data/Immagini/legnopista.jpg)")
         self.label.setAlignment(Qt.AlignCenter)
 
         self.aggiorna()
@@ -63,7 +63,7 @@ class VistaParcheggio(QWidget):
 
         self.setFixedWidth(QDesktopWidget().width())
         self.setFixedHeight(QDesktopWidget().height())
-        immagine = QImage('GestioneParcheggi/data/parcheggio2.jpg')
+        immagine = QImage('Data/Immagini/Parcheggio.jpg')
         img = immagine.scaled(self.width(), self.height())
         palette = QPalette()
         palette.setBrush(10, QBrush(img))
