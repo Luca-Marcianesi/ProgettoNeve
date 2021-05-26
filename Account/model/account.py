@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import date
 # Classe account e definizione del costruttore
 
 
@@ -86,7 +86,7 @@ class Account:
         else:
             for prenotazione in self.lista_prenotazioni:
                 controllare = prenotazione.get_scadenza()
-                oggi = datetime.today()
+                oggi = date.today()
                 if controllare > oggi:
                     self.lista_prenotazioni.remove(prenotazione)
 
