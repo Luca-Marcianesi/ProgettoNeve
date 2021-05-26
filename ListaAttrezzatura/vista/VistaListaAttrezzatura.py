@@ -3,7 +3,7 @@ from PyQt5.QtGui import QFont, QBrush, QPalette, QImage, QStandardItemModel, QSt
 from PyQt5.QtWidgets import QWidget, QHBoxLayout, QVBoxLayout, QLabel, QSpacerItem, \
     QSizePolicy, QListView, QPushButton, QDesktopWidget, QMessageBox
 
-from Attrezzatura.vista.VistaAttrezzatura import vista_attrezzatura
+from Attrezzatura.vista.VistaAttrezzatura import VistaAttrezzatura
 from ListaAttrezzatura.controller.controllerlistaattrezzatura import ControllerListaAttrezzatura
 
 # Vista lista attrezzatura
@@ -105,10 +105,10 @@ class VistaListaAttrezzatura(QWidget):
             selezionata = self.vista_lista.selectedIndexes()[0].row()
             lista = self.controller_lista_attrezzatura.get_lista_filtrata()
             attrezzatura = lista[selezionata]
-            self.vista_attrezzatura = vista_attrezzatura(self.showFullScreen,
-                                                         attrezzatura,
-                                                         self.controller_lista_attrezzatura.prenota_attrezzatura,
-                                                         self.aggiorna)
+            self.vista_attrezzatura = VistaAttrezzatura(self.showFullScreen,
+                                                        attrezzatura,
+                                                        self.controller_lista_attrezzatura.prenota_attrezzatura,
+                                                        self.aggiorna)
             self.vista_attrezzatura.showFullScreen()
         except IndexError:
             QMessageBox.information(self, 'Attenzione!', 'Non hai selezionato nessuna attrezzatura.', QMessageBox.Ok,

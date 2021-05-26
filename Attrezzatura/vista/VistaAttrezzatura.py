@@ -6,9 +6,11 @@ from Attrezzatura.controller.controller_attrezzatura import ControllerAttrezzatu
 from Sessione.model.sessione import Sessione
 
 # vista dell'attrezzatura
-class vista_attrezzatura(QWidget):
+
+
+class VistaAttrezzatura(QWidget):
     def __init__(self, callback, attrezzatura, prenota, aggiorna):
-        super(vista_attrezzatura, self).__init__()
+        super(VistaAttrezzatura, self).__init__()
 
         # Attributi
         self.aggiorna = aggiorna
@@ -105,16 +107,16 @@ class vista_attrezzatura(QWidget):
     # Metodo per la prenotazione
     def prenotazione(self):
         risultato = self.prenota(self.attrezzatura)
-        self.vista_chiusura = vista_esito(risultato)
+        self.vista_chiusura = VistaEsito(risultato)
         self.vista_chiusura.show()
         self.aggiorna()
         Sessione.salva_dati()
 
 
 # Classe esito -> compare una finestra una volta fatta la prenotazione
-class vista_esito(QWidget):
+class VistaEsito(QWidget):
     def __init__(self, risultato):
-        super(vista_esito, self).__init__()
+        super(VistaEsito, self).__init__()
         self.layout_verticale = QVBoxLayout()
         self.setMaximumSize(500, 200)
 
@@ -140,4 +142,3 @@ class vista_esito(QWidget):
     # Metodo per la chiusura della finestra
     def call_chiudi(self):
         self.close()
-
