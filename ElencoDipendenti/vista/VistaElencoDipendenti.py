@@ -68,7 +68,7 @@ class VistaElencoDipendenti(QWidget):
         # Background
         self.setFixedWidth(QDesktopWidget().width())
         self.setFixedHeight(QDesktopWidget().height())
-        back_img = QImage("ListaAttrezzatura/data/attrezzatura.jpg")
+        back_img = QImage("ListaAttrezzatura/data/ListaAttrezzatura.jpg")
         img = back_img.scaled(self.width(), self.height())
         palette = QPalette()
         palette.setBrush(10, QBrush(img))

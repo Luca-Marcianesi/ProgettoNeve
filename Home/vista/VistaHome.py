@@ -23,7 +23,7 @@ class VistaHome(QWidget):
 
         self.sfondo = QLabel('')
         self.sfondo.setStyleSheet('QLabel {background-color: darkCyan}')
-        pixmap = QPixmap("ListaAccount/data/2ls.png")
+        pixmap = QPixmap("ListaAccount/data/LogoVistaHome.png")
         self.sfondo.setPixmap(pixmap)
         self.layout_orizzontale1.addWidget(self.sfondo)
         self.layout_orizzontale1.addSpacerItem(QSpacerItem(275, 0))
@@ -45,7 +45,7 @@ class VistaHome(QWidget):
         # Sfondo
         self.setFixedWidth(QDesktopWidget().width())
         self.setFixedHeight(QDesktopWidget().height())
-        back_img = QImage("Data/Immagini/2.jpg")
+        back_img = QImage("Data/Immagini/VistaHome.jpg")
         img = back_img.scaled(self.width(), self.height())
         palette = QPalette()
         palette.setBrush(10, QBrush(img))

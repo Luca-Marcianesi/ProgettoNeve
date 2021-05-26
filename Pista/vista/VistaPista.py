@@ -51,7 +51,7 @@ class vista_pista(QWidget):
 
     def show_background(self, stringa):
         # Sfondo
-        back_img = QImage("Data/Immagini/6.jpg")
+        back_img = QImage("Data/Immagini/VistaPista.jpg")
         img = back_img.scaled(self.width(), self.height())
         palette = QPalette()
         palette.setBrush(10, QBrush(img))

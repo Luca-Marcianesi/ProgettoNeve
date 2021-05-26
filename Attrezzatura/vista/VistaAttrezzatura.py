@@ -59,8 +59,8 @@ class VistaAttrezzatura(QWidget):
     def show_background(self, stringa):
         # Sfondo
         self.setFixedSize(QDesktopWidget().width(), QDesktopWidget().height())
-        self.setStyleSheet("background-image: ListaAttrezzatura/data/1gs.jpg")
-        immagine = QImage("ListaAttrezzatura/data/1gs.jpg")
+        self.setStyleSheet("background-image: ListaAttrezzatura/data/VistaSkipass.jpg")
+        immagine = QImage("ListaAttrezzatura/data/VistaSkipass.jpg")
         immagine = immagine.scaled(self.width(), self.height())
         palette = QPalette()
         palette.setBrush(10, QBrush(immagine))
