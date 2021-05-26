@@ -68,7 +68,7 @@ class VistaElencoDipendenti(QWidget):
         # Background
         self.setFixedWidth(QDesktopWidget().width())
         self.setFixedHeight(QDesktopWidget().height())
-        back_img = QImage("ListaAttrezzatura/data/ListaAttrezzatura.jpg")
+        back_img = QImage("Data/Immagini/ListaAttrezzatura.jpg")
         img = back_img.scaled(self.width(), self.height())
         palette = QPalette()
         palette.setBrush(10, QBrush(img))
@@ -141,7 +141,6 @@ class VistaElencoDipendenti(QWidget):
     # Chiamata aggiungi dipendente
     def call_aggiungi_dipendente(self):
         self.vista_aggiungi.show()
-        self.close()
 
     # Chiamata indietro
     def indietro(self):

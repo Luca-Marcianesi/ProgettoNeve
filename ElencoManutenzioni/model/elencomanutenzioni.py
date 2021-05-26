@@ -50,5 +50,5 @@ class ElencoManutenzioni:
 
     # Metodo per salvare i dati
     def salva_dati(self):
-        with open('ElencoManutenzioni/data/elenco_manutenzioni.pickle', 'wb') as dati:
+        with open('Data/ElencoManutenzioni/elenco_manutenzioni.pickle', 'wb') as dati:
             pickle.dump(self.elenco_manutenzioni, dati, pickle.HIGHEST_PROTOCOL)
