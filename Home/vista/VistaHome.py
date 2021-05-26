@@ -1,19 +1,19 @@
 from PyQt5.QtGui import QPalette, QBrush, QImage, QFont, QPixmap
 from PyQt5.QtWidgets import QWidget, QPushButton, QVBoxLayout, QLabel, QSpacerItem, QDesktopWidget, QHBoxLayout
 
-from Home.Informazioni.vista_informazioni import vista_informazioni
+from Home.Informazioni.vistainformazioni import VistaInformazioni
 from ListaAttrezzatura.vista.VistaListaAttrezzatura import VistaListaAttrezzatura
 from ListaPiste.vista.VistaListaPiste import VistaListaPiste
 from Sessione.vista.VistaAccountLoggato import VistaAccountLoggato
-from GestioneParcheggi.vista.vista_parcheggio import vista_parcheggio
-from GestioneSkipass.vista.vista_acquista_skipass import vista_acquista_skipass
+from GestioneParcheggi.vista.vista_parcheggio import VistaParcheggio
+from GestioneSkipass.vista.vista_acquista_skipass import VistaAcquistaSkipass
 
 
 # Vista home cliente
-class vista_home(QWidget):
+class VistaHome(QWidget):
 
-    def __init__(self,callback):
-        super(vista_home, self).__init__()
+    def __init__(self, callback):
+        super(VistaHome, self).__init__()
 
         # Attributi
         self.callback = callback
@@ -81,7 +81,7 @@ class vista_home(QWidget):
 
     # Metodo che chiama e mostra la vista informazioni
     def call_info(self):
-        self.vista_informazioni = vista_informazioni(self.show)
+        self.vista_informazioni = VistaInformazioni(self.show)
         self.vista_informazioni.showFullScreen()
         self.close()
 
@@ -99,7 +99,7 @@ class vista_home(QWidget):
 
     # Metodo che chiama e mostra la vista prenota parcheggio
     def call_prenota_parcheggio(self):
-        self.vista_prenota_parcheggio = vista_parcheggio(self.showFullScreen)
+        self.vista_prenota_parcheggio = VistaParcheggio(self.showFullScreen)
         self.vista_prenota_parcheggio.showFullScreen()
         self.close()
 
@@ -111,7 +111,7 @@ class vista_home(QWidget):
 
     # Metodo che chiama e mostra la vista acquista skipass
     def call_skipass(self):
-        self.vista_acquista_skipass = vista_acquista_skipass(self.showFullScreen)
+        self.vista_acquista_skipass = VistaAcquistaSkipass(self.showFullScreen)
         self.vista_acquista_skipass.showFullScreen()
         self.close()
 

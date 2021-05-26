@@ -3,9 +3,10 @@ from PyQt5.QtWidgets import QVBoxLayout, QLabel, QDesktopWidget, QWidget, QSizeP
     QPushButton
 from PyQt5.QtCore import Qt
 
-class vista_home_prova(QWidget):
+
+class VistaHomeProva(QWidget):
     def __init__(self):
-        super(vista_home_prova, self).__init__()
+        super(VistaHomeProva, self).__init__()
 
 
         # Attributi

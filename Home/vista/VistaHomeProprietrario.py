@@ -2,11 +2,11 @@ from PyQt5.QtGui import QPalette, QBrush, QImage, QFont, QPixmap
 from PyQt5.QtWidgets import QWidget, QPushButton, QVBoxLayout, QLabel, QSizePolicy, QSpacerItem, \
     QDesktopWidget, QHBoxLayout
 
-from ElencoDipendenti.vista.VistaElencoDipendenti import vista_elenco_dipendenti
+from ElencoDipendenti.vista.VistaElencoDipendenti import VistaElencoDipendenti
 from ListaAttrezzatura.vista.VistaListaAttrezzatura import VistaListaAttrezzatura
 from ListaPiste.vista.VistaListaPisteProprietario import VistaListaPisteProprietario
 from Sessione.vista.VistaAccountLoggato import VistaAccountLoggato
-from ElencoManutenzioni.vista.vista_lista_manutenzioni import vista_lista_manutenzioni
+from ElencoManutenzioni.vista.vista_lista_manutenzioni import VistaListaManutenzioni
 from ListaAttrezzatura.vista.vistalistaattrezzaturaproprietario import VistaListaAttrezzaturaProprietario
 
 # Classe vista home proprietario
@@ -110,13 +110,13 @@ class vista_home_proprietario(QWidget):
 
     # Metodo che chiama e mostra la vista lista manutenzioni
     def call_manutenzioni(self):
-        self.vista_lista_manutenzioni = vista_lista_manutenzioni(self.showFullScreen)
+        self.vista_lista_manutenzioni = VistaListaManutenzioni(self.showFullScreen)
         self.vista_lista_manutenzioni.showFullScreen()
         self.close()
 
     # Metodo che chiama e mostra la vista elenco dipendenti
     def call_elenco_dipendenti(self):
-        self.vista_elenco_dipendenti = vista_elenco_dipendenti(self.showFullScreen)
+        self.vista_elenco_dipendenti = VistaElencoDipendenti(self.showFullScreen)
         self.vista_elenco_dipendenti.showFullScreen()
         self.close()
 

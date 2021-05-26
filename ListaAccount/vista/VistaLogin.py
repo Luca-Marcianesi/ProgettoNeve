@@ -5,7 +5,7 @@ from PyQt5.QtWidgets import QWidget, QVBoxLayout, QLabel, QLineEdit, QPushButton
 
 from Home.vista.VistaHomeProprietrario import vista_home_proprietario
 from ListaAccount.controller.controllerlistaaccount import ControllerListaAccount
-from Home.vista.VistaHome import vista_home
+from Home.vista.VistaHome import VistaHome
 
 from ListaAccount.vista.VistaCreaAccount import VistaCreaAccount
 from Sessione.model.sessione import Sessione
@@ -19,7 +19,7 @@ class VistaLogin(QWidget):
         super(VistaLogin, self).__init__(parent)
 
         # Attributi
-        self.accesso_view = vista_home(self.show)
+        self.accesso_view = VistaHome(self.show)
         self.accesso_proprietario = vista_home_proprietario(self.show)
         self.controller = ControllerListaAccount()
         self.crea_view = VistaCreaAccount(self.show, self.controller)

@@ -7,10 +7,11 @@ from PyQt5.QtWidgets import QVBoxLayout, QLabel, QDesktopWidget, QWidget, QSizeP
 from PyQt5.QtCore import Qt
 
 # Vista informazioni
-class vista_informazioni(QWidget):
-    def __init__(self, callback):
-        super(vista_informazioni, self).__init__()
 
+
+class VistaInformazioni(QWidget):
+    def __init__(self, callback):
+        super(VistaInformazioni, self).__init__()
 
         # Attributi
         self.layout_verticale = QVBoxLayout()
@@ -85,7 +86,7 @@ class vista_informazioni(QWidget):
         pulsante_web.setFont(QFont('Times New Roman', 18))
         pulsante_web.setStyleSheet('QPushButton{background-color: transparent; color: Blue}')
         pulsante_web.setFixedSize(400, 200)
-        pulsante_web.clicked.connect(partial(webbrowser.open,self.url))
+        pulsante_web.clicked.connect(partial(webbrowser.open, self.url))
         self.layout_orizzontale.addWidget(pulsante_web)
 
     # Secondo pulsante link
@@ -94,11 +95,10 @@ class vista_informazioni(QWidget):
         pulsante_web.setFont(QFont('Times New Roman', 18))
         pulsante_web.setStyleSheet('QPushButton{background-color: transparent; color: Blue}')
         pulsante_web.setFixedSize(400, 200)
-        pulsante_web.clicked.connect(partial(webbrowser.open,self.url1))
+        pulsante_web.clicked.connect(partial(webbrowser.open, self.url1))
         self.layout_orizzontale1.addWidget(pulsante_web)
 
     # Collegamento del pulsante indietro per tornare alla schermata precedente
     def indietro(self):
         self.callback()
         self.close()
-
