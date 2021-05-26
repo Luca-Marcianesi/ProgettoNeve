@@ -2,7 +2,7 @@ from PyQt5.QtGui import QImage, QPalette, QBrush, QFont
 from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import QWidget, QVBoxLayout, QHBoxLayout, QSpacerItem, QSizePolicy, \
                             QDesktopWidget, QLabel, QPushButton
-from Attrezzatura.controller.controller_attrezzatura import controller_attrezzatura
+from Attrezzatura.controller.controller_attrezzatura import ControllerAttrezzatura
 
 
 # vista dell'attrezzatura
@@ -15,7 +15,7 @@ class vista_attrezzatura_proprietario(QWidget):
         self.attrezzatura = attrezzatura
         self.callback = callback
         self.rimuovi = rimuovi
-        self.controller = controller_attrezzatura(self.attrezzatura)
+        self.controller = ControllerAttrezzatura(self.attrezzatura)
         self.layout_verticale2 = QVBoxLayout()
         self.layout_verticale1 = QVBoxLayout()
         self.layout_orizzontale = QHBoxLayout()

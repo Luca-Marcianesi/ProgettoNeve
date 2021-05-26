@@ -9,7 +9,7 @@ from GestioneParcheggi.vista.vista_parcheggio import VistaParcheggio
 from GestioneSkipass.vista.vista_acquista_skipass import VistaAcquistaSkipass
 
 
-# Vista home cliente
+# vista home cliente
 class VistaHome(QWidget):
 
     def __init__(self, callback):
