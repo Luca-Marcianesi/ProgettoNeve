@@ -30,7 +30,7 @@ class VistaLogin(QWidget):
         self.layout_orizzontale2 = QHBoxLayout()
 
         # Sfondo
-        self.show_background("SARNANO NEVE")
+        self.show_background("SARNANONEVE")
 
         # Spaziatura tra lato sinitro e caselle
         self.layout_orizzontale1.addSpacerItem(QSpacerItem(200, 0, QSizePolicy.Fixed, QSizePolicy.Fixed))
