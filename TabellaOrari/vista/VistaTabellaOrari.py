@@ -2,15 +2,16 @@ from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QImage, QPalette, QBrush, QFont, QStandardItem, QStandardItemModel
 from PyQt5.QtWidgets import QWidget, QVBoxLayout, QDesktopWidget, QLabel, QSpacerItem, QTableWidget, QTableWidgetItem, \
     QHBoxLayout, QSizePolicy, QPushButton, QListView, QMessageBox, QAbstractItemView
-
 from ElencoDipendenti.controller.controller_gestione_dipendenti import ControllerElencoDipendenti
+from TabellaOrari.controller.controller_tabella_orari import ControllerTabellaOrari
 
 
-class vista_tabella_orari(QWidget):
+class VistaTabellaOrari(QWidget):
     def __init__(self, callback):
-        super(vista_tabella_orari, self).__init__()
+        super(VistaTabellaOrari, self).__init__()
 
         # Attributi
+        self.controller_tabella_orari = ControllerTabellaOrari()
         self.callback = callback
         self.layout_verticale = QVBoxLayout()
         self.layout_orizzontale = QHBoxLayout()
@@ -28,17 +29,20 @@ class vista_tabella_orari(QWidget):
         self.tableWidget.setHorizontalHeaderLabels(['Lunedì', 'Martedì', 'Mercoledì', 'Giovedì',
                                                     'Venerdì', 'Sabato', 'Domenica'])
         self.tableWidget.horizontalHeader().setFont(QFont('Times New Roman', 15, 80))
+        self.tableWidget.horizontalHeader().setStyleSheet("color: darkRed")
+        self.tableWidget.verticalHeader().hide()
+        self.aggiorna()
 
         # Allineamento e spaziatura layout orizzontale
         self.layout_orizzontale.addSpacerItem(QSpacerItem(50, 0))
         self.layout_orizzontale.addWidget(self.tableWidget)
         self.layout_orizzontale.addSpacerItem(QSpacerItem(100, 0))
         self.layout_orizzontale.addLayout(self.show_pulsantiera())
-        self.layout_orizzontale.addSpacerItem(QSpacerItem(50, 0))
+        self.layout_orizzontale.addSpacerItem(QSpacerItem(85, 0))
         self.layout_verticale.addLayout(self.layout_orizzontale)
 
         # Spaziatura layout verticale
-        self.layout_verticale.addSpacerItem(QSpacerItem(0, 140))
+        self.layout_verticale.addSpacerItem(QSpacerItem(0, 130))
 
         self.setLayout(self.layout_verticale)
 
@@ -46,8 +50,7 @@ class vista_tabella_orari(QWidget):
     def show_background(self, stringa):
         # Sfondo
         self.setFixedSize(QDesktopWidget().width(), QDesktopWidget().height())
-        self.setStyleSheet("background-image: ListaAttrezzatura/data/VistaSkipass.jpg")
-        immagine = QImage("ListaAttrezzatura/data/VistaSkipass.jpg")
+        immagine = QImage("Data/Immagini/VistaTabella.jpg")
         immagine_scalata = immagine.scaled(self.width(), self.height())
         palette = QPalette()
         palette.setBrush(10, QBrush(immagine_scalata))
@@ -93,6 +96,7 @@ class vista_tabella_orari(QWidget):
 
     # Metodo che permette, cliccando il bottone "indietro", di tornare alla vista precedente
     def indietro(self):
+        self.controller_tabella_orari.salva_dati()
         self.callback()
         self.close()
 
@@ -100,7 +104,8 @@ class vista_tabella_orari(QWidget):
         try:
             riga = self.tableWidget.selectedIndexes()[0].row()
             colonna = self.tableWidget.selectedIndexes()[0].column()
-            self.lista_dipendenti = vista_aggiungi(self.tableWidget, riga, colonna)
+            self.lista_dipendenti = vista_aggiungi(self.tableWidget, riga, colonna,
+                                                   self.controller_tabella_orari.aggiungi_a_giorno, self.aggiorna)
             self.lista_dipendenti.show()
         except IndexError:
             QMessageBox.information(self, 'Attenzione!', 'Non hai selezionato nessuna casella.',
@@ -113,6 +118,7 @@ class vista_tabella_orari(QWidget):
         try:
             riga = self.tableWidget.selectedIndexes()[0].row()
             colonna = self.tableWidget.selectedIndexes()[0].column()
+            self.controller_tabella_orari.rimuovi_da_giorno(riga, colonna)
             vuoto = QTableWidgetItem()
             vuoto.setText("")
             self.tableWidget.setItem(riga, colonna, vuoto)
@@ -124,10 +130,23 @@ class vista_tabella_orari(QWidget):
             QMessageBox.critical(self, 'Errore!', 'Qualcosa è andato storto, riprova più tardi.',
                                  QMessageBox.Ok, QMessageBox.Ok)
 
+    def aggiorna(self):
+        indice_giorni = len(self.controller_tabella_orari.get_lista_tabella_orari())
+        for colonna in range(indice_giorni):
+            giorno = self.controller_tabella_orari.get_giorno_from_lista(colonna)
+            indice_dipendenti = len(giorno.get_lista())
+            for riga in range(indice_dipendenti):
+                    dipendente = giorno.get_dipendente(riga)
+                    item = QTableWidgetItem()
+                    item.setText(dipendente.get_dipendente_str())
+                    item.setTextAlignment(Qt.AlignCenter)
+                    item.setFont(QFont('Times New Roman', 13, 60))
+                    self.tableWidget.setItem(riga, colonna, item)
+
 
 class vista_aggiungi(QWidget):
 
-    def __init__(self, tabella, riga, colonna):
+    def __init__(self, tabella, riga, colonna, aggiungi_lista, aggiorna):
         super(vista_aggiungi, self).__init__()
         self.setFixedSize(1000, 600)
 
@@ -135,6 +154,8 @@ class vista_aggiungi(QWidget):
         self.tabella = tabella
         self.riga = riga
         self.colonna = colonna
+        self.aggiungi_lista = aggiungi_lista
+        self.aggiorna = aggiorna
 
         # Controller
         self.controller_gestione_dipendenti = ControllerElencoDipendenti()
@@ -185,7 +206,7 @@ class vista_aggiungi(QWidget):
         pulsante_aggiungi.setFont(font)
         pulsante_aggiungi.setStyleSheet(style)
         pulsante_aggiungi.setFixedSize(200, 50)
-        pulsante_aggiungi.clicked.connect(self.call_aggiungi_dipendente)
+        pulsante_aggiungi.clicked.connect(self.call_seleziona_dipendente)
 
         pulsante_esci = QPushButton("Esci")
         pulsante_esci.setFont(font)
@@ -200,15 +221,13 @@ class vista_aggiungi(QWidget):
         self.layout_orizzontale.addLayout(layout_pulsanti)
 
     # Gestione eccezzione di non aver selezionato nessun dipendente da visualizzare
-    def call_aggiungi_dipendente(self):
+    def call_seleziona_dipendente(self):
         try:
             selezionato = self.lista_dipendenti.selectedIndexes()[0].row()
             lista = self.controller_gestione_dipendenti.get_lista_elenco_dipendenti()
             dipendente = lista[selezionato]
-            persona = QTableWidgetItem()
-            persona.setFont(QFont('Times New Roman', 13, 80))
-            persona.setText(dipendente.get_dipendente_str())
-            self.tabella.setItem(self.riga, self.colonna, persona)
+            self.aggiungi_lista(len(lista), self.colonna, dipendente)
+            self.aggiorna()
             self.close()
         except IndexError:
             QMessageBox.information(self, 'Attenzione!', 'Non hai selezionato nessun dipendente da visualizzare.',
