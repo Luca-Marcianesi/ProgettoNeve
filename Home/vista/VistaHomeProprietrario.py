@@ -29,7 +29,7 @@ class vista_home_proprietario(QWidget):
 
         self.sfondo = QLabel('')
         self.sfondo.setStyleSheet('QLabel {background-color: darkCyan}')
-        pixmap = QPixmap("ListaAccount/data/LogoVistaHome.png")
+        pixmap = QPixmap("Data/Immagini/LogoVistaHome.png")
         self.sfondo.setPixmap(pixmap)
         self.layout_orizzontale1.addWidget(self.sfondo)
         self.layout_orizzontale1.addSpacerItem(QSpacerItem(300,0,QSizePolicy.Fixed, QSizePolicy.Fixed))

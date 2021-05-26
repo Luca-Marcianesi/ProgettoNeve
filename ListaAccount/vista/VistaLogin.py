@@ -109,7 +109,7 @@ class VistaLogin(QWidget):
         # Sfondo
         self.setFixedWidth(800)
         self.setFixedHeight(600)
-        back_img = QImage("ListaAccount/data/VistaLogin.png")
+        back_img = QImage("Data/Immagini/VistaLogin.png")
         img = back_img.scaled(800, 600)
         palette = QPalette()
         palette.setBrush(10, QBrush(img))
