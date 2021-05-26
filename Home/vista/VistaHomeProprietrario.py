@@ -8,10 +8,7 @@ from ListaPiste.vista.VistaListaPisteProprietario import VistaListaPistePropriet
 from Sessione.vista.VistaAccountLoggato import VistaAccountLoggato
 from ElencoManutenzioni.vista.vista_lista_manutenzioni import VistaListaManutenzioni
 from ListaAttrezzatura.vista.vistalistaattrezzaturaproprietario import VistaListaAttrezzaturaProprietario
-
-# Classe vista home proprietario
-from TabellaOrari.model.tabella_orari import tabella_orari
-from TabellaOrari.vista.VistaTabellaOrari import vista_tabella_orari
+from TabellaOrari.vista.VistaTabellaOrari import VistaTabellaOrari
 
 
 class vista_home_proprietario(QWidget):
@@ -145,6 +142,6 @@ class vista_home_proprietario(QWidget):
         return bottone
 
     def call_tabella(self):
-        self.tabella = vista_tabella_orari(self.showFullScreen)
+        self.tabella = VistaTabellaOrari(self.showFullScreen)
         self.tabella.showFullScreen()
         self.close()
