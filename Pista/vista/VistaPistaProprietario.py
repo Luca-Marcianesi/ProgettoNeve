@@ -142,7 +142,7 @@ class VistaCambiaStato(QWidget):
 
     def show_background(self):
         # Sfondo
-        back_img = QImage("Pista/data/ModificaPista.jpg")
+        back_img = QImage("Data/Immagini/ModificaPista.jpg")
         img = back_img.scaled(self.width(), self.height())
         palette = QPalette()
         palette.setBrush(10, QBrush(img))

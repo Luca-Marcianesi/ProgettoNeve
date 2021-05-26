@@ -52,7 +52,7 @@ class VistaListaPisteProprietario(QWidget):
         # Sfondo
         self.setFixedWidth(QDesktopWidget().width())
         self.setFixedHeight(QDesktopWidget().height())
-        back_img = QImage("ListaPiste/data/ImmaginePiste.jpg")
+        back_img = QImage("Data/Immagini/ImmaginePiste.jpg")
         img = back_img.scaled(self.width(), self.height())
         palette = QPalette()
         palette.setBrush(10, QBrush(img))
@@ -64,7 +64,7 @@ class VistaListaPisteProprietario(QWidget):
         # Punsante indietro
         pulsante_indietro = QPushButton()
         pulsante_indietro.setStyleSheet('QPushButton {background-color: lightBlue;}')
-        pulsante_indietro.setStyleSheet("background-image:url(Attrezzatura/data/arrowla.jpg)")
+        pulsante_indietro.setStyleSheet("background-image:url(Data/Immagini/FrecciaIndietro.jpg)")
         pulsante_indietro.setFixedSize(100, 100)
         pulsante_indietro.clicked.connect(self.indietro)
         self.layout_orizzontale1.addSpacerItem(QSpacerItem(5, 0, QSizePolicy.Fixed, QSizePolicy.Fixed))
