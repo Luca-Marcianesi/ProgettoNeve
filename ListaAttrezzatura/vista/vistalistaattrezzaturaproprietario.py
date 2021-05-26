@@ -3,7 +3,7 @@ from PyQt5.QtGui import QFont, QBrush, QPalette, QImage, QStandardItemModel, QSt
 from PyQt5.QtWidgets import QWidget, QHBoxLayout, QVBoxLayout, QLabel, QSpacerItem, \
     QSizePolicy, QListView, QPushButton, QDesktopWidget, QMessageBox
 
-from Attrezzatura.vista.VistaAttrezzaturaProprietario import vista_attrezzatura_proprietario
+from Attrezzatura.vista.VistaAttrezzaturaProprietario import VistaAttrezzaturaProprietario
 from ListaAttrezzatura.controller.controllerlistaattrezzatura import ControllerListaAttrezzatura
 from Attrezzatura.vista.VistaAggiungiAttrezzatura import VistaAggiungiAttrezzatura
 
@@ -128,7 +128,7 @@ class VistaListaAttrezzaturaProprietario(QWidget):
             selezionata = self.vista_lista.selectedIndexes()[0].row()
             lista = self.controller_lista_attrezzatura.get_lista_attrezzatura()
             attrezzatura = lista[selezionata]
-            self.vista_attrezzatura = vista_attrezzatura_proprietario(
+            self.vista_attrezzatura = VistaAttrezzaturaProprietario(
                 self.showFullScreen, attrezzatura, self.controller_lista_attrezzatura.rimuovi_attrezzatura,
                 self.aggiorna)
             self.vista_attrezzatura.showFullScreen()
