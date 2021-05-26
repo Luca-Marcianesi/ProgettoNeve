@@ -36,6 +36,7 @@ class VistaInformazioni(QWidget):
         self.layout_verticale.addLayout(self.layout_orizzontale1)
         self.layout_verticale.addSpacerItem(QSpacerItem(0, 600))
         self.layout_verticale.addWidget(self.pulsante_indietro())
+        self.layout_verticale.addSpacerItem(QSpacerItem(0, 50))
         self.setLayout(self.layout_verticale)
         self.setWindowTitle('Informazioni')
 
