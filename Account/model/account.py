@@ -1,4 +1,4 @@
-from datetime import date
+from datetime import date,datetime
 # Classe account e definizione del costruttore
 
 
@@ -86,8 +86,11 @@ class Account:
         else:
             for prenotazione in self.lista_prenotazioni:
                 controllare = prenotazione.get_scadenza()
-                oggi = date.today()
-                if controllare > oggi:
+                if isinstance(controllare, datetime):
+                    oggi = datetime.now(None)
+                else:
+                    oggi = date.today()
+                if oggi < controllare:
                     self.lista_prenotazioni.remove(prenotazione)
 
     # Metodo che controlla se una prenotazione è stata effettuata in base al codice dell'oggetto
