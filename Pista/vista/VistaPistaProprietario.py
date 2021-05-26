@@ -23,12 +23,11 @@ class VistaPistaProprietario(QWidget):
         # Sfondo
         self.show_background("PISTA")
         # Descrizione Pista
-        label = QLabel("Nome => {}\n".format(self.controller_pista.get_nome_str()) + "\n"
-                        "Difficoltà => {}\n".format(self.controller_pista.get_difficolta()) + "\n"
-                        "Stato => {}\n".format(self.controller_pista.get_stato()) + "\n")
-        label.setFont(QFont('Times New Roman', 30, 100))
-        label.setStyleSheet('QLabel{background-color: transparent; color: orange;}')
-        self.layout_verticale.addWidget(label)
+        self.label = QLabel()
+        self.label.setFont(QFont('Times New Roman', 30, 100))
+        self.label.setStyleSheet('QLabel{background-color: transparent; color: orange;}')
+        self.aggiorna()
+        self.layout_verticale.addWidget(self.label)
 
         # Indietro allineati
         self.show_pulsantiera()
@@ -72,7 +71,6 @@ class VistaPistaProprietario(QWidget):
         pulsante_modifica_pista.setFixedSize(250, 100)
         pulsante_modifica_pista.clicked.connect(self.call_modifica)
 
-
         self.layout_verticale.addSpacerItem(QSpacerItem(0, 80, QSizePolicy.Fixed, QSizePolicy.Fixed))
         self.layout_orizzontale.addSpacerItem(QSpacerItem(500, 0))
         self.layout_orizzontale.addWidget(pulsante_indietro)
@@ -81,9 +79,14 @@ class VistaPistaProprietario(QWidget):
         self.layout_orizzontale.addSpacerItem(QSpacerItem(500, 0))
         self.layout_verticale.addLayout(self.layout_orizzontale)
 
+    def aggiorna(self):
+        self.label.setText("Nome => {}\n".format(self.controller_pista.get_nome_str()) + "\n"
+                           "Difficoltà => {}\n".format(self.controller_pista.get_difficolta()) + "\n"
+                           "Stato => {}\n".format(self.controller_pista.get_stato()) + "\n")
+
     def call_modifica(self):
         self.vista_cambia_stato = VistaCambiaStato(self.controller_pista, self.salva_lista_piste, self.showFullScreen,
-                                                   self.aggiona_lista)
+                                                   self.aggiona_lista, self.aggiorna)
         self.vista_cambia_stato.show()
 
     def indietro(self):
@@ -93,10 +96,11 @@ class VistaPistaProprietario(QWidget):
 
 class VistaCambiaStato(QWidget):
 
-    def __init__(self, controller_pista, salva_lista_piste, callback, aggiorna_lista):
+    def __init__(self, controller_pista, salva_lista_piste, callback, aggiorna, aggiorna_lista):
         super(VistaCambiaStato, self).__init__()
 
         self.callback = callback
+        self.aggiorna = aggiorna
         self.aggiorna_lista = aggiorna_lista
         self.salva_lista_piste = salva_lista_piste
         self.controller_pista = controller_pista
@@ -136,6 +140,7 @@ class VistaCambiaStato(QWidget):
     def call_modifica_stato(self, stato):
         self.controller_pista.modifica_stato_pista(stato)
         self.salva_lista_piste()
+        self.aggiorna()
         self.aggiorna_lista()
         self.callback()
         self.close()
