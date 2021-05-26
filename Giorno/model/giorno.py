@@ -16,7 +16,7 @@ class GiornoLavorativo:
 
     # Metodo per rimuovere un dipendente
     def rimuovi_dipendente(self, riga):
-        self.lista_dipendenti_impiegati.remove(riga)
+        self.lista_dipendenti_impiegati.pop(riga)
 
     def get_dipendente(self, riga):
         return self.lista_dipendenti_impiegati[riga]

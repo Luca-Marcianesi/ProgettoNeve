@@ -31,6 +31,10 @@ class tabella_orari:
     def get_giorno_from_lista(self, colonna):
         return self.lista_giorni[colonna]
 
+    # Metodo che restituisce la lista dei dipendenti impiegati in quel giorno
+    def get_dipendenti_impiegati(self, colonna):
+        return self.lista_giorni[colonna].get_lista()
+
     # Metodo che legge i dati dal pickle se esiste o dal json
     def leggi_dati(self):
         if os.path.isfile('Data/TabellaOrari/tabella_orari.pickle'):

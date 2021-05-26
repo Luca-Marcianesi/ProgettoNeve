@@ -19,6 +19,9 @@ class ControllerTabellaOrari:
     def get_lista_tabella_orari(self):
         return self.model.get_lista_tabella_orari()
 
+    def get_dipendenti_impiegati(self, colonna):
+        return self.model.get_dipendenti_impiegati(colonna)
+
     def get_giorno_from_lista(self, colonna):
         return self.model.get_giorno_from_lista(colonna)
 
