@@ -64,7 +64,7 @@ class VistaListaAttrezzaturaProprietario(QWidget):
         # Sfondo
         self.setFixedWidth(QDesktopWidget().width())
         self.setFixedHeight(QDesktopWidget().height())
-        back_img = QImage("ListaAttrezzatura/data/ListaAttrezzatura.jpg")
+        back_img = QImage("Data/Immagini/imagine.jpg")
         img = back_img.scaled(self.width(), self.height())
         palette = QPalette()
         palette.setBrush(10, QBrush(img))

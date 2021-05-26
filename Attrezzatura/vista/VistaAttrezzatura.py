@@ -33,7 +33,7 @@ class VistaAttrezzatura(QWidget):
                        "Lunghezza: {}".format(self.controller.get_dimensioni()) + " cm" + "\n"
                        "Stato: {}".format(self.stato_attrezzatura()))
         label.setFont(QFont('Times New Roman', 30, 75))
-        label.setStyleSheet("background-image:url(Attrezzatura/data/legnopista.jpg)")
+        label.setStyleSheet("background-image:url(Data/Immagini/legno.jpg)")
         label.setAlignment(Qt.AlignCenter)
         label.setFixedSize(500, 200)
         self.layout_verticale2.addWidget(label)
@@ -59,7 +59,7 @@ class VistaAttrezzatura(QWidget):
     def show_background(self, stringa):
         # Sfondo
         self.setFixedSize(QDesktopWidget().width(), QDesktopWidget().height())
-        immagine = QImage(" Data/Immagini/VistaAttrezzatura.jpg")
+        immagine = QImage("Data/Immagini/VistaAttrezzatura.jpg")
         immagine = immagine.scaled(self.width(), self.height())
         palette = QPalette()
         palette.setBrush(10, QBrush(immagine))
