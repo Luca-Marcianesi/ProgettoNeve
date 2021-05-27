@@ -2,54 +2,51 @@ from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QFont, QBrush, QPalette, QImage, QStandardItemModel, QStandardItem, QColor
 from PyQt5.QtWidgets import QWidget, QHBoxLayout, QVBoxLayout, QLabel, QSpacerItem, \
     QSizePolicy, QListView, QPushButton, QDesktopWidget, QMessageBox
-from ElencoManutenzioni.controller.controllerelencomanutenzioni import ControllerElencoManutenzioni
+from ElencoManutenzioni.controller.controller_elenco_manutenzioni import ControllerElencoManutenzioni
 from datetime import date
 from Manutenzioni.vista.VistaManutenzione import VistaManutenzione
 
 
-# Vista lista manutenzioni
+# Vista utile per la visualizzazione della lista delle manutenzioni
 class VistaListaManutenzioni(QWidget):
 
     def __init__(self, callback):
         super(VistaListaManutenzioni, self).__init__()
 
-        # Attributi
-        self.controller_elenco_manutenzioni = ControllerElencoManutenzioni()
+        # Funzione di richiamo della vista precedente
         self.callback = callback
-        self.layout_verticale1 = QVBoxLayout()
+
+        # Controller dell'attrezzatura importante per effettuare le varie funzioni
+        self.controller_elenco_manutenzioni = ControllerElencoManutenzioni()
+
+        # Layout usati per visualizzare e allineare l'intera vista
+        self.layout_verticale = QVBoxLayout()
         self.layout_orizzontale = QHBoxLayout()
-        self.layout_verticale2 = QVBoxLayout()
 
-        # Sfondo
-        self.show_background("ELENCO MANUTENZIONI")
-
-        # Spaziatura
-        self.layout_orizzontale.addSpacerItem(QSpacerItem(100, 0))
-
-        # Lista
+        # Lista manutenzioni
         self.vista_elenco = QListView()
 
-        # Chiamata funzione aggiorna
-        vista_lista_model = self.aggiorna()
+        # Funzione standard che imposta uno sfondo immagine e un titolo nella attuale vista
+        self.show_background("ELENCO MANUTENZIONI")
 
-        # Aggiunta al layout
-        self.layout_orizzontale.addWidget(vista_lista_model)
+        # Spaziatura orizzontale
+        self.layout_orizzontale.addSpacerItem(QSpacerItem(100, 0))
 
-        # Pulsanti Apri e Indietro allineati
+        # Creazione e allineamento lista delle manutenzioni aggiornata
+        vista_lista_aggiornata = self.aggiorna()
+        self.layout_orizzontale.addWidget(vista_lista_aggiornata)
+
+        # Configurazione e allineamento dei pulsanti
         self.show_pulsantiera()
-
-        # Spaziatura
-        self.layout_orizzontale.addLayout(self.layout_verticale2)
         self.layout_orizzontale.addSpacerItem(QSpacerItem(150, 0))
-        self.layout_verticale1.addLayout(self.layout_orizzontale)
 
-        self.layout_verticale1.addSpacerItem(QSpacerItem(0, 400))
-
-        # Impostazione layout totale
-        self.setLayout(self.layout_verticale1)
+        # Configurazione finale del layout totale
+        self.layout_verticale.addLayout(self.layout_orizzontale)
+        self.layout_verticale.addSpacerItem(QSpacerItem(0, 400))
+        self.setLayout(self.layout_verticale)
         self.setWindowTitle('Elenco Manutenzioni')
 
-    # Metodo aggiorna facciata
+    # Resetta la lista delle manutenzioni aggiungendo le eventuali modifiche, e gestione dei colori
     def aggiorna(self):
         vista_lista_model = QStandardItemModel(self.vista_elenco)
         for manutenzione in self.controller_elenco_manutenzioni.get_elenco_manutenzioni():
@@ -82,7 +79,7 @@ class VistaListaManutenzioni(QWidget):
         self.controller_elenco_manutenzioni.salva_dati()
         self.close()
 
-    # Creazione, settaggio e stile dello sfondo
+    # Impostazione dello sfondo e del titolo
     def show_background(self, stringa):
         # Sfondo
         self.setFixedWidth(QDesktopWidget().width())
@@ -98,22 +95,28 @@ class VistaListaManutenzioni(QWidget):
         titolo.setStyleSheet("color: white")
         titolo.setAlignment(Qt.AlignCenter)
         titolo.setFont(QFont('Times New Roman', 60))
-        self.layout_verticale1.addSpacerItem(QSpacerItem(0, 50, QSizePolicy.Fixed, QSizePolicy.Fixed))
-        self.layout_verticale1.addWidget(titolo)
-        self.layout_verticale1.addSpacerItem(QSpacerItem(0, 100, QSizePolicy.Fixed, QSizePolicy.Fixed))
+        self.layout_verticale.addSpacerItem(QSpacerItem(0, 50, QSizePolicy.Fixed, QSizePolicy.Fixed))
+        self.layout_verticale.addWidget(titolo)
+        self.layout_verticale.addSpacerItem(QSpacerItem(0, 100, QSizePolicy.Fixed, QSizePolicy.Fixed))
 
-    # Creazione, settaggio e stile dei pulsanti
+    # Metodo per creazione, stile e funzionamento dei bottoni indietro e apri
     def show_pulsantiera(self):
+        # Layout interni utilizzati per l'allineamento dei tre pulsanti
+        layout_pulsanti = QVBoxLayout()
 
+        # Configurazione del pulsante Apri
         pulsante_apri = self.pulsante("Apri", self.manutenzione_selezionata)
-        self.layout_verticale2.addWidget(pulsante_apri)
+        layout_pulsanti.addWidget(pulsante_apri)
 
-        # Punsante indietro
+        # Configurazione del pulsante Indietro
         pulsante_indietro = self.pulsante("Indietro", self.indietro)
-        self.layout_verticale2.addWidget(pulsante_indietro)
-        self.layout_verticale2.addSpacerItem(QSpacerItem(0, 50))
+        layout_pulsanti.addWidget(pulsante_indietro)
 
-    # Metodo per la creazione di un pulsante
+        # Inserimento e allineamento dei tre pulsanti del layout globale
+        layout_pulsanti.addSpacerItem(QSpacerItem(0, 50))
+        self.layout_orizzontale.addLayout(layout_pulsanti)
+
+    # Metodo interno per standardizzare e semplificare la creazione di un pulsante
     def pulsante(self, nome, call):
         pulsante = QPushButton(nome)
         pulsante.setFont(QFont('Times New Roman', 20, 100, True))

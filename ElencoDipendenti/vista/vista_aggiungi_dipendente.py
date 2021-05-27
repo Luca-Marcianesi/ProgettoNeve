@@ -1,72 +1,67 @@
-from PyQt5.QtGui import QPalette, QBrush, QImage
+from PyQt5.QtGui import QPalette, QBrush, QImage, QFont
 from PyQt5.QtWidgets import QMessageBox, QLineEdit, QLabel, QPushButton, QHBoxLayout, QVBoxLayout, QWidget
-
 from Dipendenti.model.dipendente import Dipendente
 
-# vista aggiungi dipendente
 
-
+# Vista utilizzata per l'inserimento di un nuovo dipendente
 class VistaAggiungiDipendente(QWidget):
 
     def __init__(self, callback, controller, aggiorna):
         super(VistaAggiungiDipendente, self).__init__()
 
-        # Callback
+        # Funzione di richiamo della vista precedente
         self.callback = callback
-
-        # Controller
-        self.controller_elenco_dipendenti = controller
-
-        # Funzione aggiorna elenco dipendenti
+        # Funzione utile per l'aggiornamento della vista precedente dopo la modifica
         self.aggiorna = aggiorna
 
-        # Imposta le dimensioni della finestra
+        # Controller dell'elenco dipendenti importante per effettuare le diverse operazioni
+        self.controller_elenco_dipendenti = controller
+
+        # Impostazione le dimensioni della finestra
         self.setFixedSize(800, 600)
 
-        # Layout
-        self.v_layout = QVBoxLayout()
-        self.h_layout = QHBoxLayout()
+        # Layout usati per visualizzare e allineare l'intera vista
+        self.layout_verticale = QVBoxLayout()
+        self.layout_orizzontale = QHBoxLayout()
 
+        # Dizionario utilizzato per la collezione dei parametri digitati nelle caselle di testo
         self.testo = {}
 
-        # Mostra lo sfondo
+        # Funzione standard che imposta uno sfondo immagine nella vista
         self.show_background()
 
-        # Creazione caselle per inserimento info
+        # Creazione caselle di testo per inserimento delle informazioni
         self.casella_testo("Nome")
         self.casella_testo("Cognome")
         self.casella_testo("Numero di telefono")
 
-        # Bottone indietro
-        indietro = QPushButton("Indietro")
-        indietro.clicked.connect(self.indietro)
-        self.h_layout.addWidget(indietro)
+        # Creazione e configurazione del pulsante "Indietro"
+        bottone_indietro = QPushButton("Indietro")
+        bottone_indietro.clicked.connect(self.indietro)
+        self.layout_orizzontale.addWidget(bottone_indietro)
 
-        # Bottone invia
-        invio = QPushButton("Invia")
-        invio.clicked.connect(self.call_aggiungi_dipendente)
-        self.h_layout.addWidget(invio)
+        # Creazione e configurazione del pulsante "Invia"
+        bottone_invio = QPushButton("Invia")
+        bottone_invio.clicked.connect(self.call_aggiungi_dipendente)
+        self.layout_orizzontale.addWidget(bottone_invio)
 
-        # Inmpostazione layout
-        self.v_layout.addLayout(self.h_layout)
-        self.setLayout(self.v_layout)
+        # Impostazione e allineamento del layout totale
+        self.layout_verticale.addLayout(self.layout_orizzontale)
+        self.setLayout(self.layout_verticale)
         self.setWindowTitle("Nuovo Dipendente")
 
-    # Creazione e inserimento casella di testo
+    # Metodo interno utile per la semplificare la creazione di una casella di testo
     def casella_testo(self, tipo):
-
         label = QLabel(tipo + ":")
-        font = label.font()
-        font.setPointSize(14)
-        label.setFont(font)
-        self.v_layout.addWidget(label)
+        label.setFont(QFont('Times New Roman', 14, 100))
         casella = QLineEdit()
-        self.v_layout.addWidget(casella)
         self.testo[tipo] = casella
+        self.layout_verticale.addWidget(label)
+        self.layout_verticale.addWidget(casella)
 
-    # Creazione e stile dello sfondo
+    # Impostazione dello sfondo
     def show_background(self):
-        # Sfondo
+        # Settaggio e ridimensionamento dell'immagine di sfondo dell'attuale vista
         back_img = QImage("Data/Immagini/azzurro.jpg")
         img = back_img.scaled(self.width(), self.height())
         palette = QPalette()

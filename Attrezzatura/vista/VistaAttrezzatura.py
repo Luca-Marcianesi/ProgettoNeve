@@ -34,7 +34,7 @@ class VistaAttrezzatura(QWidget):
         # Spaziatura orizzontale
         self.layout_orizzontale.addSpacerItem(QSpacerItem(500, 0))
 
-        # Allineamento e settaggio di Label che descrive le principali caratteristiche dell'attrezzatura
+        # Allineamento e settaggio della Label che descrive le principali caratteristiche dell'attrezzatura
         label = QLabel("Nome: {}".format(self.controller.get_nome()) + "\n"
                        "Lunghezza: {}".format(self.controller.get_dimensioni()) + " cm" + "\n"
                        "Stato: {}".format(self.stato_attrezzatura()))
@@ -64,13 +64,12 @@ class VistaAttrezzatura(QWidget):
 
     # Impostazione dello sfondo e del titolo
     def show_background(self, stringa):
-
         # Settaggio e ridimensionamento dell'immagine di sfondo dell'attuale vista
         self.setFixedSize(QDesktopWidget().width(), QDesktopWidget().height())
         immagine = QImage("Data/Immagini/VistaAttrezzatura.jpg")
-        immagine = immagine.scaled(self.width(), self.height())
+        immagine_scalata = immagine.scaled(self.width(), self.height())
         palette = QPalette()
-        palette.setBrush(10, QBrush(immagine))
+        palette.setBrush(10, QBrush(immagine_scalata))
         self.setPalette(palette)
 
         # Settaggio e allineamento del titolo della vista

@@ -1,18 +1,17 @@
 import json
 import os
 import pickle
-
 from Dipendenti.model.dipendente import Dipendente
 
-# Classe elenco dipendenti
 
-
+# Classe che si occupa della gestione della lista dei dipendenti
 class ElencoDipendenti:
 
     def __init__(self):
 
-        # Definizione attributi
+        # Attributo lista vuota dove verranno collezionati gli oggetti Dipendente
         self.elenco = []
+        # Chiamata del metodo interno leggi dati per l'inserimento in lista dei dipendenti già salvati
         self.leggi_dati()
 
     # Metodo per aggiungere un dipendente

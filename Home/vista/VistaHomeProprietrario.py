@@ -2,7 +2,7 @@ from PyQt5.QtGui import QPalette, QBrush, QImage, QFont, QPixmap
 from PyQt5.QtWidgets import QWidget, QPushButton, QVBoxLayout, QLabel, QSizePolicy, QSpacerItem, \
     QDesktopWidget, QHBoxLayout
 
-from ElencoDipendenti.vista.VistaElencoDipendenti import VistaElencoDipendenti
+from ElencoDipendenti.vista.vista_elenco_dipendenti import VistaElencoDipendenti
 from ListaAttrezzatura.vista.VistaListaAttrezzatura import VistaListaAttrezzatura
 from ListaPiste.vista.VistaListaPisteProprietario import VistaListaPisteProprietario
 from Sessione.vista.VistaAccountLoggato import VistaAccountLoggato
