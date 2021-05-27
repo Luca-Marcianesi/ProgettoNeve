@@ -1,9 +1,10 @@
 from functools import partial
 
 from PyQt5.QtCore import Qt
-from PyQt5.QtGui import QImage, QPalette, QBrush, QFont, QStandardItem, QStandardItemModel, QColor
+from PyQt5.QtGui import QImage, QPalette, QBrush, QFont, QStandardItem, QStandardItemModel
 from PyQt5.QtWidgets import QWidget, QVBoxLayout, QDesktopWidget, QLabel, QSpacerItem, QTableWidget, QTableWidgetItem, \
     QHBoxLayout, QSizePolicy, QPushButton, QListView, QMessageBox, QAbstractItemView
+
 from ElencoDipendenti.controller.controller_gestione_dipendenti import ControllerElencoDipendenti
 from TabellaOrari.controller.controller_tabella_orari import ControllerTabellaOrari
 

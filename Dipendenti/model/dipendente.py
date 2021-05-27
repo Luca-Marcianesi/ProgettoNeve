@@ -1,8 +1,8 @@
-# Classe Dipendente
+# Classe che definisce la struttura di un oggetto dipendente generale
 class Dipendente:
     def __init__(self, nome, cognome, telefono):
 
-        # Definizione degli attributi
+        # Assegnazione delle credenziali passate agli attributi della classe
         self.nome = nome
         self.cognome = cognome
         self.telefono = telefono

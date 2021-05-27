@@ -1,11 +1,12 @@
-from datetime import date,datetime
-# Classe account e definizione del costruttore
+from datetime import date, datetime
 
 
+# Classe che definisce la struttura di un account generale
 class Account:
+    # Costruttore utile per la assegnazione dei suoi attributi ai parametri passati
     def __init__(self, nome, cognome, username, password, eta, altezza, numero_scarpe):
 
-        # Definizione degli attributi
+        # Dati caratteristici di un account
         self.nome = nome
         self.cognome = cognome
         self.username = username
@@ -13,7 +14,13 @@ class Account:
         self.eta = eta
         self.altezza = altezza
         self.numero_scarpe = numero_scarpe
+
+        """Definisce l'importanza di un account:
+                - False se è un account destinato ai clienti
+                - True se è destinato al proprietario dello stabilimento    """
         self.permesso = False
+
+        # Lista delle prenotazioni effettuate dal singolo account
         self.lista_prenotazioni = []
 
     # Metodo per settare l'età

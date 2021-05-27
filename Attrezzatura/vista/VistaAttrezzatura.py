@@ -5,30 +5,36 @@ from PyQt5.QtWidgets import QWidget, QVBoxLayout, QHBoxLayout, QSpacerItem, QSiz
 from Attrezzatura.controller.controller_attrezzatura import ControllerAttrezzatura
 from Sessione.model.sessione import Sessione
 
-# vista dell'attrezzatura
 
-
+# VistaAttrezzatura eseguita in seguito della selezione nella prorpia lista
 class VistaAttrezzatura(QWidget):
     def __init__(self, callback, attrezzatura, prenota, aggiorna):
         super(VistaAttrezzatura, self).__init__()
 
-        # Attributi
+        # Funzione utile per l'aggiornamento della vista precedente dopo la modifica
         self.aggiorna = aggiorna
-        self.attrezzatura = attrezzatura
-        self.controller = ControllerAttrezzatura(self.attrezzatura)
+        # Funzione di richiamo della vista precedente
         self.callback = callback
+        # Funzione che permette di prenotare l'attrezzatura visualizzata nell'elenco attrezzatura
         self.prenota = prenota
+        # Oggetto selezionato nella vista precedente
+        self.attrezzatura = attrezzatura
+
+        # Controller dell'attrezzatura importante per effettuare le varie funzioni interne
+        self.controller = ControllerAttrezzatura(self.attrezzatura)
+
+        # Layout usati per visualizzare e allineare l'intera vista
         self.layout_verticale2 = QVBoxLayout()
         self.layout_verticale1 = QVBoxLayout()
         self.layout_orizzontale = QHBoxLayout()
 
-        # Sfondo
+        # Funzione standard che imposta uno sfondo immagine e un titolo nella attuale vista
         self.show_background("ATTREZZATURA")
 
         # Spaziatura orizzontale
         self.layout_orizzontale.addSpacerItem(QSpacerItem(500, 0))
 
-        # Descrizione Pista, aggiunta al layout e spaziatura
+        # Allineamento e settaggio di Label che descrive le principali caratteristiche dell'attrezzatura
         label = QLabel("Nome: {}".format(self.controller.get_nome()) + "\n"
                        "Lunghezza: {}".format(self.controller.get_dimensioni()) + " cm" + "\n"
                        "Stato: {}".format(self.stato_attrezzatura()))
@@ -38,26 +44,28 @@ class VistaAttrezzatura(QWidget):
         label.setFixedSize(500, 200)
         self.layout_verticale2.addWidget(label)
 
+        # Spaziatura verticale
         self.layout_verticale2.addSpacerItem(QSpacerItem(0, 100))
 
-        # Pulsante Indietro allineato
+        # Funzione che si occupa di settare e allineare i pulsanti "Indietro" e "Prenota"
         self.show_pulsantiera()
+
+        # Impostazione e allineamento del layout totale
         self.layout_orizzontale.addLayout(self.layout_verticale2)
         self.layout_orizzontale.addSpacerItem(QSpacerItem(500, 0))
-
-        # Impostazione layout totale
         self.layout_verticale1.addLayout(self.layout_orizzontale)
         self.layout_verticale1.addSpacerItem(QSpacerItem(0, 250))
         self.setLayout(self.layout_verticale1)
 
-    # Metodo che permette, cliccando il bottone "indietro", di tornare alla vista precedente
+    # Metodo che permette, cliccando il bottone "Indietro", di tornare alla vista precedente
     def indietro(self):
         self.callback()
         self.close()
 
-    # Impostazione dello sfondo
+    # Impostazione dello sfondo e del titolo
     def show_background(self, stringa):
-        # Sfondo
+
+        # Settaggio e ridimensionamento dell'immagine di sfondo dell'attuale vista
         self.setFixedSize(QDesktopWidget().width(), QDesktopWidget().height())
         immagine = QImage("Data/Immagini/VistaAttrezzatura.jpg")
         immagine = immagine.scaled(self.width(), self.height())
@@ -65,7 +73,7 @@ class VistaAttrezzatura(QWidget):
         palette.setBrush(10, QBrush(immagine))
         self.setPalette(palette)
 
-        # Titolo
+        # Settaggio e allineamento del titolo della vista
         titolo = QLabel(stringa)
         titolo.setAlignment(Qt.AlignCenter)
         titolo.setFont(QFont('Times New Roman', 60))
@@ -75,26 +83,31 @@ class VistaAttrezzatura(QWidget):
 
     # Metodo per creazione, stile e funzionamento dei bottoni indietro e prenota
     def show_pulsantiera(self):
-        # Punsante indietro
+        # Layout interni utilizzati per l'allineamento dei due pulsanti
         layout_pulsanti1 = QVBoxLayout()
         layout_pulsanti2 = QHBoxLayout()
+
+        # Configurazione del pulsante Indietro
         pulsante_indietro = QPushButton("Indietro")
         pulsante_indietro.setStyleSheet('QPushButton {background-color: orange; color: black;}')
         pulsante_indietro.setFont(QFont('Times New Roman', 30, 100, True))
         pulsante_indietro.setFixedSize(300, 100)
         pulsante_indietro.clicked.connect(self.indietro)
 
+        # Configurazione del pulsante Prenota
         pulsante_prenota = QPushButton("Prenota")
-        pulsante_prenota.setStyleSheet('QPushButton {background-color: orange; color: black;}')
+        pulsante_prenota.setStyleSheet('QPushButton{background-color: orange; color: black;}')
         pulsante_prenota.setFont(QFont('Times New Roman', 30, 100, True))
         pulsante_prenota.setFixedSize(300, 100)
         pulsante_prenota.clicked.connect(self.prenotazione)
-        layout_pulsanti1.addWidget(pulsante_prenota)
 
+        # Inserimento dei due pulsanti dei layout interni
+        layout_pulsanti1.addWidget(pulsante_prenota)
         layout_pulsanti1.addSpacerItem(QSpacerItem(0, 100))
         layout_pulsanti1.addWidget(pulsante_indietro)
         layout_pulsanti2.addLayout(layout_pulsanti1)
 
+        # Inserimento dei due pulsanti del layout globale
         self.layout_verticale2.addLayout(layout_pulsanti2)
 
     # Metodo che controlla lo stato dell'attrezzatura
@@ -112,10 +125,11 @@ class VistaAttrezzatura(QWidget):
         Sessione.salva_dati()
 
 
-# Classe esito -> compare una finestra una volta fatta la prenotazione
+# Classe esito mostrata successivamente alla prenotazione e informa dell'esito della prenotazione
 class VistaEsito(QWidget):
     def __init__(self, risultato):
         super(VistaEsito, self).__init__()
+        # Layout e configurazione della dimensione della finestra
         self.layout_verticale = QVBoxLayout()
         self.setMaximumSize(500, 200)
 
@@ -128,9 +142,11 @@ class VistaEsito(QWidget):
         label.setFont(QFont('Times New Roman', 20))
         label.setAlignment(Qt.AlignCenter)
 
+        # Bottone utile per la chiusura della finestra
         bottone = QPushButton("Chiudi")
         bottone.clicked.connect(self.call_chiudi)
 
+        # Inserimento e allineamento della label e del bottone nel Layout principale
         self.layout_verticale.addWidget(label)
         self.layout_verticale.addSpacerItem(QSpacerItem(150, 0, QSizePolicy.Fixed, QSizePolicy.Fixed))
         self.layout_verticale.addWidget(bottone)

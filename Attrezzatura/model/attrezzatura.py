@@ -2,7 +2,7 @@
 class Attrezzatura:
     def __init__(self, codice, nome, dimensioni):
 
-        # Definizione degli attributi
+        # Definizione degli attributi chiave per l'oggetto attrezzatura
         self.codice = codice
         self.stato = True
         self.nome = nome
