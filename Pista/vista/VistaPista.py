@@ -1,7 +1,6 @@
 from PyQt5.QtCore import Qt
-from PyQt5.QtGui import QStandardItemModel, QStandardItem, QFont, QBrush, QPalette, QImage
-from PyQt5.QtWidgets import QWidget, QHBoxLayout, QVBoxLayout, QLabel, QSpacerItem, QSizePolicy, QListView, QPushButton, \
-    QDesktopWidget
+from PyQt5.QtGui import QFont, QBrush, QPalette, QImage
+from PyQt5.QtWidgets import QWidget, QHBoxLayout, QVBoxLayout, QLabel, QSpacerItem, QSizePolicy
 from Pista.controller.controllerpista import ControllerPista
 
 # Vista pista
