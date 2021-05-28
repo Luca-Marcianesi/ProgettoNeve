@@ -109,7 +109,9 @@ class VistaTabellaOrari(QWidget):
         try:
             riga = self.tableWidget.selectedIndexes()[0].row()
             colonna = self.tableWidget.selectedIndexes()[0].column()
-            self.lista_dipendenti = vista_aggiungi(self.tableWidget, riga, colonna, partial(self.controller_tabella_orari.get_dipendenti_impiegati, colonna),
+            self.lista_dipendenti = vista_aggiungi(self.tableWidget, riga, colonna,
+                                                   partial(self.controller_tabella_orari.get_dipendenti_impiegati,
+                                                           colonna),
                                                    self.controller_tabella_orari.aggiungi_a_giorno, self.aggiorna)
             self.lista_dipendenti.show()
         except IndexError:
@@ -124,7 +126,6 @@ class VistaTabellaOrari(QWidget):
             riga = self.tableWidget.selectedIndexes()[0].row()
             colonna = self.tableWidget.selectedIndexes()[0].column()
             item = self.tableWidget.item(riga, colonna)
-            nome = item.text()
             self.tableWidget.setItem(riga, colonna, QTableWidgetItem())
             self.controller_tabella_orari.rimuovi_da_giorno(colonna, riga)
             self.controller_tabella_orari.salva_dati()

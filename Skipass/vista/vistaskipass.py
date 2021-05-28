@@ -17,7 +17,7 @@ class VistaSkipass(QWidget):
         self.layout_verticale = QVBoxLayout()
         self.layout_orizzontale = QHBoxLayout()
         self.skipass = skipass
-        self.controller_skipass = controller
+        self.controller_gestione_skipass = controller
 
         # Sfondo
         self.show_background("Prenota" + "\n"
@@ -82,10 +82,10 @@ class VistaSkipass(QWidget):
 
     # Metodo che richiama la vista prenotazione con controllo
     def call_prenotazione(self):
-        if self.controller_skipass.controlla_skipass_acquistato():
+        if self.controller_gestione_skipass.controlla_skipass_acquistato():
             QMessageBox.information(self, 'Prenotazione', 'Hai già prenotato uno skipass', QMessageBox.Ok,
                                     QMessageBox.Ok)
         else:
             QMessageBox.information(self, 'Prenotazione', 'Skipass prenotato!', QMessageBox.Ok, QMessageBox.Ok)
-        self.controller_skipass.prenota_skipass(self.skipass)
+        self.controller_gestione_skipass.prenota_skipass(self.skipass)
         Sessione.salva_dati()
