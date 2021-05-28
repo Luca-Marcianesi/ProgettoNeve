@@ -3,46 +3,51 @@ from PyQt5.QtWidgets import QSpacerItem, QSizePolicy, QPushButton, QLabel, QHBox
 from Dipendenti.controller.controller_dipendente import ControllerDipendente
 from PyQt5.QtCore import Qt
 
-# vista informazioni dipendente
 
-
+# Vista utilizzata per la visualizzazione delle informazioni principali del dipendente
 class VistaInformazioniDipendente(QWidget):
 
     def __init__(self, dipendente, rimuovi, salva_dati, aggiorna):
-
         super(VistaInformazioniDipendente, self).__init__()
 
-        # Layout
+        # Funzione utile per l'aggiornamento della vista precedente dopo la modifica
+        self.aggiorna = aggiorna
+        # Funzione per la rimozione del dipendente
+        self.rimuovi = rimuovi
+        # Funzione ultile per il salvataggio dei dipendenti modificati
+        self.salva_dati = salva_dati
+        # Oggetto selezionato dalla vista precedente
+        self.dipendente = dipendente
+
+        # Controller del dipendente utile per le varie operazioni da effettuare
+        self.controller_dipendente = ControllerDipendente(self.dipendente)
+
+        # Layout usati per la visualizzazione e l'allineamento della vista
         self.layout_verticale = QVBoxLayout()
         self.layout_orizzontale = QHBoxLayout()
+
+        # Configurazione della dimensione della finestra
         self.setFixedSize(400, 300)
 
-        # Definizione degli attributi
-        self.dipendente = dipendente
-        self.controller_dipendente = ControllerDipendente(self.dipendente)
-        self.rimuovi = rimuovi
-        self.salva_dati = salva_dati
-        self.aggiorna = aggiorna
-
-        # Descrizione del dipendente
+        # Allineamento e settaggio della Label che descrive le principali inforazioni del dipendente
         label = QLabel(self.controller_dipendente.get_dipendente_str_x_elenco())
         label.setFont(QFont('Times New Roman', 20))
         label.setAlignment(Qt.AlignCenter)
+        self.layout_verticale.addWidget(label)
+        self.layout_verticale.addSpacerItem(QSpacerItem(150, 0))
 
-        # Creazione e funzionamento dei bottoni
-        bottone = QPushButton("Chiudi")
-        bottone.clicked.connect(self.call_chiudi)
+        # Creazione e configurazione del bottone "Chiudi"
+        bottone_chiudi = QPushButton("Chiudi")
+        bottone_chiudi.clicked.connect(self.call_chiudi)
+        self.layout_orizzontale.addWidget(bottone_chiudi)
 
+        # Creazione e configurazione del bottone "Elimina"
         bottone_elimina = QPushButton("Elimina")
         bottone_elimina.clicked.connect(self.call_elimina)
-
-        # Settaggio del layout totale
-        self.layout_verticale.addWidget(label)
-        self.layout_verticale.addSpacerItem(QSpacerItem(150, 0, QSizePolicy.Fixed, QSizePolicy.Fixed))
-        self.layout_orizzontale.addWidget(bottone)
         self.layout_orizzontale.addWidget(bottone_elimina)
-        self.layout_verticale.addLayout(self.layout_orizzontale)
 
+        # Impostazione e allineamento del layout totale
+        self.layout_verticale.addLayout(self.layout_orizzontale)
         self.setLayout(self.layout_verticale)
         self.setWindowTitle('Informazioni dipendente')
 

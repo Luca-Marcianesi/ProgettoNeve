@@ -6,7 +6,7 @@ from PyQt5.QtWidgets import QVBoxLayout, QLabel, QLineEdit, QPushButton, QMessag
 from Attrezzatura.model.attrezzatura import Attrezzatura
 
 
-# Vista usata per l'aggiunta di una nuova attrezzatura da parte del proprietario
+# Vista usata per l'inserimento di una nuova attrezzatura da parte del proprietario
 class VistaAggiungiAttrezzatura(QWidget):
 
     def __init__(self, callback, controller_lista_attrezzatura, aggiorna):

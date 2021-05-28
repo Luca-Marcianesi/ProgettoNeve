@@ -38,7 +38,6 @@ class GestioneParcheggi:
     def get_posti_disponibili(self):
         posti = 0
         for parcheggio in self.elenco_parcheggi:
-            print(parcheggio.stato)
             if parcheggio.get_stato():
                 posti += 1
         return posti

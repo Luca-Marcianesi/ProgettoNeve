@@ -5,11 +5,13 @@ from datetime import date, timedelta
 from Manutenzioni.model.manutenzione import Manutenzione
 
 
-# Classe manutenzioni
+# Classe per la visualizzazione del elenco delle manutenzioni
 class ElencoManutenzioni:
 
     def __init__(self):
+        # Dichiarazione di una lista vuota da riempire con gli oggetti Manutenzione
         self.elenco_manutenzioni = []
+        # Chiamata del metodo interno leggi_dati per il riempimento della lista con gli elementi salvati
         self.leggi_dati()
 
     # Metodo per aggiungere una manutenzione
@@ -28,7 +30,7 @@ class ElencoManutenzioni:
                 return True
         return False
 
-    # Restituisce l'elenco delle manutenzioni
+    # Metodo per la restituzione dell'elenco delle manutenzioni
     def get_elenco_manutenzioni(self):
         return self.elenco_manutenzioni
 
