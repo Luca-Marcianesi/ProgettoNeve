@@ -3,7 +3,7 @@ from PyQt5.QtGui import QFont, QBrush, QPalette, QImage
 from PyQt5.QtWidgets import QWidget, QHBoxLayout, QVBoxLayout, QSpacerItem, QSizePolicy, QPushButton, \
     QDesktopWidget, QGridLayout
 from ListaPiste.controller.controllerlistapiste import ControllerListaPiste
-from Pista.vista.VistaPista import vista_pista
+from Pista.vista.VistaPista import VistaPista
 
 # Vista lista piste
 
@@ -44,7 +44,7 @@ class VistaListaPiste(QWidget):
 
     # Metodo che chiama e mostra la vista pista
     def call_vista_pista(self, pista):
-        self.vista_pista = vista_pista(pista, self.showFullScreen)
+        self.vista_pista = VistaPista(pista, self.showFullScreen)
         self.vista_pista.show()
 
     # Metodo che, collegato al pulsante "INDIETRO", permette di tornare alla vista precedente
