@@ -153,7 +153,7 @@ class VistaRichiestaGiorni(QWidget):
     def call_prenota(self):
         val = self.giorni.value()
         risultato = self.controller_parcheggi.prenota_parcheggio(val)
-        QMessageBox.information(self, risultato, QMessageBox.Ok, QMessageBox.Ok)
+        QMessageBox.information(self, "Esito", risultato, QMessageBox.Ok, QMessageBox.Ok)
         self.aggiorna()
         self.close()
 
