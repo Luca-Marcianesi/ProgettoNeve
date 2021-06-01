@@ -55,13 +55,13 @@ class VistaAggiungiAttrezzatura(QWidget):
         self.layout_verticale.addWidget(label_codici)
 
         # QSpinBox per l'inserimento del codice identificativo
-        spin_codice = QSpinBox(self)
-        spin_codice.setFont(QFont('Times New Roman', 20))
-        spin_codice.setAlignment(Qt.AlignCenter)
-        spin_codice.setFixedSize(200, 100)
-        spin_codice.lineEdit().setReadOnly(True)
-        spin_codice.setRange(3, 20)
-        self.layout_verticale.addWidget(spin_codice)
+        self.spin_codice = QSpinBox(self)
+        self.spin_codice.setFont(QFont('Times New Roman', 20))
+        self.spin_codice.setAlignment(Qt.AlignCenter)
+        self.spin_codice.setFixedSize(200, 100)
+        self.spin_codice.lineEdit().setReadOnly(True)
+        self.spin_codice.setRange(3, 20)
+        self.layout_verticale.addWidget(self.spin_codice)
 
         # Label per la descrizione della SpinBox
         label_dimensioni = QLabel("Dimensioni")
@@ -70,12 +70,12 @@ class VistaAggiungiAttrezzatura(QWidget):
         self.layout_verticale.addWidget(label_dimensioni)
 
         # QSpinBox per l'inserimento delle dimensioni dell'attrezzatura
-        dimensioni = QSpinBox(self)
-        dimensioni.setFont(QFont('Times New Roman', 20))
-        dimensioni.setAlignment(Qt.AlignCenter)
-        dimensioni.setFixedSize(200, 100)
-        dimensioni.setRange(1, 200)
-        self.layout_verticale.addWidget(dimensioni)
+        self.dimensioni = QSpinBox(self)
+        self.dimensioni.setFont(QFont('Times New Roman', 20))
+        self.dimensioni.setAlignment(Qt.AlignCenter)
+        self.dimensioni.setFixedSize(200, 100)
+        self.dimensioni.setRange(1, 200)
+        self.layout_verticale.addWidget(self.dimensioni)
 
         # Funzione che si occupa di settare e allineare i pulsanti "Indietro" e "Aggiungi"
         self.show_pulsantiera()
@@ -136,7 +136,7 @@ class VistaAggiungiAttrezzatura(QWidget):
         dimensioni = int(self.dimensioni.value())
         codice = self.spin_codice.value()
         if nome != "":
-            self.controller_lista_attrezzatura.aggiungi_attrezzatura(Attrezzatura(codice, self.nome, dimensioni))
+            self.controller_lista_attrezzatura.aggiungi_attrezzatura(Attrezzatura(codice,nome, dimensioni))
             self.aggiorna()
             QMessageBox.information(self, '', 'Oggetto aggiunto.', QMessageBox.Ok, QMessageBox.Ok)
         else:
