@@ -63,6 +63,7 @@ class VistaModificaAccount(QWidget):
     def casella_testo(self, tipo):
         # Label
         label = QLabel(tipo + ":")
+        label.setStyleSheet("color : orange ")
         label.setFont(QFont('Times New Roman', 30))
         label.setAlignment(Qt.AlignCenter)
         self.layout_verticale2.addWidget(label)
@@ -109,7 +110,7 @@ class VistaModificaAccount(QWidget):
         # Sfondo
         self.setFixedWidth(QDesktopWidget().width())
         self.setFixedHeight(QDesktopWidget().height())
-        back_img = QImage("Data/Immagini/VistaModificaAccount.jpg")
+        back_img = QImage("Data/Immagini/VistaTabella.jpg")
         img = back_img.scaled(self.width(), self.height())
         palette = QPalette()
         palette.setBrush(10, QBrush(img))
