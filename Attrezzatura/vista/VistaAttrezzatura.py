@@ -1,7 +1,7 @@
 from PyQt5.QtGui import QImage, QPalette, QBrush, QFont
 from PyQt5.QtCore import Qt
-from PyQt5.QtWidgets import QWidget, QVBoxLayout, QHBoxLayout, QSpacerItem, QSizePolicy, \
-                            QDesktopWidget, QLabel, QPushButton
+from PyQt5.QtWidgets import QWidget, QVBoxLayout, QHBoxLayout, QSpacerItem,\
+    QDesktopWidget, QLabel, QPushButton, QMessageBox
 from Attrezzatura.controller.controller_attrezzatura import ControllerAttrezzatura
 from Sessione.model.sessione import Sessione
 
@@ -118,41 +118,8 @@ class VistaAttrezzatura(QWidget):
     # Metodo per la prenotazione
     def prenotazione(self):
         risultato = self.prenota(self.attrezzatura)
-        self.vista_chiusura = VistaEsito(risultato)
-        self.vista_chiusura.show()
-        self.aggiorna()
-        Sessione.salva_dati()
-
-
-# Classe esito mostrata successivamente alla prenotazione e informa dell'esito della prenotazione
-class VistaEsito(QWidget):
-    def __init__(self, risultato):
-        super(VistaEsito, self).__init__()
-        # Layout e configurazione della dimensione della finestra
-        self.layout_verticale = QVBoxLayout()
-        self.setMaximumSize(500, 200)
-
-        # Controllo dello stato per la stampa a finestra
         if risultato != "Prenotazione effettuata":
             risultato = "Hai già prenotato questa attrezzatura!"
-
-        # Creazione, aggiunta e descrizione della finestra
-        label = QLabel(risultato)
-        label.setFont(QFont('Times New Roman', 20))
-        label.setAlignment(Qt.AlignCenter)
-
-        # Bottone utile per la chiusura della finestra
-        bottone = QPushButton("Chiudi")
-        bottone.clicked.connect(self.call_chiudi)
-
-        # Inserimento e allineamento della label e del bottone nel Layout principale
-        self.layout_verticale.addWidget(label)
-        self.layout_verticale.addSpacerItem(QSpacerItem(150, 0, QSizePolicy.Fixed, QSizePolicy.Fixed))
-        self.layout_verticale.addWidget(bottone)
-
-        self.setLayout(self.layout_verticale)
-        self.setWindowTitle('Esito')
-
-    # Metodo per la chiusura della finestra
-    def call_chiudi(self):
-        self.close()
+        QMessageBox.information(self, "Esito",risultato, QMessageBox.Ok, QMessageBox.Ok)
+        self.aggiorna()
+        Sessione.salva_dati()
