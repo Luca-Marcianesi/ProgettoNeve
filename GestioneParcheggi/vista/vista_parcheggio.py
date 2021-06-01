@@ -2,7 +2,7 @@
 from PyQt5.QtGui import QImage, QPalette, QBrush, QFont
 from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import QWidget, QHBoxLayout, QVBoxLayout, QLabel, QSpacerItem, QSizePolicy, QPushButton, \
-    QDesktopWidget, QSpinBox
+    QDesktopWidget, QSpinBox, QMessageBox
 
 from Sessione.model.sessione import Sessione
 from GestioneParcheggi.controller.controllergestioneparcheggi import ControllerGestioneParcheggi
@@ -153,35 +153,7 @@ class VistaRichiestaGiorni(QWidget):
     def call_prenota(self):
         val = self.giorni.value()
         risultato = self.controller_parcheggi.prenota_parcheggio(val)
+        QMessageBox.information(self, risultato, QMessageBox.Ok, QMessageBox.Ok)
         self.aggiorna()
-        self.vista_chiusa = VistaEsito(risultato)
-        self.vista_chiusa.show()
         self.close()
 
-# Vista esito
-
-
-class VistaEsito(QWidget):
-    def __init__(self, risultato):
-        super(VistaEsito, self).__init__()
-        self.layout_verticale = QVBoxLayout()
-        self.setFixedSize(400, 300)
-
-        # Descrizione, creazione e settaggio esito e layout totale
-        label = QLabel(risultato)
-        label.setFont(QFont('Times New Roman', 20))
-        label.setAlignment(Qt.AlignCenter)
-
-        bottone = QPushButton("Chiudi")
-        bottone.clicked.connect(self.call_chiudi)
-
-        self.layout_verticale.addWidget(label)
-        self.layout_verticale.addSpacerItem(QSpacerItem(150, 0, QSizePolicy.Fixed, QSizePolicy.Fixed))
-        self.layout_verticale.addWidget(bottone)
-
-        self.setLayout(self.layout_verticale)
-        self.setWindowTitle('Esito')
-
-    # Metodo per chiudere la finestra corrente
-    def call_chiudi(self):
-        self.close()
