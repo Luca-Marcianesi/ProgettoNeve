@@ -1,4 +1,3 @@
-
 from PyQt5.QtGui import QImage, QPalette, QBrush, QFont
 from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import QWidget, QHBoxLayout, QVBoxLayout, QLabel, QSpacerItem, QSizePolicy, QPushButton, \
@@ -53,6 +52,7 @@ class VistaParcheggio(QWidget):
         self.setLayout(self.layout_verticale)
         self.setWindowTitle('Parcheggio')
 
+    # Metodo utile per l'aggiornamento della label
     def aggiorna(self):
         if Sessione.controlla_prenotazione_effettuata(2):  # 2 è il codice assegnato al parcheggio
             self.label.setText("POSTI DISPONIBILI:\n{} ".format

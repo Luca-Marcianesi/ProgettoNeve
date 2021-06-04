@@ -1,25 +1,26 @@
 import json
-
 from Skipass.model.skipass import Skipass
 from datetime import timedelta, datetime, date, time
 from Prenotazione.model.prenotazione import Prenotazione
 from Sessione.model.sessione import Sessione
 
-# Classe gestione skipass
 
-
+# Classe che si occupa della gestione delle prenotazione degli skipass
 class GestioneSkipass:
 
     def __init__(self):
 
-        # Definizione attributi
+        # Dichiarazione di una lista vuota da riempire con gli oggetti Skipass
         self.lista_skipass = []
+        # Definizioni di due attributi utili per le prenotazioni (non assegnati per provare la funzione)
         self.inizio_stagione = None
         self.fine_stagione = None
+        # Chiamata del metodo interno leggi_dati per il riempimento della lista con gli elementi salvati
         self.leggi_dati()
+        # Codice identificativo degli skipass
         self.codice_skipass = 1
 
-    # Metodo prenota
+    # Metodo prenota privato momentaneamente del controllo della stagione per poter effettuare il metodo
     def prenota(self, skipass_selezionato):
         # if date.today() > date.fromisoformat(self.inizio_stagione) and
         # date.today() < date.fromisoformat(self.fine_stagione) :
@@ -38,7 +39,6 @@ class GestioneSkipass:
                 Sessione.aggiungi_prenotazione(Prenotazione(skipass_selezionato.get_codice(),
                                                             scadenza,
                                                             skipass_selezionato))
-
             else:
 
                 if skipass_selezionato.tipo != "Stagionale":
@@ -48,13 +48,12 @@ class GestioneSkipass:
                     Sessione.aggiungi_prenotazione(Prenotazione(skipass_selezionato.get_codice(),
                                                                 scadenza,
                                                                 skipass_selezionato))
-
                 else:
                     Sessione.aggiungi_prenotazione(Prenotazione(skipass_selezionato.get_codice(),
                                                                 self.fine_stagione,
                                                                 skipass_selezionato))
-    # Metodo che controlla se lo skipass è già stato acquistato
 
+    # Metodo che controlla se lo skipass è già stato acquistato
     def controlla_skipass_acquistato(self):
         for prenotazione in Sessione.get_lista_prenotazioni():
             if prenotazione.get_codice_oggetto() == self.codice_skipass:
