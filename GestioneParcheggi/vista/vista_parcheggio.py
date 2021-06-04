@@ -3,50 +3,53 @@ from PyQt5.QtGui import QImage, QPalette, QBrush, QFont
 from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import QWidget, QHBoxLayout, QVBoxLayout, QLabel, QSpacerItem, QSizePolicy, QPushButton, \
     QDesktopWidget, QSpinBox, QMessageBox
-
 from Sessione.model.sessione import Sessione
 from GestioneParcheggi.controller.controllergestioneparcheggi import ControllerGestioneParcheggi
 
-# Vista parcheggio
 
-
+# Vista utile per la gestione della prenotazione del parcheggio
 class VistaParcheggio(QWidget):
 
     def __init__(self, callback):
         super(VistaParcheggio, self).__init__()
 
-        # Controller e layout
+        # Funzione di richiamo della vista precedente
+        self.callback = callback
+
+        # Controller della gestione parcheggi importante per effettuare le varie funzioni
         self.controller_gestione_parcheggio = ControllerGestioneParcheggi()
+
+        # Layout usati per visualizzare e allineare l'intera vista
         self.layout_verticale = QVBoxLayout()
         self.layout_orizzontale = QHBoxLayout()
-        self.callback = callback
-        self.num_giorni = 1
 
-        # Mostra sfondo
-        self.show_background("PARCHEGGIO CAPANNINA")
-
-        # Spaziatura
-        self.layout_verticale.addSpacerItem(QSpacerItem(0, 50, QSizePolicy.Fixed, QSizePolicy.Fixed))
-
+        # Label usata per la descrizione dei parcheggi
         self.label = QLabel()
         self.label.setFont(QFont('Times New Roman', 30))
         self.label.setStyleSheet("background-image:url(Data/Immagini/legnopista.jpg)")
         self.label.setAlignment(Qt.AlignCenter)
 
-        self.aggiorna()
+        # Funzione standard che imposta uno sfondo immagine e un titolo nella attuale vista
+        self.show_background("PARCHEGGIO CAPANNINA")
 
+        # Spaziatura verticale
+        self.layout_verticale.addSpacerItem(QSpacerItem(0, 50, QSizePolicy.Fixed, QSizePolicy.Fixed))
+
+        # Aggiornamento e allineamento label modificata
+        self.aggiorna()
         self.layout_orizzontale.addSpacerItem(QSpacerItem(600, 500, QSizePolicy.Fixed, QSizePolicy.Fixed))
         self.layout_orizzontale.addWidget(self.label)
         self.layout_orizzontale.addSpacerItem(QSpacerItem(600, 300, QSizePolicy.Fixed, QSizePolicy.Fixed))
 
+        # Settaggio e allineamento del layout orizzontale a quello verticale
         self.layout_verticale.addLayout(self.layout_orizzontale)
-
         self.layout_verticale.addSpacerItem(QSpacerItem(0, 200, QSizePolicy.Fixed, QSizePolicy.Fixed))
 
+        # Configurazione e allineamento dei pulsanti
         self.show_pulsantiera()
 
+        # Configurazione finale del layout totale
         self.layout_verticale.addSpacerItem(QSpacerItem(0, 150, QSizePolicy.Fixed, QSizePolicy.Fixed))
-
         self.setLayout(self.layout_verticale)
         self.setWindowTitle('Parcheggio')
 
@@ -60,7 +63,7 @@ class VistaParcheggio(QWidget):
 
     # Creazione, stile e settaggio sfondo e titolo
     def show_background(self, titolo):
-
+        # Settaggio e ridimensionamento dell'immagine di sfondo dell'attuale vista
         self.setFixedWidth(QDesktopWidget().width())
         self.setFixedHeight(QDesktopWidget().height())
         immagine = QImage('Data/Immagini/Parcheggio.jpg')
@@ -69,7 +72,7 @@ class VistaParcheggio(QWidget):
         palette.setBrush(10, QBrush(img))
         self.setPalette(palette)
 
-        # Titolo
+        # Settaggio e allineamento del titolo della vista
         titolo = QLabel(titolo)
         titolo.setAlignment(Qt.AlignCenter)
         titolo.setFont(QFont('Times New Roman', 60))
@@ -78,23 +81,27 @@ class VistaParcheggio(QWidget):
         self.layout_verticale.addWidget(titolo)
         self.layout_verticale.addSpacerItem(QSpacerItem(0, 50, QSizePolicy.Fixed, QSizePolicy.Fixed))
 
-    # Creazione, stile e settaggio dei pulsanti
+    # Metodo per creazione, stile e funzionamento dei bottoni indietro e prenota
     def show_pulsantiera(self):
-
+        # Layout interni utilizzati per l'allineamento dei tre pulsanti
         layout_pulsanti = QHBoxLayout()
         layout_pulsanti.setAlignment(Qt.AlignCenter)
+
+        # Configurazione del pulsante Indietro
         pulsante_indietro = QPushButton("INDIETRO")
         pulsante_indietro.setFont(QFont('Times New Roman', 18, 100, True))
         pulsante_indietro.setFixedSize(250, 100)
         pulsante_indietro.setStyleSheet("background-color: orange")
         pulsante_indietro.clicked.connect(self.indietro)
 
+        # Configurazione del pulsante Prenota
         pulsante_prenota = QPushButton("PRENOTA")
         pulsante_prenota.setFont(QFont('Times New Roman', 18, 100, True))
         pulsante_prenota.setFixedSize(250, 100)
         pulsante_prenota.setStyleSheet("background-color: orange")
         pulsante_prenota.clicked.connect(self.call_selezione_giorni)
 
+        # Inserimento e allineamento dei tre pulsanti del layout globale
         layout_pulsanti.addWidget(pulsante_prenota)
         layout_pulsanti.addSpacerItem(QSpacerItem(50, 0, QSizePolicy.Fixed, QSizePolicy.Fixed))
         layout_pulsanti.addWidget(pulsante_indietro)
@@ -110,50 +117,50 @@ class VistaParcheggio(QWidget):
         self.callback()
         self.close()
 
-# Vista richiesta giorni
 
-
+# Vista utile per l'inserimento dei giorni per la prenotazione del parcheggio
 class VistaRichiestaGiorni(QWidget):
 
     def __init__(self, controller_parcheggi,aggiorna):
         super(VistaRichiestaGiorni, self).__init__()
 
-        # Controller
+        # Controller della gestione parcheggi importante per effettuare le varie funzioni
         self.controller_parcheggi = controller_parcheggi
-        self.layout_verticale = QVBoxLayout()
-        self.num_giorni = 1
-        self.setFixedSize(400, 300)
+        # Funzione di aggiornamento della vista precedente
         self.aggiorna = aggiorna
+        # Layout usato per visualizzare e allineare l'intera vista
+        self.layout_verticale = QVBoxLayout()
+        self.setFixedSize(400, 300)
 
         # Descrizione della finestra per scegliere per quanti giorni prenotare
         label = QLabel("NUMERO GIORNI DA PRENOTARE:")
         label.setFont(QFont('Times New Roman', 10))
         label.setSizePolicy(300, 300)
+
+        # Configurazione della SpinBox
         self.giorni = QSpinBox(self)
         self.giorni.setFont(QFont('Times New Roman', 20))
         self.giorni.setAlignment(Qt.AlignCenter)
         self.giorni.setFixedSize(100, 50)
         self.giorni.lineEdit().setReadOnly(True)
-
         self.giorni.setRange(1, 5)
 
-        # Creazione, stile e settaggio bottone prenota e layout totale
+        # Creazione e configurazione del bottone prenota
         bottone = QPushButton("Prenota")
         bottone.clicked.connect(self.call_prenota)
 
+        # Configurazione finale del layout totale
         self.layout_verticale.addWidget(label)
         self.layout_verticale.addSpacerItem(QSpacerItem(150, 0, QSizePolicy.Fixed, QSizePolicy.Fixed))
         self.layout_verticale.addWidget(self.giorni)
         self.layout_verticale.addWidget(bottone)
-
         self.setLayout(self.layout_verticale)
         self.setWindowTitle('Giorni')
 
-    # Metodo prenota
+    # Metodo per effettuare la prenotazione
     def call_prenota(self):
         val = self.giorni.value()
         risultato = self.controller_parcheggi.prenota_parcheggio(val)
         QMessageBox.information(self, "Esito", risultato, QMessageBox.Ok, QMessageBox.Ok)
         self.aggiorna()
         self.close()
-

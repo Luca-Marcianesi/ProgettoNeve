@@ -34,7 +34,7 @@ class ElencoManutenzioni:
     def get_elenco_manutenzioni(self):
         return self.elenco_manutenzioni
 
-    # Metodo che legge i dati dal pickle se esiste o dal json
+    # Metodo che legge i dati dal file pickle se esiste, se no dal json
     def leggi_dati(self):
         if os.path.isfile('Data/ElencoManutenzioni/elenco_manutenzioni.pickle'):
             with open('Data/ElencoManutenzioni/elenco_manutenzioni.pickle', "rb") as file:
@@ -50,7 +50,7 @@ class ElencoManutenzioni:
                                                         timedelta(days=int(manutenzione_da_aggiungere
                                                                            ["cadenza(giorni)"]))))
 
-    # Metodo per salvare i dati
+    # Metodo per salvare i dati nel file pickle
     def salva_dati(self):
         with open('Data/ElencoManutenzioni/elenco_manutenzioni.pickle', 'wb') as dati:
             pickle.dump(self.elenco_manutenzioni, dati, pickle.HIGHEST_PROTOCOL)

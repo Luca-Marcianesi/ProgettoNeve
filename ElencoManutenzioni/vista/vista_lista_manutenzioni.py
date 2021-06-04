@@ -55,7 +55,7 @@ class VistaListaManutenzioni(QWidget):
             scadenza = manutenzione.get_prossima_scadenza()
             nome = manutenzione.get_nome()
             stringa = str(nome)
-
+            # Colore della label cambia a seconda dell'urgenza della manutenzione
             if oggi > scadenza:
                 item.setForeground(QColor(255, 0, 0))
                 stringa += " [URGENTE]"
@@ -63,7 +63,6 @@ class VistaListaManutenzioni(QWidget):
                 item.setForeground(QColor(255, 200, 0))
             elif scadenza > oggi:
                 item.setForeground(QColor(0, 255, 0))
-
             item.setText(stringa)
             item.setEditable(False)
             item.setFont(QFont('Times New Roman', 25, 100))
@@ -81,7 +80,7 @@ class VistaListaManutenzioni(QWidget):
 
     # Impostazione dello sfondo e del titolo
     def show_background(self, stringa):
-        # Sfondo
+        # Settaggio e ridimensionamento dell'immagine di sfondo dell'attuale vista
         self.setFixedWidth(QDesktopWidget().width())
         self.setFixedHeight(QDesktopWidget().height())
         back_img = QImage("Data/Immagini/VistaListaManutenzioni.jpg")
@@ -90,7 +89,7 @@ class VistaListaManutenzioni(QWidget):
         palette.setBrush(10, QBrush(img))
         self.setPalette(palette)
 
-        # Titolo
+        # Settaggio e allineamento del titolo della vista
         titolo = QLabel(stringa)
         titolo.setStyleSheet("color: white")
         titolo.setAlignment(Qt.AlignCenter)

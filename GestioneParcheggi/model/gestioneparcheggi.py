@@ -7,19 +7,21 @@ from Sessione.model.sessione import Sessione
 from Prenotazione.model.prenotazione import Prenotazione
 from Parcheggio.model.parcheggio import Parcheggio
 
-# Classe gestione parcheggi
 
-
+# Classe che si occupa della gestione delle prenotazione dei parcheggi
 class GestioneParcheggi:
     def __init__(self):
 
-        # Definizione degli attributi
+        # Dichiarazione di una lista vuota da riempire con gli oggetti Parcheggio
         self.elenco_parcheggi = []
+        # Codice degli oggetti parcheggio
         self.codice_parcheggio = 2
+        # Chiamata del metodo interno leggi_dati per il riempimento della lista con gli elementi salvati
         self.leggi_dati()
+        # Eliminazione dalla lista di tutte le prenotazioni scadute
         self.elimina_scadute_prenotazioni()
 
-    # Metodo prenota parcheggio
+    # Metodo che si occupa della prenotazione del parcheggio
     def prenota_parcheggio(self, numero_giorni):
         if Sessione.controlla_prenotazione_effettuata(self.codice_parcheggio):
             if self.get_posti_disponibili() > 0:
@@ -51,7 +53,7 @@ class GestioneParcheggi:
                 if controllare < oggi:
                     parcheggio.elimina_prenotazione()
 
-    # Metodo salva dati con creazione del pickle
+    # Metodo salva dati con creazione del file pickle
     def salva_dati(self):
         with open('Data/GestioneParcheggio/parcheggi.pickle', 'wb') as dati:
             pickle.dump(self.elenco_parcheggi, dati, pickle.HIGHEST_PROTOCOL)
@@ -60,7 +62,7 @@ class GestioneParcheggi:
     def aggiungi_parcheggio(self, parcheggio):
         self.elenco_parcheggi.append(parcheggio)
 
-    # Metodo che legge i dati dal pickle se esiste o dal json
+    # Metodo che legge i dati dal file pickle se esiste, se no dal json
     def leggi_dati(self):
         if os.path.isfile('Data/GestioneParcheggio/parcheggi.pickle'):
             with open('Data/GestioneParcheggio/parcheggi.pickle', "rb") as file:
