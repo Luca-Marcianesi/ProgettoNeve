@@ -60,7 +60,7 @@ class VistaAggiungiAttrezzatura(QWidget):
         self.spin_codice.setAlignment(Qt.AlignCenter)
         self.spin_codice.setFixedSize(200, 100)
         self.spin_codice.lineEdit().setReadOnly(True)
-        self.spin_codice.setRange(3, 20)
+        self.spin_codice.setRange(3,6)
         self.layout_verticale.addWidget(self.spin_codice)
 
         # Label per la descrizione della SpinBox
