@@ -11,7 +11,7 @@ class Sessione:
     # Metodo per fare il login
     @classmethod
     def login(cls, account, salva_dati):
-        cls.salva_dati = salva_dati
+        cls.funzione_salva_dati = salva_dati
         cls.account_loggato = account
         cls.elimina_prenotazioni_scadute()
 
