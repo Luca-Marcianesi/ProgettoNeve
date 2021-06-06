@@ -1,15 +1,23 @@
 from GestioneParcheggi.model.gestioneparcheggi import GestioneParcheggi
-
+from Sessione.model.sessione import Sessione
 
 # Controller relativo alla classe GestioneParcheggi
+
+
 class ControllerGestioneParcheggi:
     def __init__(self):
         # Prende come model la classe gestione parcheggi
         self.model = GestioneParcheggi()
 
-    # Metodo che chiama la funzione prenota_parcheggio del model
+    # Metodo che controlla se l'account logato ha già una prenotazione se no
+    # chiama la funzione prenota_parcheggio del model
     def prenota_parcheggio(self, numero_giorni):
-        return self.model.prenota_parcheggio(numero_giorni)
+        if Sessione.controlla_prenotazione_effettuata(self.model.codice_parcheggio):
+            risultato = self.model.prenota_parcheggio(numero_giorni)
+            self.salva_dati()
+            Sessione.salva_dati()
+            return risultato
+        return "Hai già una prenotazione"
 
     # Metodo che chiama la funzione get_posti_disponibili del model
     def get_posti_disponibili(self):

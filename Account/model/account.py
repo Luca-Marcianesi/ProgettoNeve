@@ -97,7 +97,7 @@ class Account:
                     oggi = datetime.now(None)
                 else:
                     oggi = date.today()
-                if oggi < controllare:
+                if oggi > controllare:
                     self.lista_prenotazioni.remove(prenotazione)
 
     # Metodo che controlla se una prenotazione è stata effettuata in base al codice dell'oggetto

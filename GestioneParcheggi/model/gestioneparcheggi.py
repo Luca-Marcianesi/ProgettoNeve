@@ -23,18 +23,14 @@ class GestioneParcheggi:
 
     # Metodo che si occupa della prenotazione del parcheggio
     def prenota_parcheggio(self, numero_giorni):
-        if Sessione.controlla_prenotazione_effettuata(self.codice_parcheggio):
-            if self.get_posti_disponibili() > 0:
-                for parcheggio in self.elenco_parcheggi:
-                    if parcheggio.get_stato():
-                        scadenza = date.today() + timedelta(days=int(numero_giorni))
-                        parcheggio.prenota(scadenza)
-                        Sessione.aggiungi_prenotazione(Prenotazione(parcheggio.get_codice(), scadenza, parcheggio))
-                        Sessione.salva_dati()
-                        self.salva_dati()
-                        return "Prenotazione effettuata"
-            return "Posti esauriti"
-        return "Hai già una prenotazione"
+        if self.get_posti_disponibili() > 0:
+            for parcheggio in self.elenco_parcheggi:
+                if parcheggio.get_stato():
+                    scadenza = date.today() + timedelta(days=int(numero_giorni))
+                    parcheggio.prenota(scadenza)
+                    Sessione.aggiungi_prenotazione(Prenotazione(parcheggio.get_codice(), scadenza, parcheggio))
+                    return "Prenotazione effettuata"
+        return "Posti esauriti"
 
     # Metodo che restituisce i posti disponibili
     def get_posti_disponibili(self):
