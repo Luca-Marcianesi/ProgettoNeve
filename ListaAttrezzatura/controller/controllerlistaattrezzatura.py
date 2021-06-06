@@ -1,4 +1,5 @@
 from ListaAttrezzatura.model.ListaAttrezzatura import ListaAttrezzatura
+from Sessione.model.sessione import Sessione
 
 
 class ControllerListaAttrezzatura:
@@ -21,7 +22,9 @@ class ControllerListaAttrezzatura:
         return self.model.get_lista_filtrata()
 
     def prenota_attrezzatura(self, attrezzatura):
-        return self.model.prenota_attrezzatura(attrezzatura)
+        if Sessione.controlla_prenotazione_effettuata(attrezzatura.get_codice()):
+            Sessione.aggiungi_prenotazione(self.model.prenota_attrezzatura(attrezzatura))
+        return "Prenotazione effettuata"
 
     def salva_dati(self):
         self.model.salva_dati()

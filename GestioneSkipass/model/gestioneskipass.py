@@ -2,14 +2,11 @@ import json
 from Skipass.model.skipass import Skipass
 from datetime import timedelta, datetime, date, time
 from Prenotazione.model.prenotazione import Prenotazione
-from Sessione.model.sessione import Sessione
 
 
 # Classe che si occupa della gestione delle prenotazione degli skipass
 class GestioneSkipass:
-
     def __init__(self):
-
         # Dichiarazione di una lista vuota da riempire con gli oggetti Skipass
         self.lista_skipass = []
         # Definizioni di due attributi utili per le prenotazioni (non assegnati per provare la funzione)
@@ -24,41 +21,22 @@ class GestioneSkipass:
     def prenota(self, skipass_selezionato):
         # if date.today() > date.fromisoformat(self.inizio_stagione) and
         # date.today() < date.fromisoformat(self.fine_stagione) :
-        if Sessione.controlla_prenotazione_effettuata(self.codice_skipass):
+        if skipass_selezionato.tipo != "Stagionale" and skipass_selezionato.tipo != "Mensile" and \
+                skipass_selezionato.tipo != "Settimanale":
 
-            if skipass_selezionato.tipo != "Stagionale" and skipass_selezionato.tipo != "Mensile" and \
-                    skipass_selezionato.tipo != "Settimanale":
+            scadenza = datetime(date.today().year, date.today().month, date.today().day,
+                                time.fromisoformat(skipass_selezionato.inizio_validita).hour,
+                                time.fromisoformat(skipass_selezionato.inizio_validita).minute,
+                                time.fromisoformat(skipass_selezionato.get_inizio_validita()).second)
+            scadenza = scadenza + timedelta(hours=int(skipass_selezionato.get_durata()))
 
-                scadenza = datetime(date.today().year, date.today().month, date.today().day,
-                                    time.fromisoformat(skipass_selezionato.inizio_validita).hour,
-                                    time.fromisoformat(skipass_selezionato.inizio_validita).minute,
-                                    time.fromisoformat(skipass_selezionato.get_inizio_validita()).second)
+        elif skipass_selezionato.tipo != "Stagionale":
+            scadenza = date.today() + timedelta(days=int(skipass_selezionato.get_durata()))
 
-                scadenza = scadenza + timedelta(hours=int(skipass_selezionato.get_durata()))
+        else:
+            scadenza = self.fine_stagione
 
-                Sessione.aggiungi_prenotazione(Prenotazione(skipass_selezionato.get_codice(),
-                                                            scadenza,
-                                                            skipass_selezionato))
-            else:
-
-                if skipass_selezionato.tipo != "Stagionale":
-
-                    scadenza = date.today() + timedelta(days=int(skipass_selezionato.get_durata()))
-
-                    Sessione.aggiungi_prenotazione(Prenotazione(skipass_selezionato.get_codice(),
-                                                                scadenza,
-                                                                skipass_selezionato))
-                else:
-                    Sessione.aggiungi_prenotazione(Prenotazione(skipass_selezionato.get_codice(),
-                                                                self.fine_stagione,
-                                                                skipass_selezionato))
-
-    # Metodo che controlla se lo skipass è già stato acquistato
-    def controlla_skipass_acquistato(self):
-        for prenotazione in Sessione.get_lista_prenotazioni():
-            if prenotazione.get_codice_oggetto() == self.codice_skipass:
-                return True
-        return False
+        return Prenotazione(skipass_selezionato.get_codice(), scadenza, skipass_selezionato)
 
     # Metodo per aggiungere uno skipass
     def aggiungi_skipass(self, skipass):

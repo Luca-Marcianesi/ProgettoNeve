@@ -1,7 +1,6 @@
 import json
 import os.path
 import pickle
-
 from Account.model.account import Account
 from Sessione.model.sessione import Sessione
 
@@ -11,7 +10,6 @@ from Sessione.model.sessione import Sessione
 class ListaAccount:
 
     def __init__(self):
-
         # Definizione degli attributi
         self.lista_account = []
         self.leggi_dati()
@@ -20,8 +18,7 @@ class ListaAccount:
     def crea_account(self, nome, cognome, username, password, eta, altezza, numero_scarpe):
         if self.controlla_username(username):
             return "Username già in uso"
-        else:
-            self.lista_account.append(Account(nome, cognome, username, password, eta, altezza, numero_scarpe))
+        self.lista_account.append(Account(nome, cognome, username, password, eta, altezza, numero_scarpe))
 
     # Metodo per effettuare il login
     def login(self, username, password):
