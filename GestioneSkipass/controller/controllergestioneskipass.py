@@ -2,6 +2,9 @@ from GestioneSkipass.model.gestioneskipass import GestioneSkipass
 
 
 # Controller relativo alla classe GestioneSkipass
+from Sessione.model.sessione import Sessione
+
+
 class ControllerGestioneSkipass:
     def __init__(self):
         # Prende come model la classe gestione skipass
@@ -9,7 +12,8 @@ class ControllerGestioneSkipass:
 
     # Metodo che chiama la funzione prenota_skipass del model
     def prenota_skipass(self, skipass_selezionato):
-        self.model.prenota(skipass_selezionato)
+        if Sessione.controlla_prenotazione_effettuata(self.model.codice_skipass):
+            Sessione.aggiungi_prenotazione(self.model.prenota(skipass_selezionato))
 
     # Metodo che chiama la funzione get_lista_skipass del model
     def get_lista_skipass(self):
@@ -17,7 +21,7 @@ class ControllerGestioneSkipass:
 
     # Metodo che chiama la funzione controlla_skipass_acquistato del model
     def controlla_skipass_acquistato(self):
-        return self.model.controlla_skipass_acquistato()
+        return Sessione.controlla_prenotazione_effettuata(self.model.codice_skipass)
 
     # Metodo che chiama la funzione get_skipass_n del model
     def visualizza_lista(self, numero):

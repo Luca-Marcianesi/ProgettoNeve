@@ -50,18 +50,11 @@ class ListaAttrezzatura:
     # un certo tipo di attrezzo
     def get_lista_filtrata(self):
         lista_filtrata = []
-        flag = True
         for attrezzatura in self.lista_attrezzatura:
             if attrezzatura.get_stato():
                 if self.filtra_dimenisoni(attrezzatura.get_dimensioni(), Sessione.get_numero_scarpe(),
                                           Sessione.get_altezza()):
-                    if Sessione.get_lista_prenotazioni() != []:
-                        for prenotazione in Sessione.get_lista_prenotazioni():
-                            if prenotazione.get_codice_oggetto() == attrezzatura.get_codice():
-                                flag = False
-                            if flag:
-                                lista_filtrata.append(attrezzatura)
-                    else:
+                    if Sessione.controlla_prenotazione_effettuata(attrezzatura.get_codice()):
                         lista_filtrata.append(attrezzatura)
         return lista_filtrata
 
@@ -73,13 +66,9 @@ class ListaAttrezzatura:
 
     # Metodo per prenotare l'attrezzatura
     def prenota_attrezzatura(self, attrezzatura):
-        if Sessione.controlla_prenotazione_effettuata(attrezzatura.get_codice()):
-            scadenza = date.today() + timedelta(days=int(1))
-            attrezzatura.prenota(scadenza)
-            Sessione.aggiungi_prenotazione(Prenotazione(attrezzatura.get_codice(),
-                                                        scadenza,
-                                                        attrezzatura))
-            return "Prenotazione effettuata"
+        scadenza = date.today() + timedelta(days=int(1))
+        attrezzatura.prenota(scadenza)
+        return Prenotazione(attrezzatura.get_codice(), scadenza, attrezzatura)
 
     # Metodo per eliminare le prenotazioni scadute
     def elimina_prenotazione_scadute(self):
