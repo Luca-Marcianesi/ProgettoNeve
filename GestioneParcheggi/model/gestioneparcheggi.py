@@ -28,9 +28,8 @@ class GestioneParcheggi:
                 if parcheggio.get_stato():
                     scadenza = date.today() + timedelta(days=int(numero_giorni))
                     parcheggio.prenota(scadenza)
-                    Sessione.aggiungi_prenotazione(Prenotazione(parcheggio.get_codice(), scadenza, parcheggio))
-                    return "Prenotazione effettuata"
-        return "Posti esauriti"
+                    return Prenotazione(parcheggio.get_codice(), scadenza, parcheggio)
+        return None
 
     # Metodo che restituisce i posti disponibili
     def get_posti_disponibili(self):
@@ -64,7 +63,7 @@ class GestioneParcheggi:
             with open('Data/GestioneParcheggio/parcheggi.pickle', "rb") as file:
                 self.elenco_parcheggi = pickle.load(file)
         else:
-            with open("Data/GestioneParcheggio/parcheggio.json") as file:
+            with open('Data/GestioneParcheggio/parcheggio.json') as file:
                 elenco_parcheggi = json.load(file)
             for parcheggio_da_agg in elenco_parcheggi:
                 self.aggiungi_parcheggio(

@@ -13,10 +13,14 @@ class ControllerGestioneParcheggi:
     # chiama la funzione prenota_parcheggio del model
     def prenota_parcheggio(self, numero_giorni):
         if Sessione.controlla_prenotazione_effettuata(self.model.codice_parcheggio):
-            risultato = self.model.prenota_parcheggio(numero_giorni)
-            self.salva_dati()
-            Sessione.salva_dati()
-            return risultato
+            esito = self.model.prenota_parcheggio(numero_giorni)
+            if esito is not None:
+                Sessione.aggiungi_prenotazione(esito)
+                risultato = "Prenotazione effettuata"
+                self.salva_dati()
+                Sessione.salva_dati()
+                return risultato
+            return "Posti esauriti"
         return "Hai già una prenotazione"
 
     # Metodo che chiama la funzione get_posti_disponibili del model
