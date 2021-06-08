@@ -16,8 +16,6 @@ class ListaAccount:
 
     # Metodo per creare l'account
     def crea_account(self, nome, cognome, username, password, eta, altezza, numero_scarpe):
-        if self.controlla_username(username):
-            return "Username già in uso"
         self.lista_account.append(Account(nome, cognome, username, password, eta, altezza, numero_scarpe))
 
     # Metodo per effettuare il login
