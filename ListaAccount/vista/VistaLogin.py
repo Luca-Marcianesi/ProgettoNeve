@@ -84,7 +84,7 @@ class VistaLogin(QWidget):
                 self.accesso_view.showFullScreen()
                 self.close()
         else:
-            QMessageBox.critical(self, 'Errore', 'Per favore, inserisci tutte le informazioni richieste',
+            QMessageBox.critical(self, 'Errore', 'Credenziali errate',
                                  QMessageBox.Ok, QMessageBox.Ok)
 
     # Creazione, settaggio e stile per una casella di testo
