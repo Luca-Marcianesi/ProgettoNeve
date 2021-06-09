@@ -48,14 +48,14 @@ class VistaLogin(QWidget):
         accedi.setFixedSize(150, 70)
         accedi.setFont(QFont('Times New Roman', 12))
         self.layout_orizzontale2.addWidget(accedi)
-        accedi.clicked.connect(self.entra_account)
+        accedi.clicked.connect(self.call_login)
 
         # Crea Account
         crea_account = QPushButton("CREA \n ACCOUNT")
         crea_account.setFixedSize(150, 70)
         crea_account.setFont(QFont('Times New Roman', 12))
         self.layout_orizzontale2.addWidget(crea_account)
-        crea_account.clicked.connect(self.crea_account)
+        crea_account.clicked.connect(self.call_crea_account)
         self.layout_verticale2.addLayout(self.layout_orizzontale2)
 
         # Allineamento layout orizzontale1
@@ -68,12 +68,12 @@ class VistaLogin(QWidget):
         self.setWindowTitle("Login")
 
     # Metodo, collegato al bottone, per creare l'account
-    def crea_account(self):
+    def call_crea_account(self):
         self.crea_view.show()
         self.close()
 
     # Metodo per effettuare il login
-    def entra_account(self):
+    def call_login(self):
         username = self.credenziali["USERNAME"].text()
         password = self.credenziali["PASSWORD"].text()
         if self.controller.login(username, password):
