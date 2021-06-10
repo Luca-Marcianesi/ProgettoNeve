@@ -33,6 +33,7 @@ class ListaAccount:
                 return True
         return False
 
+    # Metodo che controlla che le informazioni inserite
     def controlla_caratteristiche_persona(self, altezza, eta, numero_scarpe):
         if int(altezza) < 50 or int(altezza) > 220 or int(eta) <= 5 or int(eta) > 130 or int(
                 numero_scarpe) <= 20 or int(numero_scarpe) > 50:
