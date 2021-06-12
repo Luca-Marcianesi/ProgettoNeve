@@ -24,7 +24,7 @@ class ControllerListaAttrezzatura:
     def prenota_attrezzatura(self, attrezzatura):
         if Sessione.controlla_prenotazione_effettuata(attrezzatura.get_codice()):
             Sessione.aggiungi_prenotazione(self.model.prenota_attrezzatura(attrezzatura))
-        return "Prenotazione effettuata"
+            return "Prenotazione effettuata"
 
     def salva_dati(self):
         self.model.salva_dati()

@@ -64,7 +64,7 @@ class VistaCreaAccount(QWidget):
         n_scarpe = self.testo["Numero di scarpe"].text()
         try:
             if self.controlla_informazioni(nome, cognome, username, password, eta, altezza, n_scarpe):
-                self.controller.call_crea_account(nome, cognome, username, password, eta, altezza, n_scarpe)
+                self.controller.crea_account(nome, cognome, username, password, eta, altezza, n_scarpe)
                 self.controller.salva_dati()
                 self.callback()
                 self.close()

@@ -58,7 +58,7 @@ class ListaAttrezzatura:
                         lista_filtrata.append(attrezzatura)
         return lista_filtrata
 
-    # Metodo che confronta le dimensioni de ogni attrezzo con le caratteristiche del cliente
+    # Metodo che confronta le dimensioni di ogni attrezzo con le caratteristiche del cliente
     def filtra_dimenisoni(self, dim_attrezzo, numero_scarpe_persona, altezza_persona):
         if int(dim_attrezzo) == int(numero_scarpe_persona) or int(dim_attrezzo) == int(altezza_persona):
             return True
