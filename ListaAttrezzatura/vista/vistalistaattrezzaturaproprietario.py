@@ -85,7 +85,7 @@ class VistaListaAttrezzaturaProprietario(QWidget):
             self.layout_verticale2.addWidget(pulsante_apri)
 
         # Pulsante aggiungi
-        pulsante_aggiungi = self.pulsante("Aggiungi\nattreazzatura", self.aggiungi)
+        pulsante_aggiungi = self.pulsante("Aggiungi\nattrezzatura", self.aggiungi)
         self.layout_verticale2.addWidget(pulsante_aggiungi)
 
         # Pulsante indietro
