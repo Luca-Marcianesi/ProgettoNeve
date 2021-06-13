@@ -117,11 +117,11 @@ class VistaListaAttrezzatura(QWidget):
             QMessageBox.critical(self, 'Errore!', 'Qualcosa è andato storto, riprova più tardi.', QMessageBox.Ok,
                                  QMessageBox.Ok)
 
-    # Metodo che aggiorna la finestra
+    # Metodo che aggiorna la finestra della lista attrezzatura dopo che un attrezzatura è stata prenotata
     def aggiorna(self):
         vista_lista_model = QStandardItemModel(self.vista_lista)
         if self.controller_lista_attrezzatura.get_lista_filtrata() == []:
-            label = QLabel(" Non ci sono oggetti disponibili adatti\nalle tue caratteristiche")
+            label = QLabel("Non ci sono oggetti disponibili adatti\nalle tue caratteristiche")
             label.setAlignment(Qt.AlignCenter)
             label.setFont(QFont('Times New Roman', 25, 100))
             label.setStyleSheet('QLabel {background-color: lightBlue; color: black;}')
