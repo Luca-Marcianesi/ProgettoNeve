@@ -127,6 +127,13 @@ class VistaListaAttrezzatura(QWidget):
             label.setStyleSheet('QLabel {background-color: lightBlue; color: black;}')
             label.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Maximum)
             self.layout_orizzontale.addSpacerItem(QSpacerItem(0, 50))
+            item = QStandardItem()
+            nome = "Non ci sono oggetti"
+            item.setText(nome)
+            item.setEditable(False)
+            item.setFont(QFont('Times New Roman', 30, 100))
+            vista_lista_model.appendRow(item)
+            self.vista_lista.setModel(vista_lista_model)
             return label
 
         else:
