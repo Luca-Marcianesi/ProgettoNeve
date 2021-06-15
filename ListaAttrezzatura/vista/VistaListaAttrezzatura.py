@@ -21,33 +21,34 @@ class VistaListaAttrezzatura(QWidget):
         self.layout_orizzontale = QHBoxLayout()
         self.layout_verticale2 = QVBoxLayout()
 
+
+
         # Sfondo
         self.show_background("LISTA ATTREZZATURA")
 
         self.layout_verticale1.addSpacerItem(QSpacerItem(0, 200))
 
-        self.layout_orizzontale.addSpacerItem(QSpacerItem(100, 0))
+        self.layout_orizzontale.addSpacerItem(QSpacerItem(200, 0))
 
         # Lista
         self.vista_lista = QListView()
+        self.label = QLabel()
+        self.show_pulsantiera()
+        self.aggiorna()
 
-        label = self.aggiorna()
+        self.layout_orizzontale.addWidget(self.vista_lista)
+        self.layout_orizzontale.addWidget(self.label)
 
-        self.layout_orizzontale.addWidget(label)
-
-        self.layout_orizzontale.addSpacerItem(QSpacerItem(1000, 0))
+        self.layout_orizzontale.addSpacerItem(QSpacerItem(800, 0))
 
         # Pulsanti Apri e Indietro allineati
-        self.show_pulsantiera()
+        self.layout_orizzontale.addLayout(self.layout_verticale2)
 
         # Spaziatura
         self.layout_orizzontale.addSpacerItem(QSpacerItem(150, 0))
         self.layout_verticale1.addLayout(self.layout_orizzontale)
 
-        if self.controller_lista_attrezzatura.get_lista_filtrata() == []:
-            self.layout_verticale1.addSpacerItem(QSpacerItem(0, 350))
-        else:
-            self.layout_verticale1.addSpacerItem(QSpacerItem(0, 150))
+        self.layout_verticale1.addSpacerItem(QSpacerItem(0, 300))
 
         # Impostazione layout totale
         self.setLayout(self.layout_verticale1)
@@ -80,13 +81,13 @@ class VistaListaAttrezzatura(QWidget):
 
     # Creazione, settaggio e stile pulsanti
     def show_pulsantiera(self):
-        if not self.controller_lista_attrezzatura.get_lista_filtrata() == []:
-            pulsante_apri = QPushButton("Apri")
-            pulsante_apri.setFont(QFont('Times New Roman', 20, 100, True))
-            pulsante_apri.setStyleSheet('QPushButton {background-color: orange; color: black;}')
-            pulsante_apri.setFixedSize(250, 100)
-            pulsante_apri.clicked.connect(self.attrezzatura_selezionata)
-            self.layout_verticale2.addWidget(pulsante_apri)
+        #if not self.controller_lista_attrezzatura.get_lista_filtrata() == []:
+        self.pulsante_apri = QPushButton("Apri")
+        self.pulsante_apri.setFont(QFont('Times New Roman', 20, 100, True))
+        self.pulsante_apri.setStyleSheet('QPushButton {background-color: orange; color: black;}')
+        self.pulsante_apri.setFixedSize(250, 100)
+        self.pulsante_apri.clicked.connect(self.attrezzatura_selezionata)
+        self.layout_verticale2.addWidget(self.pulsante_apri)
 
         # Pulsante indietro
         pulsante_indietro = QPushButton("Indietro")
@@ -96,7 +97,7 @@ class VistaListaAttrezzatura(QWidget):
         pulsante_indietro.clicked.connect(self.indietro)
         self.layout_verticale2.addWidget(pulsante_indietro)
         self.layout_verticale2.addSpacerItem(QSpacerItem(0, 50))
-        self.layout_orizzontale.addLayout(self.layout_verticale2)
+
 
     # Metodo che gestisce la situazione in cui al click del pulsante "APRI", non venga selezionato niente
     # con gestione delle eccezioni
@@ -110,6 +111,7 @@ class VistaListaAttrezzatura(QWidget):
                                                         self.controller_lista_attrezzatura.prenota_attrezzatura,
                                                         self.aggiorna)
             self.vista_attrezzatura.showFullScreen()
+            self.close()
         except IndexError:
             QMessageBox.information(self, 'Attenzione!', 'Non hai selezionato nessuna attrezzatura.', QMessageBox.Ok,
                                     QMessageBox.Ok)
@@ -120,14 +122,19 @@ class VistaListaAttrezzatura(QWidget):
     # Metodo che aggiorna la finestra della lista attrezzatura dopo che un attrezzatura è stata prenotata
     def aggiorna(self):
         vista_lista_model = QStandardItemModel(self.vista_lista)
-        if self.controller_lista_attrezzatura.get_lista_filtrata() == []:
-            label = QLabel("Non ci sono oggetti disponibili adatti\nalle tue caratteristiche")
-            label.setAlignment(Qt.AlignCenter)
-            label.setFont(QFont('Times New Roman', 25, 100))
-            label.setStyleSheet('QLabel {background-color: lightBlue; color: black;}')
-            label.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Maximum)
+        if not bool(self.controller_lista_attrezzatura.get_lista_filtrata()):
+            self.layout_orizzontale.removeWidget(self.vista_lista)
+            self.vista_lista.deleteLater()
+            self.vista_lista = None
+            self.layout_verticale2.removeWidget(self.pulsante_apri)
+            self.pulsante_apri.deleteLater()
+            self.pulsante_apri = None
+            self.label.setText("Non ci sono oggetti disponibili adatti\nalle tue caratteristiche")
+            self.label.setAlignment(Qt.AlignCenter)
+            self.label.setFont(QFont('Times New Roman', 25, 100))
+            self.label.setStyleSheet('QLabel {background-color: lightBlue; color: black;}')
+            self.label.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Maximum)
             self.layout_orizzontale.addSpacerItem(QSpacerItem(0, 50))
-            return label
 
         else:
             for attrezzatura in self.controller_lista_attrezzatura.get_lista_filtrata():
@@ -138,4 +145,3 @@ class VistaListaAttrezzatura(QWidget):
                 item.setFont(QFont('Times New Roman', 30, 100))
                 vista_lista_model.appendRow(item)
             self.vista_lista.setModel(vista_lista_model)
-            return self.vista_lista

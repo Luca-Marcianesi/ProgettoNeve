@@ -1,5 +1,5 @@
 from PyQt5.QtGui import QPalette, QBrush, QImage, QFont
-from PyQt5.QtWidgets import QMessageBox, QLineEdit, QLabel, QPushButton, QHBoxLayout, QVBoxLayout, QWidget
+from PyQt5.QtWidgets import QMessageBox, QLineEdit, QLabel, QPushButton, QHBoxLayout, QVBoxLayout, QWidget, QSpacerItem
 from Dipendenti.model.dipendente import Dipendente
 
 
@@ -22,7 +22,8 @@ class VistaAggiungiDipendente(QWidget):
 
         # Layout usati per visualizzare e allineare l'intera vista
         self.layout_verticale = QVBoxLayout()
-        self.layout_orizzontale = QHBoxLayout()
+        self.layout_orizzontale1 = QHBoxLayout()
+        self.layout_orizzontale2 = QHBoxLayout()
 
         # Dizionario utilizzato per la collezione dei parametri digitati nelle caselle di testo
         self.testo = {}
@@ -37,24 +38,35 @@ class VistaAggiungiDipendente(QWidget):
 
         # Creazione e configurazione del pulsante "Indietro"
         bottone_indietro = QPushButton("Indietro")
+        bottone_indietro.setFont(QFont('Times New Roman', 18, 100, True))
+        bottone_indietro.setStyleSheet('QPushButton {background-color: orange; color: black;}')
+        bottone_indietro.setFixedSize(150, 80)
         bottone_indietro.clicked.connect(self.indietro)
-        self.layout_orizzontale.addWidget(bottone_indietro)
+        self.layout_orizzontale2.addWidget(bottone_indietro)
 
         # Creazione e configurazione del pulsante "Invia"
         bottone_invio = QPushButton("Invia")
+        bottone_invio.setFont(QFont('Times New Roman', 18, 100, True))
+        bottone_invio.setStyleSheet('QPushButton {background-color: orange; color: black;}')
+        bottone_invio.setFixedSize(150, 80)
         bottone_invio.clicked.connect(self.call_aggiungi_dipendente)
-        self.layout_orizzontale.addWidget(bottone_invio)
+        self.layout_orizzontale2.addWidget(bottone_invio)
 
         # Impostazione e allineamento del layout totale
-        self.layout_verticale.addLayout(self.layout_orizzontale)
-        self.setLayout(self.layout_verticale)
+        self.layout_verticale.addSpacerItem(QSpacerItem(0, 50))
+        self.layout_verticale.addLayout(self.layout_orizzontale2)
+        self.layout_orizzontale1.addSpacerItem(QSpacerItem(200, 0))
+        self.layout_orizzontale1.addLayout(self.layout_verticale)
+        self.layout_orizzontale1.addSpacerItem(QSpacerItem(200, 0))
+        self.setLayout(self.layout_orizzontale1)
         self.setWindowTitle("Nuovo Dipendente")
 
     # Metodo interno utile per la semplificare la creazione di una casella di testo
     def casella_testo(self, tipo):
         label = QLabel(tipo + ":")
-        label.setFont(QFont('Times New Roman', 14, 100))
+        label.setFont(QFont('Times New Roman', 18, 100))
         casella = QLineEdit()
+        casella.setFont(QFont('Times New Roman', 14))
         self.testo[tipo] = casella
         self.layout_verticale.addWidget(label)
         self.layout_verticale.addWidget(casella)

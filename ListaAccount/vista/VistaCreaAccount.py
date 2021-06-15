@@ -1,5 +1,5 @@
-from PyQt5.QtGui import QImage, QPalette, QBrush
-from PyQt5.QtWidgets import QVBoxLayout, QLabel, QLineEdit, QPushButton, QMessageBox, QWidget, QHBoxLayout
+from PyQt5.QtGui import QImage, QPalette, QBrush, QFont
+from PyQt5.QtWidgets import QVBoxLayout, QLabel, QLineEdit, QPushButton, QMessageBox, QWidget, QHBoxLayout, QSpacerItem
 
 
 # vista Crea account
@@ -15,7 +15,8 @@ class VistaCreaAccount(QWidget):
         self.setFixedWidth(800)
         self.setFixedHeight(600)
         self.v_layout = QVBoxLayout()
-        self.h_layout = QHBoxLayout()
+        self.h_layout1 = QHBoxLayout()
+        self.h_layout2 = QHBoxLayout()
 
         # Chiamata alla funzione per lo sfondo
         self.show_background()
@@ -29,27 +30,35 @@ class VistaCreaAccount(QWidget):
         self.casella_testo("Altezza")
         self.casella_testo("Numero di scarpe")
 
-        indietro = QPushButton("Indietro")
+        indietro = QPushButton("INDIETRO")
+        indietro.setFont(QFont('Times New Roman', 14, 100, True))
+        indietro.setStyleSheet('QPushButton {background-color: orange; color: black;}')
+        indietro.setFixedSize(150, 70)
         indietro.clicked.connect(self.indietro)
-        self.h_layout.addWidget(indietro)
+        self.h_layout2.addWidget(indietro)
 
-        invio = QPushButton("Invia")
+        invio = QPushButton("INVIA")
+        invio.setFont(QFont('Times New Roman', 14, 100, True))
+        invio.setStyleSheet('QPushButton {background-color: orange; color: black;}')
+        invio.setFixedSize(150, 70)
         invio.clicked.connect(self.crea_account)
-        self.h_layout.addWidget(invio)
+        self.h_layout2.addWidget(invio)
 
         # Settaggio layout
-        self.v_layout.addLayout(self.h_layout)
-        self.setLayout(self.v_layout)
+        self.v_layout.addLayout(self.h_layout2)
+        self.h_layout1.addSpacerItem(QSpacerItem(200, 0))
+        self.h_layout1.addLayout(self.v_layout)
+        self.h_layout1.addSpacerItem(QSpacerItem(200, 0))
+        self.setLayout(self.h_layout1)
         self.setWindowTitle("Nuovo Account")
 
     # Creazione casella di testo
     def casella_testo(self, tipo):
         label = QLabel(tipo + ":")
-        font = label.font()
-        font.setPointSize(14)
-        label.setFont(font)
+        label.setFont(QFont("Times New Roman", 14, 100))
         self.v_layout.addWidget(label)
         casella = QLineEdit()
+        casella.setFont(QFont("Times New Roman", 12))
         self.v_layout.addWidget(casella)
         self.testo[tipo] = casella
 

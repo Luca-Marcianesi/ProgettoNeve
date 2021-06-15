@@ -22,7 +22,7 @@ class VistaAggiungiAttrezzatura(QWidget):
         self.testo = {}
 
         # Configurazione della dimensione e creazione dei layout principali della vista
-        self.setFixedSize(1000, 1000)
+        self.setFixedSize(1000, 800)
         self.layout_verticale = QVBoxLayout()
         self.layout_orizzontale1 = QHBoxLayout()
         self.layout_orizzontale2 = QHBoxLayout()
@@ -45,7 +45,7 @@ class VistaAggiungiAttrezzatura(QWidget):
         codici = QLabel()
         codici.setText(self.leggi_codici_json())
         codici.setFont(QFont('Times New Roman', 15))
-        self.layout_verticale.addSpacerItem(QSpacerItem(0, 50))
+        self.layout_verticale.addSpacerItem(QSpacerItem(0, 20))
         self.layout_verticale.addWidget(codici)
 
         # Label per la descrizione della SpinBox
@@ -58,7 +58,7 @@ class VistaAggiungiAttrezzatura(QWidget):
         self.spin_codice = QSpinBox(self)
         self.spin_codice.setFont(QFont('Times New Roman', 20))
         self.spin_codice.setAlignment(Qt.AlignCenter)
-        self.spin_codice.setFixedSize(200, 100)
+        self.spin_codice.setFixedSize(150, 70)
         self.spin_codice.lineEdit().setReadOnly(True)
         self.spin_codice.setRange(3,6)
         self.layout_verticale.addWidget(self.spin_codice)
@@ -73,7 +73,7 @@ class VistaAggiungiAttrezzatura(QWidget):
         self.dimensioni = QSpinBox(self)
         self.dimensioni.setFont(QFont('Times New Roman', 20))
         self.dimensioni.setAlignment(Qt.AlignCenter)
-        self.dimensioni.setFixedSize(200, 100)
+        self.dimensioni.setFixedSize(150, 70)
         self.dimensioni.setRange(1, 200)
         self.layout_verticale.addWidget(self.dimensioni)
 
@@ -100,9 +100,9 @@ class VistaAggiungiAttrezzatura(QWidget):
         titolo.setAlignment(Qt.AlignCenter)
         titolo.setFont(QFont('Times New Roman', 40))
         titolo.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Maximum)
-        self.layout_verticale.addSpacerItem(QSpacerItem(0, 50, QSizePolicy.Fixed, QSizePolicy.Fixed))
+        self.layout_verticale.addSpacerItem(QSpacerItem(0, 20))
         self.layout_verticale.addWidget(titolo)
-        self.layout_verticale.addSpacerItem(QSpacerItem(0, 50, QSizePolicy.Fixed, QSizePolicy.Fixed))
+        self.layout_verticale.addSpacerItem(QSpacerItem(0, 30))
 
     # Metodo per creazione, stile e funzionamento dei bottoni Indietro e Aggiungi
     def show_pulsantiera(self):

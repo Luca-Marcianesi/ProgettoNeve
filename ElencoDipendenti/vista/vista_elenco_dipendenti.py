@@ -25,6 +25,7 @@ class VistaElencoDipendenti(QWidget):
 
         # Lista Dipendenti
         self.lista_dipendenti = QListView()
+        self.label = QLabel()
 
         # Definizione della vista successiva
         self.vista_aggiungi = VistaAggiungiDipendente(self.showFullScreen, self.controller_gestione_dipendenti,
@@ -36,12 +37,14 @@ class VistaElencoDipendenti(QWidget):
         self.layout_orizzontale.addSpacerItem(QSpacerItem(300, 0))
 
         # Creazione e allineamento lista dei dipendenti aggiornata
-        lista_aggiornata = self.aggiorna()
-        self.layout_orizzontale.addWidget(lista_aggiornata)
+        self.show_pulsantiera()
+        self.aggiorna()
+        self.layout_orizzontale.addWidget(self.lista_dipendenti)
+        self.layout_orizzontale.addWidget(self.label)
 
         # Configurazione e allineamento dei pulsanti
         self.layout_orizzontale.addSpacerItem(QSpacerItem(300, 0))
-        self.show_pulsantiera()
+        self.layout_orizzontale.addLayout(self.layout_pulsanti)
         self.layout_orizzontale.addSpacerItem(QSpacerItem(200, 0))
 
         # Configurazione finale del layout totale
@@ -70,21 +73,19 @@ class VistaElencoDipendenti(QWidget):
     # Metodo per creazione, stile e funzionamento dei bottoni indietro, apri e aggiungi dipendente
     def show_pulsantiera(self):
         # Layout interni utilizzati per l'allineamento dei tre pulsanti
-        layout_pulsanti = QVBoxLayout()
+        self.layout_pulsanti = QVBoxLayout()
 
         # Configurazione del pulsante Apri
-        layout_pulsanti.addWidget(self.pulsante("Apri", self.dipendente_selezionato))
-        layout_pulsanti.addSpacerItem(QSpacerItem(0, 50))
+        self.pulsante_apri = self.pulsante("Apri", self.dipendente_selezionato)
+        self.layout_pulsanti.addWidget(self.pulsante_apri)
+        self.layout_pulsanti.addSpacerItem(QSpacerItem(0, 50))
 
         # Configurazione del pulsante Aggiungi Dipendente
-        layout_pulsanti.addWidget(self.pulsante("Aggiungi\nDipendente", self.call_aggiungi_dipendente))
-        layout_pulsanti.addSpacerItem(QSpacerItem(0, 50))
+        self.layout_pulsanti.addWidget(self.pulsante("Aggiungi\nDipendente", self.call_aggiungi_dipendente))
+        self.layout_pulsanti.addSpacerItem(QSpacerItem(0, 50))
 
         # Configurazione del pulsante Indietro
-        layout_pulsanti.addWidget(self.pulsante("Indietro", self.indietro))
-
-        # Inserimento dei tre pulsanti del layout globale
-        self.layout_orizzontale.addLayout(layout_pulsanti)
+        self.layout_pulsanti.addWidget(self.pulsante("Indietro", self.indietro))
 
     # Metodo interno per standardizzare e semplificare la creazione di un pulsante
     def pulsante(self, titolo, call):
@@ -116,15 +117,29 @@ class VistaElencoDipendenti(QWidget):
     # Resetta la lista dei dipendenti aggiungendo le eventuali modifiche
     def aggiorna(self):
         vista_lista_model = QStandardItemModel(self.lista_dipendenti)
-        for dipendente in self.controller_gestione_dipendenti.get_lista_elenco_dipendenti():
-            item = QStandardItem()
-            nome = dipendente.get_dipendente_str()
-            item.setText(nome)
-            item.setEditable(False)
-            item.setFont(QFont('Times New Roman', 30, 100))
-            vista_lista_model.appendRow(item)
-        self.lista_dipendenti.setModel(vista_lista_model)
-        return self.lista_dipendenti
+        if not bool(self.controller_gestione_dipendenti.get_lista_elenco_dipendenti()):
+            self.layout_orizzontale.removeWidget(self.lista_dipendenti)
+            self.lista_dipendenti.deleteLater()
+            self.lista_dipendenti = None
+            self.layout_pulsanti.removeWidget(self.pulsante_apri)
+            self.pulsante_apri.deleteLater()
+            self.pulsante_apri = None
+            self.label.setText("Non ci sono più dipendenti")
+            self.label.setAlignment(Qt.AlignCenter)
+            self.label.setFont(QFont('Times New Roman', 25, 100))
+            self.label.setStyleSheet('QLabel {background-color: lightBlue; color: black;}')
+            self.label.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Maximum)
+            self.layout_orizzontale.addSpacerItem(QSpacerItem(0, 50))
+
+        else:
+            for dipendente in self.controller_gestione_dipendenti.get_lista_elenco_dipendenti():
+                item = QStandardItem()
+                nome = dipendente.get_dipendente_str()
+                item.setText(nome)
+                item.setEditable(False)
+                item.setFont(QFont('Times New Roman', 30, 100))
+                vista_lista_model.appendRow(item)
+            self.lista_dipendenti.setModel(vista_lista_model)
 
     # Metodo per la chiamata della vista aggiungi dipendente
     def call_aggiungi_dipendente(self):

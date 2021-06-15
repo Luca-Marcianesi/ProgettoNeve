@@ -30,24 +30,24 @@ class VistaListaAttrezzaturaProprietario(QWidget):
 
         # Lista
         self.vista_lista = QListView()
+        self.label = QLabel()
+        self.crea_pulsantiera()
+        self.aggiorna()
 
-        label = self.aggiorna()
-
-        self.layout_orizzontale.addWidget(label)
+        self.layout_orizzontale.addWidget(self.vista_lista)
+        self.layout_orizzontale.addWidget(self.label)
 
         self.layout_orizzontale.addSpacerItem(QSpacerItem(1000, 0))
 
         # Pulsanti Apri e Indietro allineati
-        self.show_pulsantiera()
+
+        self.layout_orizzontale.addLayout(self.layout_verticale2)
 
         # Spaziatura
         self.layout_orizzontale.addSpacerItem(QSpacerItem(150, 0))
         self.layout_verticale1.addLayout(self.layout_orizzontale)
 
-        if self.controller_lista_attrezzatura.get_lista_filtrata() == []:
-            self.layout_verticale1.addSpacerItem(QSpacerItem(0, 350))
-        else:
-            self.layout_verticale1.addSpacerItem(QSpacerItem(0, 150))
+        self.layout_verticale1.addSpacerItem(QSpacerItem(0, 200))
 
         # Impostazione layout totale
         self.setLayout(self.layout_verticale1)
@@ -79,10 +79,9 @@ class VistaListaAttrezzaturaProprietario(QWidget):
         self.layout_verticale1.addSpacerItem(QSpacerItem(0, 100, QSizePolicy.Fixed, QSizePolicy.Fixed))
 
     # Creazione, settaggio e stile dei pulsanti
-    def show_pulsantiera(self):
-        if not self.controller_lista_attrezzatura.get_lista_filtrata() == []:
-            pulsante_apri = self.pulsante("Apri", self.attrezzatura_selezionata)
-            self.layout_verticale2.addWidget(pulsante_apri)
+    def crea_pulsantiera(self):
+        self.pulsante_apri = self.pulsante("Apri", self.attrezzatura_selezionata)
+        self.layout_verticale2.addWidget(self.pulsante_apri)
 
         # Pulsante aggiungi
         pulsante_aggiungi = self.pulsante("Aggiungi\nattrezzatura", self.aggiungi)
@@ -92,19 +91,26 @@ class VistaListaAttrezzaturaProprietario(QWidget):
         pulsante_indietro = self.pulsante("Indietro", self.indietro)
         self.layout_verticale2.addWidget(pulsante_indietro)
 
-        self.layout_orizzontale.addLayout(self.layout_verticale2)
+
 
     # Metodo che aggiorna la finestra
     def aggiorna(self):
+
         vista_lista_model = QStandardItemModel(self.vista_lista)
-        if self.controller_lista_attrezzatura.get_lista_attrezzatura() == []:
-            label = QLabel(" Non ci sono oggetti disponibili")
-            label.setAlignment(Qt.AlignCenter)
-            label.setFont(QFont('Times New Roman', 25, 100))
-            label.setStyleSheet('QLabel {background-color: lightBlue; color: black;}')
-            label.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Maximum)
+        if not bool(self.controller_lista_attrezzatura.get_lista_attrezzatura()):
+            self.layout_orizzontale.removeWidget(self.vista_lista)
+            self.vista_lista.deleteLater()
+            self.vista_lista = None
+            self.layout_verticale2.removeWidget(self.pulsante_apri)
+            self.pulsante_apri.deleteLater()
+            self.pulsante_apri = None
+            self.label.setText("Non ci sono oggetti disponibili")
+            self.label.setAlignment(Qt.AlignCenter)
+            self.label.setFont(QFont('Times New Roman', 25, 100))
+            self.label.setStyleSheet('QLabel {background-color: lightBlue; color: black;}')
+            self.label.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Maximum)
             self.layout_orizzontale.addSpacerItem(QSpacerItem(0, 50))
-            return label
+
         else:
             for attrezzatura in self.controller_lista_attrezzatura.get_lista_attrezzatura():
                 item = QStandardItem()
@@ -118,7 +124,6 @@ class VistaListaAttrezzaturaProprietario(QWidget):
                 item.setFont(QFont('Times New Roman', 30, 100))
                 vista_lista_model.appendRow(item)
             self.vista_lista.setModel(vista_lista_model)
-            return self.vista_lista
 
     # Metodo che gestisce la situazione in cui al click del pulsante "APRI", non venga selezionato niente
 

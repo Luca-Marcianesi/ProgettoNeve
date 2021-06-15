@@ -133,27 +133,37 @@ class VistaRichiestaGiorni(QWidget):
         self.setFixedSize(400, 300)
 
         # Descrizione della finestra per scegliere per quanti giorni prenotare
-        label = QLabel("NUMERO GIORNI DA PRENOTARE:")
-        label.setFont(QFont('Times New Roman', 10))
+        layout_label = QHBoxLayout()
+        label = QLabel("NUMERO GIORNI\nDA PRENOTARE:")
+        label.setFont(QFont('Times New Roman', 24, 100))
         label.setSizePolicy(300, 300)
+        label.setAlignment(Qt.AlignCenter)
+        layout_label.addWidget(label)
+        self.layout_verticale.addLayout(layout_label)
 
         # Configurazione della SpinBox
-        self.giorni = QSpinBox(self)
-        self.giorni.setFont(QFont('Times New Roman', 20))
-        self.giorni.setAlignment(Qt.AlignCenter)
-        self.giorni.setFixedSize(100, 50)
-        self.giorni.lineEdit().setReadOnly(True)
-        self.giorni.setRange(1, 5)
+        layout_spinbox = QHBoxLayout()
+        giorni = QSpinBox(self)
+        giorni.setFont(QFont('Times New Roman', 20))
+        giorni.setAlignment(Qt.AlignCenter)
+        giorni.setFixedSize(100, 50)
+        giorni.lineEdit().setReadOnly(True)
+        giorni.setRange(1, 5)
+        layout_spinbox.addSpacerItem(QSpacerItem(50, 0))
+        layout_spinbox.addWidget(giorni)
+        layout_spinbox.addSpacerItem(QSpacerItem(50, 0))
+        self.layout_verticale.addLayout(layout_spinbox)
 
         # Creazione e configurazione del bottone prenota
+        layout_pulsante = QHBoxLayout()
         bottone = QPushButton("Prenota")
+        bottone.setFont(QFont('Times New Roman', 22))
+        bottone.setFixedSize(270, 60)
         bottone.clicked.connect(self.call_prenota)
+        layout_pulsante.addWidget(bottone)
+        self.layout_verticale.addLayout(layout_pulsante)
 
         # Configurazione finale del layout totale
-        self.layout_verticale.addWidget(label)
-        self.layout_verticale.addSpacerItem(QSpacerItem(150, 0, QSizePolicy.Fixed, QSizePolicy.Fixed))
-        self.layout_verticale.addWidget(self.giorni)
-        self.layout_verticale.addWidget(bottone)
         self.setLayout(self.layout_verticale)
         self.setWindowTitle('Giorni')
 

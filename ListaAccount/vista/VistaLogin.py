@@ -2,20 +2,17 @@ from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QImage, QPalette, QBrush, QFont
 from PyQt5.QtWidgets import QWidget, QVBoxLayout, QLabel, QLineEdit, QPushButton, \
     QHBoxLayout, QSizePolicy, QSpacerItem, QMessageBox
-
 from Home.vista.VistaHomeProprietrario import vista_home_proprietario
 from ListaAccount.controller.controllerlistaaccount import ControllerListaAccount
 from Home.vista.VistaHome import VistaHome
-
 from ListaAccount.vista.VistaCreaAccount import VistaCreaAccount
 from Sessione.model.sessione import Sessione
 
+
 # vista login
-
-
 class VistaLogin(QWidget):
 
-    def __init__(self,  parent=None):
+    def __init__(self, parent=None):
         super(VistaLogin, self).__init__(parent)
 
         # Attributi
@@ -46,14 +43,16 @@ class VistaLogin(QWidget):
         # Accedi
         accedi = QPushButton("ACCEDI")
         accedi.setFixedSize(150, 70)
-        accedi.setFont(QFont('Times New Roman', 12))
+        accedi.setFont(QFont('Times New Roman', 14, 100, True))
+        accedi.setStyleSheet('QPushButton {background-color: orange; color: black;}')
         self.layout_orizzontale2.addWidget(accedi)
         accedi.clicked.connect(self.call_login)
 
         # Crea Account
         crea_account = QPushButton("CREA \n ACCOUNT")
         crea_account.setFixedSize(150, 70)
-        crea_account.setFont(QFont('Times New Roman', 12))
+        crea_account.setFont(QFont('Times New Roman', 14, 100, True))
+        crea_account.setStyleSheet('QPushButton {background-color: orange; color: black;}')
         self.layout_orizzontale2.addWidget(crea_account)
         crea_account.clicked.connect(self.call_crea_account)
         self.layout_verticale2.addLayout(self.layout_orizzontale2)
@@ -120,6 +119,6 @@ class VistaLogin(QWidget):
         titolo.setAlignment(Qt.AlignCenter)
         titolo.setFont(QFont('Times New Roman', 40))
         titolo.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Maximum)
-        self.layout_verticale1.addSpacerItem(QSpacerItem(0, 50, QSizePolicy.Fixed, QSizePolicy.Fixed))
+        self.layout_verticale1.addSpacerItem(QSpacerItem(0, 10, QSizePolicy.Fixed, QSizePolicy.Fixed))
         self.layout_verticale1.addWidget(titolo)
-        self.layout_verticale1.addSpacerItem(QSpacerItem(0, 80, QSizePolicy.Fixed, QSizePolicy.Fixed))
+        self.layout_verticale1.addSpacerItem(QSpacerItem(0, 120, QSizePolicy.Fixed, QSizePolicy.Fixed))

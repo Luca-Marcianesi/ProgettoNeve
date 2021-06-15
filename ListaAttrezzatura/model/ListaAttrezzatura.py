@@ -52,14 +52,14 @@ class ListaAttrezzatura:
         lista_filtrata = []
         for attrezzatura in self.lista_attrezzatura:
             if attrezzatura.get_stato():
-                if self.filtra_dimenisoni(attrezzatura.get_dimensioni(), Sessione.get_numero_scarpe(),
+                if self.filtra_dimensioni(attrezzatura.get_dimensioni(), Sessione.get_numero_scarpe(),
                                           Sessione.get_altezza()):
                     if Sessione.controlla_prenotazione_effettuata(attrezzatura.get_codice()):
                         lista_filtrata.append(attrezzatura)
         return lista_filtrata
 
     # Metodo che confronta le dimensioni di ogni attrezzo con le caratteristiche del cliente
-    def filtra_dimenisoni(self, dim_attrezzo, numero_scarpe_persona, altezza_persona):
+    def filtra_dimensioni(self, dim_attrezzo, numero_scarpe_persona, altezza_persona):
         if int(dim_attrezzo) == int(numero_scarpe_persona) or int(dim_attrezzo) == int(altezza_persona):
             return True
         return False
