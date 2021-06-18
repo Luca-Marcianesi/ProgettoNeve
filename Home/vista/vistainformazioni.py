@@ -17,8 +17,9 @@ class VistaInformazioni(QWidget):
 
         # Layout usati per visualizzare e allineare l'intera vista
         self.layout_verticale = QVBoxLayout()
-        self.layout_orizzontale = QHBoxLayout()
         self.layout_orizzontale1 = QHBoxLayout()
+        self.layout_orizzontale2 = QHBoxLayout()
+        self.layout_orizzontale3 = QHBoxLayout()
 
         # Definizione degli url da inserire nella label
         self.url = "http://www.sarnanoneve.it"
@@ -28,23 +29,20 @@ class VistaInformazioni(QWidget):
         self.show_background("INFORMAZIONI")
 
         # Spaziature
-        self.layout_orizzontale.addSpacerItem(QSpacerItem(790, 0))
+        self.layout_orizzontale1.addSpacerItem(QSpacerItem(790, 0))
         self.layout_verticale.addSpacerItem(QSpacerItem(0, 150))
 
         # Label contenente le informazioni principali
         self.label()
         self.pulsante_web()
-        self.layout_orizzontale1.addSpacerItem(QSpacerItem(542, 0))
+        self.layout_orizzontale2.addSpacerItem(QSpacerItem(542, 0))
         self.label1()
         self.pulsante_web1()
 
-        # Spaziature orizzontali
-        self.layout_orizzontale.addSpacerItem(QSpacerItem(500, 0))
-        self.layout_orizzontale1.addSpacerItem(QSpacerItem(500, 0))
-
         # Configurazione finale del layout totale
-        self.layout_verticale.addLayout(self.layout_orizzontale)
         self.layout_verticale.addLayout(self.layout_orizzontale1)
+        self.layout_verticale.addLayout(self.layout_orizzontale2)
+        self.layout_verticale.addLayout(self.layout_orizzontale3)
         self.layout_verticale.addSpacerItem(QSpacerItem(0, 600))
         self.layout_verticale.addWidget(self.pulsante_indietro())
         self.layout_verticale.addSpacerItem(QSpacerItem(0, 50))
@@ -64,24 +62,28 @@ class VistaInformazioni(QWidget):
         # Settaggio e allineamento del titolo della vista
         titolo = QLabel(titolo)
         titolo.setAlignment(Qt.AlignCenter)
-        titolo.setFont(QFont('Times New Roman', 40))
+        titolo.setFont(QFont('Times New Roman', 60))
         titolo.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Maximum)
         titolo.setAlignment(Qt.AlignCenter)
         self.layout_verticale.addWidget(titolo)
 
     # Descrizione Informazioni del sito sarnano neve
     def label(self):
-        label = QLabel("Link utili!\n"
-                       "Link al sito Sarnano neve:\n")
-        label.setFont(QFont('Times New Roman', 25))
-        self.layout_orizzontale.addWidget(label)
+        label = QLabel("Link utili:")
+        label2 = QLabel("Link al sito Sarnano neve:")
+        label.setFont(QFont('Times New Roman', 35))
+        label2.setFont(QFont('Times New Roman', 25))
+        self.layout_orizzontale1.addWidget(label)
+        self.layout_orizzontale2.addSpacerItem(QSpacerItem(300, 200))
+        self.layout_orizzontale2.addWidget(label2)
 
     # Descrizione Informazioni del soccorso piste
     def label1(self):
-        label = QLabel("Link \n"
-                       "soccorso piste:")
+        label = QLabel("Link soccorso piste:")
         label.setFont(QFont('Times New Roman', 25))
-        self.layout_orizzontale1.addWidget(label)
+        self.layout_orizzontale3.addSpacerItem(QSpacerItem(300, 50))
+        self.layout_orizzontale3.addWidget(label)
+
 
     # Configurazione e allineamento del pulsante indietro
     def pulsante_indietro(self):
@@ -95,20 +97,21 @@ class VistaInformazioni(QWidget):
     # Configurazione e allineamento del primo pulsante Link
     def pulsante_web(self):
         pulsante_web = QPushButton("http://www.sarnanoneve.it")
-        pulsante_web.setFont(QFont('Times New Roman', 18))
+        pulsante_web.setFont(QFont('Times New Roman', 20))
         pulsante_web.setStyleSheet('QPushButton{background-color: transparent; color: Blue}')
-        pulsante_web.setFixedSize(400, 200)
         pulsante_web.clicked.connect(partial(webbrowser.open, self.url))
-        self.layout_orizzontale.addWidget(pulsante_web)
+        self.layout_orizzontale2.addSpacerItem(QSpacerItem(150, 0))
+        self.layout_orizzontale2.addWidget(pulsante_web)
+        self.layout_orizzontale2.addSpacerItem(QSpacerItem(50, 0))
 
     # Configurazione e allineamento del secondo pulsante link
     def pulsante_web1(self):
         pulsante_web = QPushButton("Link soccorso piste")
-        pulsante_web.setFont(QFont('Times New Roman', 18))
+        pulsante_web.setFont(QFont('Times New Roman', 20))
         pulsante_web.setStyleSheet('QPushButton{background-color: transparent; color: Blue}')
-        pulsante_web.setFixedSize(400, 200)
         pulsante_web.clicked.connect(partial(webbrowser.open, self.url1))
-        self.layout_orizzontale1.addWidget(pulsante_web)
+        self.layout_orizzontale3.addWidget(pulsante_web)
+        self.layout_orizzontale3.addSpacerItem(QSpacerItem(500, 0))
 
     # Collegamento del pulsante indietro per tornare alla schermata precedente
     def indietro(self):
