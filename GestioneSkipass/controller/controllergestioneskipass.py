@@ -13,7 +13,8 @@ class ControllerGestioneSkipass:
     # Metodo che chiama la funzione prenota_skipass del model
     def prenota_skipass(self, skipass_selezionato):
         if Sessione.controlla_prenotazione_effettuata(self.model.codice_skipass):
-            Sessione.aggiungi_prenotazione(self.model.prenota(skipass_selezionato))
+            prenotazione = self.model.prenota(skipass_selezionato)
+            Sessione.aggiungi_prenotazione(prenotazione)
 
     # Metodo che chiama la funzione get_lista_skipass del model
     def get_lista_skipass(self):

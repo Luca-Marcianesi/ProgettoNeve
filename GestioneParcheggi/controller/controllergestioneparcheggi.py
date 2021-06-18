@@ -17,8 +17,6 @@ class ControllerGestioneParcheggi:
             if esito is not None:
                 Sessione.aggiungi_prenotazione(esito)
                 risultato = "Prenotazione effettuata"
-                self.salva_dati()
-                Sessione.salva_dati()
                 return risultato
             return "Posti esauriti"
         return "Hai già una prenotazione"
