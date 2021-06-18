@@ -32,7 +32,7 @@ class VistaAccountLoggato(QWidget):
         self.show_background("INFORMAZIONI ACCOUNT")
 
         # Spaziatura
-        self.layout_verticale3.addSpacerItem(QSpacerItem(500, 150, QSizePolicy.Fixed, QSizePolicy.Fixed))
+        self.layout_verticale3.addSpacerItem(QSpacerItem(0, 60))
 
         # Chiamata alla funzione aggiorna
         self.aggiorna()
@@ -41,17 +41,17 @@ class VistaAccountLoggato(QWidget):
         self.layout_verticale3.addWidget(self.label)
 
         # Spaziatura
-        self.layout_verticale3.addSpacerItem(QSpacerItem(500, 150, QSizePolicy.Fixed, QSizePolicy.Fixed))
+        self.layout_verticale3.addSpacerItem(QSpacerItem(0, 500))
         self.layout_orizzontale.addLayout(self.layout_verticale3)
-        self.layout_orizzontale.addSpacerItem(QSpacerItem(700, 0, QSizePolicy.Fixed, QSizePolicy.Fixed))
+        self.layout_orizzontale.addSpacerItem(QSpacerItem(700, 0))
 
         # Pulsanti cambia credenziali, prenotazioni e indietro + allineamento
         self.show_pulsantiera()
 
         # Spaziatura
-        self.layout_orizzontale.addSpacerItem(QSpacerItem(150, 0, QSizePolicy.Fixed, QSizePolicy.Fixed))
+        self.layout_orizzontale.addSpacerItem(QSpacerItem(150, 0))
         self.layout_verticale1.addLayout(self.layout_orizzontale)
-        self.layout_verticale1.addSpacerItem(QSpacerItem(0, 200, QSizePolicy.Expanding, QSizePolicy.Expanding))
+        self.layout_verticale1.addSpacerItem(QSpacerItem(0, 200))
 
         # Settaggio layout
         self.setLayout(self.layout_verticale1)
@@ -103,7 +103,7 @@ class VistaAccountLoggato(QWidget):
         titolo.setAlignment(Qt.AlignCenter)
         titolo.setFont(QFont('Times New Roman', 60, 100))
         titolo.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Maximum)
-        titolo.setStyleSheet('QLabel {color: orange}')
+        titolo.setStyleSheet('QLabel {color: black}')
         self.layout_verticale1.addSpacerItem(QSpacerItem(0, 50, QSizePolicy.Fixed, QSizePolicy.Fixed))
         self.layout_verticale1.addWidget(titolo)
         self.layout_verticale1.addSpacerItem(QSpacerItem(0, 50, QSizePolicy.Fixed, QSizePolicy.Fixed))
@@ -123,6 +123,6 @@ class VistaAccountLoggato(QWidget):
         bottone = QPushButton(tipo)
         bottone.setFixedSize(300, 100)
         bottone.setFont(QFont('Times New Roman', 20, 100, True))
-        bottone.setStyleSheet('QPushButton {background-color: lightBlue; color: black;}')
+        bottone.setStyleSheet('QPushButton {background-color: orange; color: black;}')
         layout.addWidget(bottone)
         return bottone

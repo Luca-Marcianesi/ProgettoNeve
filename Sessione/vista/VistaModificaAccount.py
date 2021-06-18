@@ -131,7 +131,7 @@ class VistaModificaAccount(QWidget):
         bottone = QPushButton(tipo)
         bottone.setFixedSize(300, 100)
         bottone.setFont(QFont('Times New Roman', 20, 100, True))
-        bottone.setStyleSheet('QPushButton {background-color: lightBlue; color: black;}')
+        bottone.setStyleSheet('QPushButton {background-color: orange; color: black;}')
         layout.addWidget(bottone)
         return bottone
 

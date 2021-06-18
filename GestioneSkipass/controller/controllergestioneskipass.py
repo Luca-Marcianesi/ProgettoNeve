@@ -1,10 +1,8 @@
 from GestioneSkipass.model.gestioneskipass import GestioneSkipass
-
-
-# Controller relativo alla classe GestioneSkipass
 from Sessione.model.sessione import Sessione
 
 
+# Controller relativo alla classe GestioneSkipass
 class ControllerGestioneSkipass:
     def __init__(self):
         # Prende come model la classe gestione skipass
@@ -19,7 +17,7 @@ class ControllerGestioneSkipass:
                 return True
             return False
 
-    # Metodo che chiama la funzione get_lista_skipass del model
+    # Metodo che chiama la funzione visualizza_lista del model
     def get_lista_skipass(self):
         return self.model.visualizza_lista()
 
