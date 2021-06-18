@@ -6,7 +6,6 @@
                 "codice_oggetto" : 1,
                 "tipo": "Mattiniero",
                 "descrizione": "Permette l'accesso agli impianti \ndalle ore 8:00 alle ore 12:00 dello stesso giorno",
-
                 "inizio_validita": "08:00:00",
                 "durata(hours)": 4
                 },

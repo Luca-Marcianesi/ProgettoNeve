@@ -24,10 +24,16 @@ class GestioneSkipass:
         if skipass_selezionato.tipo != "Stagionale" and skipass_selezionato.tipo != "Mensile" and \
                 skipass_selezionato.tipo != "Settimanale":
 
-            scadenza = datetime(date.today().year, date.today().month, date.today().day,
-                                time.fromisoformat(skipass_selezionato.inizio_validita).hour,
-                                time.fromisoformat(skipass_selezionato.inizio_validita).minute,
-                                time.fromisoformat(skipass_selezionato.get_inizio_validita()).second)
+            scadenza = datetime(date.today().year,  # anno
+                                date.today().month,  # mese
+                                date.today().day,  # giorno
+                                time.fromisoformat(skipass_selezionato.inizio_validita).hour,  # ora
+                                time.fromisoformat(skipass_selezionato.inizio_validita).minute,  # minuti
+                                time.fromisoformat(skipass_selezionato.get_inizio_validita()).second)  # secondi
+
+            if scadenza.hour < datetime.today().hour:
+                return False
+
             scadenza = scadenza + timedelta(hours=int(skipass_selezionato.get_durata()))
 
         elif skipass_selezionato.tipo != "Stagionale":
