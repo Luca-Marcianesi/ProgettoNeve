@@ -143,14 +143,14 @@ class VistaRichiestaGiorni(QWidget):
 
         # Configurazione della SpinBox
         layout_spinbox = QHBoxLayout()
-        giorni = QSpinBox(self)
-        giorni.setFont(QFont('Times New Roman', 20))
-        giorni.setAlignment(Qt.AlignCenter)
-        giorni.setFixedSize(100, 50)
-        giorni.lineEdit().setReadOnly(True)
-        giorni.setRange(1, 5)
+        self.giorni = QSpinBox(self)
+        self.giorni.setFont(QFont('Times New Roman', 20))
+        self.giorni.setAlignment(Qt.AlignCenter)
+        self.giorni.setFixedSize(100, 50)
+        self.giorni.lineEdit().setReadOnly(True)
+        self.giorni.setRange(1, 5)
         layout_spinbox.addSpacerItem(QSpacerItem(50, 0))
-        layout_spinbox.addWidget(giorni)
+        layout_spinbox.addWidget(self.giorni)
         layout_spinbox.addSpacerItem(QSpacerItem(50, 0))
         self.layout_verticale.addLayout(layout_spinbox)
 

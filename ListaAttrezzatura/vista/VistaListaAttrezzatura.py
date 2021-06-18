@@ -21,8 +21,6 @@ class VistaListaAttrezzatura(QWidget):
         self.layout_orizzontale = QHBoxLayout()
         self.layout_verticale2 = QVBoxLayout()
 
-
-
         # Sfondo
         self.show_background("LISTA ATTREZZATURA")
 
@@ -81,7 +79,7 @@ class VistaListaAttrezzatura(QWidget):
 
     # Creazione, settaggio e stile pulsanti
     def show_pulsantiera(self):
-        #if not self.controller_lista_attrezzatura.get_lista_filtrata() == []:
+        # if not self.controller_lista_attrezzatura.get_lista_filtrata() == []:
         self.pulsante_apri = QPushButton("Apri")
         self.pulsante_apri.setFont(QFont('Times New Roman', 20, 100, True))
         self.pulsante_apri.setStyleSheet('QPushButton {background-color: orange; color: black;}')
@@ -97,7 +95,6 @@ class VistaListaAttrezzatura(QWidget):
         pulsante_indietro.clicked.connect(self.indietro)
         self.layout_verticale2.addWidget(pulsante_indietro)
         self.layout_verticale2.addSpacerItem(QSpacerItem(0, 50))
-
 
     # Metodo che gestisce la situazione in cui al click del pulsante "APRI", non venga selezionato niente
     # con gestione delle eccezioni
