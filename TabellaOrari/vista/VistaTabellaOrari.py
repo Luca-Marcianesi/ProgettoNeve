@@ -125,7 +125,6 @@ class VistaTabellaOrari(QWidget):
         try:
             riga = self.tableWidget.selectedIndexes()[0].row()
             colonna = self.tableWidget.selectedIndexes()[0].column()
-            item = self.tableWidget.item(riga, colonna)
             self.tableWidget.setItem(riga, colonna, QTableWidgetItem())
             self.controller_tabella_orari.rimuovi_da_giorno(colonna, riga)
             self.controller_tabella_orari.salva_dati()
@@ -138,7 +137,7 @@ class VistaTabellaOrari(QWidget):
                                  QMessageBox.Ok, QMessageBox.Ok)
 
     def aggiorna(self):
-        indice_giorni = len(self.controller_tabella_orari.get_lista_tabella_orari())
+        indice_giorni = len(self.controller_tabella_orari.get_tabella_orari())
         for colonna in range(indice_giorni):
             giorno = self.controller_tabella_orari.get_giorno_from_lista(colonna)
             indice_dipendenti = len(giorno.get_lista())
@@ -236,7 +235,7 @@ class vista_aggiungi(QWidget):
         flag = True
         try:
             selezionato = self.lista_dipendenti.selectedIndexes()[0].row()
-            lista = self.controller_gestione_dipendenti.get_lista_elenco_dipendenti()
+            lista = self.controller_gestione_dipendenti.get_elenco_dipendenti()
             dipendente = lista[selezionato]
             for impiegato in self.dipendenti_impiegati():
                 if impiegato.get_dipendente_str() == dipendente.get_dipendente_str():
@@ -244,7 +243,7 @@ class vista_aggiungi(QWidget):
                     QMessageBox.information(self, 'Attenzione!', 'Questo dipendente è già stato aggiunto',
                                             QMessageBox.Ok, QMessageBox.Ok)
             if flag:
-                self.aggiungi_lista(len(lista), self.colonna, dipendente)
+                self.agiungi_lista(len(lista), self.colonna, dipendente)
                 self.aggiorna()
                 self.close()
 
@@ -258,7 +257,7 @@ class vista_aggiungi(QWidget):
     # Ritorna la lista dei dipendenti
     def show_lista(self):
         vista_lista_model = QStandardItemModel(self.lista_dipendenti)
-        for dipendente in self.controller_gestione_dipendenti.get_lista_elenco_dipendenti():
+        for dipendente in self.controller_gestione_dipendenti.get_elenco_dipendenti():
             item = QStandardItem()
             nome = dipendente.get_dipendente_str()
             item.setText(nome)

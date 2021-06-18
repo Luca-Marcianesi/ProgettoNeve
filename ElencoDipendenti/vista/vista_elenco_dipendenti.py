@@ -100,7 +100,7 @@ class VistaElencoDipendenti(QWidget):
     def dipendente_selezionato(self):
         try:
             selezionato = self.lista_dipendenti.selectedIndexes()[0].row()
-            lista = self.controller_gestione_dipendenti.get_lista_elenco_dipendenti()
+            lista = self.controller_gestione_dipendenti.get_elenco_dipendenti()
             dipendente = lista[selezionato]
             self.vista_informazioni = VistaInformazioniDipendente(dipendente,
                                                                   self.controller_gestione_dipendenti.rimuovi,
@@ -117,7 +117,7 @@ class VistaElencoDipendenti(QWidget):
     # Resetta la lista dei dipendenti aggiungendo le eventuali modifiche
     def aggiorna(self):
         vista_lista_model = QStandardItemModel(self.lista_dipendenti)
-        if not bool(self.controller_gestione_dipendenti.get_lista_elenco_dipendenti()):
+        if not bool(self.controller_gestione_dipendenti.get_elenco_dipendenti()):
             self.layout_orizzontale.removeWidget(self.lista_dipendenti)
             self.lista_dipendenti.deleteLater()
             self.lista_dipendenti = None
@@ -132,7 +132,7 @@ class VistaElencoDipendenti(QWidget):
             self.layout_orizzontale.addSpacerItem(QSpacerItem(0, 50))
 
         else:
-            for dipendente in self.controller_gestione_dipendenti.get_lista_elenco_dipendenti():
+            for dipendente in self.controller_gestione_dipendenti.get_elenco_dipendenti():
                 item = QStandardItem()
                 nome = dipendente.get_dipendente_str()
                 item.setText(nome)

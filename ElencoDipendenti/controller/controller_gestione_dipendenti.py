@@ -21,12 +21,12 @@ class ControllerElencoDipendenti:
         return self.model.get_dipendente(nome, cognome)
 
     # Metodo che richiama il metodo get_lista_elenco_dipendenti della classe elenco dipendenti
-    def get_lista_elenco_dipendenti(self):
-        return self.model.get_lista_elenco_dipendenti()
+    def get_elenco_dipendenti(self):
+        return self.model.get_elenco_dipendenti()
 
     # Metodo che richiama il metodo get_lista_elenco_dipendenti_str della classe elenco dipendenti
-    def get_lista_elenco_dipendenti_str(self):
-        return self.model.get_lista_elenco_dipendenti_str()
+    def get_elenco_dipendenti_str(self):
+        return self.model.get_elenco_dipendenti_str()
 
     # Metodo che richiama il metodo salva_dati della classe elenco dipendenti
     def salva_dati(self):

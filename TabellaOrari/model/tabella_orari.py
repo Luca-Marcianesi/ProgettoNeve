@@ -24,7 +24,7 @@ class tabella_orari:
         self.get_giorno_from_lista(colonna).rimuovi_dipendente(riga)
 
     # Metodo che restituisce la lista dei giorni
-    def get_lista_tabella_orari(self):
+    def get_tabella_orari(self):
         return self.lista_giorni
 
     # Metodo che restituisce il giorno scelto dalla lista

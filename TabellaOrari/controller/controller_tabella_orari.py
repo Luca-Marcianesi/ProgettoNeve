@@ -16,8 +16,8 @@ class ControllerTabellaOrari:
     def rimuovi_da_giorno(self, colonna, riga):
         self.model.rimuovi_da_giorno(colonna, riga)
 
-    def get_lista_tabella_orari(self):
-        return self.model.get_lista_tabella_orari()
+    def get_tabella_orari(self):
+        return self.model.get_tabella_orari()
 
     def get_dipendenti_impiegati(self, colonna):
         return self.model.get_dipendenti_impiegati(colonna)
