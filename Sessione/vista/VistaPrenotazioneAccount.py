@@ -41,6 +41,7 @@ class VistaPrenotazioneAccount(QWidget):
         # Pulsante indietro allineato
         pulsante_indietro = QPushButton("INDIETRO")
         pulsante_indietro.setFont(QFont('Times New Roman', 30))
+        pulsante_indietro.setStyleSheet("background-color: orange")
         pulsante_indietro.setFixedSize(400, 150)
         pulsante_indietro.clicked.connect(self.indietro)
         self.layout_orizzontale2.addWidget(pulsante_indietro)
@@ -72,7 +73,7 @@ class VistaPrenotazioneAccount(QWidget):
         titolo = QLabel(stringa)
         titolo.setAlignment(Qt.AlignCenter)
         titolo.setFont(QFont('Times New Roman', 60))
-        titolo.setStyleSheet('color: orange')
+        titolo.setStyleSheet('color: black')
         titolo.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Maximum)
         self.layout_verticale.addSpacerItem(QSpacerItem(0, 50, QSizePolicy.Fixed, QSizePolicy.Fixed))
         self.layout_verticale.addWidget(titolo)
