@@ -17,7 +17,7 @@ class GestioneSkipass:
         # Codice identificativo degli skipass
         self.codice_skipass = 1
 
-    # Metodo prenota privato momentaneamente del controllo della stagione per poter effettuare il metodo
+    # Metodo prenota (privato momentaneamente del controllo della stagione per poter effettuare il metodo)
     def prenota(self, skipass_selezionato):
         # if date.today() > date.fromisoformat(self.inizio_stagione) and
         # date.today() < date.fromisoformat(self.fine_stagione) :
