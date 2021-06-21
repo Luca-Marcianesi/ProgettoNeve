@@ -122,6 +122,6 @@ class VistaAttrezzatura(QWidget):
             risultato = "Hai già prenotato questa attrezzatura!"
         QMessageBox.information(self, "Esito", risultato, QMessageBox.Ok, QMessageBox.Ok)
         self.aggiorna()
-        self.close()
         Sessione.salva_dati()
         self.callback()
+        self.close()
