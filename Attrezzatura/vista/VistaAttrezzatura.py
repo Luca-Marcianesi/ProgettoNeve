@@ -8,7 +8,7 @@ from Sessione.model.sessione import Sessione
 
 # VistaAttrezzatura eseguita in seguito della selezione nella prorpia lista
 class VistaAttrezzatura(QWidget):
-    def __init__(self, callback, attrezzatura, prenota, aggiorna):
+    def __init__(self, callback, attrezzatura, prenota_attrezzatura, aggiorna):
         super(VistaAttrezzatura, self).__init__()
 
         # Funzione utile per l'aggiornamento della vista precedente dopo la modifica
@@ -16,7 +16,7 @@ class VistaAttrezzatura(QWidget):
         # Funzione di richiamo della vista precedente
         self.callback = callback
         # Funzione che permette di prenotare l'attrezzatura visualizzata nell'elenco attrezzatura
-        self.prenota = prenota
+        self.prenota_attrezzatura = prenota_attrezzatura
         # Oggetto selezionato nella vista precedente
         self.attrezzatura = attrezzatura
 
@@ -117,7 +117,7 @@ class VistaAttrezzatura(QWidget):
 
     # Metodo per la prenotazione
     def prenotazione(self):
-        risultato = self.prenota(self.attrezzatura)
+        risultato = self.prenota_attrezzatura(self.attrezzatura)
         if risultato != "Prenotazione effettuata":
             risultato = "Hai già prenotato questa attrezzatura!"
         QMessageBox.information(self, "Esito", risultato, QMessageBox.Ok, QMessageBox.Ok)
