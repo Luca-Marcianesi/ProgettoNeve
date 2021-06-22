@@ -26,6 +26,7 @@ class ControllerListaAttrezzatura:
             prenotazione = self.model.prenota_attrezzatura(attrezzatura)
             Sessione.aggiungi_prenotazione(prenotazione)
             Sessione.salva_dati()
+            self.salva_dati()
             return "Prenotazione effettuata"
 
     def salva_dati(self):
