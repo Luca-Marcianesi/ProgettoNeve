@@ -11,6 +11,7 @@ class ControllerListaAttrezzatura:
     # Richiama i metodi della classe lista attrezzatura
     def aggiungi_attrezzatura(self, attrezzatura):
         self.model.aggiungi_attrezzatura(attrezzatura)
+        self.salva_dati()
 
     def rimuovi_attrezzatura(self, attrezzatura):
         self.model.rimuovi_attrezzatura(attrezzatura)
