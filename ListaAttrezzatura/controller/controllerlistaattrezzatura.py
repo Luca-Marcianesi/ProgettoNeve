@@ -14,6 +14,7 @@ class ControllerListaAttrezzatura:
 
     def rimuovi_attrezzatura(self, attrezzatura):
         self.model.rimuovi_attrezzatura(attrezzatura)
+        self.salva_dati()
 
     def get_lista_attrezzatura(self):
         return self.model.get_lista_attrezzatura()
