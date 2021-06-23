@@ -1,5 +1,5 @@
 from PyQt5.QtGui import QFont
-from PyQt5.QtWidgets import QSpacerItem, QSizePolicy, QPushButton, QLabel, QHBoxLayout, QVBoxLayout, QWidget
+from PyQt5.QtWidgets import QSpacerItem, QPushButton, QLabel, QHBoxLayout, QVBoxLayout, QWidget
 from Dipendenti.controller.controller_dipendente import ControllerDipendente
 from PyQt5.QtCore import Qt
 

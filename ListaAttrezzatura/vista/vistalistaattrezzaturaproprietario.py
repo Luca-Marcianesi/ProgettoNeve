@@ -136,7 +136,6 @@ class VistaListaAttrezzaturaProprietario(QWidget):
                 self.aggiorna)
             self.vista_attrezzatura.showFullScreen()
         except IndexError:
-            print(1)
             QMessageBox.information(self, 'Attenzione!', 'Non hai selezionato nessuna attrezzatura.', QMessageBox.Ok,
                                     QMessageBox.Ok)
         except:

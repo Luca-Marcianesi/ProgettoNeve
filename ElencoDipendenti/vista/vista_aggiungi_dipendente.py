@@ -80,7 +80,7 @@ class VistaAggiungiDipendente(QWidget):
         palette.setBrush(10, QBrush(img))
         self.setPalette(palette)
 
-    # Metodo che controlla che non venga inserito niente nel momento dell'aggiunta dipendente
+    # Metodo che controlla che le stringhe, nell'aggiunta dipendente, non siano vuote
     def controlla_informazioni1(self, nome, cognome, numero_di_telefono):
         if str(nome) != "" and str(cognome) != "" and int(numero_di_telefono) != "":
             return True
