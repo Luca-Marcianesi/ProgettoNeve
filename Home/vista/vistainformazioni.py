@@ -84,7 +84,6 @@ class VistaInformazioni(QWidget):
         self.layout_orizzontale3.addSpacerItem(QSpacerItem(300, 50))
         self.layout_orizzontale3.addWidget(label)
 
-
     # Configurazione e allineamento del pulsante indietro
     def pulsante_indietro(self):
         pulsante_indietro = QPushButton("INDIETRO")
