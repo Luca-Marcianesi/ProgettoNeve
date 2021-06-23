@@ -11,7 +11,6 @@ class ControllerListaAttrezzatura:
     # Richiama i metodi della classe lista attrezzatura
     def aggiungi_attrezzatura(self, attrezzatura):
         self.model.aggiungi_attrezzatura(attrezzatura)
-        self.salva_dati()
 
     def rimuovi_attrezzatura(self, attrezzatura):
         self.model.rimuovi_attrezzatura(attrezzatura)
@@ -27,7 +26,6 @@ class ControllerListaAttrezzatura:
         if Sessione.controlla_prenotazione_effettuata(attrezzatura.get_codice()):
             prenotazione = self.model.prenota_attrezzatura(attrezzatura)
             Sessione.aggiungi_prenotazione(prenotazione)
-            Sessione.salva_dati()
             self.salva_dati()
             return "Prenotazione effettuata"
 
