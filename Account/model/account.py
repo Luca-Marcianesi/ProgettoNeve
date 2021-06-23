@@ -44,8 +44,8 @@ class Account:
         self.lista_prenotazioni.append(prenotazione)
 
     # Metodo per rimuovere una prenotazione tramite il tipo
-    def rimuovi_prenotazione(self, tipo):
-        self.lista_prenotazioni.remove(tipo)
+    def rimuovi_prenotazione(self):
+        self.lista_prenotazioni.clear()
 
     # Metodo che restituisce la lista delle prenotazioni
     def get_lista_prenotazioni(self):

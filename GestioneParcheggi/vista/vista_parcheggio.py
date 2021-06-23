@@ -172,6 +172,7 @@ class VistaRichiestaGiorni(QWidget):
         val = self.giorni.value()
         risultato = self.controller_parcheggi.prenota_parcheggio(val)
         QMessageBox.information(self, "Esito", risultato, QMessageBox.Ok, QMessageBox.Ok)
+        Sessione.salva_dati()
         self.controller_parcheggi.salva_dati()
         self.aggiorna()
         self.close()
