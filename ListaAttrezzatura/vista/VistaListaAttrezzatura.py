@@ -55,7 +55,6 @@ class VistaListaAttrezzatura(QWidget):
     # Metodo che, collegato al pulsante "INDIETRO", permette di tornare alla vista precedente
     def indietro(self):
         self.callback()
-        self.controller_lista_attrezzatura.salva_dati()
         self.close()
 
     # Creazione, settaggio e stile dello sfondo
