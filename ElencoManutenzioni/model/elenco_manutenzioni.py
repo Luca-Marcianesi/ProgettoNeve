@@ -18,18 +18,6 @@ class ElencoManutenzioni:
     def aggiungi_manutenzione(self, manutenzione):
         self.elenco_manutenzioni.append(manutenzione)
 
-    # Metodo per eliminare una manutenzione
-    def elimina_manutenzione(self, numero):
-        self.elenco_manutenzioni.remove(numero)
-
-    # Metodo per aggiornare lo stato di una manutenzione tramite il codice
-    def aggiorna_stato(self, codice):
-        for manutenzione in self.elenco_manutenzioni:
-            if manutenzione.get_codice() == codice:
-                manutenzione.effettua_manutenzione()
-                return True
-        return False
-
     # Metodo per la restituzione dell'elenco delle manutenzioni
     def get_elenco_manutenzioni(self):
         return self.elenco_manutenzioni

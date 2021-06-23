@@ -243,7 +243,7 @@ class vista_aggiungi(QWidget):
                     QMessageBox.information(self, 'Attenzione!', 'Questo dipendente è già stato aggiunto',
                                             QMessageBox.Ok, QMessageBox.Ok)
             if flag:
-                self.agiungi_lista(len(lista), self.colonna, dipendente)
+                self.aggiungi_lista(len(lista), self.colonna, dipendente)
                 self.aggiorna()
                 self.close()
 
