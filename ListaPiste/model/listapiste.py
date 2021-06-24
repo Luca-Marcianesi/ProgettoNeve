@@ -15,10 +15,6 @@ class ListaPiste:
         self.lista_piste = []
         self.leggi_dati()
 
-    # Metodo che aggiunge una pista alla lista
-    def aggiungi_pista(self, pista):
-        self.lista_piste.append(pista)
-
     # Metodo che restituisce la lista delle piste
     def get_lista(self):
         return self.lista_piste
@@ -42,5 +38,5 @@ class ListaPiste:
             with open("Data/ListaPiste/lista_piste.json") as file:
                 lista_piste_inizio = json.load(file)
             for pista_da_caricare in lista_piste_inizio:
-                self.aggiungi_pista(
+                self.lista_piste.append(
                     Pista(pista_da_caricare["nome"], pista_da_caricare["colore"], pista_da_caricare["stato"]))
