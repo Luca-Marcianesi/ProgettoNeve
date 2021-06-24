@@ -22,24 +22,9 @@ class ElencoDipendenti:
     def rimuovi_dipendente(self, dipendente):
         self.elenco.remove(dipendente)
 
-    # Metodo che restituisce un dipendente se è presente nella lista
-    def get_dipendente(self, nome, cognome):
-        for dipendente in self.elenco:
-            if dipendente.nome == nome and dipendente.cognome == cognome:
-                return dipendente
-            else:
-                return "Dipendente non trovato"
-
     # Metodo che restituisce l'elenco dei dipendenti
     def get_elenco_dipendenti(self):
         return self.elenco
-
-    # Metodo che restituisce l'elenco con il nome dei dipendenti
-    def get_elenco_dipendenti_str(self):
-        elenco = ""
-        for dipendente in self.elenco:
-            elenco = elenco + dipendente.nome + "\n"
-        return elenco
 
     # Metodo per creare il pickle contenente i dipendenti presi dall'elenco
     def salva_dati(self):
