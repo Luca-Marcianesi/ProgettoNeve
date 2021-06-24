@@ -40,11 +40,6 @@ class Sessione:
     def aggiungi_prenotazione(cls, prenotazione):
         cls.account_loggato.aggiungi_prenotazione(prenotazione)
 
-    # Metodo che restituisce la lista delle prenotazioni con descrizione
-    @classmethod
-    def get_lista_prenotazioni_str(cls):
-        return cls.account_loggato.get_lista_prenotazioni_str()
-
     # Metodo che restituisce la lista delle prenotazioni
     @classmethod
     def get_lista_prenotazioni(cls):

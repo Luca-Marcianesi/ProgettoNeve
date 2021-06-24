@@ -55,13 +55,6 @@ class Account:
     def get_lista_prenotazioni(self):
         return self.lista_prenotazioni
 
-    # Metodo che restituisce la descrizione di ogni oggetto prenotato
-    def get_lista_prenotazioni_str(self):
-        lista = ""
-        for oggetto in self.lista_prenotazioni:
-            lista = lista + "" + oggetto.get_descrizione() + "\n"
-        return lista
-
     # Metodo che restituisce il nome
     def get_nome(self):
         return self.nome
