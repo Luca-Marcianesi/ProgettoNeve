@@ -49,4 +49,5 @@ class MyTest(unittest.TestCase):
         # Cliente
         self.assertEqual(self.attrezzatura.prenota_attrezzatura(racchette), "Prenotazione effettuata")
 
-
+if __name__ == "__main__":
+    unittest.main()

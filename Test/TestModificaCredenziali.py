@@ -33,5 +33,5 @@ class MyTest(unittest.TestCase):
         self.assertTrue(self.lista.login("dieg10", "pass"))
 
 
-if __name__ == 'main':
+if __name__ == "__main__":
     unittest.main()

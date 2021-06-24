@@ -1,10 +1,8 @@
 from functools import partial
-
 from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QImage, QPalette, QBrush, QFont, QStandardItem, QStandardItemModel
 from PyQt5.QtWidgets import QWidget, QVBoxLayout, QDesktopWidget, QLabel, QSpacerItem, QTableWidget, QTableWidgetItem, \
     QHBoxLayout, QSizePolicy, QPushButton, QListView, QMessageBox, QAbstractItemView
-
 from ElencoDipendenti.controller.controller_gestione_dipendenti import ControllerElencoDipendenti
 from TabellaOrari.controller.controller_tabella_orari import ControllerTabellaOrari
 
@@ -13,46 +11,58 @@ class VistaTabellaOrari(QWidget):
     def __init__(self, callback):
         super(VistaTabellaOrari, self).__init__()
 
-        # Attributi
+        # Controller relativo alla vista
         self.controller_tabella_orari = ControllerTabellaOrari()
+        # Funzione che richiama la vista precedente
         self.callback = callback
+        # Layout utilizzati per il settaggio e l'allindeamento dei widget
         self.layout_verticale = QVBoxLayout()
         self.layout_orizzontale = QHBoxLayout()
+
+        # Widget della relativa lista
         self.tableWidget = QTableWidget()
 
-        # Titolo e sfondo
+        # Funzione standard che imposta il titolo e lo sfondo alla vista
         self.show_background("TABELLA ORARI")
 
-        # Configurazione della tabella
+        # Impostazione di 15 righe
         self.tableWidget.setRowCount(15)
+        # Impostazione di 7 colonne
         self.tableWidget.setColumnCount(7)
+        # Disattivazione dell'editabilità del testo
         self.tableWidget.setEditTriggers(QAbstractItemView.NoEditTriggers)
+        # Dimensione delle celle
         self.tableWidget.horizontalHeader().setDefaultSectionSize(200)
         self.tableWidget.verticalHeader().setDefaultSectionSize(40)
+        # Denominazione dell'header orizzontale
         self.tableWidget.setHorizontalHeaderLabels(['Lunedì', 'Martedì', 'Mercoledì', 'Giovedì',
                                                     'Venerdì', 'Sabato', 'Domenica'])
+        # Settaggio dello stile e della dimensione dell'header orizzontale
         self.tableWidget.horizontalHeader().setFont(QFont('Times New Roman', 15, 80))
         self.tableWidget.horizontalHeader().setStyleSheet(" ::section {""background-color: orange; color: blue;}")
+        # Nasconde l'header verticale
         self.tableWidget.verticalHeader().hide()
+        # Imposta il colore dello sfondo della tabella
         self.tableWidget.setStyleSheet("background-color: lightBlue")
+
+        # Funzione che si occupa del riempimento della tabella con i dipendenti già inseriti
         self.aggiorna()
 
-        # Allineamento e spaziatura layout orizzontale
+        # Settaggio dei widget nell layout orizzontale
         self.layout_orizzontale.addSpacerItem(QSpacerItem(50, 0))
         self.layout_orizzontale.addWidget(self.tableWidget)
         self.layout_orizzontale.addSpacerItem(QSpacerItem(100, 0))
         self.layout_orizzontale.addLayout(self.show_pulsantiera())
         self.layout_orizzontale.addSpacerItem(QSpacerItem(85, 0))
+
+        # Configurazione del layout totale
         self.layout_verticale.addLayout(self.layout_orizzontale)
-
-        # Spaziatura layout verticale
         self.layout_verticale.addSpacerItem(QSpacerItem(0, 130))
-
         self.setLayout(self.layout_verticale)
 
-    # Impostazione dello sfondo
+    # Funzione standardizzata per l'impostazione del titolo e di uno sfondo alla finestra della vista
     def show_background(self, stringa):
-        # Sfondo
+        # Impostazione dello sfondo
         self.setFixedSize(QDesktopWidget().width(), QDesktopWidget().height())
         immagine = QImage("Data/Immagini/VistaTabella.jpg")
         immagine_scalata = immagine.scaled(self.width(), self.height())
@@ -60,7 +70,7 @@ class VistaTabellaOrari(QWidget):
         palette.setBrush(10, QBrush(immagine_scalata))
         self.setPalette(palette)
 
-        # Titolo
+        # Impostazione del titolo
         titolo = QLabel(stringa)
         titolo.setStyleSheet("color: orange")
         titolo.setAlignment(Qt.AlignCenter)
@@ -105,15 +115,20 @@ class VistaTabellaOrari(QWidget):
         self.callback()
         self.close()
 
+    # Metodo che si occupa della gestione dell'inserimento di un dipendente nella casella selezionata
     def aggiungi_dipendente(self):
         try:
+            # Casella selezionata
             riga = self.tableWidget.selectedIndexes()[0].row()
             colonna = self.tableWidget.selectedIndexes()[0].column()
+
+            # Creazione e esecuzione della cista che si occupa della gestione della lista dei dipendenti
             self.lista_dipendenti = vista_aggiungi(self.tableWidget, riga, colonna,
-                                                   partial(self.controller_tabella_orari.get_dipendenti_impiegati,
-                                                           colonna),
+                                                   partial(self.controller_tabella_orari.get_dipendenti_impiegati, colonna),
                                                    self.controller_tabella_orari.aggiungi_a_giorno, self.aggiorna)
             self.lista_dipendenti.show()
+
+        # Gestione delle eccezioni
         except IndexError:
             QMessageBox.information(self, 'Attenzione!', 'Non hai selezionato nessuna casella.',
                                     QMessageBox.Ok, QMessageBox.Ok)
@@ -121,14 +136,20 @@ class VistaTabellaOrari(QWidget):
             QMessageBox.critical(self, 'Errore!', 'Qualcosa è andato storto, riprova più tardi.',
                                  QMessageBox.Ok, QMessageBox.Ok)
 
+    # Metodo che si occupa della gestione della rimozione di un dipendente nella casella selezionata
     def rimuovi_dipendente(self):
         try:
+            # Casella selezionata
             riga = self.tableWidget.selectedIndexes()[0].row()
             colonna = self.tableWidget.selectedIndexes()[0].column()
+            # Elemento vuoto nella tabella
             self.tableWidget.setItem(riga, colonna, QTableWidgetItem())
+            # Rimozione del dipendente e aggiornamento della tabella
             self.controller_tabella_orari.rimuovi_da_giorno(colonna, riga)
             self.controller_tabella_orari.salva_dati()
             self.aggiorna()
+
+        # Gestione delle eccezioni
         except IndexError:
             QMessageBox.information(self, 'Attenzione!', 'Non hai selezionato nessun dipendente da eliminare.',
                                     QMessageBox.Ok, QMessageBox.Ok)
@@ -136,12 +157,16 @@ class VistaTabellaOrari(QWidget):
             QMessageBox.critical(self, 'Errore!', 'Qualcosa è andato storto, riprova più tardi.',
                                  QMessageBox.Ok, QMessageBox.Ok)
 
+    # Metodo cche si occupa del riempimento della tabella con i dipendenti già inseriti
     def aggiorna(self):
+        # Loop che scorre tra i giorni della settimana
         indice_giorni = len(self.controller_tabella_orari.get_tabella_orari())
         for colonna in range(indice_giorni):
             giorno = self.controller_tabella_orari.get_giorno_from_lista(colonna)
             indice_dipendenti = len(giorno.get_lista())
+            # Loop che scorre tra le colonne in quel relativo giorno
             for riga in range(15):
+                # Ordinamento lineare dei dipendenti nella colonna
                 if riga < indice_dipendenti:
                     dipendente = giorno.get_dipendente(riga)
                     item = QTableWidgetItem()
@@ -153,35 +178,43 @@ class VistaTabellaOrari(QWidget):
                     self.tableWidget.setItem(riga, colonna, QTableWidgetItem())
 
 
+# Vista che si occupa dell'inserimento del dipendente nel giorno precedentemente indicato
 class vista_aggiungi(QWidget):
 
     def __init__(self, tabella, riga, colonna, dipendenti_impiegati, aggiungi_lista, aggiorna):
         super(vista_aggiungi, self).__init__()
-        self.setFixedSize(1000, 600)
 
-        # Oggetti passati
-        self.tabella = tabella
-        self.riga = riga
-        self.colonna = colonna
-        self.aggiungi_lista = aggiungi_lista
-        self.aggiorna = aggiorna
-        self.dipendenti_impiegati = dipendenti_impiegati
-
-        # Controller
+        # Controller relativo all'attuale vista
         self.controller_gestione_dipendenti = ControllerElencoDipendenti()
 
-        # Layout
+        # Tabella orari della vista precedente
+        self.tabella = tabella
+        # Posizione della cella selezionata
+        self.riga = riga
+        self.colonna = colonna
+        # Funzione per l'aggiunta del dipendente alla lista
+        self.aggiungi_lista = aggiungi_lista
+        # Funzione aggiorna della vista precedente
+        self.aggiorna = aggiorna
+        # Lista dei dipendenti già impiegati
+        self.dipendenti_impiegati = dipendenti_impiegati
+
+        # Dimensione fissa della finestra
+        self.setFixedSize(1000, 600)
+
+        # Layout utilizzati per l'allineamento dei widget
         self.layout_verticale1 = QVBoxLayout()
         self.layout_orizzontale = QHBoxLayout()
 
-        # Titolo e sfondo
+        # Funzione standard utile per l'impostazione del titolo e dello sfondo nella finestra
         self.show_background("Elenco Dipendenti")
 
-        # Lista Dipendenti
+        # Widget per la lista dei dipendenti
         self.lista_dipendenti = QListView()
 
         # Spaziatura e settaggio del layout orizzontale
         self.layout_orizzontale.addSpacerItem(QSpacerItem(100, 0))
+        # Funzione che riempie il widget della lista
         self.show_lista()
         self.layout_orizzontale.addSpacerItem(QSpacerItem(50, 0))
         self.show_pulsantiera()
