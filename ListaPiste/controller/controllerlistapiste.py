@@ -5,9 +5,6 @@ class ControllerListaPiste:
     def __init__(self):
         self.model = ListaPiste()
 
-    def aggiungi_pista(self, pista):
-        self.model.aggiungi_pista(pista)
-
     def get_lista(self):
         return self.model.get_lista()
 
