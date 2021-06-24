@@ -2,8 +2,6 @@ import json
 import os
 import pickle
 from datetime import date, timedelta
-
-from Sessione.model.sessione import Sessione
 from Prenotazione.model.prenotazione import Prenotazione
 from Parcheggio.model.parcheggio import Parcheggio
 
