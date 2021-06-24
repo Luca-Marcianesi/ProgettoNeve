@@ -11,9 +11,6 @@ class ControllerListaPiste:
     def leggi_dati(self):
         self.model.leggi_dati()
 
-    def visualizza_pista(self, numero):
-        self.model.visualizza_pista(numero)
-
     def get_lista(self):
         return self.model.get_lista()
 

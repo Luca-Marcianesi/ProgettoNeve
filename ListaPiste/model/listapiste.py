@@ -19,10 +19,6 @@ class ListaPiste:
     def aggiungi_pista(self, pista):
         self.lista_piste.append(pista)
 
-    # Metodo che restituisce la pista in base al numero
-    def visualizza_pista(self, numero):
-        return self.lista_piste[numero].get_pista_str()
-
     # Metodo che restituisce la lista delle piste
     def get_lista(self):
         return self.lista_piste
