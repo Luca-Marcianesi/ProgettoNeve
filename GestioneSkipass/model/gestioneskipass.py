@@ -31,10 +31,12 @@ class GestioneSkipass:
                                 time.fromisoformat(skipass_selezionato.inizio_validita).minute,  # minuti
                                 time.fromisoformat(skipass_selezionato.get_inizio_validita()).second)  # secondi
 
+            scadenza = scadenza + timedelta(hours=int(skipass_selezionato.get_durata()))
+
             if scadenza.hour < datetime.today().hour:
                 return False
 
-            scadenza = scadenza + timedelta(hours=int(skipass_selezionato.get_durata()))
+
 
         elif skipass_selezionato.tipo != "Stagionale":
             scadenza = date.today() + timedelta(days=int(skipass_selezionato.get_durata()))

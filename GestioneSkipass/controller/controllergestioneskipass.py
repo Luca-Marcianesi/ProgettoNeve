@@ -14,16 +14,21 @@ class ControllerGestioneSkipass:
             prenotazione = self.model.prenota(skipass_selezionato)
             if prenotazione != False:
                 Sessione.aggiungi_prenotazione(prenotazione)
-                return True
-            return False
+                return 'Skipass prenotato!'
+            return 'Skipass al momento non disponibile torna domani'
+        return 'Hai già prenotato uno skipass!'
 
     # Metodo che chiama la funzione visualizza_lista del model
     def get_lista_skipass(self):
         return self.model.visualizza_lista()
 
-    # Metodo che chiama la funzione controlla_skipass_acquistato del model
+    # Metodo che chiama la funzione controlla_skipass_acquistato del model  DA ELIMINARE
     def controlla_skipass_acquistato(self):
         return Sessione.controlla_prenotazione_effettuata(self.model.codice_skipass)
+
+    #  ^
+    #  |
+    # DA ELIMINARE
 
     # Metodo che chiama la funzione get_skipass_n del model
     def visualizza_lista(self, numero):
