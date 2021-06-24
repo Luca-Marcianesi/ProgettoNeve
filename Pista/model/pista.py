@@ -12,12 +12,6 @@ class Pista:
     def set_stato(self, stato):
         self.stato = stato
 
-    # Metodo che restituisce gli attributi della pista con descrizione
-    def get_pista_str(self):
-        return "Nome: {}".format(self.nome) + "\n" \
-                "Difficoltà: {}".format(self.difficolta) + "\n"\
-                "Stato: {}".format(self.stato) + "\n"
-
     # Metodo che restituisce il nome di una pista
     def get_nome_str(self):
         return self.nome

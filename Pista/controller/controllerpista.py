@@ -10,9 +10,6 @@ class ControllerPista:
     def modifica_stato_pista(self, stato):
         self.model.set_stato(stato)
 
-    def get_pista_str(self):
-        self.model.get_pista_str()
-
     def get_nome_str(self):
         return self.model.get_nome_str()
 
