@@ -15,27 +15,9 @@ class ListaPiste:
         self.lista_piste = []
         self.leggi_dati()
 
-    # Metodo che cerca la pista, se esistente, in base al nome
-    def cerca_pista(self, nome):
-        for pista in self.lista_piste:
-            if pista.nome == nome:
-                return pista
-        return "Pista non trovata"
-
-    # Metodo che cerca la pista in base
-    def cerca_pista_x_numero(self, posizione):
-        if posizione <= 0 or posizione > len(self.lista_piste):
-            return "Pista inesistente"
-        else:
-            return self.lista_piste[posizione-1]
-
     # Metodo che aggiunge una pista alla lista
     def aggiungi_pista(self, pista):
         self.lista_piste.append(pista)
-
-    # Metodo che permette di modificare una pista
-    def modifica_pista(self, posizione, stato):
-        self.cerca_pista_x_numero(posizione).set_stato(stato)
 
     # Metodo che restituisce la pista in base al numero
     def visualizza_pista(self, numero):
