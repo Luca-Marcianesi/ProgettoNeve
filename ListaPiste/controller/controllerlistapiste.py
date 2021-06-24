@@ -8,9 +8,6 @@ class ControllerListaPiste:
     def aggiungi_pista(self, pista):
         self.model.aggiungi_pista(pista)
 
-    def leggi_dati(self):
-        self.model.leggi_dati()
-
     def get_lista(self):
         return self.model.get_lista()
 
