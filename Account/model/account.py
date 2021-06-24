@@ -35,6 +35,10 @@ class Account:
     def set_altezza(self, altezza):
         self.altezza = altezza
 
+    # Metodo per settare la password
+    def set_password(self, password):
+        self.password = password
+
     # Metodo per settare i permessi del proprietario
     def set_permessi(self, permesso):
         self.permesso = permesso
@@ -77,10 +81,6 @@ class Account:
     # Metodo che restituisce il numero di scarpe
     def get_numero_scarpe(self):
         return self.numero_scarpe
-
-    # Metodo per settare la password
-    def set_password(self, password):
-        self.password = password
 
     # Metodo che restituisce i permessi del proprietario
     def get_permessi(self):
