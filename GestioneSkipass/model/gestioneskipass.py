@@ -51,7 +51,7 @@ class GestioneSkipass:
         self.lista_skipass.append(skipass)
 
     # Metodo che restituisce lo skipass in base al numero dato
-    def get_skipass_n(self, numero):
+    def get_skipass_per_numero(self, numero):
         return self.lista_skipass[numero]
 
     # Metodo che legge i dati dal pickle
@@ -73,10 +73,3 @@ class GestioneSkipass:
                                               abbonamento["tipo"],
                                               abbonamento["descrizione"],
                                               "", abbonamento["durata(day)"]))
-
-    # Metodo che restituisce la lista degli skipass
-    def visualizza_lista(self):
-        lista = "la stagione inizia: {}".format(self.inizio_stagione) + " e finisce: {} \n".format(self.fine_stagione)
-        for skipass in self.lista_skipass:
-            lista += skipass.print()
-        return lista
