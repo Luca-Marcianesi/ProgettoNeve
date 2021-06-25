@@ -23,14 +23,8 @@ class ControllerSessione:
     def cambia_numero_scarpe(self, numero_scarpe):
         self.model.cambia_numero_scarpe(numero_scarpe)
 
-    def get_lista_prenotazioni_str(self):
-        return self.model.get_lista_prenotazioni_str()
-
     def get_lista_prenotazioni(self):
         return self.model.get_lista_prenotazioni()
-
-    def cancella_prenotazione(self):
-        self.model.cancella_prenotazione()
 
     def aggiungi_prenotazione(self, prenotazione):
         self.model.aggiungi_prenotazione(prenotazione)

@@ -31,25 +31,25 @@ class VistaAcquistaSkipass(QWidget):
 
         # Settaggio layout e creazione dei vari pulsanti skipass
         self.layout_verticale2.addWidget(self.show_pulsante
-                                         ("Mattiniero", self.controller_gestione_skipass.visualizza_lista(0)))
+                                         ("Mattiniero", self.controller_gestione_skipass.get_skipass_per_numero(0)))
         self.layout_verticale2.addSpacerItem(QSpacerItem(0, 50))
-        self.layout_verticale2.addWidget(self.show_pulsante
-                                         ("Pomeridiano", self.controller_gestione_skipass.visualizza_lista(1)))
+        self.layout_verticale2.addWidget(self.crea_pulsante
+                                         ("Pomeridiano", self.controller_gestione_skipass.get_skipass_per_numero(1)))
         self.layout_verticale2.addSpacerItem(QSpacerItem(0, 50))
 
-        self.layout_verticale2.addWidget(self.show_pulsante
-                                         ("Giornaliero", self.controller_gestione_skipass.visualizza_lista(2)))
+        self.layout_verticale2.addWidget(self.crea_pulsante
+                                         ("Giornaliero", self.controller_gestione_skipass.get_skipass_per_numero(2)))
 
-        self.layout_verticale3.addWidget(self.show_pulsante
-                                         ("Settimanale", self.controller_gestione_skipass.visualizza_lista(3)))
+        self.layout_verticale3.addWidget(self.crea_pulsante
+                                         ("Settimanale", self.controller_gestione_skipass.get_skipass_per_numero(3)))
         self.layout_verticale3.addSpacerItem(QSpacerItem(0, 50))
 
-        self.layout_verticale3.addWidget(self.show_pulsante
-                                         ("Mensile", self.controller_gestione_skipass.visualizza_lista(4)))
+        self.layout_verticale3.addWidget(self.crea_pulsante
+                                         ("Mensile", self.controller_gestione_skipass.get_skipass_per_numero(4)))
         self.layout_verticale3.addSpacerItem(QSpacerItem(0, 50))
 
-        self.layout_verticale3.addWidget(self.show_pulsante
-                                         ("Stagionale", self.controller_gestione_skipass.visualizza_lista(5)))
+        self.layout_verticale3.addWidget(self.crea_pulsante
+                                         ("Stagionale", self.controller_gestione_skipass.get_skipass_per_numero(5)))
 
         # Allineamento e configurazione layout orizzontale
         self.layout_orizzontale1.addSpacerItem(QSpacerItem(40, 0))
@@ -102,7 +102,7 @@ class VistaAcquistaSkipass(QWidget):
         self.layout_verticale1.addSpacerItem(QSpacerItem(0, 150, QSizePolicy.Fixed, QSizePolicy.Fixed))
 
     # Metodo per mostrare il pulsante associato ad ogni skipass
-    def show_pulsante(self, titolo, skipass):
+    def crea_pulsante(self, titolo, skipass):
         pulsante_skipass = self.crea_bottone(titolo)
         pulsante_skipass.clicked.connect(partial(self.call_skipass, skipass))
         return pulsante_skipass

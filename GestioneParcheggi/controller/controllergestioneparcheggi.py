@@ -28,11 +28,3 @@ class ControllerGestioneParcheggi:
     # Metodo che chiama la funzione salva_dati del model
     def salva_dati(self):
         self.model.salva_dati()
-
-    # Metodo che chiama la funzione elimina_scadute_prenotazioni del model
-    def elimina_scadute_prenotazioni(self):
-        self.model.elimina_scadute_prenotazioni()
-
-    # Metodo che chiama la funzione aggiungi_parcheggio del model
-    def aggiungi_parcheggio(self, parcheggio):
-        self.model.aggiungi_parcheggio(parcheggio)

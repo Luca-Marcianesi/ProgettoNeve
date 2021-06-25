@@ -35,6 +35,10 @@ class Account:
     def set_altezza(self, altezza):
         self.altezza = altezza
 
+    # Metodo per settare la password
+    def set_password(self, password):
+        self.password = password
+
     # Metodo per settare i permessi del proprietario
     def set_permessi(self, permesso):
         self.permesso = permesso
@@ -50,13 +54,6 @@ class Account:
     # Metodo che restituisce la lista delle prenotazioni
     def get_lista_prenotazioni(self):
         return self.lista_prenotazioni
-
-    # Metodo che restituisce la descrizione di ogni oggetto prenotato
-    def get_lista_prenotazioni_str(self):
-        lista = ""
-        for oggetto in self.lista_prenotazioni:
-            lista = lista + "" + oggetto.get_descrizione() + "\n"
-        return lista
 
     # Metodo che restituisce il nome
     def get_nome(self):
@@ -77,10 +74,6 @@ class Account:
     # Metodo che restituisce il numero di scarpe
     def get_numero_scarpe(self):
         return self.numero_scarpe
-
-    # Metodo per settare la password
-    def set_password(self, password):
-        self.password = password
 
     # Metodo che restituisce i permessi del proprietario
     def get_permessi(self):
