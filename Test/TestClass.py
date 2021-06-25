@@ -1,5 +1,4 @@
 import unittest
-
 from Attrezzatura.model.attrezzatura import Attrezzatura
 from GestioneParcheggi.controller.controllergestioneparcheggi import ControllerGestioneParcheggi
 from GestioneSkipass.controller.controllergestioneskipass import ControllerGestioneSkipass
@@ -8,8 +7,8 @@ from ListaAttrezzatura.controller.controllerlistaattrezzatura import ControllerL
 from Sessione.model.sessione import Sessione
 
 
-class MyTest(unittest.TestCase):
-
+class TestClass(unittest.TestCase):
+    # Configurazione degli attributi utilizzati nella classe
     def setUp(self):
         self.attrezzatura = ControllerListaAttrezzatura()
         self.parcheggi = ControllerGestioneParcheggi()
@@ -18,22 +17,48 @@ class MyTest(unittest.TestCase):
         self.lista.crea_account("Diego", "Mignani", "dieg10", "password", "20", "180", "45")
         self.lista.login("dieg10", "password")
 
-    # Verifica credenziali
+    # Test del login Proprietario:
+    def test1(self):
+        self.assertTrue(self.lista.login("admin", "admin"))
+
+    # Test del login Cliente:
     def test2(self):
-        self.assertTrue(Sessione.get_nome() == "Diego")
-        self.assertTrue(Sessione.get_cognome() == "Mignani")
-        self.assertTrue(Sessione.get_altezza() == "180")
-        self.assertFalse(Sessione.get_eta() == "22")
+        # Password sbagliata
+        self.assertFalse(self.lista.login("dieg10", "pass"))
+        # Password giusta
+        self.assertTrue(self.lista.login("dieg10", "password"))
+
+    # Verifica credenziali
+    def test3(self):
+        self.assertEqual(Sessione.get_nome(), "Diego")
+        self.assertEqual(Sessione.get_cognome(), "Mignani")
+        self.assertEqual(Sessione.get_altezza(), "180")
+        self.assertEqual(Sessione.get_eta(), "20")
+        self.assertEqual(Sessione.get_numero_scarpe(), "45")
+
+    # Test modifica password
+    def test4(self):
+        Sessione.cambia_password("pass")
+        self.assertTrue(self.lista.login("dieg10", "pass"))
+
+    # Test modifica credenziali
+    def test5(self):
+        Sessione.cambia_eta("18")
+        Sessione.cambia_altezza("190")
+        Sessione.cambia_numero_scarpe("44")
+        self.assertEqual(Sessione.get_altezza(), "190")
+        self.assertEqual(Sessione.get_eta(), "18")
+        self.assertEqual(Sessione.get_numero_scarpe(), "44")
 
     # Test prenotazione parcheggio
-    def test3(self):
+    def test6(self):
         # Prima prenotazione
         self.assertEqual(self.parcheggi.prenota_parcheggio(2), "Prenotazione effettuata")
         # Doppia prenotazione
         self.assertEqual(self.parcheggi.prenota_parcheggio(2), "Hai già una prenotazione")
 
     # Test prenotazione skipass
-    def test4(self):
+    def test7(self):
         # Skipass settimanale
         settimanale = self.skipass.visualizza_lista(3)
         # Prima prenotazione
@@ -42,7 +67,7 @@ class MyTest(unittest.TestCase):
         self.assertFalse(self.skipass.prenota_skipass(settimanale))
 
     # Test aggiunta attrezzatura da parte del proprietario e prenotazione di quell'attrezzatura dal cliente
-    def test5(self):
+    def test8(self):
         # Proprietario
         racchette = Attrezzatura(5, "Racchette", 130)
         self.attrezzatura.aggiungi_attrezzatura(racchette)
