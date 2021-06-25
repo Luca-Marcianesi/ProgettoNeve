@@ -18,14 +18,6 @@ class ControllerGestioneSkipass:
             return 'Skipass al momento non disponibile torna domani'
         return 'Hai già prenotato uno skipass!'
 
-    # Metodo che chiama la funzione visualizza_lista del model
-    def get_lista_skipass(self):
-        return self.model.visualizza_lista()
-
     # Metodo che chiama la funzione get_skipass_n del model
-    def visualizza_lista(self, numero):
-        return self.model.get_skipass_n(numero)
-
-    # Metodo che chiama la funzione aggiungi_skipass del model
-    def aggiungi_skipass(self, skipass):
-        self.model.aggiungi_skipass(skipass)
+    def get_skipass_per_numero(self, numero):
+        return self.model.get_skipass_per_numero(numero)

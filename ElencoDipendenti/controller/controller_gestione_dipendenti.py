@@ -16,17 +16,9 @@ class ControllerElencoDipendenti:
     def rimuovi(self, dipendente):
         self.model.rimuovi_dipendente(dipendente)
 
-    # Metodo che richiama il metodo get_dipendente della classe elenco dipendenti
-    def get_dipendente(self, nome, cognome):
-        return self.model.get_dipendente(nome, cognome)
-
     # Metodo che richiama il metodo get_lista_elenco_dipendenti della classe elenco dipendenti
     def get_elenco_dipendenti(self):
         return self.model.get_elenco_dipendenti()
-
-    # Metodo che richiama il metodo get_lista_elenco_dipendenti_str della classe elenco dipendenti
-    def get_elenco_dipendenti_str(self):
-        return self.model.get_elenco_dipendenti_str()
 
     # Metodo che richiama il metodo salva_dati della classe elenco dipendenti
     def salva_dati(self):
