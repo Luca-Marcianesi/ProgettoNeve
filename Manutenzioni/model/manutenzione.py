@@ -26,6 +26,6 @@ class Manutenzione:
     # Metodo che restituisce di una manutenzione con la sua descrizione
     def get_manutenzione_str(self):
         return "Nome: {}\nCadenza: {} giorni\n" \
-               "Ultima manutenzione: {}\nProssima Manutenzione: {}\n".format(self.nome, self.cadenza,
+               "Ultima manutenzione: {}\nProssima Manutenzione: {}".format(self.nome, self.cadenza,
                                                                              self.ultima_manutenzione,
                                                                              self.prossima_scadenza)

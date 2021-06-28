@@ -21,3 +21,4 @@ class ControllerGestioneSkipass:
     # Metodo che chiama la funzione get_skipass_n del model
     def get_skipass_per_numero(self, numero):
         return self.model.get_skipass_per_numero(numero)
+
