@@ -60,7 +60,7 @@ class TestClass(unittest.TestCase):
     # Test prenotazione skipass
     def test7(self):
         # Skipass settimanale
-        settimanale = self.skipass.visualizza_lista(3)
+        settimanale = self.skipass.get_skipass_per_numero(3)
         # Prima prenotazione
         self.assertTrue(self.skipass.prenota_skipass(settimanale))
         # Doppia prenotazione

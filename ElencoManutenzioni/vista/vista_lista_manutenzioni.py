@@ -75,7 +75,6 @@ class VistaListaManutenzioni(QWidget):
     # Metodo che permette, cliccando il bottone "indietro", di tornare alla vista precedente
     def indietro(self):
         self.callback()
-        self.controller_elenco_manutenzioni.salva_dati()
         self.close()
 
     # Impostazione dello sfondo e del titolo
