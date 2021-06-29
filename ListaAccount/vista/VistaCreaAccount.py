@@ -2,26 +2,34 @@ from PyQt5.QtGui import QImage, QPalette, QBrush, QFont
 from PyQt5.QtWidgets import QVBoxLayout, QLabel, QLineEdit, QPushButton, QMessageBox, QWidget, QHBoxLayout, QSpacerItem
 
 
-# vista Crea account
+# Vista che gestisce l'interfaccia grafica per la creazione di un account cliente
 class VistaCreaAccount(QWidget):
 
     def __init__(self, callback, controller):
         super(VistaCreaAccount, self).__init__()
 
-        # Definizione degli attributi
+        # Funzione che richiama la vista precedente
         self.callback = callback
+
+        # Controller relativo alla vista
         self.controller = controller
+
+        # Dizionario utilizzato per la gestione dei paramentri inseriti nella casella di testo
         self.testo = {}
+
+        # Dimensione della finestra
         self.setFixedWidth(800)
         self.setFixedHeight(600)
+
+        # Layout utilizzati nella vista
         self.v_layout = QVBoxLayout()
         self.h_layout1 = QHBoxLayout()
         self.h_layout2 = QHBoxLayout()
 
-        # Chiamata alla funzione per lo sfondo
+        # Funzione standardizzata per la configurazione dello sfondo
         self.show_background()
 
-        # Creazione, settaggio e stile pulsante indietro, invia e parametri account
+        # Creazione, settaggio e stile tramite funzione interna della casella di testo in cui inserire le credenziali
         self.casella_testo("Nome")
         self.casella_testo("Cognome")
         self.casella_testo("Username")
@@ -30,6 +38,7 @@ class VistaCreaAccount(QWidget):
         self.casella_testo("Altezza")
         self.casella_testo("Numero di scarpe")
 
+        # Pulsante indietro che richiama la vista precedente
         indietro = QPushButton("INDIETRO")
         indietro.setFont(QFont('Times New Roman', 14, 100, True))
         indietro.setStyleSheet('QPushButton {background-color: orange; color: black;}')
@@ -37,6 +46,7 @@ class VistaCreaAccount(QWidget):
         indietro.clicked.connect(self.indietro)
         self.h_layout2.addWidget(indietro)
 
+        # Pulsante invia che se il processo è andato a buon fine crea l'account con le credenziali inserite
         invio = QPushButton("INVIA")
         invio.setFont(QFont('Times New Roman', 14, 100, True))
         invio.setStyleSheet('QPushButton {background-color: orange; color: black;}')
@@ -44,7 +54,7 @@ class VistaCreaAccount(QWidget):
         invio.clicked.connect(self.crea_account)
         self.h_layout2.addWidget(invio)
 
-        # Settaggio layout
+        # Settaggio e spaziatura del layout totale
         self.v_layout.addLayout(self.h_layout2)
         self.h_layout1.addSpacerItem(QSpacerItem(200, 0))
         self.h_layout1.addLayout(self.v_layout)
@@ -52,7 +62,7 @@ class VistaCreaAccount(QWidget):
         self.setLayout(self.h_layout1)
         self.setWindowTitle("Nuovo Account")
 
-    # Creazione casella di testo
+    # Metodo per la creazione di una label e la casella di testo sotto
     def casella_testo(self, tipo):
         label = QLabel(tipo + ":")
         label.setFont(QFont("Times New Roman", 14, 100))

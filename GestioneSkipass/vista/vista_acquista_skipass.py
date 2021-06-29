@@ -30,7 +30,7 @@ class VistaAcquistaSkipass(QWidget):
         self.show_background("PRENOTA SKIPASS")
 
         # Settaggio layout e creazione dei vari pulsanti skipass
-        self.layout_verticale2.addWidget(self.show_pulsante
+        self.layout_verticale2.addWidget(self.crea_pulsante
                                          ("Mattiniero", self.controller_gestione_skipass.get_skipass_per_numero(0)))
         self.layout_verticale2.addSpacerItem(QSpacerItem(0, 50))
         self.layout_verticale2.addWidget(self.crea_pulsante

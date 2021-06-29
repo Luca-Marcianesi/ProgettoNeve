@@ -4,9 +4,8 @@ from PyQt5.QtWidgets import QVBoxLayout, QLabel, QLineEdit, QPushButton, QMessag
 from PyQt5.QtCore import Qt
 from Sessione.controller.controllersessione import ControllerSessione
 
+
 # Vista modifica account
-
-
 class VistaModificaAccount(QWidget):
 
     def __init__(self, aggiorna, callback):
