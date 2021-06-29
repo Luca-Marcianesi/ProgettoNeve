@@ -12,45 +12,45 @@ class VistaPrenotazioneAccount(QWidget):
     def __init__(self, callback):
         super(VistaPrenotazioneAccount, self).__init__()
 
-        # Attributi
+        # Controller associato alla vista
         self.controller = ControllerSessione()
+        # Funzione che richiama la vista precendente
         self.callback = callback
+
+        # Layout utilizzati per l'allineamento dei widget
         self.layout_verticale = QVBoxLayout()
         self.layout_orizzontale1 = QHBoxLayout()
         self.layout_orizzontale2 = QHBoxLayout()
 
-        # Sfondo
+        # Funzione standard che imposta un titolo e uno sfondo alla vista
         self.show_background("PRENOTAZIONI ACCOUNT")
 
-        self.layout_orizzontale1.addSpacerItem(QSpacerItem(400, 0, QSizePolicy.Fixed, QSizePolicy.Fixed))
-
-        # label
+        # Lista delle prenotazioni effettuate
+        self.layout_orizzontale1.addSpacerItem(QSpacerItem(400, 0))
         self.lista_prenotazioni = QListView()
 
+        # Riempimento della lista
         vista_lista_model = self.aggiorna()
-
         self.layout_orizzontale1.addWidget(vista_lista_model)
-
         self.layout_verticale.addLayout(self.layout_orizzontale1)
 
-        # Spaziatura
-        self.layout_orizzontale1.addSpacerItem(QSpacerItem(400, 0, QSizePolicy.Fixed, QSizePolicy.Fixed))
-        self.layout_verticale.addSpacerItem(QSpacerItem(0, 100, QSizePolicy.Fixed, QSizePolicy.Fixed))
-        self.layout_orizzontale2.addSpacerItem(QSpacerItem(700, 0, QSizePolicy.Fixed, QSizePolicy.Fixed))
+        # Spaziature
+        self.layout_orizzontale1.addSpacerItem(QSpacerItem(400, 0))
+        self.layout_verticale.addSpacerItem(QSpacerItem(0, 100))
+        self.layout_orizzontale2.addSpacerItem(QSpacerItem(700, 0))
 
-        # Pulsante indietro allineato
+        # Configurazione e allineamento del pulsante indietro
         pulsante_indietro = QPushButton("INDIETRO")
         pulsante_indietro.setFont(QFont('Times New Roman', 30))
         pulsante_indietro.setStyleSheet("background-color: orange")
         pulsante_indietro.setFixedSize(400, 150)
         pulsante_indietro.clicked.connect(self.indietro)
         self.layout_orizzontale2.addWidget(pulsante_indietro)
-        self.layout_orizzontale2.addSpacerItem(QSpacerItem(700, 0, QSizePolicy.Fixed, QSizePolicy.Fixed))
+        self.layout_orizzontale2.addSpacerItem(QSpacerItem(700, 0))
 
-        # Conclusione
-
+        # Impostazione del layout totale
         self.layout_verticale.addLayout(self.layout_orizzontale2)
-        self.layout_verticale.addSpacerItem(QSpacerItem(0, 100, QSizePolicy.Expanding, QSizePolicy.Expanding))
+        self.layout_verticale.addSpacerItem(QSpacerItem(0, 100))
         self.setLayout(self.layout_verticale)
 
     # Metodo che, collegato al pulsante "INDIETRO", permette di tornare alla vista precedente
@@ -58,7 +58,7 @@ class VistaPrenotazioneAccount(QWidget):
         self.callback()
         self.close()
 
-    # Creazione, settaggio e stile sfondo
+    # Creazione, settaggio e stile sfondo e titolo
     def show_background(self, stringa):
         # Sfondo
         self.setFixedWidth(QDesktopWidget().width())
@@ -79,10 +79,10 @@ class VistaPrenotazioneAccount(QWidget):
         self.layout_verticale.addWidget(titolo)
         self.layout_verticale.addSpacerItem(QSpacerItem(0, 150, QSizePolicy.Fixed, QSizePolicy.Fixed))
 
-        # Ritorna la lista delle prenotazioni
+    # Ritorna la lista delle prenotazioni aggiornata
     def aggiorna(self):
         vista_lista_model = QStandardItemModel(self.lista_prenotazioni)
-        if self.controller.get_lista_prenotazioni() == []:
+        if self.controller.get_lista_prenotazioni() is []:
             label = QLabel(" Non hai effetuato prenotazioni")
             label.setAlignment(Qt.AlignCenter)
             label.setFont(QFont('Times New Roman', 25, 100))
