@@ -13,12 +13,16 @@ class VistaAccountLoggato(QWidget):
     def __init__(self, callback):
         super(VistaAccountLoggato, self).__init__()
 
-        # Attributi
+        # Controller relativo alla vista
         self.controller = ControllerSessione()
+
+        # Layout utilizzati dalla vista per l'allineamento dei widget
         self.layout_verticale1 = QVBoxLayout()
         self.layout_verticale2 = QVBoxLayout()
         self.layout_verticale3 = QVBoxLayout()
         self.layout_orizzontale = QHBoxLayout()
+
+        # Label che illustra le informazioni utili
         self.label = QLabel()
 
         # Viste successive
@@ -28,7 +32,7 @@ class VistaAccountLoggato(QWidget):
         # vista precedente
         self.callback = callback
 
-        # Sfondo
+        # Impostazione dello sfondo e del titolo
         self.show_background("INFORMAZIONI ACCOUNT")
 
         # Spaziatura
@@ -48,7 +52,7 @@ class VistaAccountLoggato(QWidget):
         # Pulsanti cambia credenziali, prenotazioni e indietro + allineamento
         self.show_pulsantiera()
 
-        # Spaziatura
+        # Spaziatura e allineamento
         self.layout_orizzontale.addSpacerItem(QSpacerItem(150, 0))
         self.layout_verticale1.addLayout(self.layout_orizzontale)
         self.layout_verticale1.addSpacerItem(QSpacerItem(0, 200))
@@ -87,7 +91,7 @@ class VistaAccountLoggato(QWidget):
         self.vista_prenotazione_account.showFullScreen()
         self.close()
 
-    # Creazione, settaggio e stile sfondo
+    # Funzione standard per il settaggio dello sfondo e del titolo alla finestra
     def show_background(self, stringa):
         # Sfondo
         self.setFixedWidth(QDesktopWidget().width())
