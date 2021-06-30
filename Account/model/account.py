@@ -47,10 +47,6 @@ class Account:
     def aggiungi_prenotazione(self, prenotazione):
         self.lista_prenotazioni.append(prenotazione)
 
-    # Metodo per rimuovere una prenotazione tramite il tipo
-    def rimuovi_prenotazione(self):
-        self.lista_prenotazioni.clear()
-
     # Metodo che restituisce la lista delle prenotazioni
     def get_lista_prenotazioni(self):
         return self.lista_prenotazioni
@@ -86,10 +82,10 @@ class Account:
         else:
             for prenotazione in self.lista_prenotazioni:
                 controllare = prenotazione.get_scadenza()
-                if isinstance(controllare, datetime):
-                    oggi = datetime.now(None)
+                if isinstance(controllare, datetime): # controlla se la variabile "controllare" è del tipo datetime per evitare errori
+                    oggi = datetime.now(None)  # viene preso oggi come istanza della classe datetime il parametro None riguarda il fuso orario(time zone)
                 else:
-                    oggi = date.today()
+                    oggi = date.today()  # viene preso oggi come istanza della classe date
                 if oggi > controllare:
                     self.lista_prenotazioni.remove(prenotazione)
 
