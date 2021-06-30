@@ -1,6 +1,6 @@
 from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QFont, QStandardItemModel, QStandardItem
-from PyQt5.QtWidgets import QVBoxLayout, QHBoxLayout, QListView, QSpacerItem, QSizePolicy, QPushButton, QMessageBox, \
+from PyQt5.QtWidgets import QVBoxLayout, QHBoxLayout, QListView, QSpacerItem, QPushButton, QMessageBox, \
     QLabel, QWidget
 
 from ElencoDipendenti.controller.controller_gestione_dipendenti import ControllerElencoDipendenti
