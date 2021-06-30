@@ -26,7 +26,7 @@ class VistaHome(QWidget):
         self.sfondo = QLabel('')
         self.sfondo.setStyleSheet('QLabel {background-color: darkCyan}')
         pixmap = QPixmap("Data/Immagini/LogoVistaHome.png")
-        self.sfondo.setPixmap(pixmap)
+        self.sfondo.setPixmap(pixmap) # Inserire immagine sopra lo sfondo (logo sarnano neve)
         self.layout_orizzontale1.addWidget(self.sfondo)
         self.layout_orizzontale1.addSpacerItem(QSpacerItem(275, 0))
 

@@ -92,7 +92,7 @@ class VistaListaPiste(QWidget):
             else:
                 bottone.setStyleSheet('QPushButton {background-color: lightBlue; color: red;}')
             bottone.clicked.connect(partial(self.call_vista_pista, pista))
-            if colonna == 5 or colonna == 10:
+            if colonna == 5:
                 colonna = 0
                 riga += 1
             layout_piste.addWidget(bottone, riga, colonna)
