@@ -125,8 +125,8 @@ class VistaTabellaOrari(QWidget):
         try:
             riga = self.tableWidget.selectedIndexes()[0].row()
             colonna = self.tableWidget.selectedIndexes()[0].column()
-            self.tableWidget.setItem(riga, colonna, QTableWidgetItem())
-            self.controller_tabella_orari.rimuovi_da_giorno(colonna, riga)
+            self.tableWidget.setItem(riga, colonna, QTableWidgetItem())   # sovrascrivo con un item vuoto
+            self.controller_tabella_orari.rimuovi_da_giorno(colonna, riga)  # rimuovo l'iteme vuoto
             self.controller_tabella_orari.salva_dati()
             self.aggiorna()
         except IndexError:
