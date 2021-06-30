@@ -107,8 +107,8 @@ class VistaTabellaOrari(QWidget):
 
     def aggiungi_dipendente(self):
         try:
-            riga = self.tableWidget.selectedIndexes()[0].row()
-            colonna = self.tableWidget.selectedIndexes()[0].column()
+            riga = self.tableWidget.selectedIndexes()[0].row()  # trova la riga selezionata
+            colonna = self.tableWidget.selectedIndexes()[0].column()        # trova la colonna selezionata
             self.lista_dipendenti = vista_aggiungi(self.tableWidget, riga, colonna,
                                                    partial(self.controller_tabella_orari.get_dipendenti_impiegati,
                                                            colonna),
