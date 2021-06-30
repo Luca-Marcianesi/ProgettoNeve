@@ -82,8 +82,9 @@ class VistaPrenotazioneAccount(QWidget):
     # Ritorna la lista delle prenotazioni aggiornata
     def aggiorna(self):
         vista_lista_model = QStandardItemModel(self.lista_prenotazioni)
-        if self.controller.get_lista_prenotazioni() is []:
-            label = QLabel(" Non hai effetuato prenotazioni")
+        lista_prenotazioni = self.controller.get_lista_prenotazioni()
+        if not lista_prenotazioni:
+            label = QLabel("Non hai effetuato prenotazioni")
             label.setAlignment(Qt.AlignCenter)
             label.setFont(QFont('Times New Roman', 25, 100))
             label.setStyleSheet('QLabel {background-color: lightBlue; color: black;}')

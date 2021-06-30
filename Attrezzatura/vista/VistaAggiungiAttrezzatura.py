@@ -137,13 +137,13 @@ class VistaAggiungiAttrezzatura(QWidget):
         codice = self.spin_codice.value()
         if nome != "":
             self.controller_lista_attrezzatura.aggiungi_attrezzatura(Attrezzatura(codice,nome, dimensioni))
-            self.salva_dati()
+            self.controller_lista_attrezzatura.salva_dati()
             self.aggiorna()
             QMessageBox.information(self, '', 'Oggetto aggiunto.', QMessageBox.Ok, QMessageBox.Ok)
         else:
             QMessageBox.critical(self, 'Errore', 'Controlla le informazioni.', QMessageBox.Ok, QMessageBox.Ok)
 
-    # Metodo per la visualizzazione dei codici indentificativi delle attrezzature standdard
+    # Metodo per la visualizzazione dei codici indentificativi delle attrezzature standard
     def leggi_codici_json(self):
         with open("Data/data/codici.json") as file:
             file = json.load(file)

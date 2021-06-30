@@ -36,8 +36,6 @@ class GestioneSkipass:
             if scadenza.hour < datetime.today().hour:
                 return False
 
-
-
         elif skipass_selezionato.tipo != "Stagionale":
             scadenza = date.today() + timedelta(days=int(skipass_selezionato.get_durata()))
 

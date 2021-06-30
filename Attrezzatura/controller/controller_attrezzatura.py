@@ -16,7 +16,7 @@ class ControllerAttrezzatura:
 
     # Restituisce il codice identificativo dell'attrezzatura
     def get_codice(self):
-        self.model.get_codice()
+        return self.model.get_codice()
 
     # Restituisce le dimensioni dell'attrezzatura
     def get_dimensioni(self):
