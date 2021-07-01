@@ -14,38 +14,45 @@ class VistaListaAttrezzatura(QWidget):
     def __init__(self, callback):
         super(VistaListaAttrezzatura, self).__init__()
 
-        # Attributi
+        # Controller dell'attrezzatura importante per effettuare le varie funzioni interne
         self.controller_lista_attrezzatura = ControllerListaAttrezzatura()
+        # Funzione di richiamo della vista precedente
         self.callback = callback
+        # Layout usati per visualizzare e allineare l'intera vista
         self.layout_verticale1 = QVBoxLayout()
         self.layout_orizzontale = QHBoxLayout()
         self.layout_verticale2 = QVBoxLayout()
 
-        # Sfondo
+        # Funzione standard che imposta uno sfondo immagine e un titolo nella attuale vista
         self.show_background("LISTA ATTREZZATURA")
 
+        # Spaziatura verticale
         self.layout_verticale1.addSpacerItem(QSpacerItem(0, 200))
 
+        # Spaziatura orizzontale
         self.layout_orizzontale.addSpacerItem(QSpacerItem(200, 0))
 
         # Lista
         self.vista_lista = QListView()
         self.label = QLabel()
+        # Funzione che si occupa di settare e allineare i pulsanti "Indietro" e "Prenota"
         self.show_pulsantiera()
+        # Funzione che riempie la tabella con i dipendenti salvati
         self.aggiorna()
 
+        # Settaggio layout
         self.layout_orizzontale.addWidget(self.vista_lista)
         self.layout_orizzontale.addWidget(self.label)
 
+        # Spaziatura layout orizzontale
         self.layout_orizzontale.addSpacerItem(QSpacerItem(800, 0))
 
-        # Pulsanti Apri e Indietro allineati
+        # Aggiunta layout
         self.layout_orizzontale.addLayout(self.layout_verticale2)
 
-        # Spaziatura
+        # Allineamento e spaziatura layout
         self.layout_orizzontale.addSpacerItem(QSpacerItem(150, 0))
         self.layout_verticale1.addLayout(self.layout_orizzontale)
-
         self.layout_verticale1.addSpacerItem(QSpacerItem(0, 300))
 
         # Impostazione layout totale
@@ -76,7 +83,7 @@ class VistaListaAttrezzatura(QWidget):
         self.layout_verticale1.addWidget(titolo)
         self.layout_verticale1.addSpacerItem(QSpacerItem(0, 100, QSizePolicy.Fixed, QSizePolicy.Fixed))
 
-    # Creazione, settaggio e stile pulsanti
+    # Creazione, settaggio e stile pulsante "Apri"
     def show_pulsantiera(self):
         # if not self.controller_lista_attrezzatura.get_lista_filtrata() == []:
         self.pulsante_apri = QPushButton("Apri")
