@@ -12,31 +12,33 @@ class VistaListaPiste(QWidget):
     def __init__(self, callback):
         super(VistaListaPiste, self).__init__()
 
-        # Attributi
+        # Funzione che richiama la vista precedente
         self.callback = callback
+        # Controller relativo alla vista
         self.controller = ControllerListaPiste()
         self.vista_pista = None
+        # Layout utilizzati nella vista per l'allineamento dei widget
         self.layout_verticale1 = QVBoxLayout()
         self.layout_orizzontale = QHBoxLayout()
         self.layout_verticale2 = QVBoxLayout()
 
-        # Sfondo
+        # Funzione standard che imposta lo sfondo e il titolo alla vista
         self.show_background()
 
-        # Spaziatura
-        self.layout_verticale1.addSpacerItem(QSpacerItem(0, 850, QSizePolicy.Fixed, QSizePolicy.Fixed))
+        # Spaziatura layout verticale
+        self.layout_verticale1.addSpacerItem(QSpacerItem(0, 850))
 
         # Pulsanti Apri
         self.show_pulsante_indietro()
 
-        # Spaziatura
-        self.layout_verticale1.addSpacerItem(QSpacerItem(0, 20, QSizePolicy.Fixed, QSizePolicy.Fixed))
+        # Spaziatura layout verticale
+        self.layout_verticale1.addSpacerItem(QSpacerItem(0, 20))
         # Pulsanti Apri
         self.show_pulsantiera_piste()
 
-        # Spaziatura
+        # Spaziatura layout verticale
         self.layout_verticale1.addLayout(self.layout_orizzontale)
-        self.layout_verticale1.addSpacerItem(QSpacerItem(0, 25, QSizePolicy.Fixed, QSizePolicy.Fixed))
+        self.layout_verticale1.addSpacerItem(QSpacerItem(0, 25))
 
         # Impostazione layout totale
         self.setLayout(self.layout_verticale1)
@@ -66,7 +68,7 @@ class VistaListaPiste(QWidget):
     # Creazione, settaggio, aggiunta al layout e stile pulsante indietro
     def show_pulsante_indietro(self):
 
-        # Punsante indietro
+        # Pulsante indietro
         pulsante_indietro = QPushButton()
         pulsante_indietro.setStyleSheet('QPushButton {background-color: lightBlue;}')
         pulsante_indietro.setStyleSheet("background-image:url(Data/Immagini/FrecciaIndietro.jpg)")

@@ -10,25 +10,26 @@ class VistaListaPisteProprietario(QWidget):
     def __init__(self, callback):
         super(VistaListaPisteProprietario, self).__init__()
 
-        # Attributi
+        # Funzione che richiama la vista precedente
         self.callback = callback
+        # Controller relativo alla vista
         self.controller = ControllerListaPiste()
         self.vista_pista = None
+        # Layout utilizzati nella vista per l'allineamento dei widget
         self.layout_verticale1 = QVBoxLayout()
         self.layout_orizzontale1 = QHBoxLayout()
 
-        # Sfondo
+        # Funzione standard che imposta lo sfondo e il titolo alla vista
         self.show_background()
 
-        # Spaziatura
-        self.layout_verticale1.addSpacerItem(QSpacerItem(0, 850, QSizePolicy.Fixed, QSizePolicy.Fixed))
+        # Spaziatura layout verticale
+        self.layout_verticale1.addSpacerItem(QSpacerItem(0, 850))
 
-        # Pulsanti Apri
+        # Funzione che configura il pulsante indietro
         self.show_pulsante_indietro()
 
-        # Spaziatura
-        self.layout_verticale1.addSpacerItem(QSpacerItem(0, 20, QSizePolicy.Fixed, QSizePolicy.Fixed))
-        # Pulsanti Apri
+        # Spaziatura layout verticale
+        self.layout_verticale1.addSpacerItem(QSpacerItem(0, 20))
 
         # Creazione layout a griglia
         self.layout_piste = QGridLayout()
@@ -36,12 +37,12 @@ class VistaListaPisteProprietario(QWidget):
         # Chiamata funzione aggiorna
         self.aggiorna()
 
-        # Settaggio layout
+        # Settaggio layout verticale
         self.layout_verticale1.addLayout(self.layout_piste)
 
-        # Layout e spaziatura
+        # Settaggio layout verticale e spaziatura layout verticale
         self.layout_verticale1.addLayout(self.layout_orizzontale1)
-        self.layout_verticale1.addSpacerItem(QSpacerItem(0, 25, QSizePolicy.Fixed, QSizePolicy.Fixed))
+        self.layout_verticale1.addSpacerItem(QSpacerItem(0, 25))
 
         # Impostazione layout totale
         self.setLayout(self.layout_verticale1)
@@ -61,34 +62,33 @@ class VistaListaPisteProprietario(QWidget):
     # Creazione, settaggio, stile, mostra e aggiunta al layout di vari pulsanti
     def show_pulsante_indietro(self):
 
-        # Punsante indietro
+        # Metodo per creazione, stile e funzionamento dei bottoni indietro
         pulsante_indietro = QPushButton()
         pulsante_indietro.setStyleSheet('QPushButton {background-color: lightBlue;}')
         pulsante_indietro.setStyleSheet("background-image:url(Data/Immagini/FrecciaIndietro.jpg)")
         pulsante_indietro.setFixedSize(100, 100)
         pulsante_indietro.clicked.connect(self.indietro)
-        self.layout_orizzontale1.addSpacerItem(QSpacerItem(5, 0, QSizePolicy.Fixed, QSizePolicy.Fixed))
+        self.layout_orizzontale1.addSpacerItem(QSpacerItem(5, 0))
         self.layout_orizzontale1.addWidget(pulsante_indietro)
 
+        # Pulsante che apre tutte le piste
         apri_tutte_le_piste = QPushButton("APRI\nTUTTE")
         apri_tutte_le_piste.setStyleSheet('QPushButton {background-color: orange;}')
         apri_tutte_le_piste.setFont(QFont('Times New Roman', 15, 50, True))
         apri_tutte_le_piste.setFixedSize(100, 100)
         apri_tutte_le_piste.clicked.connect(self.call_apri_tutte)
-
-        self.layout_orizzontale1.addSpacerItem(QSpacerItem(5, 0, QSizePolicy.Fixed, QSizePolicy.Fixed))
+        self.layout_orizzontale1.addSpacerItem(QSpacerItem(5, 0))
         self.layout_orizzontale1.addWidget(apri_tutte_le_piste)
 
+        # Pulsante che chiude tutte le piste
         chiudi_tutte_le_piste = QPushButton("CHIUDI\nTUTTE")
         chiudi_tutte_le_piste.setStyleSheet(' QPushButton {background-color: orange;}')
         chiudi_tutte_le_piste.setFont(QFont('Times New Roman', 15, 50, True))
         chiudi_tutte_le_piste.setFixedSize(100, 100)
         chiudi_tutte_le_piste.clicked.connect(self.call_chiudi_tutte)
-
         self.layout_orizzontale1.addSpacerItem(QSpacerItem(5, 0, QSizePolicy.Fixed, QSizePolicy.Fixed))
         self.layout_orizzontale1.addWidget(chiudi_tutte_le_piste)
         self.layout_orizzontale1.addSpacerItem(QSpacerItem(5000, 0, QSizePolicy.Fixed, QSizePolicy.Fixed))
-
         self.layout_verticale1.addLayout(self.layout_orizzontale1)
 
     # Metodo che aggiorna la finestra
@@ -122,13 +122,13 @@ class VistaListaPisteProprietario(QWidget):
         self.vista_pista_proprietario.showFullScreen()
         self.close()
 
-    # Metodo che setta lo stato di tutte le piste ad "APERTA"
+    # Metodo che setta lo stato di tutte le piste a "APERTA"
     def call_apri_tutte(self):
         self.controller.set_stato_tutte("Aperta")
         self.controller.salva_dati()
         self.aggiorna()
 
-    # Metodo che setta lo stato di tutte le piste ad "CHIUSA"
+    # Metodo che setta lo stato di tutte le piste a "CHIUSA"
     def call_chiudi_tutte(self):
         self.controller.set_stato_tutte("Chiusa")
         self.controller.salva_dati()
