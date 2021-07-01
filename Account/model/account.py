@@ -3,7 +3,7 @@ from datetime import date, datetime
 
 # Classe che definisce la struttura di un account generale
 class Account:
-    # Costruttore utile per la assegnazione dei suoi attributi ai parametri passati
+    # Costruttore utile per l'assegnazione dei suoi attributi ai parametri passati
     def __init__(self, nome, cognome, username, password, eta, altezza, numero_scarpe):
 
         # Dati caratteristici di un account
