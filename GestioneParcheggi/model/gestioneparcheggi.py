@@ -43,7 +43,7 @@ class GestioneParcheggi:
             if parcheggio.get_scadenza() is not None:
                 oggi = date.today()
                 controllare = parcheggio.get_scadenza()
-                if controllare < oggi:
+                if oggi > controllare:
                     parcheggio.elimina_prenotazione()
 
     # Metodo salva dati con creazione del file pickle
