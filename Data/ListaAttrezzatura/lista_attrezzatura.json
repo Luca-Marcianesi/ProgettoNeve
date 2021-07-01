@@ -1,6 +1,6 @@
 [
   {
-    "nome":"Scii",
+    "nome":"Scii atomic",
     "codice": 3,
     "dimensioni": 180
   },
@@ -24,5 +24,75 @@
     "nome":"Ciaspole",
     "codice": 6,
     "dimensioni":40
+  },
+  {
+    "nome":"Scii ",
+    "codice": 3,
+    "dimensioni":170
+  },
+  {
+    "nome":"Scii fischer",
+    "codice": 3,
+    "dimensioni":160
+  },
+  {
+    "nome":"Scii ",
+    "codice": 3,
+    "dimensioni":150
+  },
+  {
+    "nome":"Scii",
+    "codice": 3,
+    "dimensioni":175
+  },
+  {
+    "nome":"Ciaspole",
+    "codice": 6,
+    "dimensioni":38
+  },
+  {
+    "nome":"Ciaspole",
+    "codice": 6,
+    "dimensioni":39
+  },
+  {
+    "nome":"Ciaspole",
+    "codice": 6,
+    "dimensioni":41
+  },
+  {
+    "nome":"Ciaspole",
+    "codice": 6,
+    "dimensioni":43
+  },
+  {
+    "nome":"Scarponi atomic",
+    "codice": 5,
+    "dimensioni":41
+  },
+  {
+    "nome":"Scarponi atomic",
+    "codice": 5,
+    "dimensioni":42
+  },
+  {
+    "nome":"Scarponi atomic",
+    "codice": 5,
+    "dimensioni":39
+  },
+  {
+    "nome":"Snowboard",
+    "codice": 4,
+    "dimensioni":160
+  },
+  {
+    "nome":"Snowboard",
+    "codice": 4,
+    "dimensioni":170
+  },
+  {
+    "nome":"Snowboard",
+    "codice": 4,
+    "dimensioni":190
   }
 ]
