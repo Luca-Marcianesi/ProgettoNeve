@@ -86,7 +86,7 @@ class Account:
                     oggi = datetime.now(None)  # viene preso oggi come istanza della classe datetime il parametro None riguarda il fuso orario(time zone)
                 else:
                     oggi = date.today()# viene preso oggi come istanza della classe date
-                if oggi < controllare:
+                if oggi > controllare:
                     if self.lista_prenotazioni.__len__() == 1:
                         self.lista_prenotazioni.clear()
                     else:
