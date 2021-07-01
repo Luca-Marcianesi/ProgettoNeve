@@ -37,7 +37,7 @@ class GestioneSkipass:
                 return False
 
         elif skipass_selezionato.tipo != "Stagionale":
-            scadenza = date.today() + timedelta(days=int(skipass_selezionato.get_durata()))
+            scadenza = datetime.today() + timedelta(days=int(skipass_selezionato.get_durata()))
 
         else:
             scadenza = self.fine_stagione

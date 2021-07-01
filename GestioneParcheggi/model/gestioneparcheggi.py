@@ -1,7 +1,7 @@
 import json
 import os
 import pickle
-from datetime import date, timedelta
+from datetime import date, timedelta, datetime
 from Prenotazione.model.prenotazione import Prenotazione
 from Parcheggio.model.parcheggio import Parcheggio
 
@@ -24,7 +24,7 @@ class GestioneParcheggi:
         if self.get_posti_disponibili() > 0:
             for parcheggio in self.elenco_parcheggi:
                 if parcheggio.get_stato():
-                    scadenza = date.today() + timedelta(days=int(numero_giorni))
+                    scadenza = datetime.today() + timedelta(days=int(numero_giorni))
                     parcheggio.prenota(scadenza)
                     return Prenotazione(parcheggio.get_codice(), scadenza, parcheggio)
         return None

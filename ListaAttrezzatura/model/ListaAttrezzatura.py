@@ -1,7 +1,7 @@
 import json
 import os
 import pickle
-from datetime import date, timedelta
+from datetime import date, timedelta, datetime
 from Attrezzatura.model.attrezzatura import Attrezzatura
 from Sessione.model.sessione import Sessione
 from Prenotazione.model.prenotazione import Prenotazione
@@ -67,7 +67,7 @@ class ListaAttrezzatura:
 
     # Metodo per prenotare l'attrezzatura
     def prenota_attrezzatura(self, attrezzatura):
-        scadenza = date.today() + timedelta(days=int(1))
+        scadenza = datetime.today() + timedelta(days=int(1))
         attrezzatura.prenota(scadenza)
         return Prenotazione(attrezzatura.get_codice(), scadenza, attrezzatura)
 
