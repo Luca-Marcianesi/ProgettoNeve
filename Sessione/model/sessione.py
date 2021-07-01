@@ -14,6 +14,7 @@ class Sessione:
         cls.funzione_salva_dati = salva_dati
         cls.account_loggato = account
         cls.elimina_prenotazioni_scadute()
+        cls.salva_dati()
 
     # Metodo per settare l'età
     @classmethod
