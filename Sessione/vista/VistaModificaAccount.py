@@ -25,7 +25,7 @@ class VistaModificaAccount(QWidget):
         self.show_background("MODIFICA LE \nCREDENZIALI")
 
         # Spaziatura
-        self.layout_orizzontale2.addSpacerItem(QSpacerItem(700, 0, QSizePolicy.Fixed, QSizePolicy.Fixed))
+        self.layout_orizzontale2.addSpacerItem(QSpacerItem(700, 0))
 
         # Caselle di testo allineate
         self.casella_testo("PASSWORD")
@@ -35,7 +35,7 @@ class VistaModificaAccount(QWidget):
 
         # Spaziatura
         self.layout_orizzontale2.addLayout(self.layout_verticale2)
-        self.layout_orizzontale2.addSpacerItem(QSpacerItem(700, 0, QSizePolicy.Fixed, QSizePolicy.Fixed))
+        self.layout_orizzontale2.addSpacerItem(QSpacerItem(700, 0))
 
         # Pulsanti Indietro e Invia
         self.show_pulsatiera()
@@ -56,7 +56,7 @@ class VistaModificaAccount(QWidget):
 
         self.layout_verticale2.addLayout(self.layout_orizzontale1)
         self.layout_verticale1.addLayout(self.layout_orizzontale2)
-        self.layout_verticale1.addSpacerItem(QSpacerItem(0, 100, QSizePolicy.Expanding, QSizePolicy.Expanding))
+        self.layout_verticale1.addSpacerItem(QSpacerItem(0, 100))
 
     # Creazione, settaggio e stile caselle di testo
     def casella_testo(self, tipo):
@@ -121,9 +121,9 @@ class VistaModificaAccount(QWidget):
         titolo.setFont(QFont('Times New Roman', 60, 100))
         titolo.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Maximum)
         titolo.setStyleSheet('QLabel {color: orange}')
-        self.layout_verticale1.addSpacerItem(QSpacerItem(0, 50, QSizePolicy.Fixed, QSizePolicy.Fixed))
+        self.layout_verticale1.addSpacerItem(QSpacerItem(0, 50))
         self.layout_verticale1.addWidget(titolo)
-        self.layout_verticale1.addSpacerItem(QSpacerItem(0, 150, QSizePolicy.Fixed, QSizePolicy.Fixed))
+        self.layout_verticale1.addSpacerItem(QSpacerItem(0, 150))
 
     # Metodo che crea un bottone generico
     def crea_bottone(self, tipo, layout):

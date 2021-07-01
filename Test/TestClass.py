@@ -64,7 +64,7 @@ class TestClass(unittest.TestCase):
         # Prima prenotazione
         self.assertTrue(self.skipass.prenota_skipass(settimanale))
         # Doppia prenotazione
-        self.assertFalse(self.skipass.prenota_skipass(settimanale))
+        self.assertEqual(self.skipass.prenota_skipass(settimanale), "Hai già prenotato uno skipass!")
 
     # Test aggiunta attrezzatura da parte del proprietario e prenotazione di quell'attrezzatura dal cliente
     def test8(self):

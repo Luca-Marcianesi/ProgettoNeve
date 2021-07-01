@@ -1,10 +1,8 @@
 from functools import partial
-
 from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QImage, QPalette, QBrush, QFont
 from PyQt5.QtWidgets import QWidget, QVBoxLayout, QDesktopWidget, QLabel, QSpacerItem, QTableWidget, QTableWidgetItem, \
     QHBoxLayout, QPushButton, QMessageBox, QAbstractItemView
-
 from TabellaOrari.controller.controller_tabella_orari import ControllerTabellaOrari
 from TabellaOrari.vista.VistaAggiungi import vista_aggiungi
 
@@ -13,28 +11,40 @@ class VistaTabellaOrari(QWidget):
     def __init__(self, callback):
         super(VistaTabellaOrari, self).__init__()
 
-        # Attributi
+        # Controller relativo alla vista
         self.controller_tabella_orari = ControllerTabellaOrari()
+        # Funzione che richiama la vista precedente
         self.callback = callback
+        # Layout utilizzati nella vista per l'allineamento dei widget
         self.layout_verticale = QVBoxLayout()
         self.layout_orizzontale = QHBoxLayout()
+
+        # Widget della tabella
         self.tableWidget = QTableWidget()
 
-        # Titolo e sfondo
+        # Funzione standard che imposta lo sfondo e il titolo alla vista
         self.show_background("TABELLA ORARI")
 
-        # Configurazione della tabella
+        # Impostazione del numero delle righe e colonne della tabella
         self.tableWidget.setRowCount(15)
         self.tableWidget.setColumnCount(7)
+        # Rende tutte le caselle non modificabili manualmente
         self.tableWidget.setEditTriggers(QAbstractItemView.NoEditTriggers)
+        # Dimensioni delle caselle
         self.tableWidget.horizontalHeader().setDefaultSectionSize(200)
         self.tableWidget.verticalHeader().setDefaultSectionSize(40)
+        # Settaggio dei titoli delle colonne
         self.tableWidget.setHorizontalHeaderLabels(['Lunedì', 'Martedì', 'Mercoledì', 'Giovedì',
                                                     'Venerdì', 'Sabato', 'Domenica'])
+        # Settaggio del font delle scritte nella tabella
         self.tableWidget.horizontalHeader().setFont(QFont('Times New Roman', 15, 80))
         self.tableWidget.horizontalHeader().setStyleSheet(" ::section {""background-color: orange; color: blue;}")
+        # Nasconde i titoli verticali della tabella
         self.tableWidget.verticalHeader().hide()
+        # Colore della tabella
         self.tableWidget.setStyleSheet("background-color: lightBlue")
+
+        # Funzione che riempie la tabella con i dipendenti salvati
         self.aggiorna()
 
         # Allineamento e spaziatura layout orizzontale
@@ -47,10 +57,9 @@ class VistaTabellaOrari(QWidget):
 
         # Spaziatura layout verticale
         self.layout_verticale.addSpacerItem(QSpacerItem(0, 130))
-
         self.setLayout(self.layout_verticale)
 
-    # Impostazione dello sfondo
+    # Funzione che imposta titolo e sfondo alla finestra
     def show_background(self, stringa):
         # Sfondo
         self.setFixedSize(QDesktopWidget().width(), QDesktopWidget().height())
@@ -105,9 +114,10 @@ class VistaTabellaOrari(QWidget):
         self.callback()
         self.close()
 
+    # Aggiunta del dipendente alla tabella
     def aggiungi_dipendente(self):
         try:
-            riga = self.tableWidget.selectedIndexes()[0].row()  # trova la riga selezionata
+            riga = self.tableWidget.selectedIndexes()[0].row()              # trova la riga selezionata
             colonna = self.tableWidget.selectedIndexes()[0].column()        # trova la colonna selezionata
             self.lista_dipendenti = vista_aggiungi(self.tableWidget, riga, colonna,
                                                    partial(self.controller_tabella_orari.get_dipendenti_impiegati,
@@ -121,6 +131,7 @@ class VistaTabellaOrari(QWidget):
             QMessageBox.critical(self, 'Errore!', 'Qualcosa è andato storto, riprova più tardi.',
                                  QMessageBox.Ok, QMessageBox.Ok)
 
+    # Rimozione del dipendente selezionato nella tabella
     def rimuovi_dipendente(self):
         try:
             riga = self.tableWidget.selectedIndexes()[0].row()
@@ -136,6 +147,7 @@ class VistaTabellaOrari(QWidget):
             QMessageBox.critical(self, 'Errore!', 'Qualcosa è andato storto, riprova più tardi.',
                                  QMessageBox.Ok, QMessageBox.Ok)
 
+    # Funzione che riempie la tabella dei dipendenti salvati
     def aggiorna(self):
         indice_giorni = len(self.controller_tabella_orari.get_tabella_orari())
         for colonna in range(indice_giorni):
