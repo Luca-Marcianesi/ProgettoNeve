@@ -61,7 +61,7 @@ class ListaAttrezzatura:
     # Metodo che confronta le dimensioni di ogni attrezzo con le caratteristiche del cliente
     def filtra_dimensioni(self, dim_attrezzo, numero_scarpe_persona, altezza_persona):
         if int(dim_attrezzo) == int(numero_scarpe_persona) or \
-                (int(altezza_persona) >= int(dim_attrezzo) - 10 and int(altezza_persona) <= int(dim_attrezzo)):
+                (int(dim_attrezzo) >= (int(altezza_persona) -10) and int(dim_attrezzo) <= int(altezza_persona)):
             return True
         return False
 
