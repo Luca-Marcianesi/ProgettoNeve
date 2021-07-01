@@ -14,24 +14,31 @@ class VistaListaAttrezzaturaProprietario(QWidget):
     def __init__(self, callback):
         super(VistaListaAttrezzaturaProprietario, self).__init__()
 
-        # Attributi
+        # Controller dell'attrezzatura importante per effettuare le varie funzioni interne
         self.controller_lista_attrezzatura = ControllerListaAttrezzatura()
+        # Funzione di richiamo della vista precedente
         self.callback = callback
+
+        # Layout usati per visualizzare e allineare l'intera vista
         self.layout_verticale1 = QVBoxLayout()
         self.layout_orizzontale = QHBoxLayout()
         self.layout_verticale2 = QVBoxLayout()
 
-        # Sfondo
+        # Funzione standard che imposta uno sfondo immagine e un titolo nella attuale vista
         self.show_background("LISTA ATTREZZATURA")
 
+        # Spaziatura verticale
         self.layout_verticale1.addSpacerItem(QSpacerItem(0, 200))
 
+        # Spaziatura orizzontale
         self.layout_orizzontale.addSpacerItem(QSpacerItem(100, 0))
 
         # Lista
         self.vista_lista = QListView()
         self.label = QLabel()
+        # Funzione che si occupa di settare e allineare i pulsanti "Indietro" e "Prenota"
         self.crea_pulsantiera()
+        # Funzione che riempie la tabella con i dipendenti salvati
         self.aggiorna()
 
         self.layout_orizzontale.addWidget(self.vista_lista)
@@ -43,10 +50,11 @@ class VistaListaAttrezzaturaProprietario(QWidget):
 
         self.layout_orizzontale.addLayout(self.layout_verticale2)
 
-        # Spaziatura
+        # Spaziatura e settaggio layout verticale
         self.layout_orizzontale.addSpacerItem(QSpacerItem(150, 0))
         self.layout_verticale1.addLayout(self.layout_orizzontale)
 
+        # Spaziatura layout verticale
         self.layout_verticale1.addSpacerItem(QSpacerItem(0, 200))
 
         # Impostazione layout totale
@@ -77,7 +85,7 @@ class VistaListaAttrezzaturaProprietario(QWidget):
         self.layout_verticale1.addWidget(titolo)
         self.layout_verticale1.addSpacerItem(QSpacerItem(0, 100, QSizePolicy.Fixed, QSizePolicy.Fixed))
 
-    # Creazione, settaggio e stile dei pulsanti
+    # Metodo che configura i pulsanti "indietro" e "aggiungi"
     def crea_pulsantiera(self):
         self.pulsante_apri = self.pulsante("Apri", self.attrezzatura_selezionata)
         self.layout_verticale2.addWidget(self.pulsante_apri)
@@ -124,7 +132,7 @@ class VistaListaAttrezzaturaProprietario(QWidget):
                 vista_lista_model.appendRow(item)
             self.vista_lista.setModel(vista_lista_model)
 
-    # Metodo che gestisce la situazione in cui al click del pulsante "APRI", non venga selezionato niente
+    # Metodo che gestisce le attrezzatutre selezionate e gestisce le relative eccezioni
 
     def attrezzatura_selezionata(self):
         try:
@@ -142,7 +150,7 @@ class VistaListaAttrezzaturaProprietario(QWidget):
             QMessageBox.critical(self, 'Errore!', 'Qualcosa è andato storto, riprova più tardi.', QMessageBox.Ok,
                                  QMessageBox.Ok)
 
-    # Crea un pulsante
+    # Metodo per la creazione di un pulsante
 
     def pulsante(self, nome, call):
         pulsante = QPushButton(nome)
@@ -152,6 +160,7 @@ class VistaListaAttrezzaturaProprietario(QWidget):
         pulsante.clicked.connect(call)
         return pulsante
 
+    # Metodo per l'aggiunta di una nuova attrezzatura che poi è possibile prenotare
     def aggiungi(self):
         self.vista_aggiungi_attrezzatura = VistaAggiungiAttrezzatura(
             self.showFullScreen, self.controller_lista_attrezzatura, self.aggiorna)

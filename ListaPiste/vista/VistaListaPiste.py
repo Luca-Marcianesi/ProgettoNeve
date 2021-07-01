@@ -36,7 +36,7 @@ class VistaListaPiste(QWidget):
         # Pulsanti Apri
         self.show_pulsantiera_piste()
 
-        # Spaziatura layout verticale
+        # Spaziatura e settaggio layout verticale
         self.layout_verticale1.addLayout(self.layout_orizzontale)
         self.layout_verticale1.addSpacerItem(QSpacerItem(0, 25))
 
