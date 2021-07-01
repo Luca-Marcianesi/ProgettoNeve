@@ -82,7 +82,7 @@ class VistaTabellaOrari(QWidget):
 
     # Metodo per creazione, stile e funzionamento dei bottoni indietro, aggiungi dipendente e rimuovi dipendente
     def show_pulsantiera(self):
-        # Punsante indietro
+        # Pulsante indietro
         layout_pulsanti = QVBoxLayout()
         pulsante_indietro = QPushButton("Indietro")
         pulsante_indietro.setStyleSheet('QPushButton {background-color: orange; color: black;}')
@@ -90,7 +90,7 @@ class VistaTabellaOrari(QWidget):
         pulsante_indietro.setFixedSize(250, 100)
         pulsante_indietro.clicked.connect(self.indietro)
 
-        # Punsante aggiungi dipendente
+        # Pulsante aggiungi dipendente
         pulsante_aggiungi = QPushButton("Aggiungi\n Dipendente")
         pulsante_aggiungi.setStyleSheet('QPushButton {background-color: orange; color: black;}')
         pulsante_aggiungi.setFont(QFont('Times New Roman', 25, 100, True))
