@@ -1,10 +1,8 @@
 from functools import partial
-
 from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QImage, QPalette, QBrush, QFont
 from PyQt5.QtWidgets import QWidget, QVBoxLayout, QDesktopWidget, QLabel, QSpacerItem, QTableWidget, QTableWidgetItem, \
     QHBoxLayout, QPushButton, QMessageBox, QAbstractItemView
-
 from TabellaOrari.controller.controller_tabella_orari import ControllerTabellaOrari
 from TabellaOrari.vista.VistaAggiungi import vista_aggiungi
 
