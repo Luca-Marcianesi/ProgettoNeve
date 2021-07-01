@@ -1,4 +1,4 @@
-from datetime import date, datetime
+from datetime import date, datetime, timedelta
 
 
 # Classe che definisce la struttura di un account generale
@@ -85,9 +85,12 @@ class Account:
                 if isinstance(controllare, datetime): # controlla se la variabile "controllare" è del tipo datetime per evitare errori
                     oggi = datetime.now(None)  # viene preso oggi come istanza della classe datetime il parametro None riguarda il fuso orario(time zone)
                 else:
-                    oggi = date.today()  # viene preso oggi come istanza della classe date
-                if oggi > controllare:
-                    self.lista_prenotazioni.remove(prenotazione)
+                    oggi = date.today()# viene preso oggi come istanza della classe date
+                if oggi < controllare:
+                    if self.lista_prenotazioni.__len__() == 1:
+                        self.lista_prenotazioni.clear()
+                    else:
+                        self.lista_prenotazioni.remove(prenotazione)
 
     # Metodo che controlla se una prenotazione è stata effettuata in base al codice dell'oggetto
     def controlla_prenotazione_effettuata(self, codice):
