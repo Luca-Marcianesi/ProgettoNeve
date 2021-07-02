@@ -105,7 +105,7 @@ class VistaInformazioni(QWidget):
 
     # Configurazione e allineamento del secondo pulsante link
     def pulsante_web1(self):
-        pulsante_web = QPushButton("Link soccorso piste")
+        pulsante_web = QPushButton("https://www.crocebianca.soccorso-piste.it")
         pulsante_web.setFont(QFont('Times New Roman', 20))
         pulsante_web.setStyleSheet('QPushButton{background-color: transparent; color: Blue}')
         pulsante_web.clicked.connect(partial(webbrowser.open, self.url1))
