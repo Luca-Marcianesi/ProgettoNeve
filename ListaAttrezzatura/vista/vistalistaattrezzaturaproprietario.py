@@ -2,14 +2,12 @@ from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QFont, QBrush, QPalette, QImage, QStandardItemModel, QStandardItem, QColor
 from PyQt5.QtWidgets import QWidget, QHBoxLayout, QVBoxLayout, QLabel, QSpacerItem, \
     QSizePolicy, QListView, QPushButton, QDesktopWidget, QMessageBox
-
 from Attrezzatura.vista.VistaAttrezzaturaProprietario import VistaAttrezzaturaProprietario
 from ListaAttrezzatura.controller.controllerlistaattrezzatura import ControllerListaAttrezzatura
 from Attrezzatura.vista.VistaAggiungiAttrezzatura import VistaAggiungiAttrezzatura
 
+
 # Vista lista attrezzatura proprietario
-
-
 class VistaListaAttrezzaturaProprietario(QWidget):
     def __init__(self, callback):
         super(VistaListaAttrezzaturaProprietario, self).__init__()
@@ -27,46 +25,37 @@ class VistaListaAttrezzaturaProprietario(QWidget):
         # Funzione standard che imposta uno sfondo immagine e un titolo nella attuale vista
         self.show_background("LISTA ATTREZZATURA")
 
-        # Spaziatura verticale
+        # Spaziature
         self.layout_verticale1.addSpacerItem(QSpacerItem(0, 200))
-
-        # Spaziatura orizzontale
         self.layout_orizzontale.addSpacerItem(QSpacerItem(100, 0))
 
-        # Lista
+        # Widget lista
         self.vista_lista = QListView()
+        # Label che illustra al cliente che non ci sono attrezzature disponibili
         self.label = QLabel()
         # Funzione che si occupa di settare e allineare i pulsanti "Indietro" e "Prenota"
         self.crea_pulsantiera()
-        # Funzione che riempie la tabella con i dipendenti salvati
+        # Funzione che riempie la lista con l'attrezzatura
         self.aggiorna()
 
+        # Configurazione e allineamento dei widget ai layout
         self.layout_orizzontale.addWidget(self.vista_lista)
         self.layout_orizzontale.addWidget(self.label)
-
-        self.layout_orizzontale.addSpacerItem(QSpacerItem(1000, 0))
-
-        # Pulsanti Apri e Indietro allineati
-
+        self.layout_orizzontale.addSpacerItem(QSpacerItem(500, 0))
         self.layout_orizzontale.addLayout(self.layout_verticale2)
-
-        # Spaziatura e settaggio layout verticale
         self.layout_orizzontale.addSpacerItem(QSpacerItem(150, 0))
         self.layout_verticale1.addLayout(self.layout_orizzontale)
-
-        # Spaziatura layout verticale
         self.layout_verticale1.addSpacerItem(QSpacerItem(0, 200))
 
         # Impostazione layout totale
         self.setLayout(self.layout_verticale1)
-        self.setWindowTitle('Lista Attrezzatura')
 
     # Metodo che, collegato al pulsante "INDIETRO", permette di tornare alla vista precedente
     def indietro(self):
         self.callback()
         self.close()
 
-    # Creazione, settaggio e stile dello sfondo
+    # Creazione, settaggio e stile dello sfondo e del titolo
     def show_background(self, stringa):
         # Sfondo
         self.setFixedWidth(QDesktopWidget().width())
@@ -81,9 +70,9 @@ class VistaListaAttrezzaturaProprietario(QWidget):
         titolo = QLabel(stringa)
         titolo.setAlignment(Qt.AlignCenter)
         titolo.setFont(QFont('Times New Roman', 60))
-        self.layout_verticale1.addSpacerItem(QSpacerItem(0, 50, QSizePolicy.Fixed, QSizePolicy.Fixed))
+        self.layout_verticale1.addSpacerItem(QSpacerItem(0, 50))
         self.layout_verticale1.addWidget(titolo)
-        self.layout_verticale1.addSpacerItem(QSpacerItem(0, 100, QSizePolicy.Fixed, QSizePolicy.Fixed))
+        self.layout_verticale1.addSpacerItem(QSpacerItem(0, 100))
 
     # Metodo che configura i pulsanti "indietro" e "aggiungi"
     def crea_pulsantiera(self):
@@ -100,17 +89,20 @@ class VistaListaAttrezzaturaProprietario(QWidget):
 
 
 
-    # Metodo che aggiorna la finestra
+    # Metodo che si occupa di riempire la lista con tutte le attrezzature
     def aggiorna(self):
 
         vista_lista_model = QStandardItemModel(self.vista_lista)
+        # Se la lista attrezzatura è vuota
         if not bool(self.controller_lista_attrezzatura.get_lista_attrezzatura()):
+            # Rimozione del widget
             self.layout_orizzontale.removeWidget(self.vista_lista)
             self.vista_lista.deleteLater()
             self.vista_lista = None
             self.layout_verticale2.removeWidget(self.pulsante_apri)
             self.pulsante_apri.deleteLater()
             self.pulsante_apri = None
+
             self.label.setText("Non ci sono oggetti disponibili")
             self.label.setAlignment(Qt.AlignCenter)
             self.label.setFont(QFont('Times New Roman', 25, 100))
@@ -132,8 +124,7 @@ class VistaListaAttrezzaturaProprietario(QWidget):
                 vista_lista_model.appendRow(item)
             self.vista_lista.setModel(vista_lista_model)
 
-    # Metodo che gestisce le attrezzatutre selezionate e gestisce le relative eccezioni
-
+    # Metodo che gestisce l'apertura della vista attrezzatura relativa a quella selezionata
     def attrezzatura_selezionata(self):
         try:
             selezionata = self.vista_lista.selectedIndexes()[0].row()
@@ -150,8 +141,7 @@ class VistaListaAttrezzaturaProprietario(QWidget):
             QMessageBox.critical(self, 'Errore!', 'Qualcosa è andato storto, riprova più tardi.', QMessageBox.Ok,
                                  QMessageBox.Ok)
 
-    # Metodo per la creazione di un pulsante
-
+    # Metodo per la creazione di un pulsante standard
     def pulsante(self, nome, call):
         pulsante = QPushButton(nome)
         pulsante.setFont(QFont('Times New Roman', 20, 100, True))

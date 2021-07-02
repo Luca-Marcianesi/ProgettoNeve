@@ -10,7 +10,6 @@ from ListaAttrezzatura.controller.controllerlistaattrezzatura import ControllerL
 
 
 class VistaListaAttrezzatura(QWidget):
-
     def __init__(self, callback):
         super(VistaListaAttrezzatura, self).__init__()
 
@@ -26,38 +25,32 @@ class VistaListaAttrezzatura(QWidget):
         # Funzione standard che imposta uno sfondo immagine e un titolo nella attuale vista
         self.show_background("LISTA ATTREZZATURA")
 
-        # Spaziatura verticale
+        # Spaziature
         self.layout_verticale1.addSpacerItem(QSpacerItem(0, 200))
-
-        # Spaziatura orizzontale
         self.layout_orizzontale.addSpacerItem(QSpacerItem(200, 0))
 
-        # Lista
+        # Widget della lista delle attrezzature
         self.vista_lista = QListView()
+        # Label che si occupa di comunicare al cliente che non ci sono attrezzature disponibili
         self.label = QLabel()
+
         # Funzione che si occupa di settare e allineare i pulsanti "Indietro" e "Prenota"
         self.show_pulsantiera()
-        # Funzione che riempie la tabella con i dipendenti salvati
+
+        # Funzione che riempie la lista con le attrezzature corrispondenti al cliente
         self.aggiorna()
 
-        # Settaggio layout
+        # Settaggio e allineamento dei widget ai layout
         self.layout_orizzontale.addWidget(self.vista_lista)
         self.layout_orizzontale.addWidget(self.label)
-
-        # Spaziatura layout orizzontale
         self.layout_orizzontale.addSpacerItem(QSpacerItem(800, 0))
-
-        # Aggiunta layout
         self.layout_orizzontale.addLayout(self.layout_verticale2)
-
-        # Allineamento e spaziatura layout
         self.layout_orizzontale.addSpacerItem(QSpacerItem(150, 0))
         self.layout_verticale1.addLayout(self.layout_orizzontale)
         self.layout_verticale1.addSpacerItem(QSpacerItem(0, 300))
 
         # Impostazione layout totale
         self.setLayout(self.layout_verticale1)
-        self.setWindowTitle('Lista Attrezzatura')
 
     # Metodo che, collegato al pulsante "INDIETRO", permette di tornare alla vista precedente
     def indietro(self):
@@ -79,13 +72,12 @@ class VistaListaAttrezzatura(QWidget):
         titolo = QLabel(stringa)
         titolo.setAlignment(Qt.AlignCenter)
         titolo.setFont(QFont('Times New Roman', 60))
-        self.layout_verticale1.addSpacerItem(QSpacerItem(0, 50, QSizePolicy.Fixed, QSizePolicy.Fixed))
+        self.layout_verticale1.addSpacerItem(QSpacerItem(0, 50))
         self.layout_verticale1.addWidget(titolo)
-        self.layout_verticale1.addSpacerItem(QSpacerItem(0, 100, QSizePolicy.Fixed, QSizePolicy.Fixed))
+        self.layout_verticale1.addSpacerItem(QSpacerItem(0, 100))
 
     # Creazione, settaggio e stile pulsante "Apri"
     def show_pulsantiera(self):
-        # if not self.controller_lista_attrezzatura.get_lista_filtrata() == []:
         self.pulsante_apri = QPushButton("Apri")
         self.pulsante_apri.setFont(QFont('Times New Roman', 20, 100, True))
         self.pulsante_apri.setStyleSheet('QPushButton {background-color: orange; color: black;}')
@@ -102,8 +94,7 @@ class VistaListaAttrezzatura(QWidget):
         self.layout_verticale2.addWidget(pulsante_indietro)
         self.layout_verticale2.addSpacerItem(QSpacerItem(0, 50))
 
-    # Metodo che gestisce la situazione in cui al click del pulsante "APRI", non venga selezionato niente
-    # con gestione delle eccezioni
+    # Metodo che si occupa dell'accesso alla vista attrezzatura relativa all'attrezzatura selezionata
     def attrezzatura_selezionata(self):
         try:
             selezionata = self.vista_lista.selectedIndexes()[0].row()
@@ -122,16 +113,19 @@ class VistaListaAttrezzatura(QWidget):
             QMessageBox.critical(self, 'Errore!', 'Qualcosa è andato storto, riprova più tardi.', QMessageBox.Ok,
                                  QMessageBox.Ok)
 
-    # Metodo che aggiorna la finestra della lista attrezzatura dopo che un attrezzatura è stata prenotata
+    # Metodo che si occupa del riempimento della lista attrezzatura
     def aggiorna(self):
         vista_lista_model = QStandardItemModel(self.vista_lista)
+        # Se la lista è vuota
         if not bool(self.controller_lista_attrezzatura.get_lista_filtrata()):
+            # Rimozione dei pulsanti
             self.layout_orizzontale.removeWidget(self.vista_lista)
             self.vista_lista.deleteLater()
             self.vista_lista = None
             self.layout_verticale2.removeWidget(self.pulsante_apri)
             self.pulsante_apri.deleteLater()
             self.pulsante_apri = None
+
             self.label.setText("Non ci sono oggetti disponibili adatti\nalle tue caratteristiche")
             self.label.setAlignment(Qt.AlignCenter)
             self.label.setFont(QFont('Times New Roman', 25, 100))

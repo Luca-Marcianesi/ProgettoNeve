@@ -94,5 +94,10 @@
     "nome":"Snowboard",
     "codice": 4,
     "dimensioni":190
+  },
+  {
+    "nome":"Scarponi titanium",
+    "codice": 5,
+    "dimensioni":45
   }
 ]
