@@ -41,7 +41,7 @@ class VistaAttrezzatura(QWidget):
         label.setFont(QFont('Times New Roman', 30, 75))
         label.setStyleSheet("background-image:url(Data/Immagini/legno.jpg)")
         label.setAlignment(Qt.AlignCenter)
-        label.setFixedSize(500, 200)
+        label.setFixedSize(700, 200)
         self.layout_verticale2.addWidget(label)
 
         # Spaziatura verticale
