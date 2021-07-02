@@ -10,7 +10,8 @@ class Prenotazione:
 
     # Metodo che restituisce la descrizione della prenotazione
     def get_descrizione(self):
-        return "Prenotazione: {}  \nScadenza: {}".format(self.oggetto.get_descrizione(), self.scadenza)
+        return "Prenotazione: {}  \nScadenza: {}".format(self.oggetto.get_descrizione(),
+                                                      self.scadenza.isoformat(timespec='minutes'))  # troncamento
 
     # Metodo che restituisce il codice dell'oggetto
     def get_codice_oggetto(self):

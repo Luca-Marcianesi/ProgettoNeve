@@ -94,9 +94,7 @@ class VistaPrenotazioneAccount(QWidget):
         else:
             for prenotazione in self.controller.get_lista_prenotazioni():
                 item = QStandardItem()
-                nome = prenotazione.get_descrizione_oggetto()
-                scadenza = prenotazione.get_scadenza()
-                stringa = nome + "\nScadenza: " + str(scadenza)
+                stringa = prenotazione.get_descrizione()
                 item.setForeground(QColor(237, 118, 14))  # imposta il colore alla scritta dell'item
                 item.setText(stringa)
                 item.setEditable(False)
