@@ -41,7 +41,7 @@ class GestioneParcheggi:
     def elimina_scadute_prenotazioni(self):
         for parcheggio in self.elenco_parcheggi:
             if parcheggio.get_scadenza() is not None:
-                oggi = date.today()
+                oggi = datetime.today()
                 controllare = parcheggio.get_scadenza()
                 if oggi > controllare:
                     parcheggio.elimina_prenotazione()

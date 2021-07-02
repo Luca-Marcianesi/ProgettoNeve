@@ -1,4 +1,5 @@
 # Classe prenotazione
+from datetime import datetime, date
 
 
 class Prenotazione:
