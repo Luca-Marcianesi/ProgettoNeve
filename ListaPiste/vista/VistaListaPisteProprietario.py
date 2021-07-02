@@ -14,10 +14,10 @@ class VistaListaPisteProprietario(QWidget):
         self.callback = callback
         # Controller relativo alla vista
         self.controller = ControllerListaPiste()
-        self.vista_pista = None
         # Layout utilizzati nella vista per l'allineamento dei widget
         self.layout_verticale1 = QVBoxLayout()
         self.layout_orizzontale1 = QHBoxLayout()
+        self.layout_piste = QGridLayout()
 
         # Funzione standard che imposta lo sfondo e il titolo alla vista
         self.show_background()
@@ -31,22 +31,16 @@ class VistaListaPisteProprietario(QWidget):
         # Spaziatura layout verticale
         self.layout_verticale1.addSpacerItem(QSpacerItem(0, 20))
 
-        # Creazione layout a griglia
-        self.layout_piste = QGridLayout()
-
-        # Chiamata funzione aggiorna
+        # Funzione che si occupa del'aggiornamento dei pulsanti relativi alle piste
         self.aggiorna()
 
-        # Settaggio layout verticale
-        self.layout_verticale1.addLayout(self.layout_piste)
-
         # Settaggio layout verticale e spaziatura layout verticale
+        self.layout_verticale1.addLayout(self.layout_piste)
         self.layout_verticale1.addLayout(self.layout_orizzontale1)
         self.layout_verticale1.addSpacerItem(QSpacerItem(0, 25))
 
         # Impostazione layout totale
         self.setLayout(self.layout_verticale1)
-        self.setWindowTitle('Lista Piste')
 
     # Creazione, settaggio e stile sfondo
     def show_background(self):
@@ -59,10 +53,9 @@ class VistaListaPisteProprietario(QWidget):
         palette.setBrush(10, QBrush(img))
         self.setPalette(palette)
 
-    # Creazione, settaggio, stile, mostra e aggiunta al layout di vari pulsanti
+    # Configurazione e allineamento al layout dei vari pulsanti
     def show_pulsante_indietro(self):
-
-        # Metodo per creazione, stile e funzionamento dei bottoni indietro
+        # Bottone indietro
         pulsante_indietro = QPushButton()
         pulsante_indietro.setStyleSheet('QPushButton {background-color: lightBlue;}')
         pulsante_indietro.setStyleSheet("background-image:url(Data/Immagini/FrecciaIndietro.jpg)")
@@ -91,9 +84,8 @@ class VistaListaPisteProprietario(QWidget):
         self.layout_orizzontale1.addSpacerItem(QSpacerItem(5000, 0, QSizePolicy.Fixed, QSizePolicy.Fixed))
         self.layout_verticale1.addLayout(self.layout_orizzontale1)
 
-    # Metodo che aggiorna la finestra
+    # Metodo che si occupa della configurazione dei pulsanti relativi alle piste
     def aggiorna(self):
-        # Punsante indietro
         riga = 0
         colonna = 0
         indice_pista = 1
@@ -113,7 +105,7 @@ class VistaListaPisteProprietario(QWidget):
             colonna += 1
             indice_pista += 1
 
-    # Metodo che chiama e mostra la vista pista
+    # Metodo che chiama la vista pista scelta
     def call_vista_pista_proprietario(self, pista):
         self.vista_pista_proprietario = VistaPistaProprietario(pista,
                                                                self.showFullScreen,
