@@ -23,7 +23,7 @@ class VistaInformazioni(QWidget):
 
         # Definizione degli url da inserire nella label
         self.url = "http://www.sarnanoneve.it"
-        self.url1 = ""
+        self.url1 = "https://www.crocebianca.bz.it/it/i-nostri-servizi/soccorso/servizio-soccorso-piste-647.html"
 
         # Funzione standard che imposta uno sfondo immagine
         self.show_background("INFORMAZIONI")
