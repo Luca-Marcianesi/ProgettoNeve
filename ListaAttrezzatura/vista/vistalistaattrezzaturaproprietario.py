@@ -40,7 +40,13 @@ class VistaListaAttrezzaturaProprietario(QWidget):
 
         # Configurazione e allineamento dei widget ai layout
         self.layout_orizzontale.addWidget(self.vista_lista)
-        self.layout_orizzontale.addWidget(self.label)
+        #self.layout_orizzontale.addWidget(self.label)
+
+        # Funzione che riempie la lista con l'attrezzatura
+        self.aggiorna()
+
+
+
         self.layout_orizzontale.addSpacerItem(QSpacerItem(500, 0))
         self.layout_orizzontale.addLayout(self.layout_verticale2)
         self.layout_orizzontale.addSpacerItem(QSpacerItem(150, 0))
@@ -97,8 +103,8 @@ class VistaListaAttrezzaturaProprietario(QWidget):
         if not bool(self.controller_lista_attrezzatura.get_lista_attrezzatura()):
             # Rimozione del widget
             self.layout_orizzontale.removeWidget(self.vista_lista)
-            self.vista_lista.deleteLater()
-            self.vista_lista = None
+            #self.vista_lista.deleteLater()
+            #self.vista_lista = None
             self.layout_verticale2.removeWidget(self.pulsante_apri)
             self.pulsante_apri.deleteLater()
             self.pulsante_apri = None
@@ -109,6 +115,7 @@ class VistaListaAttrezzaturaProprietario(QWidget):
             self.label.setStyleSheet('QLabel {background-color: lightBlue; color: black;}')
             self.label.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Maximum)
             self.layout_orizzontale.addSpacerItem(QSpacerItem(0, 50))
+            self.layout_orizzontale.replaceWidget(self.vista_lista,self.label)
 
         else:
             for attrezzatura in self.controller_lista_attrezzatura.get_lista_attrezzatura():
@@ -123,6 +130,7 @@ class VistaListaAttrezzaturaProprietario(QWidget):
                 item.setFont(QFont('Times New Roman', 30, 100))
                 vista_lista_model.appendRow(item)
             self.vista_lista.setModel(vista_lista_model)
+            self.vista_lista.setStyleSheet("background-color: lightBlue")
 
     # Metodo che gestisce l'apertura della vista attrezzatura relativa a quella selezionata
     def attrezzatura_selezionata(self):
