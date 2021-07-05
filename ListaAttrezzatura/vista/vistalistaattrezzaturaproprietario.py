@@ -1,7 +1,7 @@
 from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QFont, QBrush, QPalette, QImage, QStandardItemModel, QStandardItem, QColor
 from PyQt5.QtWidgets import QWidget, QHBoxLayout, QVBoxLayout, QLabel, QSpacerItem, \
-    QSizePolicy, QListView, QPushButton, QDesktopWidget, QMessageBox
+    QListView, QPushButton, QDesktopWidget, QMessageBox
 from Attrezzatura.vista.VistaAttrezzaturaProprietario import VistaAttrezzaturaProprietario
 from ListaAttrezzatura.controller.controllerlistaattrezzatura import ControllerListaAttrezzatura
 from Attrezzatura.vista.VistaAggiungiAttrezzatura import VistaAggiungiAttrezzatura
@@ -40,13 +40,7 @@ class VistaListaAttrezzaturaProprietario(QWidget):
 
         # Configurazione e allineamento dei widget ai layout
         self.layout_orizzontale.addWidget(self.vista_lista)
-        #self.layout_orizzontale.addWidget(self.label)
-
-        # Funzione che riempie la lista con l'attrezzatura
-        self.aggiorna()
-
-
-
+        self.layout_orizzontale.addWidget(self.label)
         self.layout_orizzontale.addSpacerItem(QSpacerItem(500, 0))
         self.layout_orizzontale.addLayout(self.layout_verticale2)
         self.layout_orizzontale.addSpacerItem(QSpacerItem(150, 0))
@@ -93,30 +87,18 @@ class VistaListaAttrezzaturaProprietario(QWidget):
         pulsante_indietro = self.pulsante("Indietro", self.indietro)
         self.layout_verticale2.addWidget(pulsante_indietro)
 
-
-
     # Metodo che si occupa di riempire la lista con tutte le attrezzature
     def aggiorna(self):
-
         vista_lista_model = QStandardItemModel(self.vista_lista)
-        # Se la lista attrezzatura è vuota
         if not bool(self.controller_lista_attrezzatura.get_lista_attrezzatura()):
-            # Rimozione del widget
-            self.layout_orizzontale.removeWidget(self.vista_lista)
-            #self.vista_lista.deleteLater()
-            #self.vista_lista = None
-            self.layout_verticale2.removeWidget(self.pulsante_apri)
-            self.pulsante_apri.deleteLater()
-            self.pulsante_apri = None
-
-            self.label.setText("Non ci sono oggetti disponibili")
-            self.label.setAlignment(Qt.AlignCenter)
-            self.label.setFont(QFont('Times New Roman', 25, 100))
-            self.label.setStyleSheet('QLabel {background-color: lightBlue; color: black;}')
-            self.label.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Maximum)
-            self.layout_orizzontale.addSpacerItem(QSpacerItem(0, 50))
-            self.layout_orizzontale.replaceWidget(self.vista_lista,self.label)
-
+            item = QStandardItem()
+            item.setText("\nLista vuota\nInserire una nuova attrezzatura\n\n")
+            item.setEditable(False)
+            item.setTextAlignment(Qt.AlignCenter)
+            item.setForeground(QColor(0, 0, 255))
+            item.setFont(QFont('Times New Roman', 35, 100))
+            vista_lista_model.appendRow(item)
+            self.vista_lista.setModel(vista_lista_model)
         else:
             for attrezzatura in self.controller_lista_attrezzatura.get_lista_attrezzatura():
                 item = QStandardItem()
@@ -130,7 +112,7 @@ class VistaListaAttrezzaturaProprietario(QWidget):
                 item.setFont(QFont('Times New Roman', 30, 100))
                 vista_lista_model.appendRow(item)
             self.vista_lista.setModel(vista_lista_model)
-            self.vista_lista.setStyleSheet("background-color: lightBlue")
+
 
     # Metodo che gestisce l'apertura della vista attrezzatura relativa a quella selezionata
     def attrezzatura_selezionata(self):
