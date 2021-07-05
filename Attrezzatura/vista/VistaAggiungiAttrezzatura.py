@@ -104,15 +104,8 @@ class VistaAggiungiAttrezzatura(QWidget):
         self.layout_verticale.addWidget(titolo)
         self.layout_verticale.addSpacerItem(QSpacerItem(0, 30))
 
-    # Metodo per creazione, stile e funzionamento dei bottoni Indietro e Aggiungi
+    # Metodo per creazione, stile e funzionamento del bottone Aggiungi
     def show_pulsantiera(self):
-
-        # Configurazione del pulsante Indietro
-        indietro = QPushButton("Indietro")
-        indietro.setFont(QFont('Times New Roman', 25, 100, True))
-        indietro.clicked.connect(self.indietro)
-        indietro.setFixedSize(200, 100)
-        indietro.setStyleSheet('background-color: orange')
 
         # Configurazione del pulsante Aggiungi
         invio = QPushButton("Aggiungi")
@@ -121,14 +114,8 @@ class VistaAggiungiAttrezzatura(QWidget):
         invio.setFixedSize(200, 100)
         invio.setStyleSheet('background-color: orange')
 
-        # Inserimento dei due pulsanti del layout globale
-        self.layout_orizzontale1.addWidget(indietro)
+        # Inserimento del pulsante del layout globale
         self.layout_orizzontale1.addWidget(invio)
-
-    # Metodo che, collegato al bottone "INDIETRO", permette di tornare alla vista precedente
-    def indietro(self):
-        self.callback()
-        self.close()
 
     # Metodo utile per l'inserimento della nuova attrezzatura appena configurata
     def aggiungi(self):
@@ -136,9 +123,10 @@ class VistaAggiungiAttrezzatura(QWidget):
         dimensioni = int(self.dimensioni.value())
         codice = self.spin_codice.value()
         if nome != "":
-            self.controller_lista_attrezzatura.aggiungi_attrezzatura(Attrezzatura(codice,nome, dimensioni))
+            self.controller_lista_attrezzatura.aggiungi_attrezzatura(Attrezzatura(codice, nome, dimensioni))
             self.controller_lista_attrezzatura.salva_dati()
             self.aggiorna()
+            self.close()
             QMessageBox.information(self, '', 'Oggetto aggiunto.', QMessageBox.Ok, QMessageBox.Ok)
         else:
             QMessageBox.critical(self, 'Errore', 'Controlla le informazioni.', QMessageBox.Ok, QMessageBox.Ok)
