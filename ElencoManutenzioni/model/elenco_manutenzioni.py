@@ -32,7 +32,7 @@ class ElencoManutenzioni:
                 elenco_manutenzioni = json.load(file)
             for manutenzione_da_aggiungere in elenco_manutenzioni:
                 try:
-                    data = date.fromisoformat("ultimo_controllo")
+                    data = date.fromisoformat(manutenzione_da_aggiungere["ultimo_controllo"])
                 except ValueError:
                     data = date.today()
                 self.aggiungi_manutenzione(Manutenzione(manutenzione_da_aggiungere["nome"],
