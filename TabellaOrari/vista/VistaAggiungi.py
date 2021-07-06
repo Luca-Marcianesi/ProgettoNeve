@@ -118,6 +118,7 @@ class vista_aggiungi(QWidget):
             item.setFont(QFont('Times New Roman', 20, 100))
             vista_lista_model.appendRow(item)
         self.lista_dipendenti.setModel(vista_lista_model)
+        self.lista_dipendenti.setStyleSheet("background-color: lightBlue")
         self.layout_orizzontale.addWidget(self.lista_dipendenti)
 
     # Chiamata indietro
