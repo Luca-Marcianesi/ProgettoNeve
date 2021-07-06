@@ -35,7 +35,7 @@ class VistaListaAttrezzaturaProprietario(QWidget):
         self.label = QLabel()
         # Funzione che si occupa di settare e allineare i pulsanti "Indietro" e "Prenota"
         self.crea_pulsantiera()
-        # Funzione che riempie la lista con l'attrezzatura
+        # Funzione che riempie la lista con l'attrezzatura o se vuota con un messaggio standard
         self.aggiorna()
 
         # Configurazione e allineamento dei widget ai layout
