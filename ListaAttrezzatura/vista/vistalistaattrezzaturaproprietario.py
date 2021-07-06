@@ -112,7 +112,7 @@ class VistaListaAttrezzaturaProprietario(QWidget):
                 item.setFont(QFont('Times New Roman', 30, 100))
                 vista_lista_model.appendRow(item)
             self.vista_lista.setModel(vista_lista_model)
-
+            self.vista_lista.setStyleSheet("background-color: lightBlue")
 
     # Metodo che gestisce l'apertura della vista attrezzatura relativa a quella selezionata
     def attrezzatura_selezionata(self):

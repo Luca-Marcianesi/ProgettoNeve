@@ -1,5 +1,5 @@
 from PyQt5.QtCore import Qt
-from PyQt5.QtGui import QPalette, QImage, QBrush, QFont, QStandardItem, QStandardItemModel
+from PyQt5.QtGui import QPalette, QImage, QBrush, QFont, QStandardItem, QStandardItemModel, QColor
 from PyQt5.QtWidgets import QVBoxLayout, QHBoxLayout, QDesktopWidget, QLabel, QSpacerItem, QSizePolicy, QWidget, \
     QListView, QPushButton, QMessageBox
 from ElencoDipendenti.controller.controller_gestione_dipendenti import ControllerElencoDipendenti
@@ -118,19 +118,14 @@ class VistaElencoDipendenti(QWidget):
     def aggiorna(self):
         vista_lista_model = QStandardItemModel(self.lista_dipendenti)
         if not bool(self.controller_gestione_dipendenti.get_elenco_dipendenti()):
-            self.layout_orizzontale.removeWidget(self.lista_dipendenti)
-            self.lista_dipendenti.deleteLater()
-            self.lista_dipendenti = None
-            self.layout_pulsanti.removeWidget(self.pulsante_apri)
-            self.pulsante_apri.deleteLater()
-            self.pulsante_apri = None
-            self.label.setText("Non ci sono più dipendenti")
-            self.label.setAlignment(Qt.AlignCenter)
-            self.label.setFont(QFont('Times New Roman', 25, 100))
-            self.label.setStyleSheet('QLabel {background-color: lightBlue; color: black;}')
-            self.label.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Maximum)
-            self.layout_orizzontale.addSpacerItem(QSpacerItem(0, 50))
-
+            item = QStandardItem()
+            item.setText("\nLista vuota\nInserire un nuovo dipendente\n\n")
+            item.setEditable(False)
+            item.setTextAlignment(Qt.AlignCenter)
+            item.setForeground(QColor(0, 0, 255))
+            item.setFont(QFont('Times New Roman', 35, 100))
+            vista_lista_model.appendRow(item)
+            self.lista_dipendenti.setModel(vista_lista_model)
         else:
             for dipendente in self.controller_gestione_dipendenti.get_elenco_dipendenti():
                 item = QStandardItem()
@@ -140,6 +135,7 @@ class VistaElencoDipendenti(QWidget):
                 item.setFont(QFont('Times New Roman', 30, 100))
                 vista_lista_model.appendRow(item)
             self.lista_dipendenti.setModel(vista_lista_model)
+            self.lista_dipendenti.setStyleSheet("background-color: lightBlue")
 
     # Metodo per la chiamata della vista aggiungi dipendente
     def call_aggiungi_dipendente(self):
