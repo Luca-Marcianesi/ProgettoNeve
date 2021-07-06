@@ -31,10 +31,14 @@ class ElencoManutenzioni:
             with open("Data/ElencoManutenzioni/elenco_manutenzioni.json") as file:
                 elenco_manutenzioni = json.load(file)
             for manutenzione_da_aggiungere in elenco_manutenzioni:
+                try:
+                    data = date.fromisoformat("ultimo_controllo")
+                except ValueError:
+                    data = date.today()
                 self.aggiungi_manutenzione(Manutenzione(manutenzione_da_aggiungere["nome"],
                                                         manutenzione_da_aggiungere["cadenza(giorni)"],
-                                                        date.today(),
-                                                        date.today() +
+                                                        data,
+                                                        data +
                                                         timedelta(days=int(manutenzione_da_aggiungere
                                                                            ["cadenza(giorni)"]))))
 
