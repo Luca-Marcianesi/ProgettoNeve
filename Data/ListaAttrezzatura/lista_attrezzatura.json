@@ -26,7 +26,7 @@
     "dimensioni":40
   },
   {
-    "nome":"Scii ",
+    "nome":"Scii",
     "codice": 3,
     "dimensioni":170
   },
@@ -36,7 +36,7 @@
     "dimensioni":160
   },
   {
-    "nome":"Scii ",
+    "nome":"Scii",
     "codice": 3,
     "dimensioni":150
   },
@@ -99,5 +99,30 @@
     "nome":"Scarponi titanium",
     "codice": 5,
     "dimensioni":45
+  },
+  {
+    "nome":"Scii baby",
+    "codice": 3,
+    "dimensioni":120
+  },
+  {
+    "nome":"Scarponi asgard",
+    "codice": 5,
+    "dimensioni":36
+  },
+  {
+    "nome":"Scarponi geox",
+    "codice": 5,
+    "dimensioni":30
+  },
+  {
+    "nome":"Ciaspole supreme",
+    "codice": 6,
+    "dimensioni":46
+  },
+  {
+    "nome":"Scarponi mosfet",
+    "codice": 5,
+    "dimensioni":37
   }
 ]
