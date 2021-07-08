@@ -35,7 +35,7 @@ class VistaCreaAccount(QWidget):
         self.casella_testo("Username")
         self.casella_testo("Password")
         self.casella_testo("Età")
-        self.casella_testo("Altezza")
+        self.casella_testo("Altezza(cm)")
         self.casella_testo("Numero di scarpe")
 
         # Pulsante indietro che richiama la vista precedente
@@ -79,7 +79,7 @@ class VistaCreaAccount(QWidget):
         username = self.testo["Username"].text()
         password = self.testo["Password"].text()
         eta = self.testo["Età"].text()
-        altezza = self.testo["Altezza"].text()
+        altezza = self.testo["Altezza(cm)"].text()
         n_scarpe = self.testo["Numero di scarpe"].text()
         try:
             if self.controlla_informazioni(nome, cognome, username, password, eta, altezza, n_scarpe):
