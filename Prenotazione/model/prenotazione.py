@@ -21,5 +21,6 @@ class Prenotazione:
     def get_scadenza(self):
         return self.scadenza
 
+    # Metodo che restituisce la descrizione dell'oggetto (skipass/parcheggio/attrezzatura)
     def get_descrizione_oggetto(self):
         return self.oggetto.get_descrizione()

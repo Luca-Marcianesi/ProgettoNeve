@@ -40,7 +40,7 @@ class GestioneSkipass:
             scadenza = datetime.today() + timedelta(days=int(skipass_selezionato.get_durata()))
 
         else:
-            scadenza = self.fine_stagione
+            scadenza = datetime.fromisoformat(self.fine_stagione)
 
         return Prenotazione(skipass_selezionato.get_codice(), scadenza, skipass_selezionato)
 
